@@ -1,0 +1,13 @@
+*.exe
+*.iobj
+*.ipdb
+*.pdb
+*.user
+
+### FOLDERS ###
+Dependencies
+Lib
+Inter
+.vs
+
+
