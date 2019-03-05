@@ -1,40 +1,87 @@
 #include "MainApp.h"
-
-MainApp::MainApp()
+#include <OgreConfigFile.h>
+#include <iostream>
+MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogre::BLANKSTRING)
 {
 }
 
 MainApp::~MainApp()
 {
+	delete mRoot;
 }
 
 int MainApp::initApp() 
 {
-	// create root
-	Root *root; 
 
-#if _DEBUG
-	root = new Root("plugins_d.cfg");
+#ifdef _DEBUG
+	mResourcesCfg = "resources_d.cfg";
+	mPluginsCfg = "plugins_d.cfg";
 #else
-	root = new Root("plugins.cfg");
+	mResourcesCfg = "resources.cfg";
+	mPluginsCfg = "plugins.cfg";
 #endif
 
-	root->setRenderSystem(*root->getAvailableRenderers().begin());
-
-	// choose renderer
-	if (root == NULL)
+	mRoot = new Ogre::Root(mPluginsCfg);
+	
+	if (mRoot == NULL)
 	{
 		return 0;
 	}
 
+	renderSys = *mRoot->getAvailableRenderers().begin();
+	mRoot->setRenderSystem(renderSys);
+
 	// initialise root
-	root->initialise(false);
-	// create main window
-	RenderWindow *renderWindow = root->createRenderWindow("Main", 320, 240, false);
-	// create the scene
-	//SceneManager *sceneMgr = root->createSceneManager("SceneManager");
-	// add a camera
-	//Camera *mainCam = sceneMgr->createCamera("MainCam");
-	// add viewport
-	//Viewport *vp = renderWindow->addViewport(mainCam);
+	//mRoot->initialise(false);
+	locateResources();
+
+	if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(NULL)))
+		return false;
+
+	renderSys->setConfigOption("Full Screen", "No");
+	renderSys->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
+
+	mWindow = mRoot->initialise(true, "Retrowave Spaceship FoxMcDonald");
+
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+
+	mSceneMgr = mRoot->createSceneManager();
+
+	mCamera = mSceneMgr->createCamera("MainCam");
+
+	mCamera->setNearClipDistance(5);
+
+	mCamNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("nCam");
+	mCamNode->attachObject(mCamera);
+	mCamNode->setPosition(0, 0, 80);
+	mCamNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
+
+	vp = mWindow->addViewport(mCamera);
+	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+
+	mCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+}
+
+void MainApp::locateResources()
+{
+	// load resource paths from config file
+	Ogre::ConfigFile cf;
+	cf.load(mResourcesCfg);
+	Ogre::String sec, type, name;
+	// go through all specified resource groups
+	Ogre::ConfigFile::SettingsBySection_::const_iterator seci;
+	for (seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci) {
+		sec = seci->first;
+		const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
+		Ogre::ConfigFile::SettingsMultiMap::const_iterator i;
+
+		// go through all resource paths
+		for (i = settings.begin(); i != settings.end(); i++)
+		{
+			type = i->first;
+			name = Ogre::FileSystemLayer::resolveBundlePath(i->second);
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, type, sec);
+		}
+	}
 }

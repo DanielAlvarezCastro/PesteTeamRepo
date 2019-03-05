@@ -1,200 +1,222 @@
-10:48:08: Creating resource group General
-10:48:08: Creating resource group OgreInternal
-10:48:08: Creating resource group OgreAutodetect
-10:48:08: SceneManagerFactory for type 'DefaultSceneManager' registered.
-10:48:08: Registering ResourceManager for type Material
-10:48:08: Registering ResourceManager for type Mesh
-10:48:08: Registering ResourceManager for type Skeleton
-10:48:08: MovableObjectFactory for type 'ParticleSystem' registered.
-10:48:08: ArchiveFactory for archive type FileSystem registered.
-10:48:08: ArchiveFactory for archive type Zip registered.
-10:48:08: ArchiveFactory for archive type EmbeddedZip registered.
-10:48:08: DDS codec registering
-10:48:08: ETC codec registering
-10:48:08: Registering ResourceManager for type HighLevelGpuProgram
-10:48:08: Registering ResourceManager for type Compositor
-10:48:08: MovableObjectFactory for type 'Entity' registered.
-10:48:08: MovableObjectFactory for type 'Light' registered.
-10:48:08: MovableObjectFactory for type 'BillboardSet' registered.
-10:48:08: MovableObjectFactory for type 'ManualObject' registered.
-10:48:08: MovableObjectFactory for type 'BillboardChain' registered.
-10:48:08: MovableObjectFactory for type 'RibbonTrail' registered.
-10:48:08: Loading library .\RenderSystem_Direct3D11_d
-10:48:08: Installing plugin: D3D11 RenderSystem
-10:48:08: D3D11: Direct3D11 Rendering Subsystem created.
-10:48:08: D3D11: Driver Detection Starts
-10:48:08: D3D11: "Intel(R) HD Graphics 530"
-10:48:08: D3D11: "NVIDIA GeForce GTX 960M"
-10:48:08: D3D11: "Microsoft Basic Render Driver (software)"
-10:48:09: D3D11: Driver Detection Ends
-10:48:09: Plugin successfully installed
-10:48:09: Loading library .\RenderSystem_GL_d
-10:48:09: Installing plugin: GL RenderSystem
-10:48:09: OpenGL Rendering Subsystem created.
-10:48:09: Plugin successfully installed
-10:48:09: Loading library .\RenderSystem_GL3Plus_d
-10:48:09: Installing plugin: GL 3+ RenderSystem
-10:48:09: OpenGL 3+ Rendering Subsystem created.
-10:48:09: Plugin successfully installed
-10:48:09: Loading library .\Plugin_ParticleFX_d
-10:48:09: Installing plugin: ParticleFX
-10:48:09: Particle Emitter Type 'Point' registered
-10:48:09: Particle Emitter Type 'Box' registered
-10:48:09: Particle Emitter Type 'Ellipsoid' registered
-10:48:09: Particle Emitter Type 'Cylinder' registered
-10:48:09: Particle Emitter Type 'Ring' registered
-10:48:09: Particle Emitter Type 'HollowEllipsoid' registered
-10:48:09: Particle Affector Type 'LinearForce' registered
-10:48:09: Particle Affector Type 'ColourFader' registered
-10:48:09: Particle Affector Type 'ColourFader2' registered
-10:48:09: Particle Affector Type 'ColourImage' registered
-10:48:09: Particle Affector Type 'ColourInterpolator' registered
-10:48:09: Particle Affector Type 'Scaler' registered
-10:48:09: Particle Affector Type 'Rotator' registered
-10:48:09: Particle Affector Type 'DirectionRandomiser' registered
-10:48:09: Particle Affector Type 'DeflectorPlane' registered
-10:48:09: Plugin successfully installed
-10:48:09: Loading library .\Plugin_BSPSceneManager_d
-10:48:09: Installing plugin: BSP Scene Manager
-10:48:09: Plugin successfully installed
-10:48:09: Loading library .\Codec_STBI_d
-10:48:09: stb_image - v2.19 - public domain JPEG/PNG reader
-10:48:09: Supported formats: jpeg,jpg,png,bmp,psd,tga,gif,pic,ppm,pgm,hdr
-10:48:09: Loading library .\Plugin_PCZSceneManager_d
-10:48:09: Installing plugin: Portal Connected Zone Scene Manager
-10:48:09: PCZone Factory Type 'ZoneType_Default' registered
-10:48:09: Plugin successfully installed
-10:48:09: Loading library .\Plugin_OctreeZone_d
-10:48:09: Installing plugin: Octree Zone Factory
-10:48:09: Plugin successfully installed
-10:48:09: Loading library .\Plugin_OctreeSceneManager_d
-10:48:09: Installing plugin: Octree Scene Manager
-10:48:09: Plugin successfully installed
-10:48:09: *-*-* OGRE Initialising
-10:48:09: *-*-* Version 1.11.5 (Rhagorthua)
-10:48:09: CPU Identifier & Features
-10:48:09: -------------------------
-10:48:09:  *   CPU ID: GenuineIntel: Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
-10:48:09:  *          SSE: yes
-10:48:09:  *         SSE2: yes
-10:48:09:  *         SSE3: yes
-10:48:09:  *        SSE41: yes
-10:48:09:  *        SSE42: yes
-10:48:09:  *          MMX: yes
-10:48:09:  *       MMXEXT: yes
-10:48:09:  *        3DNOW: no
-10:48:09:  *     3DNOWEXT: no
-10:48:09:  *         CMOV: yes
-10:48:09:  *          TSC: yes
-10:48:09:  *INVARIANT TSC: yes
-10:48:09:  *          FPU: yes
-10:48:09:  *          PRO: yes
-10:48:09:  *           HT: no
-10:48:09: -------------------------
-10:48:09: D3D11: Subsystem Initialising
-10:48:09: D3D11: Driver Detection Starts
-10:48:09: D3D11: "Intel(R) HD Graphics 530"
-10:48:09: D3D11: "NVIDIA GeForce GTX 960M"
-10:48:09: D3D11: "Microsoft Basic Render Driver (software)"
-10:48:09: D3D11: Driver Detection Ends
-10:48:09: D3D11: Requested "(default)", selected "Intel(R) HD Graphics 530"
-10:48:09: ***************************************
-10:48:09: *** D3D11: Subsystem Initialized OK ***
-10:48:09: ***************************************
-10:48:09: D3D11: Created D3D11 Rendering Window 'Main' : 320x240, 32bpp
-10:48:09: Warning: D3D11: disabling VSync in windowed mode can cause timing issues at lower frame rates, turn VSync on if you observe this problem.
-10:48:09: Registering ResourceManager for type Texture
-10:48:09: Registering ResourceManager for type GpuProgram
-10:48:09: RenderSystem capabilities
-10:48:09: -------------------------
-10:48:09: RenderSystem Name: Direct3D11 Rendering Subsystem
-10:48:09: GPU Vendor: intel
-10:48:09: Device Name: Intel(R) HD Graphics 530
-10:48:09: Driver Version: 22.20.16.4749
-10:48:09:  * Fixed function pipeline: no
-10:48:09:  * Anisotropic texture filtering: yes
-10:48:09:  * Cube mapping: yes
-10:48:09:  * Hardware stencil buffer: yes
-10:48:09:    - Stencil depth: 8
-10:48:09:    - Two sided stencil support: yes
-10:48:09:    - Wrap stencil values: yes
-10:48:09:  * 32-bit index buffers: yes
-10:48:09:  * Vertex programs: yes
-10:48:09:  * Number of floating-point constants for vertex programs: 512
-10:48:09:  * Number of integer constants for vertex programs: 16
-10:48:09:  * Number of boolean constants for vertex programs: 16
-10:48:09:  * Fragment programs: yes
-10:48:09:  * Number of floating-point constants for fragment programs: 512
-10:48:09:  * Number of integer constants for fragment programs: 16
-10:48:09:  * Number of boolean constants for fragment programs: 16
-10:48:09:  * Geometry programs: yes
-10:48:09:  * Number of floating-point constants for geometry programs: 512
-10:48:09:  * Number of integer constants for geometry programs: 16
-10:48:09:  * Number of boolean constants for geometry programs: 16
-10:48:09:  * Tessellation Hull programs: yes
-10:48:09:  * Number of floating-point constants for tessellation hull programs: 512
-10:48:09:  * Number of integer constants for tessellation hull programs: 16
-10:48:09:  * Number of boolean constants for tessellation hull programs: 16
-10:48:09:  * Tessellation Domain programs: yes
-10:48:09:  * Number of floating-point constants for tessellation domain programs: 512
-10:48:09:  * Number of integer constants for tessellation domain programs: 16
-10:48:09:  * Number of boolean constants for tessellation domain programs: 16
-10:48:09:  * Compute programs: yes
-10:48:09:  * Number of floating-point constants for compute programs: 512
-10:48:09:  * Number of integer constants for compute programs: 16
-10:48:09:  * Number of boolean constants for compute programs: 16
-10:48:09:  * Supported Shader Profiles: cs_4_0 cs_4_1 cs_5_0 ds_5_0 gs_4_0 gs_4_1 gs_5_0 hlsl hs_5_0 ps_2_0 ps_2_a ps_2_b ps_2_x ps_3_0 ps_3_x ps_4_0 ps_4_0_level_9_1 ps_4_0_level_9_3 ps_4_1 ps_5_0 vs_2_0 vs_2_a vs_2_x vs_3_0 vs_4_0 vs_4_0_level_9_1 vs_4_0_level_9_3 vs_4_1 vs_5_0
-10:48:09:  * Texture Compression: yes
-10:48:09:    - DXT: yes
-10:48:09:    - VTC: no
-10:48:09:    - PVRTC: no
-10:48:09:    - ATC: no
-10:48:09:    - ETC1: no
-10:48:09:    - ETC2: no
-10:48:09:    - BC4/BC5: no
-10:48:09:    - BC6H/BC7: yes
-10:48:09:    - ASTC: no
-10:48:09:    - Mipmaps for compressed formats: no
-10:48:09:  * Hardware Occlusion Query: yes
-10:48:09:  * User clip planes: yes
-10:48:09:  * VET_UBYTE4 vertex element type: yes
-10:48:09:  * Infinite far plane projection: yes
-10:48:09:  * Hardware render-to-texture: yes
-10:48:09:  * Floating point textures: yes
-10:48:09:  * Non-power-of-two textures: yes
-10:48:09:  * 1d textures: yes
-10:48:09:  * Volume textures: yes
-10:48:09:  * Multiple Render Targets: 8
-10:48:09:    - With different bit depths: yes
-10:48:09:  * Point Sprites: yes
-10:48:09:  * Wide Lines: no
-10:48:09:  * Hardware Gamma: no
-10:48:09:  * Extended point parameters: yes
-10:48:09:  * Max Point Size: 256
-10:48:09:  * Vertex texture fetch: yes
-10:48:09:  * Number of texture units: 16
-10:48:09:  * Number of vertex attributes: 32
-10:48:09:  * Stencil buffer depth: 8
-10:48:09:  * Number of vertex blend matrices: 0
-10:48:09:    - Max vertex textures: 4
-10:48:09:    - Vertex textures shared: yes
-10:48:09:  * Render to Vertex Buffer : yes
-10:48:09:  * Hardware Atomic Counters: no
-10:48:09: DefaultWorkQueue('Root') initialising on thread 3340.
-10:48:09: DefaultWorkQueue('Root')::WorkerFunc - thread 6284 starting.
-1010:1010:480:4810::48::4848::099:: 9: : DefaultWorkQueue('Root')::WorkerFunc - thread 1460 starting.9DefaultWorkQueue('Root')::WorkerFunc - thread 1144 starting.: 
-
-DefaultWorkQueue('Root')::WorkerFunc - thread 17844 starting.
-9DefaultWorkQueue('Root')::WorkerFunc - thread 14584 starting.
-: DefaultWorkQueue('Root')::WorkerFunc - thread 19524 starting.
-1010::4848::099: : DefaultWorkQueue('Root')::WorkerFunc - thread 18312 starting.DefaultWorkQueue('Root')::WorkerFunc - thread 14776 starting.
-
-10:48:09: Particle Renderer Type 'billboard' registered
-10:48:09: SceneManagerFactory for type 'BspSceneManager' registered.
-10:48:09: Registering SceneLoader Q3BSP
-10:48:09: SceneManagerFactory for type 'PCZSceneManager' registered.
-10:48:09: MovableObjectFactory for type 'PCZLight' registered.
-10:48:09: MovableObjectFactory for type 'Portal' registered.
-10:48:09: MovableObjectFactory for type 'AntiPortal' registered.
-10:48:09: PCZone Factory Type 'ZoneType_Octree' registered
-10:48:09: SceneManagerFactory for type 'OctreeSceneManager' registered.
+14:37:32: Creating resource group General
+14:37:32: Creating resource group OgreInternal
+14:37:32: Creating resource group OgreAutodetect
+14:37:32: SceneManagerFactory for type 'DefaultSceneManager' registered.
+14:37:32: Registering ResourceManager for type Material
+14:37:32: Registering ResourceManager for type Mesh
+14:37:32: Registering ResourceManager for type Skeleton
+14:37:32: MovableObjectFactory for type 'ParticleSystem' registered.
+14:37:32: ArchiveFactory for archive type FileSystem registered.
+14:37:32: ArchiveFactory for archive type Zip registered.
+14:37:32: ArchiveFactory for archive type EmbeddedZip registered.
+14:37:32: DDS codec registering
+14:37:32: ETC codec registering
+14:37:32: Registering ResourceManager for type HighLevelGpuProgram
+14:37:32: Registering ResourceManager for type Compositor
+14:37:32: MovableObjectFactory for type 'Entity' registered.
+14:37:32: MovableObjectFactory for type 'Light' registered.
+14:37:32: MovableObjectFactory for type 'BillboardSet' registered.
+14:37:32: MovableObjectFactory for type 'ManualObject' registered.
+14:37:32: MovableObjectFactory for type 'BillboardChain' registered.
+14:37:32: MovableObjectFactory for type 'RibbonTrail' registered.
+14:37:32: Loading library .\RenderSystem_Direct3D11
+14:37:32: Installing plugin: D3D11 RenderSystem
+14:37:32: D3D11: Direct3D11 Rendering Subsystem created.
+14:37:32: D3D11: Driver Detection Starts
+14:37:32: D3D11: "Intel(R) HD Graphics 630"
+14:37:32: D3D11: "NVIDIA GeForce GTX 1050 Ti"
+14:37:32: D3D11: "Microsoft Basic Render Driver (software)"
+14:37:32: D3D11: Driver Detection Ends
+14:37:32: Plugin successfully installed
+14:37:32: Loading library .\RenderSystem_GL
+14:37:32: Installing plugin: GL RenderSystem
+14:37:32: OpenGL Rendering Subsystem created.
+14:37:32: Plugin successfully installed
+14:37:32: Loading library .\RenderSystem_GL3Plus
+14:37:32: Installing plugin: GL 3+ RenderSystem
+14:37:32: OpenGL 3+ Rendering Subsystem created.
+14:37:32: Plugin successfully installed
+14:37:32: Loading library .\Plugin_ParticleFX
+14:37:32: Installing plugin: ParticleFX
+14:37:32: Particle Emitter Type 'Point' registered
+14:37:32: Particle Emitter Type 'Box' registered
+14:37:32: Particle Emitter Type 'Ellipsoid' registered
+14:37:32: Particle Emitter Type 'Cylinder' registered
+14:37:32: Particle Emitter Type 'Ring' registered
+14:37:32: Particle Emitter Type 'HollowEllipsoid' registered
+14:37:32: Particle Affector Type 'LinearForce' registered
+14:37:32: Particle Affector Type 'ColourFader' registered
+14:37:32: Particle Affector Type 'ColourFader2' registered
+14:37:32: Particle Affector Type 'ColourImage' registered
+14:37:32: Particle Affector Type 'ColourInterpolator' registered
+14:37:32: Particle Affector Type 'Scaler' registered
+14:37:32: Particle Affector Type 'Rotator' registered
+14:37:32: Particle Affector Type 'DirectionRandomiser' registered
+14:37:32: Particle Affector Type 'DeflectorPlane' registered
+14:37:32: Plugin successfully installed
+14:37:32: Loading library .\Plugin_BSPSceneManager
+14:37:32: Installing plugin: BSP Scene Manager
+14:37:32: Plugin successfully installed
+14:37:32: Loading library .\Codec_STBI
+14:37:32: stb_image - v2.19 - public domain JPEG/PNG reader
+14:37:32: Supported formats: jpeg,jpg,png,bmp,psd,tga,gif,pic,ppm,pgm,hdr
+14:37:32: Loading library .\Plugin_PCZSceneManager
+14:37:32: Installing plugin: Portal Connected Zone Scene Manager
+14:37:32: PCZone Factory Type 'ZoneType_Default' registered
+14:37:32: Plugin successfully installed
+14:37:32: Loading library .\Plugin_OctreeZone
+14:37:32: Installing plugin: Octree Zone Factory
+14:37:32: Plugin successfully installed
+14:37:32: Loading library .\Plugin_OctreeSceneManager
+14:37:32: Installing plugin: Octree Scene Manager
+14:37:32: Plugin successfully installed
+14:37:32: *-*-* OGRE Initialising
+14:37:32: *-*-* Version 1.11.5 (Rhagorthua)
+14:37:32: Creating resource group Essential
+14:37:32: Added resource location './Assets/SdkTrays.zip' of type 'Zip' to resource group 'Essential'
+14:37:32: Added resource location './Assets' of type 'FileSystem' to resource group 'General'
+14:37:32: Added resource location './Assets/materials/scripts' of type 'FileSystem' to resource group 'General'
+14:37:32: Added resource location './Assets/materials/textures' of type 'FileSystem' to resource group 'General'
+14:37:32: Added resource location './Assets/models' of type 'FileSystem' to resource group 'General'
+14:37:32: Ogre::FileNotFoundException::FileNotFoundException: 'ogre.cfg' file not found! in ConfigFile::load at C:\Users\Aramis\Documents\ProyectoIII\PesteTeam\Dependencies\ogre-1.11.5\OgreMain\src\OgreConfigFile.cpp (line 67)
+14:37:32: D3D11: RenderSystem Option: Full Screen = No
+14:37:32: D3D11: RenderSystem Option: Video Mode = 800 x 600 @ 32-bit colour
+14:37:32: CPU Identifier & Features
+14:37:32: -------------------------
+14:37:32:  *   CPU ID: GenuineIntel: Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+14:37:32:  *          SSE: yes
+14:37:32:  *         SSE2: yes
+14:37:32:  *         SSE3: yes
+14:37:32:  *        SSE41: yes
+14:37:32:  *        SSE42: yes
+14:37:32:  *          MMX: yes
+14:37:32:  *       MMXEXT: yes
+14:37:32:  *        3DNOW: no
+14:37:32:  *     3DNOWEXT: no
+14:37:32:  *         CMOV: yes
+14:37:32:  *          TSC: yes
+14:37:32:  *INVARIANT TSC: yes
+14:37:32:  *          FPU: yes
+14:37:32:  *          PRO: yes
+14:37:32:  *           HT: no
+14:37:32: -------------------------
+14:37:32: D3D11: Subsystem Initialising
+14:37:32: D3D11: Driver Detection Starts
+14:37:32: D3D11: "Intel(R) HD Graphics 630"
+14:37:32: D3D11: "NVIDIA GeForce GTX 1050 Ti"
+14:37:32: D3D11: "Microsoft Basic Render Driver (software)"
+14:37:32: D3D11: Driver Detection Ends
+14:37:32: D3D11: Requested "(default)", selected "Intel(R) HD Graphics 630"
+14:37:32: D3D11RenderSystem::_createRenderWindow "Retrowave Spaceship FoxMcDonald", 800x600 windowed  miscParams: FSAA=1 FSAAHint= colourDepth=16 gamma=false useNVPerfHUD=false vsync=true vsyncInterval=1 
+14:37:32: D3D11: Created D3D11 Rendering Window 'Retrowave Spaceship FoxMcDonald' : 800x600, 16bpp
+14:37:32: Registering ResourceManager for type Texture
+14:37:32: Registering ResourceManager for type GpuProgram
+14:37:32: RenderSystem capabilities
+14:37:32: -------------------------
+14:37:32: RenderSystem Name: Direct3D11 Rendering Subsystem
+14:37:32: GPU Vendor: intel
+14:37:32: Device Name: Intel(R) HD Graphics 630
+14:37:32: Driver Version: 22.20.16.4836
+14:37:32:  * Fixed function pipeline: no
+14:37:32:  * Anisotropic texture filtering: yes
+14:37:32:  * Cube mapping: yes
+14:37:32:  * Hardware stencil buffer: yes
+14:37:32:    - Stencil depth: 8
+14:37:32:    - Two sided stencil support: yes
+14:37:32:    - Wrap stencil values: yes
+14:37:32:  * 32-bit index buffers: yes
+14:37:32:  * Vertex programs: yes
+14:37:32:  * Number of floating-point constants for vertex programs: 512
+14:37:32:  * Number of integer constants for vertex programs: 16
+14:37:32:  * Number of boolean constants for vertex programs: 16
+14:37:32:  * Fragment programs: yes
+14:37:32:  * Number of floating-point constants for fragment programs: 512
+14:37:32:  * Number of integer constants for fragment programs: 16
+14:37:32:  * Number of boolean constants for fragment programs: 16
+14:37:32:  * Geometry programs: yes
+14:37:32:  * Number of floating-point constants for geometry programs: 512
+14:37:32:  * Number of integer constants for geometry programs: 16
+14:37:32:  * Number of boolean constants for geometry programs: 16
+14:37:32:  * Tessellation Hull programs: yes
+14:37:32:  * Number of floating-point constants for tessellation hull programs: 512
+14:37:32:  * Number of integer constants for tessellation hull programs: 16
+14:37:32:  * Number of boolean constants for tessellation hull programs: 16
+14:37:32:  * Tessellation Domain programs: yes
+14:37:32:  * Number of floating-point constants for tessellation domain programs: 512
+14:37:32:  * Number of integer constants for tessellation domain programs: 16
+14:37:32:  * Number of boolean constants for tessellation domain programs: 16
+14:37:32:  * Compute programs: yes
+14:37:32:  * Number of floating-point constants for compute programs: 512
+14:37:32:  * Number of integer constants for compute programs: 16
+14:37:32:  * Number of boolean constants for compute programs: 16
+14:37:32:  * Supported Shader Profiles: cs_4_0 cs_4_1 cs_5_0 ds_5_0 gs_4_0 gs_4_1 gs_5_0 hlsl hs_5_0 ps_2_0 ps_2_a ps_2_b ps_2_x ps_3_0 ps_3_x ps_4_0 ps_4_0_level_9_1 ps_4_0_level_9_3 ps_4_1 ps_5_0 vs_2_0 vs_2_a vs_2_x vs_3_0 vs_4_0 vs_4_0_level_9_1 vs_4_0_level_9_3 vs_4_1 vs_5_0
+14:37:32:  * Texture Compression: yes
+14:37:32:    - DXT: yes
+14:37:32:    - VTC: no
+14:37:32:    - PVRTC: no
+14:37:32:    - ATC: no
+14:37:32:    - ETC1: no
+14:37:32:    - ETC2: no
+14:37:32:    - BC4/BC5: no
+14:37:32:    - BC6H/BC7: yes
+14:37:32:    - ASTC: no
+14:37:32:    - Mipmaps for compressed formats: no
+14:37:32:  * Hardware Occlusion Query: yes
+14:37:32:  * User clip planes: yes
+14:37:32:  * VET_UBYTE4 vertex element type: yes
+14:37:32:  * Infinite far plane projection: yes
+14:37:32:  * Hardware render-to-texture: yes
+14:37:32:  * Floating point textures: yes
+14:37:32:  * Non-power-of-two textures: yes
+14:37:32:  * 1d textures: yes
+14:37:32:  * Volume textures: yes
+14:37:32:  * Multiple Render Targets: 8
+14:37:32:    - With different bit depths: yes
+14:37:32:  * Point Sprites: yes
+14:37:32:  * Wide Lines: no
+14:37:32:  * Hardware Gamma: no
+14:37:32:  * Extended point parameters: yes
+14:37:32:  * Max Point Size: 256
+14:37:32:  * Vertex texture fetch: yes
+14:37:32:  * Number of texture units: 16
+14:37:32:  * Number of vertex attributes: 32
+14:37:32:  * Stencil buffer depth: 8
+14:37:32:  * Number of vertex blend matrices: 0
+14:37:32:    - Max vertex textures: 4
+14:37:32:    - Vertex textures shared: yes
+14:37:32:  * Render to Vertex Buffer : yes
+14:37:32:  * Hardware Atomic Counters: no
+14:37:32: ***************************************
+14:37:32: *** D3D11: Subsystem Initialized OK ***
+14:37:32: ***************************************
+14:37:32: DefaultWorkQueue('Root') initialising on thread 7532.
+14:37:32: DefaultWorkQueue('Root')::WorkerFunc - thread 10684 starting.
+14:37:32: DefaultWorkQueue('Root')::WorkerFunc - thread 14220 starting.
+14:37:32: DefaultWorkQueue('Root')::WorkerFunc - thread 4832 starting.
+14:37:32: DefaultWorkQueue('Root')::WorkerFunc - thread 4904 starting.
+14:37:32: Particle Renderer Type 'billboard' registered
+14:37:32: SceneManagerFactory for type 'BspSceneManager' registered.
+14:37:32: Registering SceneLoader Q3BSP
+14:37:32: SceneManagerFactory for type 'PCZSceneManager' registered.
+14:37:32: MovableObjectFactory for type 'PCZLight' registered.
+14:37:32: MovableObjectFactory for type 'Portal' registered.
+14:37:32: MovableObjectFactory for type 'AntiPortal' registered.
+14:37:32: PCZone Factory Type 'ZoneType_Octree' registered
+14:37:32: SceneManagerFactory for type 'OctreeSceneManager' registered.
+14:37:32: Parsing scripts for resource group Essential
+14:37:32: Parsing script SdkTrays.material
+14:37:32: Finished parsing scripts for resource group Essential
+14:37:32: Creating resources for group Essential
+14:37:32: All done
+14:37:32: Parsing scripts for resource group General
+14:37:32: Finished parsing scripts for resource group General
+14:37:32: Creating resources for group General
+14:37:32: All done
+14:37:32: Parsing scripts for resource group OgreAutodetect
+14:37:32: Finished parsing scripts for resource group OgreAutodetect
+14:37:32: Creating resources for group OgreAutodetect
+14:37:32: All done
+14:37:32: Parsing scripts for resource group OgreInternal
+14:37:32: Finished parsing scripts for resource group OgreInternal
+14:37:32: Creating resources for group OgreInternal
+14:37:32: All done

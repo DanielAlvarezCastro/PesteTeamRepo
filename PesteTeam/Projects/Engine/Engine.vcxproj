@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Engine\GameObject.cpp" />
     <ClCompile Include="..\..\Src\Engine\MainApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Engine\GameObject.h" />
     <ClInclude Include="..\..\Src\Engine\MainApp.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
