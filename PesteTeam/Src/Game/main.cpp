@@ -1,7 +1,11 @@
 #include <iostream>
-#include "Saluda.h"
+#include <MainApp.h>
+
 int main() {
-	Saluda* persona = new Saluda();
 	
+	MainApp Application;
+
+	Application.initApp();
+
 	return 0;
 }
