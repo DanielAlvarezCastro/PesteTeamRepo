@@ -1,26 +1,28 @@
-09:51:12: Creating resource group General
-09:51:12: Creating resource group OgreInternal
-09:51:12: Creating resource group OgreAutodetect
-09:51:12: SceneManagerFactory for type 'DefaultSceneManager' registered.
-09:51:12: Registering ResourceManager for type Material
-09:51:12: Registering ResourceManager for type Mesh
-09:51:12: Registering ResourceManager for type Skeleton
-09:51:12: MovableObjectFactory for type 'ParticleSystem' registered.
-09:51:12: ArchiveFactory for archive type FileSystem registered.
-09:51:12: ArchiveFactory for archive type Zip registered.
-09:51:12: ArchiveFactory for archive type EmbeddedZip registered.
-09:51:12: DDS codec registering
-09:51:12: ETC codec registering
-09:51:12: Registering ResourceManager for type HighLevelGpuProgram
-09:51:12: Registering ResourceManager for type Compositor
-09:51:12: MovableObjectFactory for type 'Entity' registered.
-09:51:12: MovableObjectFactory for type 'Light' registered.
-09:51:12: MovableObjectFactory for type 'BillboardSet' registered.
-09:51:12: MovableObjectFactory for type 'ManualObject' registered.
-09:51:12: MovableObjectFactory for type 'BillboardChain' registered.
-09:51:12: MovableObjectFactory for type 'RibbonTrail' registered.
-09:51:12: Ogre::FileNotFoundException::FileNotFoundException: 'plugins_d.cfg' file not found! in ConfigFile::load at D:\UNI_3_2\PROYECTO\PesteTeamCompiladoV2\Dependencies\ogre-1.11.5\OgreMain\src\OgreConfigFile.cpp (line 67)
-09:51:12: automatic plugin loading disabled: 'plugins_d.cfg' file not found!
-09:51:12: *-*-* OGRE Initialising
-09:51:12: *-*-* Version 1.11.5 (Rhagorthua)
-09:51:12: Ogre::InvalidStateException::InvalidStateException: Cannot initialise - no render system has been selected. in Root::initialise at D:\UNI_3_2\PROYECTO\PesteTeamCompiladoV2\Dependencies\ogre-1.11.5\OgreMain\src\OgreRoot.cpp (line 545)
+10:20:07: Creating resource group General
+10:20:07: Creating resource group OgreInternal
+10:20:07: Creating resource group OgreAutodetect
+10:20:07: SceneManagerFactory for type 'DefaultSceneManager' registered.
+10:20:07: Registering ResourceManager for type Material
+10:20:07: Registering ResourceManager for type Mesh
+10:20:07: Registering ResourceManager for type Skeleton
+10:20:07: MovableObjectFactory for type 'ParticleSystem' registered.
+10:20:07: ArchiveFactory for archive type FileSystem registered.
+10:20:07: ArchiveFactory for archive type Zip registered.
+10:20:07: ArchiveFactory for archive type EmbeddedZip registered.
+10:20:07: DDS codec registering
+10:20:07: ETC codec registering
+10:20:07: Registering ResourceManager for type HighLevelGpuProgram
+10:20:07: Registering ResourceManager for type Compositor
+10:20:07: MovableObjectFactory for type 'Entity' registered.
+10:20:07: MovableObjectFactory for type 'Light' registered.
+10:20:07: MovableObjectFactory for type 'BillboardSet' registered.
+10:20:07: MovableObjectFactory for type 'ManualObject' registered.
+10:20:07: MovableObjectFactory for type 'BillboardChain' registered.
+10:20:07: MovableObjectFactory for type 'RibbonTrail' registered.
+10:20:07: Ogre::FileNotFoundException::FileNotFoundException: 'plugins.cfg' file not found! in ConfigFile::load at C:\Users\Aramis\Documents\ProyectoIII\PesteTeam\Dependencies\ogre-1.11.5\OgreMain\src\OgreConfigFile.cpp (line 67)
+10:20:07: automatic plugin loading disabled: 'plugins.cfg' file not found!
+10:20:07: *-*-* OGRE Initialising
+10:20:07: *-*-* Version 1.11.5 (Rhagorthua)
+10:20:07: Loading library plugins.cfg
+10:20:07: Ogre::InternalErrorException::InternalErrorException: Could not load dynamic library plugins.cfg.  System Error: No se puede encontrar el módulo especificado.
+ in DynLib::load at C:\Users\Aramis\Documents\ProyectoIII\PesteTeam\Dependencies\ogre-1.11.5\OgreMain\src\OgreDynLib.cpp (line 112)
