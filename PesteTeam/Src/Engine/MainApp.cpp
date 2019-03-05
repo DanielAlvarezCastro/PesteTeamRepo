@@ -61,6 +61,24 @@ int MainApp::initApp()
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
 	mCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+
+	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("cube.mesh");
+
+	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	ogreNode->attachObject(ogreEntity);
+	ogreNode->setScale(0.1, 0.1, 0.1);
+
+	Light* luz = mSceneMgr->createLight("Luz");
+	luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz->setDiffuseColour(0.75, 0.75, 0.75);
+	//mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
+	SceneNode* mLightNode = mCamNode->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
+
+	mLightNode->setDirection(Ogre::Vector3(-1, 0, -1));
+	while (true) {
+		mRoot->renderOneFrame();
+	}
 }
 
 void MainApp::locateResources()
