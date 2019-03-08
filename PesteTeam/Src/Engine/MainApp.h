@@ -5,6 +5,7 @@
 #include <OgreFontManager.h> 
 #include "windows.h"
 #include <OgreFileSystemLayer.h>
+#include <OgreRenderTarget.h>
 
 using namespace Ogre;
 

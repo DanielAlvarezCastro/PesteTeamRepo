@@ -77,7 +77,15 @@ int MainApp::initApp()
 
 	mLightNode->setDirection(Ogre::Vector3(-1, 0, -1));
 	while (true) {
-		mRoot->renderOneFrame();
+		mRoot->startRendering();
+
+		if (mWindow->isClosed()) {
+			return false;
+		}
+		if (!mRoot->renderOneFrame())
+			return false;
+		ogreNode->setPosition(ogreNode->getPosition().x + 1, ogreNode->getPosition().y, ogreNode->getPosition().z);
+		
 	}
 }
 
