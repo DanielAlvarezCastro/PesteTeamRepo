@@ -1,6 +1,8 @@
 #include "MainApp.h"
 #include <OgreConfigFile.h>
 #include <iostream>
+
+
 MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogre::BLANKSTRING)
 {
 }
@@ -12,40 +14,9 @@ MainApp::~MainApp()
 
 int MainApp::initApp() 
 {
-
-#ifdef _DEBUG
-	mResourcesCfg = "resources_d.cfg";
-	mPluginsCfg = "plugins_d.cfg";
-#else
-	mResourcesCfg = "resources.cfg";
-	mPluginsCfg = "plugins.cfg";
-#endif
-
-	mRoot = new Ogre::Root(mPluginsCfg);
 	
-	if (mRoot == NULL)
-	{
-		return 0;
-	}
-
-	renderSys = *mRoot->getAvailableRenderers().begin();
-	mRoot->setRenderSystem(renderSys);
-
-	// initialise root
-	//mRoot->initialise(false);
-	locateResources();
-
-	if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(NULL)))
-		return false;
-
-	renderSys->setConfigOption("Full Screen", "No");
-	renderSys->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
-
-	mWindow = mRoot->initialise(true, "Retrowave Spaceship FoxMcDonald");
-
-	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
-	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-
+	initOgre();
+	initOIS();
 	mSceneMgr = mRoot->createSceneManager();
 
 	mCamera = mSceneMgr->createCamera("MainCam");
@@ -76,9 +47,15 @@ int MainApp::initApp()
 	mLightNode->attachObject(luz);
 
 	mLightNode->setDirection(Ogre::Vector3(-1, 0, -1));
-	while (true) {
-		mRoot->startRendering();
-
+	appRunning = true;
+	while (appRunning) {
+		
+		mKeyboard->capture();
+		mMouse->capture();
+		if (mKeyboard->isKeyDown(OIS::KC_ESCAPE)) {
+			appRunning = false;
+		}
+		
 		if (mWindow->isClosed()) {
 			return false;
 		}
@@ -87,6 +64,60 @@ int MainApp::initApp()
 		ogreNode->setPosition(ogreNode->getPosition().x + 1, ogreNode->getPosition().y, ogreNode->getPosition().z);
 		
 	}
+}
+
+int MainApp::initOgre()
+{
+	//INICIALIZACION DE OGRE
+#ifdef _DEBUG
+	mResourcesCfg = "resources_d.cfg";
+	mPluginsCfg = "plugins_d.cfg";
+#else
+	mResourcesCfg = "resources.cfg";
+	mPluginsCfg = "plugins.cfg";
+#endif
+
+	mRoot = new Ogre::Root(mPluginsCfg);
+
+	if (mRoot == NULL)
+	{
+		return 0;
+	}
+
+	renderSys = *mRoot->getAvailableRenderers().begin();
+	mRoot->setRenderSystem(renderSys);
+
+	// initialise root
+	//mRoot->initialise(false);
+	locateResources();
+
+	if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(NULL)))
+		return false;
+
+	renderSys->setConfigOption("Full Screen", "No");
+	renderSys->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
+
+	mWindow = mRoot->initialise(true, "Retrowave Spaceship FoxMcDonald");
+
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+}
+
+void MainApp::initOIS()
+{
+	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
+	OIS::ParamList pl;
+	size_t windowHnd = 0;
+	std::ostringstream windowHndStr;
+
+	mWindow->getCustomAttribute("WINDOW", &windowHnd);
+	windowHndStr << windowHnd;
+	pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
+
+	mInputMgr = OIS::InputManager::createInputSystem(pl);
+
+	mKeyboard = static_cast<OIS::Keyboard*>(mInputMgr->createInputObject(OIS::OISKeyboard, false));
+	mMouse = static_cast<OIS::Mouse*>(mInputMgr->createInputObject(OIS::OISMouse, false));
 }
 
 void MainApp::locateResources()
