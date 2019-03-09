@@ -1,10 +1,11 @@
 #include "MainApp.h"
 #include <OgreConfigFile.h>
 #include <iostream>
-#include "Scene.h"
+#include "SceneMachine.h"
 
 MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogre::BLANKSTRING)
 {
+	sceneMC = new SceneMachine();
 }
 
 MainApp::~MainApp()
@@ -17,7 +18,7 @@ int MainApp::initApp()
 	initOgre();
 	initOIS();
 	mSceneMgr = mRoot->createSceneManager();
-	scene = new Scene(this);
+	sceneMC->addScene(new Scene(this));
 
 	appRunning = true;
 	while (appRunning) {
@@ -30,7 +31,7 @@ int MainApp::initApp()
 		mMouse->capture();
 		
 		if (!mRoot->renderOneFrame()) return false;
-		scene->updateScene();
+		sceneMC->update();
 	}
 	return 1;
 }

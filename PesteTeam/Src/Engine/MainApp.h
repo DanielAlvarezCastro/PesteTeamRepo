@@ -19,11 +19,12 @@
 #include <OISJoyStick.h>
 //#include "InputManager.h"
 //#include "Scene.h"
+//#include "SceneMachine.h"
 
 using namespace Ogre;
 using namespace OIS;
 
-class Scene;
+class SceneMachine;
 
 class MainApp
 {
@@ -35,7 +36,7 @@ private:
 	Ogre::RenderSystem* renderSys;
 	Ogre::SceneManager* mSceneMgr;
 
-	Scene* scene;
+	SceneMachine* sceneMC;
 
 	OIS::InputManager* mInputMgr;
 	OIS::Mouse* mMouse;

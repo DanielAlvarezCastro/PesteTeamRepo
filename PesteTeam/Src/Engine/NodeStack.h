@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-#ifndef PILAESTADOS_H_
-#define PILAESTADOS_H_
+#ifndef NODESTACK_H_
+#define NODESTACK_H_
 
 template <class T>  //  Template, parametros genericos
-class PilaEstados {
+class NodeStack {
 
 private:
 
@@ -19,12 +19,12 @@ private:
 
 public:
 	
-	PilaEstados()  // Constructora
+	NodeStack()  // Constructora
 	{
 		top = 0;
 	}
 
-	~PilaEstados();  // Destructora
+	~NodeStack();  // Destructora
 
 	/***Métodos***/
 	void push(T);
@@ -35,7 +35,7 @@ public:
 /***CODIGO DE LOS METODOS INCLUIDO EN EL .h***/
                      
 template < class T >    
-void PilaEstados<T>::push(T value) // Añade nodo a la pila 
+void NodeStack<T>::push(T value) // Añade nodo a la pila 
 {
 	StackNode *newNode;
 	newNode = new StackNode;
@@ -56,7 +56,7 @@ void PilaEstados<T>::push(T value) // Añade nodo a la pila
 }
 
 template < class T >  // Devuelve el valor del "top" de la pila y lo elimina
-void PilaEstados<T>::pop(T &value)
+void NodeStack<T>::pop(T &value)
 {
 	StackNode *temp;
 
@@ -75,7 +75,7 @@ void PilaEstados<T>::pop(T &value)
 }
 
 template < class T > 
-bool PilaEstados<T>::isEmpty() //bool existen nodos en la pila
+bool NodeStack<T>::isEmpty() //bool existen nodos en la pila
 {
 	bool state;
 
@@ -88,7 +88,7 @@ bool PilaEstados<T>::isEmpty() //bool existen nodos en la pila
 }
 
 template < class T >
-PilaEstados<T>::~PilaEstados() // Destructora
+NodeStack<T>::~NodeStack() // Destructora
 {
 	StackNode *nodePtr, *nextNode;
 
