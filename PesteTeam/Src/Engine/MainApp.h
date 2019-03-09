@@ -18,9 +18,12 @@
 #include <OISMouse.h>
 #include <OISJoyStick.h>
 //#include "InputManager.h"
+//#include "Scene.h"
 
 using namespace Ogre;
 using namespace OIS;
+
+class Scene;
 
 class MainApp
 {
@@ -31,14 +34,17 @@ private:
 	Ogre::RenderWindow* mWindow;
 	Ogre::RenderSystem* renderSys;
 	Ogre::SceneManager* mSceneMgr;
-	Ogre::Camera* mCamera;
-	Ogre::Viewport* vp;
-	Ogre::SceneNode* mCamNode;
+
+	Scene* scene;
+
 	OIS::InputManager* mInputMgr;
 	OIS::Mouse* mMouse;
 	OIS::Keyboard* mKeyboard;
+
 	bool appRunning;
+
 	void messagePump();
+
 public:	
 	MainApp();
 	~MainApp();
@@ -46,5 +52,15 @@ public:
 	int initOgre();
 	void initOIS();
 	void locateResources();
+	void closeApp();
+
 	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT) {}
+
+	//getters
+	Ogre::RenderWindow* getRenderWindow() { return mWindow; }
+	Ogre::RenderSystem* getRenderSys() { return renderSys; }
+	Ogre::SceneManager* getSceneMgr() { return mSceneMgr; }
+
+	OIS::Mouse* getMouse() { return mMouse; }
+	OIS::Keyboard* getKeyboard() { return mKeyboard; }
 };

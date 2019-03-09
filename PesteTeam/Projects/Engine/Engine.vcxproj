@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\Engine\GameObject.cpp" />
     <ClCompile Include="..\..\Src\Engine\MainApp.cpp" />
+    <ClCompile Include="..\..\Src\Engine\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Engine\GameObject.h" />
     <ClInclude Include="..\..\Src\Engine\MainApp.h" />
+    <ClInclude Include="..\..\Src\Engine\Scene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

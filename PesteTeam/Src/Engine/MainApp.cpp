@@ -1,9 +1,7 @@
 #include "MainApp.h"
 #include <OgreConfigFile.h>
 #include <iostream>
-
-
-
+#include "Scene.h"
 
 MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogre::BLANKSTRING)
 {
@@ -16,56 +14,23 @@ MainApp::~MainApp()
 
 int MainApp::initApp() 
 {
-	
 	initOgre();
 	initOIS();
 	mSceneMgr = mRoot->createSceneManager();
+	scene = new Scene(this);
 
-	mCamera = mSceneMgr->createCamera("MainCam");
-
-	mCamera->setNearClipDistance(5);
-
-	mCamNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("nCam");
-	mCamNode->attachObject(mCamera);
-	mCamNode->setPosition(0, 0, 80);
-	mCamNode->lookAt(Ogre::Vector3(0, 0, -300), Ogre::Node::TS_WORLD);
-
-	vp = mWindow->addViewport(mCamera);
-	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
-
-	mCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
-
-	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("cube.mesh");
-
-	Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	ogreNode->attachObject(ogreEntity);
-	ogreNode->setScale(0.1, 0.1, 0.1);
-
-	Light* luz = mSceneMgr->createLight("Luz");
-	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz->setDiffuseColour(0.75, 0.75, 0.75);
-	//mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
-	SceneNode* mLightNode = mCamNode->createChildSceneNode("nLuz");
-	mLightNode->attachObject(luz);
-
-	mLightNode->setDirection(Ogre::Vector3(-1, 0, -1));
 	appRunning = true;
 	while (appRunning) {
-			
 		messagePump();
+
 		mWindow->update();
-		if (mWindow->isClosed()) {
-			return false;
-		}
+		if (mWindow->isClosed()) return false;
+
 		mKeyboard->capture();
 		mMouse->capture();
-		if (mKeyboard->isKeyDown(OIS::KC_ESCAPE)) {
-			appRunning = false;
-		}
 		
-		if (!mRoot->renderOneFrame())
-			return false;
-		ogreNode->setPosition(ogreNode->getPosition().x + 1, ogreNode->getPosition().y, ogreNode->getPosition().z);
+		if (!mRoot->renderOneFrame()) return false;
+		scene->updateScene();
 	}
 	return 1;
 }
@@ -98,11 +63,12 @@ int MainApp::initOgre()
 		return 0;
 	}
 
-	renderSys = *mRoot->getAvailableRenderers().begin();
+	Ogre::RenderSystemList rsl = mRoot->getAvailableRenderers();
+	renderSys = *rsl.begin();
 	mRoot->setRenderSystem(renderSys);
 
 	// initialise root
-	//mRoot->initialise(false);
+	// mRoot->initialise(false);
 	locateResources();
 
 	if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(NULL)))
@@ -160,4 +126,9 @@ void MainApp::locateResources()
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, type, sec);
 		}
 	}
+}
+
+void MainApp::closeApp()
+{
+	appRunning = false;
 }
