@@ -3,6 +3,8 @@
 #include <iostream>
 
 
+
+
 MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogre::BLANKSTRING)
 {
 }
@@ -49,22 +51,34 @@ int MainApp::initApp()
 	mLightNode->setDirection(Ogre::Vector3(-1, 0, -1));
 	appRunning = true;
 	while (appRunning) {
-		
+			
+		messagePump();
+		mWindow->update();
+		if (mWindow->isClosed()) {
+			return false;
+		}
 		mKeyboard->capture();
 		mMouse->capture();
 		if (mKeyboard->isKeyDown(OIS::KC_ESCAPE)) {
 			appRunning = false;
 		}
 		
-		if (mWindow->isClosed()) {
-			return false;
-		}
 		if (!mRoot->renderOneFrame())
 			return false;
 		ogreNode->setPosition(ogreNode->getPosition().x + 1, ogreNode->getPosition().y, ogreNode->getPosition().z);
-		
+	}
+	return 1;
+}
+void MainApp::messagePump()
+{
+	MSG  msg;
+	while (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 	}
 }
+
 
 int MainApp::initOgre()
 {
@@ -101,20 +115,25 @@ int MainApp::initOgre()
 
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+
 }
 
 void MainApp::initOIS()
 {
 	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
-	OIS::ParamList pl;
+	OIS::ParamList paramList;
 	size_t windowHnd = 0;
 	std::ostringstream windowHndStr;
 
 	mWindow->getCustomAttribute("WINDOW", &windowHnd);
 	windowHndStr << windowHnd;
-	pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
+	paramList.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
+	paramList.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND")));
+	paramList.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
+	paramList.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
+	paramList.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
 
-	mInputMgr = OIS::InputManager::createInputSystem(pl);
+	mInputMgr = OIS::InputManager::createInputSystem(paramList);
 
 	mKeyboard = static_cast<OIS::Keyboard*>(mInputMgr->createInputObject(OIS::OISKeyboard, false));
 	mMouse = static_cast<OIS::Mouse*>(mInputMgr->createInputObject(OIS::OISMouse, false));

@@ -37,9 +37,8 @@ private:
 	OIS::InputManager* mInputMgr;
 	OIS::Mouse* mMouse;
 	OIS::Keyboard* mKeyboard;
-	HWND hWnd;
 	bool appRunning;
-
+	void messagePump();
 public:	
 	MainApp();
 	~MainApp();
