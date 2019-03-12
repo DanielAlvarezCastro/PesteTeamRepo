@@ -1,9 +1,9 @@
 #ifndef _BEHAVIOURCOMPONENT_H
 #define _BEHAVIOURCOMPONENT_H
 
-#include "Component.h"
-class BehaviourComponent :
-	public Component
+#include "BasicComponent.h"
+
+class BehaviourComponent : public BasicComponent
 {
 public:
 	BehaviourComponent(GameObject* gameObject_);

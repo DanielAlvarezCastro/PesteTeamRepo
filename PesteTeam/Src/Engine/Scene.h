@@ -1,6 +1,6 @@
 #pragma once
 #include <Ogre.h>
-#include "MainApp.h"
+#include "GameObject.h"
 
 class Scene
 {
@@ -12,7 +12,7 @@ protected:
 	Ogre::Viewport* vp;
 	Ogre::SceneNode* mCamNode;
 
-	Ogre::SceneNode* gameObject;
+	std::vector<GameObject*> gameObjects;
 
 public:
 	Scene();

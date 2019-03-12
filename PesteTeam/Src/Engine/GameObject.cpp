@@ -1,11 +1,8 @@
 #include "GameObject.h"
 
-
-
 GameObject::GameObject()
 {
 }
-
 
 GameObject::~GameObject()
 {
@@ -33,4 +30,13 @@ void GameObject::reciveMsg(Message * msg)
 	{
 		bComponent->reciveMsg(msg);
 	}
+}
+
+void GameObject::createEntity(std::string mesh) 
+{
+	ogreEntity = MainApp::instance()->getSceneMgr()->createEntity(mesh);
+
+	ogreNode = MainApp::instance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
+	ogreNode->attachObject(ogreEntity);
+	ogreNode->setScale(0.1, 0.1, 0.1);
 }

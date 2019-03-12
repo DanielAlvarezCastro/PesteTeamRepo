@@ -1,9 +1,8 @@
 #include "RigidBody.h"
 
-RigidBody::RigidBody(GameObject* gameObject_) : Component(gameObject_)
+RigidBody::RigidBody(GameObject* gameObject_) : BasicComponent(gameObject_)
 {
 }
-
 
 RigidBody::~RigidBody()
 {

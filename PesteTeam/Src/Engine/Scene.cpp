@@ -28,12 +28,6 @@ void Scene::createScene()
 
 	mCamera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 
-	Ogre::Entity* ogreEntity = mSceneMgr->createEntity("cube.mesh");
-
-	gameObject = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	gameObject->attachObject(ogreEntity);
-	gameObject->setScale(0.1, 0.1, 0.1);
-
 	Ogre::Light* luz = mSceneMgr->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
 	luz->setDiffuseColour(0.75, 0.75, 0.75);
@@ -42,11 +36,20 @@ void Scene::createScene()
 	mLightNode->attachObject(luz);
 
 	mLightNode->setDirection(Ogre::Vector3(-1, 0, -1));
+
+	GameObject* pollita = new GameObject();
+	pollita->createEntity("cube.mesh");
+	gameObjects.push_back(pollita);
 }
 
 void Scene::updateScene() 
 {
-	gameObject->setPosition(gameObject->getPosition().x + 1, gameObject->getPosition().y, gameObject->getPosition().z);
+	//esto debe sustituirse por actualizar los componentes
+	for (GameObject* go : gameObjects)
+	{
+		Ogre::Vector3 pos = { go->getPosition().x + 1, go->getPosition().y, go->getPosition().z };
+		go->setPosition(pos);
+	}
 
 	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
 		MainApp::instance()->closeApp();

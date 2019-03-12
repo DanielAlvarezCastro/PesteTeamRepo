@@ -1,11 +1,8 @@
 #include "BehaviourComponent.h"
 
-
-
-BehaviourComponent::BehaviourComponent(GameObject* gameObject_):Component(gameObject_)
+BehaviourComponent::BehaviourComponent(GameObject* gameObject_) : BasicComponent(gameObject_)
 {
 }
-
 
 BehaviourComponent::~BehaviourComponent()
 {

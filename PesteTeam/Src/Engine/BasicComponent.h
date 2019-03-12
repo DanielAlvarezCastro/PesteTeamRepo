@@ -1,7 +1,7 @@
 #include <iostream>
 
-#ifndef _COMPONENT_H
-#define _COMPONENT_H
+#ifndef _BASIC_COMPONENT_H
+#define _BASIC_COMPONENT_H
 
 using namespace std;
 
@@ -12,14 +12,14 @@ struct Message
 	string id;
 };
 
-class Component //Clase abstracta base de los componentes 
+class BasicComponent //Clase abstracta base de los componentes 
 {
 protected:
 	//id de componente?
 	GameObject* gameObject;
 public:
-	Component(GameObject* gameObject_);
-	virtual ~Component();
+	BasicComponent(GameObject* gameObject_);
+	virtual ~BasicComponent();
 	virtual void Update() = 0;
 
 	virtual void sendObjectMsg(Message* msg_);
@@ -27,4 +27,4 @@ public:
 	virtual void reciveMsg(Message* msg_) = 0;
 };
 
-#endif // _COMPONENT
+#endif // _BASI_COMPONENT

@@ -1,9 +1,9 @@
 #ifndef _RIGIDBODY_H
 #define _RIGIDBODY_H
 
-#include "Component.h"
-class RigidBody :
-	public Component
+#include "BasicComponent.h"
+
+class RigidBody : public BasicComponent
 {
 public:
 	RigidBody(GameObject* gameObject_);
@@ -14,4 +14,3 @@ public:
 };
 
 #endif // _RIGIDBODY
-
