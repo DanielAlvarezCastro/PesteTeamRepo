@@ -3,6 +3,8 @@
 #include <iostream>
 #include "SceneMachine.h"
 
+MainApp* MainApp::instance_ = nullptr;
+
 MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogre::BLANKSTRING)
 {
 	sceneMC = new SceneMachine();
@@ -18,7 +20,8 @@ int MainApp::initApp()
 	initOgre();
 	initOIS();
 	mSceneMgr = mRoot->createSceneManager();
-	appRunning = true;	
+	appRunning = true;
+
 	return 1;
 }
 void MainApp::messagePump()
@@ -30,7 +33,6 @@ void MainApp::messagePump()
 		DispatchMessage(&msg);
 	}
 }
-
 
 int MainApp::initOgre()
 {

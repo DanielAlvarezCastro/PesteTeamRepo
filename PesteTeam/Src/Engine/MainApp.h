@@ -29,6 +29,8 @@ class Scene;
 class MainApp
 {
 private:
+	static MainApp* instance_;
+
 	Ogre::Root* mRoot;
 	Ogre::String mResourcesCfg;
 	Ogre::String mPluginsCfg;
@@ -67,4 +69,10 @@ public:
 
 	OIS::Mouse* getMouse() { return mMouse; }
 	OIS::Keyboard* getKeyboard() { return mKeyboard; }
+
+	static MainApp* instance() {
+		if (instance_ == nullptr)
+			instance_ = new MainApp();
+		return instance_;
+	}
 };

@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-Scene::Scene(MainApp* app) : APPLICATION(app)
+Scene::Scene()
 {
 	createScene();
 }
@@ -11,8 +11,8 @@ Scene::~Scene()
 
 void Scene::createScene() 
 {
-	mSceneMgr = APPLICATION->getSceneMgr();
-	mWindow = APPLICATION->getRenderWindow();
+	mSceneMgr = MainApp::instance()->getSceneMgr();
+	mWindow = MainApp::instance()->getRenderWindow();
 
 	mCamera = mSceneMgr->createCamera("MainCam");
 
@@ -48,7 +48,7 @@ void Scene::updateScene()
 {
 	gameObject->setPosition(gameObject->getPosition().x + 1, gameObject->getPosition().y, gameObject->getPosition().z);
 
-	if (APPLICATION->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
-		APPLICATION->closeApp();
+	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
+		MainApp::instance()->closeApp();
 	}
 }

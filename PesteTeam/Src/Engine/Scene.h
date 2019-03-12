@@ -5,8 +5,6 @@
 class Scene
 {
 protected:
-	MainApp* APPLICATION;
-
 	Ogre::SceneManager* mSceneMgr;
 	Ogre::RenderWindow* mWindow;
 
@@ -17,7 +15,7 @@ protected:
 	Ogre::SceneNode* gameObject;
 
 public:
-	Scene(MainApp* app);
+	Scene();
 	~Scene();
 	void createScene();
 	void updateScene();
