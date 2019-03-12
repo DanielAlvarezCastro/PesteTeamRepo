@@ -3,6 +3,9 @@
 *.ipdb
 *.pdb
 *.user
+*.dll
+*.ilk
+Ogre.log
 
 ### FOLDERS ###
 Dependencies
