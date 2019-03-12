@@ -1,6 +1,7 @@
 #include <iostream>
 #include <MainApp.h>
 #include <Scene.h>
+#include <fmod.hpp>
 #include <fmod_studio.hpp>
 
 int main() {
