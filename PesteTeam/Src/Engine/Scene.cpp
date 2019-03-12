@@ -40,6 +40,13 @@ void Scene::createScene()
 	GameObject* pollita = new GameObject();
 	pollita->createEntity("cube.mesh");
 	gameObjects.push_back(pollita);
+
+	GameObject* pollita2 = new GameObject();
+	pollita2->createEntity("cube.mesh");
+	Ogre::Vector3 aux = pollita2->getPosition();
+	aux.y += 10;
+	pollita2->setPosition(aux);
+	gameObjects.push_back(pollita2);
 }
 
 void Scene::updateScene() 
