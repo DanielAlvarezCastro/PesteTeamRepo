@@ -25,7 +25,7 @@ using namespace Ogre;
 using namespace OIS;
 
 class SceneMachine;
-
+class Scene;
 class MainApp
 {
 private:
@@ -54,6 +54,9 @@ public:
 	void initOIS();
 	void locateResources();
 	void closeApp();
+	bool runGame();
+
+	void AddScene(Scene* scene);
 
 	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT) {}
 

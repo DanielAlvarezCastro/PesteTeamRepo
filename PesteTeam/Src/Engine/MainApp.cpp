@@ -18,21 +18,7 @@ int MainApp::initApp()
 	initOgre();
 	initOIS();
 	mSceneMgr = mRoot->createSceneManager();
-	sceneMC->addScene(new Scene(this));
-
-	appRunning = true;
-	while (appRunning) {
-		messagePump();
-
-		mWindow->update();
-		if (mWindow->isClosed()) return false;
-
-		mKeyboard->capture();
-		mMouse->capture();
-		
-		if (!mRoot->renderOneFrame()) return false;
-		sceneMC->update();
-	}
+	appRunning = true;	
 	return 1;
 }
 void MainApp::messagePump()
@@ -132,4 +118,25 @@ void MainApp::locateResources()
 void MainApp::closeApp()
 {
 	appRunning = false;
+}
+
+bool MainApp::runGame()
+{
+	while (appRunning) {
+		messagePump();
+
+		mWindow->update();
+		if (mWindow->isClosed()) return false;
+
+		mKeyboard->capture();
+		mMouse->capture();
+
+		if (!mRoot->renderOneFrame()) return false;
+		sceneMC->update();
+	}
+}
+
+void MainApp::AddScene(Scene* scene)
+{
+	sceneMC->addScene(scene);
 }
