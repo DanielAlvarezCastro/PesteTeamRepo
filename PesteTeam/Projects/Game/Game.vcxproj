@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Src\Game\GameObjectFactory.cpp" />
     <ClCompile Include="..\..\Src\Game\main.cpp" />
+    <ClCompile Include="..\..\Src\Game\SceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\Game\GameObjectFactory.h" />
     <ClInclude Include="..\..\Src\Game\json.hpp" />
+    <ClInclude Include="..\..\Src\Game\SceneLoader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -5,10 +5,10 @@
 #include <list>
 #include "BehaviourComponent.h"
 #include "GameObject.h"
-#ifndef _GAMEOBJECTFACTORY_H
-#define _GAMEOBJECTFACTORY_H
+#ifndef _SCENELOADER_H
+#define _SCENELOADER_H
 using json = nlohmann::json;
-class GameObjectFactory
+class SceneLoader
 {
 private:
 	//Diccionario con el contenido de los prefabs  key=prefab type  value=prefab parameters
@@ -16,12 +16,12 @@ private:
 	std::map<std::string, std::string> prefabsMap;
 	std::string scenesPath;
 public:
-	GameObjectFactory(std::string scenesPath);
+	SceneLoader(std::string scenesPath);
 	bool loadPrefabs();
 	bool loadScene(std::string sceneName);
 	GameObject* createGameObject(json gameObject_json, std::vector<float> position);
 	void addComponents(json components_json, GameObject* go);
-	~GameObjectFactory();
+	~SceneLoader();
 };
 
-#endif // _GAMEOBJECT
+#endif

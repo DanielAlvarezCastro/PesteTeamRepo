@@ -1,13 +1,13 @@
-#include "GameObjectFactory.h"
+#include "SceneLoader.h"
 #include <fstream>
 #include <iostream>
 using json = nlohmann::json;
 
-GameObjectFactory::GameObjectFactory(std::string scenesPath) : scenesPath(scenesPath)
+SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 {
 }
 
-bool GameObjectFactory::loadPrefabs()
+bool SceneLoader::loadPrefabs()
 {
 	std::cout << "Cargando prefabs..." << std::endl;
 	//Carga el json de los prefabs
@@ -37,7 +37,7 @@ bool GameObjectFactory::loadPrefabs()
 
 
 
-bool GameObjectFactory::loadScene(std::string sceneName)
+bool SceneLoader::loadScene(std::string sceneName)
 {
 	std::cout << "********Cargando " << sceneName << "********" << std::endl;
 	//Carga el archivo que contiene la escena
@@ -78,7 +78,7 @@ bool GameObjectFactory::loadScene(std::string sceneName)
 	return true;
 }
 
-GameObject* GameObjectFactory::createGameObject(json gameObject_json, std::vector<float> position)
+GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<float> position)
 {
 	GameObject* ob = new GameObject();
 	std::string name= gameObject_json["Name"].get<std::string>();
@@ -87,7 +87,7 @@ GameObject* GameObjectFactory::createGameObject(json gameObject_json, std::vecto
 	return ob;
 }
 
-void GameObjectFactory::addComponents(json components_json, GameObject * go)
+void SceneLoader::addComponents(json components_json, GameObject * go)
 {
 	for (json::iterator itComponent = components_json.begin(); itComponent != components_json.end(); ++itComponent) {
 		std::string componentName = (*itComponent)["Name"].get<std::string>();
@@ -103,6 +103,6 @@ void GameObjectFactory::addComponents(json components_json, GameObject * go)
 }
 
 
-GameObjectFactory::~GameObjectFactory()
+SceneLoader::~SceneLoader()
 {
 }
