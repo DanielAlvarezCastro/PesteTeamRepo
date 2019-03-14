@@ -55,6 +55,9 @@ public:
 	Vec3 getPosition() { return Vec3(transform.position); };
 	Vec3 getDirection() { return Vec3(transform.direction); };
 	Vec3 getScale() { return Vec3(transform.scale); };
+	float getRoll() { return ogreNode->getOrientation().getRoll().valueRadians(); }
+	float getPitch() { return (float)ogreNode->getOrientation().getPitch().valueRadians(); }
+	float getYaw() { return (float)ogreNode->getOrientation().getYaw().valueRadians(); }
 #pragma endregion
 #pragma region Transform Setters
 	void setPosition(Vec3 position_) {transform.position = position_.getVector(); ogreNode->setPosition(transform.position); };
@@ -66,12 +69,13 @@ public:
 	void translate(Vec3 movement) { ogreNode->translate(movement.getVector()); setPosition(ogreNode->getPosition()); };
 #pragma endregion
 #pragma region Rotation Metods
-	void yaw(float radian) { ogreNode->yaw(Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
-	void pitch(float radian) { ogreNode->pitch(Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
-	void roll(float radian) { ogreNode->roll(Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
-	void rotate(Vec3 axis, float radian) { ogreNode->rotate(axis.getVector(), Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
+	void calculateDirection();
+	void yaw(float radian) { ogreNode->yaw(Ogre::Radian((Ogre::Real)radian)); calculateDirection(); };
+	void pitch(float radian) { ogreNode->pitch(Ogre::Radian((Ogre::Real)radian)); calculateDirection(); };
+	void roll(float radian) { ogreNode->roll(Ogre::Radian((Ogre::Real)radian)); calculateDirection();};
+	void rotate(Vec3 axis, float radian) { ogreNode->rotate(axis.getVector(), Ogre::Radian((Ogre::Real)radian)); calculateDirection();};
 	void lookAt(Vec3 position, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TransformSpace::TS_WORLD) {
-		ogreNode->lookAt(position.getVector(), relativeTo); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z);
+		ogreNode->lookAt(position.getVector(), relativeTo); calculateDirection();;
 	}
 #pragma endregion
 #pragma endregion

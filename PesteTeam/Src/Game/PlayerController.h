@@ -5,9 +5,11 @@ class PlayerController :
 	public BehaviourComponent
 {
 public:
-	PlayerController(GameObject* gameObject);
+	PlayerController(GameObject* gameObject, GameObject* gameObject2_);
 	virtual ~PlayerController();
 
+	float pi = 3.14159265359;
+	GameObject* pointer;
 	OIS::Keyboard* keyboard;
 
 	virtual void Update();
