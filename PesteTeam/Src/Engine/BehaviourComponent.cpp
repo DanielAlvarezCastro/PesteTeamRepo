@@ -8,7 +8,4 @@ BehaviourComponent::~BehaviourComponent()
 {
 }
 
-void BehaviourComponent::Update()
-{
-}
 

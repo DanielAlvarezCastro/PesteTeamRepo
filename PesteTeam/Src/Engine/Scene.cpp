@@ -36,17 +36,6 @@ void Scene::createScene()
 	mLightNode->attachObject(luz);
 
 	mLightNode->setDirection(Ogre::Vector3(-1, 0, -1));
-
-	GameObject* pollita = new GameObject();
-	pollita->createEntity("cube.mesh");
-	gameObjects.push_back(pollita);
-
-	GameObject* pollita2 = new GameObject();
-	pollita2->createEntity("cube.mesh");
-	Ogre::Vector3 aux = pollita2->getPosition();
-	aux.y += 10;
-	pollita2->setPosition(aux);
-	gameObjects.push_back(pollita2);
 }
 
 void Scene::updateScene() 
@@ -54,8 +43,10 @@ void Scene::updateScene()
 	//esto debe sustituirse por actualizar los componentes
 	for (GameObject* go : gameObjects)
 	{
-		Ogre::Vector3 pos = { go->getPosition().x + 1, go->getPosition().y, go->getPosition().z };
-		go->setPosition(pos);
+	}
+	for (BasicComponent* c : components)
+	{
+		c->Update();
 	}
 
 	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {

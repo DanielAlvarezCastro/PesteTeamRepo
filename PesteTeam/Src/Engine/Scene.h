@@ -13,11 +13,16 @@ protected:
 	Ogre::SceneNode* mCamNode;
 
 	std::vector<GameObject*> gameObjects;
+	std::vector<BasicComponent*> components;
+
 
 public:
 	Scene();
 	~Scene();
 	void createScene();
 	void updateScene();
+
+	void addGameObject(GameObject* GO) { gameObjects.push_back(GO); };
+	void addComponent(BasicComponent* GO) { components.push_back(GO); };
 };
 

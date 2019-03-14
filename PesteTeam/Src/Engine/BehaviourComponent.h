@@ -9,7 +9,7 @@ public:
 	BehaviourComponent(GameObject* gameObject_);
 	virtual ~BehaviourComponent();
 
-	virtual void Update();
+	virtual void Update()=0;
 
 };
 

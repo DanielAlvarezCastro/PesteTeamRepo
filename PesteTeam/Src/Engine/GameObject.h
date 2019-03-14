@@ -7,6 +7,17 @@
 #ifndef _GAMEOBJECT_H
 #define _GAMEOBJECT_H
 
+struct Vec3 
+{
+	float x;
+	float y;
+	float z;
+
+	Vec3(float _x=0, float _y=0, float _z=0) : x(_x), y(_y), z(_z){};
+	Vec3(Ogre::Vector3 vec): x(vec.x), y(vec.y), z(vec.z) {};
+	Ogre::Vector3 getVector() { return Ogre::Vector3((Ogre::Real)x, (Ogre::Real)y, (Ogre::Real)z); };
+};
+
 class GameObject
 {
 private:
@@ -41,25 +52,26 @@ public:
 
 #pragma region Transform functions
 #pragma region Trasform Getters
-	Ogre::Vector3 getPosition() { return transform.position; };
-	Ogre::Vector3 getDirection() { return transform.direction; };
-	Ogre::Vector3 getScale() { return transform.scale; };
+	Vec3 getPosition() { return Vec3(transform.position); };
+	Vec3 getDirection() { return Vec3(transform.direction); };
+	Vec3 getScale() { return Vec3(transform.scale); };
 #pragma endregion
 #pragma region Transform Setters
-	void setPosition(Ogre::Vector3 position_) { transform.position = position_; ogreNode->setPosition(transform.position); };
-	void setDirection(Ogre::Vector3 direction_) { transform.direction = direction_; ogreNode->setDirection(transform.direction); };
-	void setScale(Ogre::Vector3 scale_) { transform.scale = scale_; ogreNode->setScale(transform.scale); };
+	void setPosition(Vec3 position_) {transform.position = position_.getVector(); ogreNode->setPosition(transform.position); };
+	void setDirection(Vec3 direction_) { transform.direction = direction_.getVector(); ogreNode->setDirection(transform.direction); };
+	void setScale(Vec3 scale_) { transform.scale = scale_.getVector(); ogreNode->setScale(transform.scale); };
+	void setInitialState() { ogreNode->setInitialState(); };
 #pragma endregion
 #pragma region Position Metods
-	void translate(Ogre::Vector3 movement) { ogreNode->translate(movement); setPosition(ogreNode->getPosition()); };
+	void translate(Vec3 movement) { ogreNode->translate(movement.getVector()); setPosition(ogreNode->getPosition()); };
 #pragma endregion
 #pragma region Rotation Metods
-	void yaw(Ogre::Radian radian) { ogreNode->yaw(radian); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
-	void pitch(Ogre::Radian radian) { ogreNode->pitch(radian); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
-	void roll(Ogre::Radian radian) { ogreNode->roll(radian); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
-	void rotate(Ogre::Vector3 axis, Ogre::Radian radian) { ogreNode->rotate(axis, radian); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
-	void lookAt(Ogre::Vector3 position, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TransformSpace::TS_WORLD) {
-		ogreNode->lookAt(position, relativeTo); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z);
+	void yaw(float radian) { ogreNode->yaw(Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
+	void pitch(float radian) { ogreNode->pitch(Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
+	void roll(float radian) { ogreNode->roll(Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
+	void rotate(Vec3 axis, float radian) { ogreNode->rotate(axis.getVector(), Ogre::Radian((Ogre::Real)radian)); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z); };
+	void lookAt(Vec3 position, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TransformSpace::TS_WORLD) {
+		ogreNode->lookAt(position.getVector(), relativeTo); setDirection(ogreNode->getOrientation()*Ogre::Vector3::UNIT_Z);
 	}
 #pragma endregion
 #pragma endregion

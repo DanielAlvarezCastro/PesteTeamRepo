@@ -20,10 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Game\main.cpp" />
+    <ClCompile Include="..\..\Src\Game\PlayerController.cpp" />
     <ClCompile Include="..\..\Src\Game\SceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Game\json.hpp" />
+    <ClInclude Include="..\..\Src\Game\PlayerController.h" />
     <ClInclude Include="..\..\Src\Game\SceneLoader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
