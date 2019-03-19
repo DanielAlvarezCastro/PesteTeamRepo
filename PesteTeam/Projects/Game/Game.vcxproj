@@ -83,13 +83,13 @@
     <OutDir>$(SolutionDir)Exe</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Exe</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
