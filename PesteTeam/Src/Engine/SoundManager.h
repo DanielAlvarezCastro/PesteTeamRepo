@@ -32,10 +32,10 @@ struct Implementation {
 
 	int mnNextChannelId;
 
-	typedef map<string, FMOD::Sound*> SoundMap;
-	typedef map<int, FMOD::Channel*> ChannelMap;
-	typedef map<string, FMOD::Studio::EventInstance*> EventMap;
-	typedef map<string, FMOD::Studio::Bank*> BankMap;
+	typedef std::map<string, FMOD::Sound*> SoundMap;
+	typedef std::map<int, FMOD::Channel*> ChannelMap;
+	typedef std::map<string, FMOD::Studio::EventInstance*> EventMap;
+	typedef std::map<string, FMOD::Studio::Bank*> BankMap;
 
 	BankMap mBanks;
 	EventMap mEvents;
@@ -65,7 +65,7 @@ public:
 	void LoadSound(const string& strSoundName, bool b3d = true, bool bLooping = false, bool bStream = false);
 	void UnLoadSound(const string& strSoundName);
 	//void Set3dListenerAndOrientation(const SoundVector& vPos = SoundVector{ 0, 0, 0 }, float fVolumedB = 0.0f);
-	int PlaySound(const string& strSoundName, const SoundVector& vPos = SoundVector{ 0, 0, 0 }, float fVolumedB = 0.0f);
+	int PlaySoundA(const string& strSoundName, const SoundVector& vPos = SoundVector{ 0, 0, 0 }, float fVolumedB = 0.0f);
 	void PlayEvent(const string& strEventName);
 	void StopChannel(int nChannelId);
 	void StopEvent(const string& strEventName, bool bImmediate = false);
