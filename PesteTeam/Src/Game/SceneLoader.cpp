@@ -1,13 +1,14 @@
 #include "SceneLoader.h"
 #include <fstream>
 #include <iostream>
+#include "PlayerController.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 {
 }
 
-bool SceneLoader::loadPrefabs()
+bool SceneLoader::loadPrefabsFromFile()
 {
 	std::cout << "Cargando prefabs..." << std::endl;
 	//Carga el json de los prefabs
@@ -37,7 +38,7 @@ bool SceneLoader::loadPrefabs()
 
 
 
-bool SceneLoader::loadScene(std::string sceneName)
+bool SceneLoader::loadSceneFromFile(std::string sceneName)
 {
 	std::cout << "********Cargando " << sceneName << "********" << std::endl;
 	//Carga el archivo que contiene la escena
@@ -75,6 +76,56 @@ bool SceneLoader::loadScene(std::string sceneName)
 	//Cierra el archivo de la escena
 	sceneFile.close();
 	std::cout << sceneName << " cargado con exito!" << std::endl;
+	//CREAR ESCENAS AQUÍ
+	//ESTO ESTÁ DE PRUEBA, SE DEBERÍA LEER TODO DEL JSON
+	if (sceneName == "Scene1") {
+
+		Scene* escena1 = new Scene();
+		scenesMap.insert(pair<std::string, Scene*>(sceneName, escena1));
+	}
+	else if (sceneName == "Scene2") {
+		Scene* escena2 = new Scene();
+		scenesMap.insert(pair<std::string, Scene*>(sceneName, escena2));
+	}
+	return true;
+}
+
+//Escenas de prueba para meterlas desde código aquí
+bool SceneLoader::loadTestScene()
+{
+	Scene* escena1 = new Scene();
+	escena1->createScene("primary");
+	escena1->createCamera("Camera");
+	escena1->createLight("luz1");
+
+	GameObject* Nave = new GameObject();
+	Nave->createEntity("SkyGrasper.mesh", escena1);
+	Nave->setScale(Vec3(2, 2, 2));
+	Nave->setPosition(Vec3(0, -7, 35));
+	GameObject* pointer = new GameObject();
+	pointer->createEntity("cube.mesh", escena1);
+	pointer->setScale(Vec3(0.05, 0.05, 0.05));
+	pointer->setPosition(Vec3(0, -7, 5));
+	escena1->addGameObject(Nave);
+	escena1->addGameObject(pointer);
+
+	PlayerController* pc = new PlayerController(Nave, pointer);
+	escena1->addComponent(pc);
+
+	scenesMap.insert(pair<std::string, Scene*>("Scene1", escena1));
+
+
+	Scene* escena2 = new Scene();
+	escena2->createScene("secondary");
+	escena2->createCamera("Camera");
+	escena2->createLight("luz1");
+	GameObject* pointer2 = new GameObject();
+	pointer2->createEntity("cube.mesh", escena2);
+	pointer2->setScale(Vec3(0.2, 0.2, 0.2));
+	pointer2->setPosition(Vec3(0, -7, 5));
+	escena2->addGameObject(pointer2);
+	scenesMap.insert(pair<std::string, Scene*>("Scene2", escena2));
+
 	return true;
 }
 
@@ -100,6 +151,12 @@ void SceneLoader::addComponents(json components_json, GameObject * go)
 
 		}
 	}	
+}
+
+Scene* SceneLoader::getScene(std::string sceneName)
+{
+	Scene* escena = scenesMap[sceneName];
+	return escena;
 }
 
 

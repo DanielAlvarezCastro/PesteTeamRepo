@@ -5,6 +5,7 @@
 #include <list>
 #include "BehaviourComponent.h"
 #include "GameObject.h"
+#include "Scene.h"
 #ifndef _SCENELOADER_H
 #define _SCENELOADER_H
 using json = nlohmann::json;
@@ -15,12 +16,17 @@ private:
 	//Con este diccionario no va a ser necesario abrir el archivo prefabs cada vez que queramos cargar uno
 	std::map<std::string, std::string> prefabsMap;
 	std::string scenesPath;
+	std::map<std::string, Scene*> scenesMap;
 public:
 	SceneLoader(std::string scenesPath);
-	bool loadPrefabs();
-	bool loadScene(std::string sceneName);
+	bool loadPrefabsFromFile();
+	bool loadSceneFromFile(std::string sceneName);
+
+	bool loadTestScene();
+
 	GameObject* createGameObject(json gameObject_json, std::vector<float> position);
 	void addComponents(json components_json, GameObject* go);
+	Scene* getScene(std::string sceneName);
 	~SceneLoader();
 };
 

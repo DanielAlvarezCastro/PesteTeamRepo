@@ -6,7 +6,7 @@
 
 #ifndef _GAMEOBJECT_H
 #define _GAMEOBJECT_H
-
+class Scene;
 struct Vec3 
 {
 	float x;
@@ -83,6 +83,7 @@ public:
 	void reciveMsg(Message* msg);
 	void asingFather(GameObject* father_) { father = father_; };
 	void createEntity(std::string mesh);
+	void createEntity(std::string mesh, Scene* scene);
 };
 
 #endif // _GAMEOBJECT

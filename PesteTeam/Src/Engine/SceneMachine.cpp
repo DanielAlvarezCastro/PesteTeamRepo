@@ -19,3 +19,8 @@ void SceneMachine::delScene() {
 void SceneMachine::update() {
 	sceneStack.top()->updateScene();;
 }
+
+Scene * SceneMachine::currentScene()
+{
+	return sceneStack.top();
+}

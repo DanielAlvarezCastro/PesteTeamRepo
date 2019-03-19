@@ -1,5 +1,6 @@
 #include "GameObject.h"
-
+#include <OgreSceneManager.h>
+#include "Scene.h"
 GameObject::GameObject()
 {
 }
@@ -44,9 +45,19 @@ void GameObject::reciveMsg(Message * msg)
 
 void GameObject::createEntity(std::string mesh) 
 {
-	ogreEntity = MainApp::instance()->getSceneMgr()->createEntity(mesh);
+	Ogre::SceneManager* scnMgr = MainApp::instance()->getCurrentSceneMgr();
+	ogreEntity = scnMgr->createEntity(mesh);
 
-	ogreNode = MainApp::instance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
+	ogreNode = MainApp::instance()->getCurrentSceneMgr()->getRootSceneNode()->createChildSceneNode();
+	ogreNode->attachObject(ogreEntity);
+	ogreNode->setScale(0.1, 0.1, 0.1);
+}
+void GameObject::createEntity(std::string mesh, Scene* scene)
+{
+	Ogre::SceneManager* scnMgr = scene->getSceneManager();;
+	ogreEntity = scnMgr->createEntity(mesh);
+
+	ogreNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 	ogreNode->attachObject(ogreEntity);
 	ogreNode->setScale(0.1, 0.1, 0.1);
 }

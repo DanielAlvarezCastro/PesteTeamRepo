@@ -151,7 +151,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;fmod_ARM.lib;fmod_X64.lib;fmod_X86.lib;fmodL_ARM.lib;fmodL_X64.lib;fmodL_X86.lib;fmodstudio_ARM.lib;fmodstudio_X64.lib;fmodstudio_X86.lib;fmodstudioL_ARM.lib;fmodstudioL_X64.lib;fmodstudioL_X86.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
+      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;fmod_ARM.lib;fmod_X86.lib;fmodL_ARM.lib;fmodL_X86.lib;fmodstudio_ARM.lib;fmodstudio_X86.lib;fmodstudioL_ARM.lib;fmodstudioL_X86.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

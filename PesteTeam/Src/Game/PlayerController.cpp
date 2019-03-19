@@ -1,6 +1,6 @@
 #include "PlayerController.h"
 #include <GameObject.h>
-
+#include "GameSceneManager.h"
 
 
 PlayerController::PlayerController(GameObject* gameObject, GameObject* gameObject2_):BehaviourComponent(gameObject), pointer(gameObject2_)
@@ -53,5 +53,8 @@ void PlayerController::Update()
 	if (keyboard->isKeyDown(OIS::KC_SPACE)) {
  		gameObject->translate(gameObject->getDirection());
 		pointer->translate(gameObject->getDirection());
+	}
+	if (keyboard->isKeyDown(OIS::KC_P)) {
+		GameSceneManager::instance()->LoadScene("Scene2");
 	}
 }

@@ -18,8 +18,7 @@ MainApp::~MainApp()
 int MainApp::initApp() 
 {
 	initOgre();
-	initOIS();
-	mSceneMgr = mRoot->createSceneManager();
+	initOIS();	
 	appRunning = true;
 
 	return 1;
@@ -141,4 +140,25 @@ bool MainApp::runGame()
 void MainApp::AddScene(Scene* scene)
 {
 	sceneMC->addScene(scene);
+}
+
+void MainApp::setupViewport(Camera* camera)
+{
+	mWindow->removeAllViewports();
+	
+	Ogre::Viewport *vp = mWindow->addViewport(camera); //Our Viewport linked to the camera
+
+	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+	camera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+}
+
+void MainApp::addViewport(Ogre::Camera* camera)
+{
+	vp = mWindow->addViewport(camera);
+	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+}
+
+Ogre::SceneManager * MainApp::getCurrentSceneMgr()
+{
+	return sceneMC->currentScene()->getSceneManager();
 }
