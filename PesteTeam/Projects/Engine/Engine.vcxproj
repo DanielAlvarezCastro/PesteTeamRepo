@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\Src\Engine\RigidBody.cpp" />
     <ClCompile Include="..\..\Src\Engine\Scene.cpp" />
     <ClCompile Include="..\..\Src\Engine\SceneMachine.cpp" />
+    <ClCompile Include="..\..\Src\Engine\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Engine\BehaviourComponent.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="..\..\Src\Engine\RigidBody.h" />
     <ClInclude Include="..\..\Src\Engine\Scene.h" />
     <ClInclude Include="..\..\Src\Engine\SceneMachine.h" />
+    <ClInclude Include="..\..\Src\Engine\SoundManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

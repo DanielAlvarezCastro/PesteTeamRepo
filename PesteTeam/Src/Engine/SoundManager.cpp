@@ -99,7 +99,7 @@ void SoundManager::UnLoadSound(const std::string& strSoundName)
 // If the channel was set right then we update all the possible parameters like volume and position
 // and then unpause the sound. 
 // Finally we return the channel id encase we refer to it later.
-int SoundManager::PlaySound(const string& strSoundName, const SoundVector& vPosition, float fVolumedB)
+int SoundManager::PlaySoundA(const string& strSoundName, const SoundVector& vPosition, float fVolumedB)
 {
 	int nChannelId = sgpImplementation->mnNextChannelId++;
 	auto tFoundIt = sgpImplementation->mSounds.find(strSoundName);
