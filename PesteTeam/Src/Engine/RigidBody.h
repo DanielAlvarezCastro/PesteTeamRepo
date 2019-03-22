@@ -20,7 +20,7 @@ public:
 	///constructora con masa por parametro
 	RigidBody(GameObject* gameObject_, btScalar mass_);
 	///contructora que calcula la masa propia con una densisad
-	RigidBody(GameObject* gameObject_, btScalar density_);
+	RigidBody(GameObject* gameObject_, float density_, bool b=false);
 	void setName(const std::string newName);
 
 	virtual ~RigidBody();

@@ -12,7 +12,7 @@ RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_) : BasicComponent(g
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, btScalar density) : BasicComponent(gameObject_)
+RigidBody::RigidBody(GameObject* gameObject_, float density, bool b) : BasicComponent(gameObject_)
 {
 	//masa = dimension del gameObject * densidad establecida
 	mass = gameObject->getScale().x * gameObject->getScale().y * gameObject->getScale().z * density;
