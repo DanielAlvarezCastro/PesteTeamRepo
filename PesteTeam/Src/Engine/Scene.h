@@ -9,7 +9,6 @@ protected:
 	Ogre::RenderWindow* mWindow;
 
 	Ogre::Camera* mCamera;
-	Ogre::Viewport* vp;
 	Ogre::SceneNode* mCamNode;
 
 	std::vector<GameObject*> gameObjects;
@@ -19,10 +18,14 @@ protected:
 public:
 	Scene();
 	~Scene();
-	void createScene();
+	void createScene(String sceneName);
 	void updateScene();
 
 	void addGameObject(GameObject* GO) { gameObjects.push_back(GO); };
 	void addComponent(BasicComponent* GO) { components.push_back(GO); };
+	void createCamera(String cameraName);
+	Ogre::Camera* getCamera() { return mCamera; };
+	Ogre::SceneManager* getSceneManager() { return mSceneMgr; };
+	void createLight(String lightName);
 };
 

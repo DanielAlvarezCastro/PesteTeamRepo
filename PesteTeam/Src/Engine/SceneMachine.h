@@ -15,5 +15,6 @@ public:
 	void addScene(Scene* s);
 	void delScene();
 	void update();
+	Scene* currentScene();
 };
 

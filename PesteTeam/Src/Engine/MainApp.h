@@ -36,7 +36,8 @@ private:
 	Ogre::String mPluginsCfg;
 	Ogre::RenderWindow* mWindow;
 	Ogre::RenderSystem* renderSys;
-	Ogre::SceneManager* mSceneMgr;
+	
+	Ogre::Viewport* vp;
 
 	SceneMachine* sceneMC;
 
@@ -59,16 +60,24 @@ public:
 	bool runGame();
 
 	void AddScene(Scene* scene);
+	void setupViewport(Camera* camera);
+	void addViewport(Ogre::Camera* camera);
+	void changeCamera(Ogre::Camera* camera) {
+		vp->setCamera(camera);
+	}
 
 	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT) {}
 
 	//getters
 	Ogre::RenderWindow* getRenderWindow() { return mWindow; }
 	Ogre::RenderSystem* getRenderSys() { return renderSys; }
-	Ogre::SceneManager* getSceneMgr() { return mSceneMgr; }
+	Ogre::Viewport* getViewport() { return vp; }
+	Ogre::Root* getRoot() { return mRoot; };
+	Ogre::SceneManager* getCurrentSceneMgr();
 
 	OIS::Mouse* getMouse() { return mMouse; }
 	OIS::Keyboard* getKeyboard() { return mKeyboard; }
+
 
 	static MainApp* instance() {
 		if (instance_ == nullptr)
