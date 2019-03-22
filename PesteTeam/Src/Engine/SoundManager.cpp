@@ -3,8 +3,9 @@
 // Initialize FMOD at high level (mpStudioSystem) and low level (mpSystem)
 Implementation::Implementation() {
 	mpStudioSystem = NULL;
-	SoundManager::ErrorCheck(FMOD::Studio::System::create(&mpStudioSystem));
-	SoundManager::ErrorCheck(mpStudioSystem->initialize(32, FMOD_STUDIO_INIT_LIVEUPDATE, FMOD_INIT_PROFILE_ENABLE, NULL));
+	//SoundManager::ErrorCheck(FMOD::Studio::System::create(&mpStudioSystem));
+	FMOD::Studio::System::create(&mpStudioSystem);
+	SoundManager::ErrorCheck(mpStudioSystem->initialize(32, FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, NULL));
 
 	mpSystem = NULL;
 	SoundManager::ErrorCheck(mpStudioSystem->getLowLevelSystem(&mpSystem));

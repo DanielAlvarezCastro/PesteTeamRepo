@@ -26,7 +26,6 @@
     <ClCompile Include="..\..\Src\Engine\RigidBody.cpp" />
     <ClCompile Include="..\..\Src\Engine\Scene.cpp" />
     <ClCompile Include="..\..\Src\Engine\SceneMachine.cpp" />
-    <ClCompile Include="..\..\Src\Engine\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Engine\BehaviourComponent.h" />
@@ -37,7 +36,6 @@
     <ClInclude Include="..\..\Src\Engine\RigidBody.h" />
     <ClInclude Include="..\..\Src\Engine\Scene.h" />
     <ClInclude Include="..\..\Src\Engine\SceneMachine.h" />
-    <ClInclude Include="..\..\Src\Engine\SoundManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -95,7 +93,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,7 +101,7 @@
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,7 +130,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OIS.lib;OgreMain.lib;fmod_ARM.lib;fmod_X64.lib;fmod_X86.lib;fmodL_ARM.lib;fmodL_X64.lib;fmodL_X86.lib;fmodstudio_ARM.lib;fmodstudio_X64.lib;fmodstudio_X86.lib;fmodstudioL_ARM.lib;fmodstudioL_X64.lib;fmodstudioL_X86.lib;OgreRTShaderSystem.lib;OgreOverlay.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
+      <AdditionalDependencies>OIS.lib;OgreMain.lib;OgreRTShaderSystem.lib;OgreOverlay.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
@@ -153,7 +151,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;fmod_ARM.lib;fmod_X86.lib;fmodL_ARM.lib;fmodL_X86.lib;fmodstudio_ARM.lib;fmodstudio_X86.lib;fmodstudioL_ARM.lib;fmodstudioL_X86.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
+      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

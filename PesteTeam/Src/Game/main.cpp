@@ -4,7 +4,6 @@
 #include <SceneLoader.h>
 #include "PlayerController.h"
 #include "GameSceneManager.h"
-#include <SoundManager.h>
 
 int main() {
 
@@ -16,10 +15,6 @@ int main() {
 	}
 	//Carga la escena número 1 ESTÁ DE PRUEBA
 	GameSceneManager::instance()->LoadScene("Scene1");
-	
-	SoundManager::instance()->Init();
-	SoundManager::instance()->LoadSound("./Assets/Audio/yell.mp3");
-	SoundManager::instance()->PlaySoundA("./Assets/Audio/yell.mp3", SoundVector{ 0, 0, 0 }, SoundManager::instance()->VolumeTodb(1.0f));
 
 	MainApp::instance()->runGame();
 	
