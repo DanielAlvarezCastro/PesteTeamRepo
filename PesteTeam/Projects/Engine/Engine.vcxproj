@@ -23,6 +23,7 @@
     <ClCompile Include="..\..\Src\Engine\BasicComponent.cpp" />
     <ClCompile Include="..\..\Src\Engine\GameObject.cpp" />
     <ClCompile Include="..\..\Src\Engine\MainApp.cpp" />
+    <ClCompile Include="..\..\Src\Engine\Physics.cpp" />
     <ClCompile Include="..\..\Src\Engine\RigidBody.cpp" />
     <ClCompile Include="..\..\Src\Engine\Scene.cpp" />
     <ClCompile Include="..\..\Src\Engine\SceneMachine.cpp" />
