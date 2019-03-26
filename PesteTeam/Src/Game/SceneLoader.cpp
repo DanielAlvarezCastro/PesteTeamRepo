@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include "PlayerController.h"
+#include "CameraMovement.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -129,6 +130,9 @@ bool SceneLoader::loadTestScene()
 
 	PlayerController* pc = new PlayerController(Nave, pointer);
 	escena1->addComponent(pc);
+
+	CameraMovement* cM = new CameraMovement(cameraOb, Nave);
+	escena1->addComponent(cM);
 
 	scenesMap.insert(pair<std::string, Scene*>("Scene1", escena1));
 
