@@ -8,7 +8,8 @@ CameraMovement::~CameraMovement()
 {
 }
 
-void CameraMovement::Update()
+
+void CameraMovement::Update(float t)
 {
 	Vec3 targetPos = target->getPosition();
 	targetPos.z -= 100;

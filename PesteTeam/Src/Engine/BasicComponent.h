@@ -20,7 +20,7 @@ protected:
 public:
 	BasicComponent(GameObject* gameObject_);
 	virtual ~BasicComponent();
-	virtual void Update() = 0;
+	virtual void Update(float t) = 0;
 
 	virtual void sendObjectMsg(Message* msg_);
 	virtual void sendSceneMsg(Message* msg_);

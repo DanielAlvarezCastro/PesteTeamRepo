@@ -15,11 +15,11 @@ void Scene::createScene(String sceneName)
 	   
 }
 
-void Scene::updateScene() 
+void Scene::updateScene()
 {
 	for (BasicComponent* c : components)
 	{
-		c->Update();
+		c->Update(MainApp::instance()->deltaTime());
 	}
 
 	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {

@@ -22,6 +22,7 @@
     <ClCompile Include="..\..\Src\Engine\BehaviourComponent.cpp" />
     <ClCompile Include="..\..\Src\Engine\BasicComponent.cpp" />
     <ClCompile Include="..\..\Src\Engine\GameObject.cpp" />
+    <ClCompile Include="..\..\Src\Engine\GameTime.cpp" />
     <ClCompile Include="..\..\Src\Engine\MainApp.cpp" />
     <ClCompile Include="..\..\Src\Engine\Physics.cpp" />
     <ClCompile Include="..\..\Src\Engine\RigidBody.cpp" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\..\Src\Engine\BehaviourComponent.h" />
     <ClInclude Include="..\..\Src\Engine\BasicComponent.h" />
     <ClInclude Include="..\..\Src\Engine\GameObject.h" />
+    <ClInclude Include="..\..\Src\Engine\GameTime.h" />
     <ClInclude Include="..\..\Src\Engine\MainApp.h" />
     <ClInclude Include="..\..\Src\Engine\NodeStack.h" />
     <ClInclude Include="..\..\Src\Engine\Physics.h" />
@@ -95,7 +97,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-2.0.8\include;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -103,7 +105,7 @@
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-2.0.8\include;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

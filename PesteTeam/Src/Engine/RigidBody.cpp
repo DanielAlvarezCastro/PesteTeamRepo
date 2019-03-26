@@ -57,6 +57,6 @@ RigidBody::~RigidBody()
 {
 }
 
-void RigidBody::Update()
+void RigidBody::Update(float t)
 {
 }
