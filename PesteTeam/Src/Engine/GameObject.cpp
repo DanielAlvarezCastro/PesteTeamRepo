@@ -15,6 +15,8 @@ void GameObject::release()
 	if (references == 0) 
 	{
 		if(rigidBody) delete rigidBody;
+		if (camera) delete camera;
+		if (light) delete light;
 		for (auto &bComponent : behaviourComponents)
 		{
 			delete bComponent;
@@ -43,21 +45,38 @@ void GameObject::reciveMsg(Message * msg)
 	}
 }
 
-void GameObject::createEntity(std::string mesh) 
+void GameObject::createEntity(std::string mesh, std::string name, Scene* scene)
 {
-	Ogre::SceneManager* scnMgr = MainApp::instance()->getCurrentSceneMgr();
+	Ogre::SceneManager* scnMgr = scene->getSceneManager();
 	ogreEntity = scnMgr->createEntity(mesh);
 
-	ogreNode = MainApp::instance()->getCurrentSceneMgr()->getRootSceneNode()->createChildSceneNode();
+	ogreNode = scnMgr->getRootSceneNode()->createChildSceneNode(name);
 	ogreNode->attachObject(ogreEntity);
 	ogreNode->setScale(0.1, 0.1, 0.1);
 }
-void GameObject::createEntity(std::string mesh, Scene* scene)
-{
-	Ogre::SceneManager* scnMgr = scene->getSceneManager();;
-	ogreEntity = scnMgr->createEntity(mesh);
 
-	ogreNode = scnMgr->getRootSceneNode()->createChildSceneNode();
-	ogreNode->attachObject(ogreEntity);
-	ogreNode->setScale(0.1, 0.1, 0.1);
+void GameObject::createEmptyEntity(std::string name, Scene * scene)
+{
+	Ogre::SceneManager* scnMgr = scene->getSceneManager();
+
+	ogreNode = scnMgr->getRootSceneNode()->createChildSceneNode(name);
+}
+
+void GameObject::addRigidbody(RigidBody * rb)
+{
+	rigidBody = rb;
+}
+
+void GameObject::attachCamera(Ogre::Camera * cam)
+{
+	camera = cam;
+	ogreNode->attachObject(cam);
+}
+
+void GameObject::attachLight(Ogre::Light * lig)
+{
+	light = lig;
+	ogreNode->attachObject(light);
+
+	ogreNode->setDirection(Ogre::Vector3(-1, 0, -1));
 }

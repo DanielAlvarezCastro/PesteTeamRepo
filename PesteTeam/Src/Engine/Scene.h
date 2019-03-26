@@ -7,9 +7,7 @@ class Scene
 protected:
 	Ogre::SceneManager* mSceneMgr;
 	Ogre::RenderWindow* mWindow;
-
 	Ogre::Camera* mCamera;
-	Ogre::SceneNode* mCamNode;
 
 	std::vector<GameObject*> gameObjects;
 	std::vector<BasicComponent*> components;
@@ -23,9 +21,8 @@ public:
 
 	void addGameObject(GameObject* GO) { gameObjects.push_back(GO); };
 	void addComponent(BasicComponent* GO) { components.push_back(GO); };
-	void createCamera(String cameraName);
-	Ogre::Camera* getCamera() { return mCamera; };
+	void addCamera(Ogre::Camera* cam) { mCamera = cam; };
+	Ogre::Camera* getCamera() {	return mCamera;	};
 	Ogre::SceneManager* getSceneManager() { return mSceneMgr; };
-	void createLight(String lightName);
 };
 

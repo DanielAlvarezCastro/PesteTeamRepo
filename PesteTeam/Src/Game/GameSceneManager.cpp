@@ -20,6 +20,7 @@ bool GameSceneManager::LoadGame()
 		//return false;
 	if (!loader->loadTestScene())
 		return false;
+	return true;
 }
 
 //Carga una escena con un nombre determinado

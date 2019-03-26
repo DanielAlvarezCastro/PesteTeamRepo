@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Game\CameraMovement.cpp" />
     <ClCompile Include="..\..\Src\Game\GameSceneManager.cpp" />
     <ClCompile Include="..\..\Src\Game\main.cpp" />
     <ClCompile Include="..\..\Src\Game\PlayerController.cpp" />
     <ClCompile Include="..\..\Src\Game\SceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Game\CameraMovement.h" />
     <ClInclude Include="..\..\Src\Game\GameSceneManager.h" />
     <ClInclude Include="..\..\Src\Game\json.hpp" />
     <ClInclude Include="..\..\Src\Game\PlayerController.h" />
@@ -85,13 +87,13 @@
     <OutDir>$(SolutionDir)Exe</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\irrKlang-1.6.0\include;$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Exe</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\irrKlang-1.6.0\include;$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Src\Engine;$(IncludePath);$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

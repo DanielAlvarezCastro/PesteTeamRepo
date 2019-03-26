@@ -36,6 +36,8 @@ private:
 	}transform;
 	GameObject* father = NULL;
 	RigidBody* rigidBody;
+	Ogre::Camera* camera;
+	Ogre::Light* light;
 	std::vector<BehaviourComponent*>behaviourComponents;
 	//scena en la que se encuentra
 	int references = 0;
@@ -82,8 +84,11 @@ public:
 	void setActive(bool active_) { active = active_; };
 	void reciveMsg(Message* msg);
 	void asingFather(GameObject* father_) { father = father_; };
-	void createEntity(std::string mesh);
-	void createEntity(std::string mesh, Scene* scene);
+	void createEntity(std::string mesh, std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
+	void createEmptyEntity(std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
+	void addRigidbody(RigidBody* rb);
+	void attachCamera(Ogre::Camera* cam);
+	void attachLight(Ogre::Light* lig);
 };
 
 #endif // _GAMEOBJECT

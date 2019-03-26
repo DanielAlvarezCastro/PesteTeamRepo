@@ -5,14 +5,18 @@
 #include "PlayerController.h"
 #include "GameSceneManager.h"
 
+#include <iostream>
+#include <irrKlang.h>
+using namespace irrklang;
+
 int main() {
 
 	MainApp::instance()->initApp();
 
 	//Carga los recursos del juego las escenas y los gameobjects
-	if (!GameSceneManager::instance()->LoadGame()) {
+	if (!GameSceneManager::instance()->LoadGame()) 
 		return false;
-	}
+
 	//Carga la escena número 1 ESTÁ DE PRUEBA
 	GameSceneManager::instance()->LoadScene("Scene1");
 
