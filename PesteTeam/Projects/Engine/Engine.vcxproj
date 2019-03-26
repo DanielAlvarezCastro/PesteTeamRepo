@@ -26,7 +26,6 @@
     <ClCompile Include="..\..\Src\Engine\RigidBody.cpp" />
     <ClCompile Include="..\..\Src\Engine\Scene.cpp" />
     <ClCompile Include="..\..\Src\Engine\SceneMachine.cpp" />
-    <ClCompile Include="..\..\Src\Engine\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Engine\BehaviourComponent.h" />
@@ -34,10 +33,10 @@
     <ClInclude Include="..\..\Src\Engine\GameObject.h" />
     <ClInclude Include="..\..\Src\Engine\MainApp.h" />
     <ClInclude Include="..\..\Src\Engine\NodeStack.h" />
+    <ClInclude Include="..\..\Src\Engine\Physics.h" />
     <ClInclude Include="..\..\Src\Engine\RigidBody.h" />
     <ClInclude Include="..\..\Src\Engine\Scene.h" />
     <ClInclude Include="..\..\Src\Engine\SceneMachine.h" />
-    <ClInclude Include="..\..\Src\Engine\SoundManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -95,16 +94,16 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)Dependencies\FMOD;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -132,8 +131,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OIS.lib;OgreMain.lib;fmod_ARM.lib;fmod_X86.lib;fmodL_ARM.lib;fmodL_X86.lib;fmodstudio_ARM.lib;fmodstudio_X86.lib;fmodstudioL_ARM.lib;fmodstudioL_X86.lib;OgreRTShaderSystem.lib;OgreOverlay.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OIS.lib;OgreMain.lib;OgreRTShaderSystem.lib;OgreOverlay.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Lib;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -152,8 +151,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;fmod_ARM.lib;fmod_X86.lib;fmodL_ARM.lib;fmodL_X86.lib;fmodstudio_ARM.lib;fmodstudio_X86.lib;fmodstudioL_ARM.lib;fmodstudioL_X86.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\bullet3-2.88\Build\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
