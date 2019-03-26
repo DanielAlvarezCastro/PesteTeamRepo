@@ -74,6 +74,7 @@ public:
 	Ogre::Viewport* getViewport() { return vp; }
 	Ogre::Root* getRoot() { return mRoot; };
 	Ogre::SceneManager* getCurrentSceneMgr();
+	Scene* getCurrentScene();
 
 	OIS::Mouse* getMouse() { return mMouse; }
 	OIS::Keyboard* getKeyboard() { return mKeyboard; }

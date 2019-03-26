@@ -95,19 +95,37 @@ bool SceneLoader::loadTestScene()
 {
 	Scene* escena1 = new Scene();
 	escena1->createScene("primary");
-	escena1->createCamera("Camera");
-	escena1->createLight("luz1");
 
 	GameObject* Nave = new GameObject();
-	Nave->createEntity("SkyGrasper.mesh", escena1);
+	Nave->createEntity("SkyGrasper.mesh", "Player", escena1);
 	Nave->setScale(Vec3(2, 2, 2));
 	Nave->setPosition(Vec3(0, -7, 35));
 	GameObject* pointer = new GameObject();
-	pointer->createEntity("cube.mesh", escena1);
+	pointer->createEntity("cube.mesh", "Pointer", escena1);
 	pointer->setScale(Vec3(0.05, 0.05, 0.05));
 	pointer->setPosition(Vec3(0, -7, 5));
 	escena1->addGameObject(Nave);
 	escena1->addGameObject(pointer);
+
+	Ogre::Camera* mCamera = escena1->getSceneManager()->createCamera("MainCam");
+	mCamera->setNearClipDistance(5);
+	escena1->addCamera(mCamera);
+	GameObject* cameraOb = new GameObject();
+	cameraOb->createEmptyEntity("MainCam", escena1);
+	cameraOb->attachCamera(mCamera);
+	cameraOb->setPosition(Vec3(0, 0, 80));
+	cameraOb->lookAt(Vec3(0, 0, -300), Ogre::Node::TS_WORLD);
+
+	escena1->addGameObject(cameraOb);
+
+	Ogre::Light* luz = escena1->getSceneManager()->createLight("Luz");
+	luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz->setDiffuseColour(0.75, 0.75, 0.75);
+
+	GameObject* l1Ob = new GameObject();
+	l1Ob->createEmptyEntity("mLight", escena1);
+	l1Ob->attachLight(luz);
+	escena1->addGameObject(l1Ob);
 
 	PlayerController* pc = new PlayerController(Nave, pointer);
 	escena1->addComponent(pc);
@@ -117,13 +135,34 @@ bool SceneLoader::loadTestScene()
 
 	Scene* escena2 = new Scene();
 	escena2->createScene("secondary");
-	escena2->createCamera("Camera");
-	escena2->createLight("luz1");
-	GameObject* pointer2 = new GameObject();
-	pointer2->createEntity("cube.mesh", escena2);
-	pointer2->setScale(Vec3(0.2, 0.2, 0.2));
-	pointer2->setPosition(Vec3(0, -7, 5));
-	escena2->addGameObject(pointer2);
+	GameObject* cameraOb2 = new GameObject();
+	Ogre::Camera* mCamera2 = escena2->getSceneManager()->createCamera("MainCam2");
+	mCamera2->setNearClipDistance(5);
+	cameraOb2->createEmptyEntity("MainCam2", escena2);
+	cameraOb2->attachCamera(mCamera2);
+	cameraOb2->setPosition(Vec3(0, 0, 80));
+	cameraOb2->lookAt(Vec3(0, 0, -300), Ogre::Node::TS_WORLD);
+
+	GameObject* cubito = new GameObject();
+	cubito->createEntity("cube.mesh", "Cubito", escena2);
+	cubito->setScale(Vec3(0.2, 0.2, 0.2));
+	cubito->setPosition(Vec3(0, -7, 5));
+	escena2->addGameObject(cubito);
+	escena2->addCamera(mCamera2);
+
+	escena2->addGameObject(cameraOb2);
+
+
+	Ogre::Light* luz2 = escena2->getSceneManager()->createLight("Luz2");
+	luz2->setType(Ogre::Light::LT_DIRECTIONAL);
+	luz2->setDiffuseColour(0.75, 0.75, 0.75);
+
+	GameObject* l2Ob = new GameObject();
+	l2Ob->createEmptyEntity("mLight2", escena2);
+	l2Ob->attachLight(luz2);
+
+	escena2->addGameObject(l2Ob);
+
 	scenesMap.insert(pair<std::string, Scene*>("Scene2", escena2));
 
 	return true;

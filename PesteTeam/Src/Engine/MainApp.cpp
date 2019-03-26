@@ -162,3 +162,8 @@ Ogre::SceneManager * MainApp::getCurrentSceneMgr()
 {
 	return sceneMC->currentScene()->getSceneManager();
 }
+
+Scene * MainApp::getCurrentScene()
+{
+	return sceneMC->currentScene();
+}
