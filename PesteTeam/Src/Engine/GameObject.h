@@ -20,6 +20,7 @@ struct Vec3
 
 class GameObject
 {
+#pragma region GO Private Atributes
 private:
 	struct Transform
 	{
@@ -35,22 +36,33 @@ private:
 
 	}transform;
 	GameObject* father = NULL;
-	RigidBody* rigidBody;
 	Ogre::Camera* camera;
 	Ogre::Light* light;
+	RigidBody* rigidBody = nullptr;
 	std::vector<BehaviourComponent*>behaviourComponents;
-	//scena en la que se encuentra
 	int references = 0;
 	bool active = true;
-	//cosas de Ogre
+	//Ogre scene node
 	Ogre::SceneNode* ogreNode = nullptr;
+	//Ogre Entity
 	Ogre::Entity* ogreEntity = nullptr;
+#pragma endregion
 
 public:
 	GameObject();
 	~GameObject();
 	void addReference() { references++; };
 	void release();
+	void setActive(bool active_) { active = active_; };
+	void reciveMsg(Message* msg);
+
+	void asingFather(GameObject* father_);
+	void reciveChild(Ogre::SceneNode* childNode) { ogreNode->addChild(childNode); };
+	void createEntity(std::string mesh, std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
+	void createEmptyEntity(std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
+	void addRigidbody(RigidBody* rb);
+	void attachCamera(Ogre::Camera* cam);
+	void attachLight(Ogre::Light* lig);
 
 #pragma region Transform functions
 #pragma region Trasform Getters
@@ -67,10 +79,10 @@ public:
 	void setScale(Vec3 scale_) { transform.scale = scale_.getVector(); ogreNode->setScale(transform.scale); };
 	void setInitialState() { ogreNode->setInitialState(); };
 #pragma endregion
-#pragma region Position Metods
+#pragma region Position Methods
 	void translate(Vec3 movement) { ogreNode->translate(movement.getVector()); setPosition(ogreNode->getPosition()); };
 #pragma endregion
-#pragma region Rotation Metods
+#pragma region Rotation Methods
 	void calculateDirection();
 	void yaw(float radian) { ogreNode->yaw(Ogre::Radian((Ogre::Real)radian)); calculateDirection(); };
 	void pitch(float radian) { ogreNode->pitch(Ogre::Radian((Ogre::Real)radian)); calculateDirection(); };
@@ -79,16 +91,12 @@ public:
 	void lookAt(Vec3 position, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TransformSpace::TS_WORLD) {
 		ogreNode->lookAt(position.getVector(), relativeTo); calculateDirection();;
 	}
+#pragma region Bounding Box Methods
+	Vec3 getBoundingBox();
+#pragma endregion
+
 #pragma endregion
 #pragma endregion
-	void setActive(bool active_) { active = active_; };
-	void reciveMsg(Message* msg);
-	void asingFather(GameObject* father_) { father = father_; };
-	void createEntity(std::string mesh, std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
-	void createEmptyEntity(std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
-	void addRigidbody(RigidBody* rb);
-	void attachCamera(Ogre::Camera* cam);
-	void attachLight(Ogre::Light* lig);
 };
 
 #endif // _GAMEOBJECT

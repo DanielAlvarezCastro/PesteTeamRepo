@@ -36,6 +36,15 @@ void GameObject::calculateDirection()
 	transform.direction = dir;
 }
 
+Vec3 GameObject::getBoundingBox()
+{
+	Ogre::Quaternion q = ogreNode->getOrientation();
+	setDirection(Vec3(0,0,-1));
+	Vec3 bb = Vec3(ogreNode->_getWorldAABB().getSize());
+	ogreNode->setOrientation(q);
+	return bb;
+}
+
 void GameObject::reciveMsg(Message * msg)
 {
 	if (rigidBody) rigidBody->reciveMsg(msg);
@@ -43,6 +52,12 @@ void GameObject::reciveMsg(Message * msg)
 	{
 		bComponent->reciveMsg(msg);
 	}
+}
+
+void GameObject::asingFather(GameObject * father_)
+{
+	father = father_;
+	father->reciveChild(ogreNode);
 }
 
 void GameObject::createEntity(std::string mesh, std::string name, Scene* scene)
