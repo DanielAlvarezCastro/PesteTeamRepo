@@ -45,6 +45,7 @@ private:
 	//cosas de Ogre
 	Ogre::SceneNode* ogreNode = nullptr;
 	Ogre::Entity* ogreEntity = nullptr;
+	std::string name;
 
 public:
 	GameObject();
@@ -54,6 +55,7 @@ public:
 
 #pragma region Transform functions
 #pragma region Trasform Getters
+	std::string getName() { return name; };
 	Vec3 getPosition() { return Vec3(transform.position); };
 	Vec3 getDirection() { return Vec3(transform.direction); };
 	Vec3 getScale() { return Vec3(transform.scale); };
@@ -84,8 +86,8 @@ public:
 	void setActive(bool active_) { active = active_; };
 	void reciveMsg(Message* msg);
 	void asingFather(GameObject* father_) { father = father_; };
-	void createEntity(std::string mesh, std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
-	void createEmptyEntity(std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
+	void createEntity(std::string mesh, std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
+	void createEmptyEntity(std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
 	void addRigidbody(RigidBody* rb);
 	void attachCamera(Ogre::Camera* cam);
 	void attachLight(Ogre::Light* lig);

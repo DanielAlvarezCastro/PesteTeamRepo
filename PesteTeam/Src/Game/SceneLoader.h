@@ -24,8 +24,8 @@ public:
 
 	bool loadTestScene();
 
-	GameObject* createGameObject(json gameObject_json, std::vector<float> position);
-	void addComponents(json components_json, GameObject* go);
+	GameObject* createGameObject(json gameObject_json, std::vector<float> position, Scene* scene);
+	void addComponents(json components_json, GameObject* go, Scene* scene);
 	Scene* getScene(std::string sceneName);
 	~SceneLoader();
 };
