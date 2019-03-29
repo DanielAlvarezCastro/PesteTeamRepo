@@ -1,21 +1,24 @@
 #include "RigidBody.h"
 #include"GameObject.h"
 
-RigidBody::RigidBody(GameObject* gameObject_) : BasicComponent(gameObject_)
+#include<OgreMeshManager.h>
+#include<OgreMesh.h>
+
+RigidBody::RigidBody(GameObject* gameObject_, std::string name_) : BasicComponent(gameObject_), name(name_)
 {
 	mass = 0;
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_) : BasicComponent(gameObject_), mass(mass_)
+RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_) : BasicComponent(gameObject_), mass(mass_), name(name_)
 {
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, float density, bool b) : BasicComponent(gameObject_)
+RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density) : BasicComponent(gameObject_), name(name_)
 {
 	//masa = dimension del gameObject * densidad establecida
-	mass = gameObject->getScale().x * gameObject->getScale().y * gameObject->getScale().z * density;
+	mass = (gameObject->getScale().x * gameObject->getScale().y * gameObject->getScale().z) * density;
 	setIniConf();
 }
 
@@ -40,23 +43,57 @@ void RigidBody::setIniConf() {
 
 	//estado inicial del cuerpo
 	btDefaultMotionState * motionState = new btDefaultMotionState(startTransform);
-	//construimos el rigid body con toda la informacion 
+	//construimos el rigidbody con toda la informacion 
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, motionState, shape, localInertia);
 	rigidBody = new btRigidBody(rbInfo);
 	rigidBody->setRestitution(1);
 	rigidBody->setUserPointer(gameObject);
-	//añadimos el cuerpo al mundo fisico
-	Physics::getInstance()->addRigidBodyToWorld(rigidBody, "kk");
+	//aï¿½adimos el cuerpo al mundo fisico
+	Physics::getInstance()->addRigidBodyToWorld(rigidBody, name);
+
+	//debugCollider = Ogre::MeshManager::getSingleton().getByName("Cube.mesh").staticCast<Ogre::Mesh>();
 }
 
 void RigidBody::setName(const std::string newName) {
 	name = newName;
 }
 
+void RigidBody::setMass(const btScalar nmass_) {
+	//necesitamos la inercia local
+	btVector3 localInertia = rigidBody->getLocalInertia();
+	mass = nmass_;
+	//asignamos al rigidbody
+	rigidBody->setMassProps(mass, localInertia);
+}
+
 RigidBody::~RigidBody()
 {
+	rigidBody = nullptr;
 }
 
 void RigidBody::Update(float t)
 {
+	//puntero auxiliar para ahorrar llamadas
+	btDynamicsWorld* auxWolrd = Physics::getInstance()->getDynamicWorld();
+	if (auxWolrd != NULL) {
+		//actualizamos el tiempo
+		auxWolrd->stepSimulation(t);
+		//accedemos a cada uno de los objetos
+		for (int i = 0; i < Physics::getInstance()->getNumberOfBodies(); i++) {
+			btCollisionObject* obj = auxWolrd->getCollisionObjectArray()[i];
+			btRigidBody* body = btRigidBody::upcast(obj);
+			//posicion del body
+			btTransform t;
+			if (body && body->getMotionState()) {
+				body->getMotionState()->getWorldTransform(t);
+			}
+			//control sobre el gameObject
+			btQuaternion rotation = t.getRotation();
+			gameObject->setPosition(Vec3(t.getOrigin().x(), t.getOrigin().y(), t.getOrigin().z()));
+			//sacamos los euler desde el quaternion
+			btScalar auxX, auxY, auxZ;
+			rotation.getEulerZYX(auxZ, auxY, auxX);
+			gameObject->setDirection(Vec3(auxX, auxY, auxZ));
+		}
+	}
 }
