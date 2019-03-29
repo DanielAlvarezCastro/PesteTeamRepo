@@ -1,38 +1,30 @@
 {
     "GameObjects": [
+		{
+			"Name" : "CameraOb",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,80],			
+			"Components" : [
+				{
+					"Name" : "Camera",
+					"NearClipDistance" : 5
+				},
+				{
+					"Name" : "CameraMovement",
+					"GameObject": "Player"
+				}
+			]
+		},
+		{
+			"Name" : "Pointer",
+			"Type" : "Pointer",
+			"Position" : [0,-7,5]
+		},
         {
             "Name" : "Player",
             "Type" : "Player",
 			"Position" : [0,0,0]
-        },
-		{
-            "Name" : "Enemy1",
-            "Type" : "EnemyShip",
-			"Position" : [200,200,200]
-        },
-		{
-            "Name" : "Enemy2",
-            "Type" : "EnemyShip",
-			"Position" : [300,100,200]
-        },
-		{
-            "Name" : "Enemy3",
-			"Type" : "None",
-			"Position" : [300,100,200],
-			"Mesh" : "cube.mesh",
-            "Components" : [
-				{
-					"Name" : "HealthScript",
-					"Health" : 20,
-					"Time" : 0.1
-				},
-				{
-					"Name" : "Shooter",
-					"Bullet" : "EnemyBullet",
-					"FireRate" : 0.1,
-					"Damage" : 10					
-				}
-            ]
-        }
-    ]
+		}		
+	]
 }

@@ -22,6 +22,12 @@ public:
 	void addGameObject(GameObject* GO) { gameObjects.push_back(GO); };
 	void addComponent(BasicComponent* GO) { components.push_back(GO); };
 	void addCamera(Ogre::Camera* cam) { mCamera = cam; };
+	GameObject* getGameObject(std::string name) {
+		for (int i = 0; i < gameObjects.size(); i++) {
+			if (gameObjects[i]->getName() == name) {
+				return gameObjects[i];
+			}
+	} }
 	Ogre::Camera* getCamera() {	return mCamera;	};
 	Ogre::SceneManager* getSceneManager() { return mSceneMgr; };
 };

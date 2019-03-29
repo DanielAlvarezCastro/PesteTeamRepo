@@ -3,6 +3,7 @@
 #include <iostream>
 #include "PlayerController.h"
 #include "CameraMovement.h"
+#include <vector>
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -55,6 +56,10 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName)
 	json scene_json;
 	sceneFile >> scene_json;
 
+	Scene* escena = new Scene();
+	escena->createScene("primary");
+	scenesMap.insert(pair<std::string, Scene*>(sceneName, escena));
+
 	//Itera sobre los gameobjects en el json de la escena
 	for (json::iterator it = scene_json["GameObjects"].begin(); it != scene_json["GameObjects"].end(); ++it) {
 
@@ -64,30 +69,20 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName)
 		//Si el tipo de prefab existe entonces crea el gameobject a partir del diccionario
 		if (prefabsMap.find(prefabType)!=prefabsMap.end()) {
 			json prefab_json = json::parse(prefabsMap[(*it)["Type"]]);
-			GameObject* go = createGameObject(prefab_json, position);
-			addComponents(prefab_json["Components"], go);
+			GameObject* go = createGameObject(prefab_json, position, escena);
+			escena->addGameObject(go);
+			addComponents(prefab_json["Components"], go, escena);
 		}
 		else {
 			//Si no existe entonces lo crea leyendo el json de la escena
-			GameObject* go = createGameObject((*it), position);
-			addComponents((*it)["Components"], go);
+			GameObject* go= createGameObject((*it), position, escena);
+			addComponents((*it)["Components"], go, escena);
 		}
 	}
 
 	//Cierra el archivo de la escena
 	sceneFile.close();
 	std::cout << sceneName << " cargado con exito!" << std::endl;
-	//CREAR ESCENAS AQUÍ
-	//ESTO ESTÁ DE PRUEBA, SE DEBERÍA LEER TODO DEL JSON
-	if (sceneName == "Scene1") {
-
-		Scene* escena1 = new Scene();
-		scenesMap.insert(pair<std::string, Scene*>(sceneName, escena1));
-	}
-	else if (sceneName == "Scene2") {
-		Scene* escena2 = new Scene();
-		scenesMap.insert(pair<std::string, Scene*>(sceneName, escena2));
-	}
 	return true;
 }
 
@@ -172,16 +167,29 @@ bool SceneLoader::loadTestScene()
 	return true;
 }
 
-GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<float> position)
+GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<float> position, Scene* scene)
 {
 	GameObject* ob = new GameObject();
 	std::string name= gameObject_json["Name"].get<std::string>();
 	std::string meshName = gameObject_json["Mesh"].get<std::string>();
-	//Añadir a la escena de ogre 
+	if (meshName == "None") {
+		ob->createEmptyEntity(name, scene);
+	}
+	else ob->createEntity(meshName, name, scene);
+
+	Vec3 pos(position[0], position[1], position[2]);
+	ob->setPosition(pos);
+
+	if (gameObject_json.find("Scale") != gameObject_json.end()) {
+		std::vector<float> scale = gameObject_json["Scale"].get<std::vector<float>>();
+		Vec3 sc(scale[0], scale[1], scale[2]);
+		ob->setScale(sc);
+	}
+
 	return ob;
 }
 
-void SceneLoader::addComponents(json components_json, GameObject * go)
+void SceneLoader::addComponents(json components_json, GameObject * go, Scene* scene)
 {
 	for (json::iterator itComponent = components_json.begin(); itComponent != components_json.end(); ++itComponent) {
 		std::string componentName = (*itComponent)["Name"].get<std::string>();
@@ -190,8 +198,24 @@ void SceneLoader::addComponents(json components_json, GameObject * go)
 			float time = (*itComponent)["Time"].get<float>();
 			//Hacer new Healthscript() y añadirselo al go
 		}
-		else if (componentName == "Shooter") {
-
+		else if (componentName == "Camera") {
+			Ogre::Camera* cam = scene->getSceneManager()->createCamera("mCamera");
+			int dist = (*itComponent)["NearClipDistance"].get<int>();
+			cam->setNearClipDistance(dist);			
+			go->attachCamera(cam);
+			scene->addCamera(cam);
+		}
+		else if (componentName == "CameraMovement") {
+			std::string pName = (*itComponent)["GameObject"];
+			GameObject* target = scene->getGameObject(pName);
+			CameraMovement* cM = new CameraMovement(go, target);
+			scene->addComponent(cM);
+		}
+		else if (componentName == "PlayerController") {
+			std::string pName = (*itComponent)["GameObject"];
+			GameObject* pointer = scene->getGameObject(pName);
+			PlayerController* pc = new PlayerController(go, pointer);
+			scene->addComponent(pc);
 		}
 	}	
 }
