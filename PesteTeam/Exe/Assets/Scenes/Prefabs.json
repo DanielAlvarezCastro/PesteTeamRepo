@@ -53,6 +53,11 @@
 					"Damage" : 10					
 				}
             ]
+		},
+		{
+            "Name" : "Cubito",
+            "Type" : "Cubito",
+            "Mesh" : "cube.mesh"
         }
     ]
 }

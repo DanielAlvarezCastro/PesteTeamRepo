@@ -15,7 +15,7 @@
 					"GameObject": "Player"
 				}
 			]
-		},		
+		},
 		{
 			"Name" : "LightOb1",
 			"Type" : "None",
@@ -29,14 +29,10 @@
 			]
 		},
 		{
-			"Name" : "Pointer",
-			"Type" : "Pointer",
-			"Position" : [0,-7,5]
-		},
-        {
-            "Name" : "Player",
-            "Type" : "Player",
-			"Position" : [0,-7,35]
+            "Name" : "Cubito1",
+			"Type" : "Cubito",
+			"Mesh" : "cube.mesh",
+			"Position" : [0,0,0]
 		}		
 	]
 }
