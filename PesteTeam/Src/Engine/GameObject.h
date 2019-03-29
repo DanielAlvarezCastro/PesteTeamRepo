@@ -45,7 +45,7 @@ private:
 	//Ogre scene node
 	Ogre::SceneNode* ogreNode = nullptr;
 	//Ogre Entity
-	Ogre::Entity* ogreEntity = nullptr;ç
+	Ogre::Entity* ogreEntity = nullptr;
 	std::string name;
 #pragma endregion
 
