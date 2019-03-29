@@ -211,6 +211,14 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			CameraMovement* cM = new CameraMovement(go, target);
 			scene->addComponent(cM);
 		}
+		else if (componentName == "Light") {
+			Ogre::Light* luz = scene->getSceneManager()->createLight("Luz");
+			if ((*itComponent)["Type"]=="Directional") {
+				luz->setType(Ogre::Light::LT_DIRECTIONAL);
+			}
+			luz->setDiffuseColour(0.75, 0.75, 0.75);
+			go->attachLight(luz);
+		}
 		else if (componentName == "PlayerController") {
 			std::string pName = (*itComponent)["GameObject"];
 			GameObject* pointer = scene->getGameObject(pName);

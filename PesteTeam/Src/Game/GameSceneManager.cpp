@@ -16,8 +16,10 @@ bool GameSceneManager::LoadGame()
 	loader = new SceneLoader("./Assets/Scenes/");
 	if (!loader->loadPrefabsFromFile())
 		return false;
-	//if (!loader->loadSceneFromFile("Scene1"))
-		//return false;
+	/*if (!loader->loadSceneFromFile("Scene1"))
+		return false;
+	if (!loader->loadSceneFromFile("Scene2"))
+		return false;*/
 	if (!loader->loadTestScene())
 		return false;
 	return true;
