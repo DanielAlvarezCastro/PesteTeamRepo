@@ -27,6 +27,7 @@ public:
 	void addRigidBodyToWorld(btRigidBody* bt,const std::string & btname);
 
 	btDynamicsWorld* getDynamicWorld() { return dynamicsWorld; };
+	int getNumberOfBodies() { return collisionShapes.size(); };
 	std::vector<btCollisionShape*> getCollisionShapes() { return collisionShapes; };
 
 	static Physics* getInstance() {

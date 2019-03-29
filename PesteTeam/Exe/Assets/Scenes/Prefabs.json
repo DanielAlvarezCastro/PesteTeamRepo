@@ -1,20 +1,20 @@
 {
     "Prefabs": [
+		{
+			"Name" : "Pointer",
+			"Type" : "Pointer",
+			"Mesh" : "cube.mesh",
+			"Scale" : [0.05,0.05,0.05]
+		},
         {
             "Name" : "Player",
             "Type" : "Player",
-            "Mesh" : "cube.mesh",
+			"Mesh" : "SkyGrasper.mesh",
+			"Scale" : [2,2,2],
             "Components" : [
 				{
-					"Name" : "HealthScript",
-					"Health" : 100,
-					"Time" : 0.1
-				},
-				{
-					"Name" : "Shooter",
-					"Bullet" : "PlayerBullet",
-					"FireRate" : 0.1,
-					"Damage" : 10				
+					"Name" : "PlayerController",
+					"GameObject" : "Pointer"
 				}
             ]
         },

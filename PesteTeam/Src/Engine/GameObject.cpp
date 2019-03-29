@@ -59,9 +59,9 @@ void GameObject::asingFather(GameObject * father_)
 	father = father_;
 	father->reciveChild(ogreNode);
 }
-
-void GameObject::createEntity(std::string mesh, std::string name, Scene* scene)
+void GameObject::createEntity(std::string mesh, std::string name_, Scene* scene)
 {
+	name = name_;
 	Ogre::SceneManager* scnMgr = scene->getSceneManager();
 	ogreEntity = scnMgr->createEntity(mesh);
 
@@ -70,8 +70,9 @@ void GameObject::createEntity(std::string mesh, std::string name, Scene* scene)
 	ogreNode->setScale(0.1, 0.1, 0.1);
 }
 
-void GameObject::createEmptyEntity(std::string name, Scene * scene)
+void GameObject::createEmptyEntity(std::string name_, Scene * scene)
 {
+	name = name_;
 	Ogre::SceneManager* scnMgr = scene->getSceneManager();
 
 	ogreNode = scnMgr->getRootSceneNode()->createChildSceneNode(name);

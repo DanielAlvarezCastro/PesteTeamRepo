@@ -45,7 +45,8 @@ private:
 	//Ogre scene node
 	Ogre::SceneNode* ogreNode = nullptr;
 	//Ogre Entity
-	Ogre::Entity* ogreEntity = nullptr;
+	Ogre::Entity* ogreEntity = nullptr;ç
+	std::string name;
 #pragma endregion
 
 public:
@@ -58,14 +59,15 @@ public:
 
 	void asingFather(GameObject* father_);
 	void reciveChild(Ogre::SceneNode* childNode) { ogreNode->addChild(childNode); };
-	void createEntity(std::string mesh, std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
-	void createEmptyEntity(std::string name, Scene* scene = MainApp::instance()->getCurrentScene());
+	void createEntity(std::string mesh, std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
+	void createEmptyEntity(std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
 	void addRigidbody(RigidBody* rb);
 	void attachCamera(Ogre::Camera* cam);
 	void attachLight(Ogre::Light* lig);
 
 #pragma region Transform functions
 #pragma region Trasform Getters
+	std::string getName() { return name; };
 	Vec3 getPosition() { return Vec3(transform.position); };
 	Vec3 getDirection() { return Vec3(transform.direction); };
 	Vec3 getScale() { return Vec3(transform.scale); };
