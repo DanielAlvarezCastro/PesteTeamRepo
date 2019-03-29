@@ -23,7 +23,11 @@ RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density) 
 }
 
 void RigidBody::setIniConf() {
-	//forma del collider
+	//guardamos la rotacion original del GO
+	Vec3 ogRotation{ gameObject->getDirection() };
+	//rotamos el GO para que se alinee con cualquiera de los ejes, con el fin de que su bounding box sea mínima
+	gameObject->setDirection(Vec3{ 0,0,0 });
+	//forma del collider en funcion de la bounding box del GO
 	btVector3 auxScale{ gameObject->getScale().x, gameObject->getScale().y, gameObject->getScale().z };
 	//de momento solo haremos collider con forma de cubos
 	btCollisionShape* shape = new btBoxShape(auxScale);
@@ -31,7 +35,10 @@ void RigidBody::setIniConf() {
 	//posicion y rotacion
 	btTransform startTransform;
 	startTransform.setIdentity();
-	//rotation del gameobject
+
+	//devolvemos el GO a su rotacion original antes de girar tambien el collider creado
+	gameObject->setDirection(ogRotation);
+	//rotation del collider para que este a la par que la del GO
 	btQuaternion auxDir{ gameObject->getYaw(), gameObject->getPitch(), gameObject->getRoll() };
 	startTransform.setRotation(auxDir);
 	//inercia inicial por defecto a 0
@@ -50,8 +57,6 @@ void RigidBody::setIniConf() {
 	rigidBody->setUserPointer(gameObject);
 	//a�adimos el cuerpo al mundo fisico
 	Physics::getInstance()->addRigidBodyToWorld(rigidBody, name);
-
-	//debugCollider = Ogre::MeshManager::getSingleton().getByName("Cube.mesh").staticCast<Ogre::Mesh>();
 }
 
 void RigidBody::setName(const std::string newName) {

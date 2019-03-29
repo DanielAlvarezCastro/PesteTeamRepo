@@ -25,6 +25,9 @@ public:
 	void initPhysics();
 
 	void addRigidBodyToWorld(btRigidBody* bt,const std::string & btname);
+	void trackAndChangeNameOfRigidBody(std::string oldName_, std::string newName_);
+	std::string getRigidBodyName(btRigidBody* toFind);
+	btRigidBody* getRigidBodyFromName(std::string toFind);
 
 	btDynamicsWorld* getDynamicWorld() { return dynamicsWorld; };
 	int getNumberOfBodies() { return collisionShapes.size(); };
