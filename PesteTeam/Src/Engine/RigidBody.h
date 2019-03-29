@@ -30,7 +30,7 @@ public:
 
 	virtual void reciveMsg(Message* msg_) {};
 	virtual ~RigidBody();
-	virtual void Update() {};
+	virtual void Update(float t);
 };
 
 #endif // _RIGIDBODY

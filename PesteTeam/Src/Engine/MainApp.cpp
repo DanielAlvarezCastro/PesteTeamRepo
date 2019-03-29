@@ -2,6 +2,7 @@
 #include <OgreConfigFile.h>
 #include <iostream>
 #include "SceneMachine.h"
+#include "GameTime.h"
 
 MainApp* MainApp::instance_ = nullptr;
 
@@ -20,7 +21,7 @@ int MainApp::initApp()
 	initOgre();
 	initOIS();	
 	appRunning = true;
-
+	time = new GameTime();
 	return 1;
 }
 void MainApp::messagePump()
@@ -125,7 +126,7 @@ bool MainApp::runGame()
 {
 	while (appRunning) {
 		messagePump();
-
+		time->Update();
 		mWindow->update();
 		if (mWindow->isClosed()) return false;
 
@@ -156,6 +157,11 @@ void MainApp::addViewport(Ogre::Camera* camera)
 {
 	vp = mWindow->addViewport(camera);
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+}
+
+float MainApp::deltaTime()
+{
+	return time->deltaTime();
 }
 
 Ogre::SceneManager * MainApp::getCurrentSceneMgr()

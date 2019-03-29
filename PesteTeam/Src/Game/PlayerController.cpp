@@ -13,7 +13,7 @@ PlayerController::~PlayerController()
 {
 }
 
-void PlayerController::Update()
+void PlayerController::Update(float t)
 {
 	if (keyboard->isKeyDown(OIS::KC_A)) {
 		pointer->translate(Vec3(-0.5, 0, 0));

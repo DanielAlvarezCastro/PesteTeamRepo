@@ -48,7 +48,7 @@ void RigidBody::setIniConf() {
 	rigidBody = new btRigidBody(rbInfo);
 	rigidBody->setRestitution(1);
 	rigidBody->setUserPointer(gameObject);
-	//añadimos el cuerpo al mundo fisico
+	//aï¿½adimos el cuerpo al mundo fisico
 	Physics::getInstance()->addRigidBodyToWorld(rigidBody, "kk");
 
 	//debugCollider = Ogre::MeshManager::getSingleton().getByName("Cube.mesh").staticCast<Ogre::Mesh>();
@@ -70,7 +70,8 @@ RigidBody::~RigidBody()
 {
 }
 
-void RigidBody::update(float t)
+void RigidBody::update(float t){}
+void RigidBody::Update(float t)
 {
 	//puntero auxiliar para ahorrar llamadas
 	btDynamicsWorld* auxWolrd = Physics::getInstance()->getDynamicWorld();

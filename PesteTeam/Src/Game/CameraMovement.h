@@ -11,7 +11,7 @@ public:
 	GameObject* target;
 
 
-	virtual void Update();
+	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg) {};
 };
 

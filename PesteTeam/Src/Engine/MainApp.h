@@ -26,6 +26,7 @@ using namespace OIS;
 
 class SceneMachine;
 class Scene;
+class GameTime;
 class MainApp
 {
 private:
@@ -40,6 +41,7 @@ private:
 	Ogre::Viewport* vp;
 
 	SceneMachine* sceneMC;
+	GameTime* time;
 
 	OIS::InputManager* mInputMgr;
 	OIS::Mouse* mMouse;
@@ -65,7 +67,7 @@ public:
 	void changeCamera(Ogre::Camera* camera) {
 		vp->setCamera(camera);
 	}
-
+	float deltaTime();
 	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT) {}
 
 	//getters
