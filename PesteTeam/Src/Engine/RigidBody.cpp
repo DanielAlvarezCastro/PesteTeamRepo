@@ -4,18 +4,18 @@
 #include<OgreMeshManager.h>
 #include<OgreMesh.h>
 
-RigidBody::RigidBody(GameObject* gameObject_) : BasicComponent(gameObject_)
+RigidBody::RigidBody(GameObject* gameObject_, std::string name_) : BasicComponent(gameObject_), name(name_)
 {
 	mass = 0;
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_) : BasicComponent(gameObject_), mass(mass_)
+RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_) : BasicComponent(gameObject_), mass(mass_), name(name_)
 {
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, float density, bool b) : BasicComponent(gameObject_)
+RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density) : BasicComponent(gameObject_), name(name_)
 {
 	//masa = dimension del gameObject * densidad establecida
 	mass = (gameObject->getScale().x * gameObject->getScale().y * gameObject->getScale().z) * density;
@@ -49,7 +49,7 @@ void RigidBody::setIniConf() {
 	rigidBody->setRestitution(1);
 	rigidBody->setUserPointer(gameObject);
 	//a�adimos el cuerpo al mundo fisico
-	Physics::getInstance()->addRigidBodyToWorld(rigidBody, "kk");
+	Physics::getInstance()->addRigidBodyToWorld(rigidBody, name);
 
 	//debugCollider = Ogre::MeshManager::getSingleton().getByName("Cube.mesh").staticCast<Ogre::Mesh>();
 }
@@ -68,9 +68,9 @@ void RigidBody::setMass(const btScalar nmass_) {
 
 RigidBody::~RigidBody()
 {
+	rigidBody = nullptr;
 }
 
-void RigidBody::update(float t){}
 void RigidBody::Update(float t)
 {
 	//puntero auxiliar para ahorrar llamadas
