@@ -96,13 +96,21 @@ bool SceneLoader::loadTestScene()
 	Nave->createEntity("SkyGrasper.mesh", "Player", escena1);
 	Nave->setScale(Vec3(2, 2, 2));
 	Nave->setPosition(Vec3(0, -7, 35));
-	Nave->addRigidbody(new RigidBody(Nave, "Player", 5.0));
+
+	GameObject* cubito = new GameObject();
+	cubito->createEntity("cube.mesh", "Cubito", escena1);
+	cubito->setScale(Vec3(0.2, 0.2, 0.2));
+	cubito->setPosition(Vec3(0, -7, 5));
+	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
+	escena1->addComponent(rb);
+
 	GameObject* pointer = new GameObject();
 	pointer->createEntity("cube.mesh", "Pointer", escena1);
 	pointer->setScale(Vec3(0.05, 0.05, 0.05));
 	pointer->setPosition(Vec3(0, -7, 5));
 	escena1->addGameObject(Nave);
 	escena1->addGameObject(pointer);
+	escena1->addGameObject(cubito);
 
 	Ogre::Camera* mCamera = escena1->getSceneManager()->createCamera("MainCam");
 	mCamera->setNearClipDistance(5);
@@ -143,11 +151,11 @@ bool SceneLoader::loadTestScene()
 	cameraOb2->setPosition(Vec3(0, 0, 80));
 	cameraOb2->lookAt(Vec3(0, 0, -300), Ogre::Node::TS_WORLD);
 
-	GameObject* cubito = new GameObject();
-	cubito->createEntity("cube.mesh", "Cubito", escena2);
-	cubito->setScale(Vec3(0.2, 0.2, 0.2));
-	cubito->setPosition(Vec3(0, -7, 5));
-	escena2->addGameObject(cubito);
+	//GameObject* cubito = new GameObject();
+	//cubito->createEntity("cube.mesh", "Cubito", escena2);
+	//cubito->setScale(Vec3(0.2, 0.2, 0.2));
+	//cubito->setPosition(Vec3(0, -7, 5));
+	//escena2->addGameObject(cubito);
 	escena2->addCamera(mCamera2);
 
 	escena2->addGameObject(cameraOb2);
