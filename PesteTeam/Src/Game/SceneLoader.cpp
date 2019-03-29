@@ -96,6 +96,7 @@ bool SceneLoader::loadTestScene()
 	Nave->createEntity("SkyGrasper.mesh", "Player", escena1);
 	Nave->setScale(Vec3(2, 2, 2));
 	Nave->setPosition(Vec3(0, -7, 35));
+	Nave->addRigidbody(new RigidBody(Nave, "Player", 5.0));
 	GameObject* pointer = new GameObject();
 	pointer->createEntity("cube.mesh", "Pointer", escena1);
 	pointer->setScale(Vec3(0.05, 0.05, 0.05));

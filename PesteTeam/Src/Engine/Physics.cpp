@@ -1,5 +1,7 @@
 #include"Physics.h"
 
+Physics* Physics::instance_ = nullptr;
+
 Physics::Physics() {
 	initPhysics();
 }

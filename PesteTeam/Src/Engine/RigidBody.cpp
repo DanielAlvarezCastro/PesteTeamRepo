@@ -28,7 +28,8 @@ void RigidBody::setIniConf() {
 	//rotamos el GO para que se alinee con cualquiera de los ejes, con el fin de que su bounding box sea mínima
 	gameObject->setDirection(Vec3{ 0,0,0 });
 	//forma del collider en funcion de la bounding box del GO
-	btVector3 auxScale{ gameObject->getScale().x, gameObject->getScale().y, gameObject->getScale().z };
+	Vec3 scale = gameObject->getBoundingBox();
+	btVector3 auxScale{ scale.x, scale.y, scale.z };
 	//de momento solo haremos collider con forma de cubos
 	btCollisionShape* shape = new btBoxShape(auxScale);
 
