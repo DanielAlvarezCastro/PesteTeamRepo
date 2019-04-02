@@ -17,6 +17,13 @@ void Scene::createScene(String sceneName)
 
 void Scene::updateScene()
 {
+	//puntero auxiliar para ahorrar llamadas
+	btDynamicsWorld* auxWolrd = Physics::getInstance()->getDynamicWorld();
+	if (auxWolrd != NULL) {
+		//actualizamos el tiempo
+		auxWolrd->stepSimulation(MainApp::instance()->deltaTime());
+	}
+
 	for (BasicComponent* c : components)
 	{
 		c->Update(MainApp::instance()->deltaTime());

@@ -104,10 +104,18 @@ bool SceneLoader::loadTestScene()
 	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
 	escena1->addComponent(rb);
 
+	GameObject* cubito2 = new GameObject();
+	cubito2->createEntity("cube.mesh", "Cubito2", escena1);
+	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
+	cubito2->setPosition(Vec3(20, -7, 5));
+	RigidBody* rb2 = new RigidBody(cubito2, "Cubito", 5.0);
+	escena1->addComponent(rb2);
+
 	GameObject* pointer = new GameObject();
 	pointer->createEntity("cube.mesh", "Pointer", escena1);
 	pointer->setScale(Vec3(0.05, 0.05, 0.05));
 	pointer->setPosition(Vec3(0, -7, 5));
+
 	escena1->addGameObject(Nave);
 	escena1->addGameObject(pointer);
 	escena1->addGameObject(cubito);
