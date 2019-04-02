@@ -99,16 +99,16 @@ bool SceneLoader::loadTestScene()
 
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", escena1);
-	cubito->setScale(Vec3(0.2, 0.2, 0.2));
-	cubito->setPosition(Vec3(0, -7, 5));
+	cubito->setScale(Vec3(0.1, 0.1, 0.1));
+	cubito->setPosition(Vec3(0, 10, 5));
 	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
 	escena1->addComponent(rb);
 
 	GameObject* cubito2 = new GameObject();
 	cubito2->createEntity("cube.mesh", "Cubito2", escena1);
 	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
-	cubito2->setPosition(Vec3(20, -7, 5));
-	RigidBody* rb2 = new RigidBody(cubito2, "Cubito", 5.0);
+	cubito2->setPosition(Vec3(0, -30, 5));
+	RigidBody* rb2 = new RigidBody(cubito2, "Cubito2");
 	escena1->addComponent(rb2);
 
 	GameObject* pointer = new GameObject();
@@ -133,7 +133,9 @@ bool SceneLoader::loadTestScene()
 
 	Ogre::Light* luz = escena1->getSceneManager()->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz->setDiffuseColour(0.75, 0.75, 0.75);
+	luz->setDiffuseColour(.75, .75, .75);
+
+	escena1->getSceneManager()->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
 	GameObject* l1Ob = new GameObject();
 	l1Ob->createEmptyEntity("mLight", escena1);

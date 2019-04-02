@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include <OgreSceneManager.h>
 #include "Scene.h"
+
 GameObject::GameObject()
 {
 }
@@ -38,10 +39,9 @@ void GameObject::calculateDirection()
 
 Vec3 GameObject::getBoundingBox()
 {
-	Ogre::Quaternion q = ogreNode->getOrientation();
-	setDirection(Vec3(0,0,-1));
-	Vec3 bb = Vec3(ogreNode->_getWorldAABB().getSize());
-	ogreNode->setOrientation(q);
+	Ogre::AxisAlignedBox auxAABB = ogreEntity->getWorldBoundingBox(true);
+	Vec3 bb = auxAABB.getSize();
+	ogreNode->showBoundingBox(true);
 	return bb;
 }
 

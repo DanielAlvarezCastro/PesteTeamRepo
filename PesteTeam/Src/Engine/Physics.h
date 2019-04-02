@@ -5,9 +5,16 @@
 #ifndef _PHYSICS_H
 #define _PHYSICS_H
 
+class MainApp;
+class OgreDebugUtils;
+class OgreDebugDrawer;
+
 class Physics {
 private:
 	static Physics* instance_;
+	OgreDebugDrawer* mDebugDrawer;
+	bool debuged = false;
+
 protected:
 	//elementos necesarios para la configuracion inicial
 	btDefaultCollisionConfiguration* collisionConfiguration;
@@ -23,6 +30,7 @@ public:
 	Physics();
 	~Physics();
 	void initPhysics();
+	void updatePhysics(float t);
 
 	void addRigidBodyToWorld(btRigidBody* bt,const std::string & btname);
 	void trackAndChangeNameOfRigidBody(std::string oldName_, std::string newName_);

@@ -1,4 +1,6 @@
-#include"Physics.h"
+#include "Physics.h"
+#include "MainApp.h"
+#include "OgreDebugUtils.h"
 
 Physics* Physics::instance_ = nullptr;
 
@@ -29,6 +31,24 @@ void Physics::initPhysics() {
 	solver = new btSequentialImpulseConstraintSolver();
 	//creamos el mundo fisico
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
+	//para poder hacer debug
+	mDebugDrawer = new OgreDebugDrawer();
+}
+
+void Physics::updatePhysics(float t) {
+	if (dynamicsWorld != NULL) {
+		//actualizamos el tiempo
+		dynamicsWorld->stepSimulation(t);
+	}
+	
+	if (!debuged) {
+		mDebugDrawer->initDebugDrawer(MainApp::instance()->getCurrentSceneMgr());
+		debuged = true;
+	}
+
+	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+	dynamicsWorld->setDebugDrawer(mDebugDrawer);
+	dynamicsWorld->debugDrawWorld();
 }
 
 void Physics::addRigidBodyToWorld(btRigidBody* bt,const std::string & btname) {

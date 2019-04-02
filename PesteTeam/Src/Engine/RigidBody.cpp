@@ -20,13 +20,15 @@ RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density) 
 	//masa = dimension del gameObject * densidad establecida
 	mass = (gameObject->getScale().x * gameObject->getScale().y * gameObject->getScale().z) * density;
 	setIniConf();
+	rigidBody->setRestitution(0);
+}
+
+RigidBody::~RigidBody()
+{
+	rigidBody = nullptr;
 }
 
 void RigidBody::setIniConf() {
-	//guardamos la rotacion original del GO
-	Vec3 ogRotation{ gameObject->getDirection() };
-	//rotamos el GO para que se alinee con cualquiera de los ejes, con el fin de que su bounding box sea mínima
-	gameObject->setDirection(Vec3{ 0,0,0 });
 	//forma del collider en funcion de la bounding box del GO
 	Vec3 scale = gameObject->getBoundingBox();
 	btVector3 auxScale{ scale.x, scale.y, scale.z };
@@ -37,8 +39,6 @@ void RigidBody::setIniConf() {
 	btTransform startTransform;
 	startTransform.setIdentity();
 
-	//devolvemos el GO a su rotacion original antes de girar tambien el collider creado
-	gameObject->setDirection(ogRotation);
 	//rotation del collider para que este a la par que la del GO
 	btQuaternion auxDir{ gameObject->getYaw(), gameObject->getPitch(), gameObject->getRoll() };
 	startTransform.setRotation(auxDir);
@@ -72,14 +72,8 @@ void RigidBody::setMass(const btScalar nmass_) {
 	rigidBody->setMassProps(mass, localInertia);
 }
 
-RigidBody::~RigidBody()
-{
-	rigidBody = nullptr;
-}
-
 void RigidBody::Update(float t)
 {
-	cout << "X: " << gameObject->getPosition().x << "	Y: " << gameObject->getPosition().y << "	Z: " << gameObject->getPosition().z << "	" << gameObject->getName() << endl;
 	//posicion del body
 	btTransform trans;
 	if (rigidBody && rigidBody->getMotionState()) {
@@ -92,4 +86,18 @@ void RigidBody::Update(float t)
 		rotation.getEulerZYX(auxZ, auxY, auxX);
 		gameObject->setDirection(Vec3(auxX, auxY, auxZ));
 	}
+
+	//actualizamos caja de colision
+	Vec3 scale = gameObject->getBoundingBox();
+	btVector3 auxScale{ scale.x, scale.y, scale.z };
+	delete rigidBody->getCollisionShape();
+	btCollisionShape* shape = new btBoxShape(auxScale);
+	rigidBody->setCollisionShape(shape);
+
+	btDynamicsWorld* dw = Physics::getInstance()->getDynamicWorld();
+	btTransform wt = rigidBody->getWorldTransform();
+	btCollisionShape* cs = rigidBody->getCollisionShape();
+	btVector3 colour = { 0, 1, 0 };
+	
+	dw->debugDrawObject(wt, cs, colour);
 }
