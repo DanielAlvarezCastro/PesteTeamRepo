@@ -79,6 +79,7 @@ RigidBody::~RigidBody()
 
 void RigidBody::Update(float t)
 {
+	cout << "X: " << gameObject->getPosition().x << "	Y: " << gameObject->getPosition().y << "	Z: " << gameObject->getPosition().z << "	" << gameObject->getName() << endl;
 	//posicion del body
 	btTransform trans;
 	if (rigidBody && rigidBody->getMotionState()) {
