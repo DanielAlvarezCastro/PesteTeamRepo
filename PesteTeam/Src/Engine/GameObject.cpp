@@ -57,6 +57,7 @@ void GameObject::reciveMsg(Message * msg)
 void GameObject::asingFather(GameObject * father_)
 {
 	father = father_;
+	ogreNode->getParent()->removeChild(ogreNode);
 	father->reciveChild(ogreNode);
 }
 void GameObject::createEntity(std::string mesh, std::string name_, Scene* scene)
