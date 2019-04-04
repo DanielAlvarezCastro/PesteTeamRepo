@@ -134,6 +134,7 @@ bool SceneLoader::loadTestScene()
 	Ogre::Light* luz = escena1->getSceneManager()->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
 	luz->setDiffuseColour(.75, .75, .75);
+	
 
 	escena1->getSceneManager()->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
@@ -147,6 +148,26 @@ bool SceneLoader::loadTestScene()
 
 	CameraMovement* cM = new CameraMovement(cameraOb, Nave);
 	escena1->addComponent(cM);
+
+
+	MeshManager::getSingleton().createPlane("mPlane", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Plane(Ogre::Vector3::UNIT_Y, 0), 12000, 12000, 1, 1, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
+
+	GameObject* planeOb = new GameObject();
+	planeOb->createEntity("mPlane", "Floor", escena1);
+	planeOb->setMaterial("Test/FloorTile");
+	planeOb->setPosition(Vec3(0, -60, 0));
+	escena1->addGameObject(planeOb);
+
+	GameObject* planeOb2 = new GameObject();
+	planeOb2->createEntity("mPlane", "Floor2", escena1);
+	planeOb2->setMaterial("Test/FloorTileLight");
+	planeOb2->setPosition(Vec3(0, -59.9, 0));
+	escena1->addGameObject(planeOb2);
+
+	
+	
+	
 
 	scenesMap.insert(pair<std::string, Scene*>("Scene1", escena1));
 

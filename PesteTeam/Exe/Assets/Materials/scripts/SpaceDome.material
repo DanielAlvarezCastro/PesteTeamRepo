@@ -2,9 +2,36 @@
 material Test/SpaceDome {
 	technique {
 		pass {
-		texture_unit texture1 { // 
-			texture Space.png 2d // archivo
-			tex_address_mode clamp //
+		texture_unit textura1 { // 
+			texture BackgroundSpace.png 2d // archivo
+			tex_address_mode mirror //
 			filtering bilinear // de acceso al texel
 		}
 	} } }
+	
+material Test/FloorTile {
+	technique {
+			pass {
+			texture_unit textura1 { // 
+				texture FloorTileBackground.png 2d // archivo
+				tex_address_mode wrap //
+				filtering bilinear // de acceso al texel
+				scale 0.01 0.01			
+			}
+		} } 
+}
+material Test/FloorTileLight {
+	technique {
+			pass {
+			scene_blend alpha_blend		
+			depth_write off
+			emissive 1 1 1 1
+			texture_unit textura1 { // 
+				texture FloorTileLight.png 2d // archivo
+				tex_address_mode wrap //
+				filtering bilinear // de acceso al texel
+				scale 0.01 0.01
+				colour_op modulate
+			}
+		} } 
+}

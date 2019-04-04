@@ -31,4 +31,6 @@ void GameSceneManager::LoadScene(string sceneName)
 	Scene* escena = loader->getScene(sceneName);
 	MainApp::instance()->setupViewport(escena->getCamera());
 	MainApp::instance()->AddScene(escena);
+	MainApp::instance()->getViewport();
+	
 }

@@ -64,6 +64,7 @@ public:
 	void addRigidbody(RigidBody* rb);
 	void attachCamera(Ogre::Camera* cam);
 	void attachLight(Ogre::Light* lig);
+	void setMaterial(std::string materialName);
 
 #pragma region Transform functions
 #pragma region Trasform Getters

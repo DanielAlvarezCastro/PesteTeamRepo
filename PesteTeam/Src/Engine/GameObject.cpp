@@ -97,3 +97,6 @@ void GameObject::attachLight(Ogre::Light * lig)
 
 	ogreNode->setDirection(Ogre::Vector3(-1, 0, -1));
 }
+void GameObject::setMaterial(std::string materialName) {
+	ogreEntity->setMaterialName(materialName);
+}

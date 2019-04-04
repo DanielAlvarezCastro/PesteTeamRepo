@@ -1,0 +1,16 @@
+#version 330 core
+in vec2 vUv0;
+uniform sampler2D RTT0;
+out vec4 fragColor;
+vec4 auxColor;
+uniform float tiempoA;
+const vec3 WsRGB = vec3(0.2125, 0.7154, 0.0721);
+void main() {
+	vec3 sceneColor = vec3(texture(RTT0, vUv0));
+	fragColor=vec4(sceneColor,1.0);	
+	if(int(gl_FragCoord.y + tiempoA*20) %4 <2){
+		float lum = dot(sceneColor, WsRGB);
+		vec3 auxColor = sceneColor/4;
+		fragColor = vec4(sceneColor-auxColor, 1.0);
+	}
+}   

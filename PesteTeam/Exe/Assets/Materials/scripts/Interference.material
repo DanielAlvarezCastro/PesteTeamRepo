@@ -1,0 +1,31 @@
+vertex_program InterferenceVS glsl
+{
+	source vertexShaderLMglsl.txt
+	default_params 
+	{
+		param_named_auto modelViewProjMat worldviewproj_matrix
+		param_named_auto tiempoA time
+	}
+}
+fragment_program InterferencePS glsl
+{
+	source InterferencePS.txt
+	default_params {
+		param_named RTT0 int 0 
+	}
+}
+
+material InterferencePS {
+	technique {
+		pass {
+			depth_check off
+			depth_write off
+			vertex_program_ref InterferenceVS {
+			}
+			fragment_program_ref InterferencePS {
+			}
+			texture_unit RTT0
+			{
+				filtering none
+			}
+} } }
