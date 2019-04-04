@@ -1,0 +1,10 @@
+
+material Test/SpaceDome {
+	technique {
+		pass {
+		texture_unit texture1 { // 
+			texture Space.png 2d // archivo
+			tex_address_mode clamp //
+			filtering bilinear // de acceso al texel
+		}
+	} } }
