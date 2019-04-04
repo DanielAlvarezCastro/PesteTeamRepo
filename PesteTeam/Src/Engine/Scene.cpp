@@ -12,7 +12,8 @@ void Scene::createScene(String sceneName)
 {
 	mSceneMgr = MainApp::instance()->getRoot()->createSceneManager();
 	mWindow = MainApp::instance()->getRenderWindow();
-	mSceneMgr->setSkyDome(true, "Test/SpaceDome",5, 1.0);
+	//mSceneMgr->setSkyDome(true, "Test/SpaceDome",5, 1.0);
+	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox", 10);
 }
 
 void Scene::updateScene()
