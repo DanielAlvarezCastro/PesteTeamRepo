@@ -17,12 +17,7 @@ int main() {
 	//Carga la escena número 1 ESTÁ DE PRUEBA
 	GameSceneManager::instance()->LoadScene("Scene1");
 
-	SoundManager::instance()->Init();
-	SoundManager::instance()->PlaySound2D("yell.mp3", true, false);
-
 	MainApp::instance()->runGame();
-
-	SoundManager::instance()->Drop();
 	
 	return 0;
 }
