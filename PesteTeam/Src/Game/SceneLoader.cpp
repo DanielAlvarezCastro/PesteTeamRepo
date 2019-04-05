@@ -93,7 +93,7 @@ bool SceneLoader::loadTestScene()
 	escena1->createScene("primary");
 
 	GameObject* Nave = new GameObject();
-	Nave->createEntity("SkyGrasper.mesh", "Player", escena1);
+	Nave->createEntity("SXR-72.mesh", "Player", escena1);
 	Nave->setScale(Vec3(2, 2, 2));
 	Nave->setPosition(Vec3(0, -7, 35));
 
