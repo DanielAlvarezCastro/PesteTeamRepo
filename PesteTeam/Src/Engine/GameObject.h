@@ -69,8 +69,8 @@ public:
 #pragma region Transform functions
 #pragma region Trasform Getters
 	std::string getName() { return name; };
-	Vec3 getPosition() { return Vec3(transform.position); };
-	Vec3 getDirection() { return Vec3(transform.direction); };
+	Ogre::Vector3 getPosition() { return transform.position; };
+	Ogre::Vector3 getDirection() { return transform.direction; };
 	Vec3 getScale() { return Vec3(transform.scale); };
 	float getRoll() { return ogreNode->getOrientation().getRoll().valueRadians(); }
 	float getPitch() { return (float)ogreNode->getOrientation().getPitch().valueRadians(); }
