@@ -10,12 +10,12 @@ RigidBody::RigidBody(GameObject* gameObject_, std::string name_) : BasicComponen
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_) : BasicComponent(gameObject_), mass(mass_), name(name_)
+RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_, bool mov) : BasicComponent(gameObject_), mass(mass_), name(name_), mov_(mov)
 {
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density) : BasicComponent(gameObject_), name(name_)
+RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density, bool mov) : BasicComponent(gameObject_), name(name_), mov_(mov)
 {
 	//masa = dimension del gameObject * densidad establecida
 	mass = (gameObject->getScale().x * gameObject->getScale().y * gameObject->getScale().z) * density;
@@ -31,7 +31,7 @@ RigidBody::~RigidBody()
 void RigidBody::setIniConf() {
 	//forma del collider en funcion de la bounding box del GO
 	Vec3 scale = gameObject->getBoundingBox();
-	btVector3 auxScale{ scale.x, scale.y, scale.z };
+	btVector3 auxScale{ btScalar(scale.x * 0.5), btScalar(scale.y * 0.5), btScalar(scale.z * 0.5) };
 	//de momento solo haremos collider con forma de cubos
 	btCollisionShape* shape = new btBoxShape(auxScale);
 
@@ -76,7 +76,7 @@ void RigidBody::Update(float t)
 {
 	//posicion del body
 	btTransform trans;
-	if (rigidBody && rigidBody->getMotionState()) {
+	if (rigidBody && rigidBody->getMotionState() && !mov_) {
 		rigidBody->getMotionState()->getWorldTransform(trans);
 		//control sobre el gameObject
 		btQuaternion rotation = trans.getRotation();
@@ -87,9 +87,15 @@ void RigidBody::Update(float t)
 		gameObject->setDirection(Vec3(auxX, auxY, auxZ));
 	}
 
+	//comprobamos colision
+	auto& manifoldPoints = Physics::getInstance()->getObjectsCollisions()[rigidBody];
+	if (! manifoldPoints.empty()) {
+		cout << "choco" << endl;
+	}
+
 	//actualizamos caja de colision
 	Vec3 scale = gameObject->getBoundingBox();
-	btVector3 auxScale{ scale.x, scale.y, scale.z };
+	btVector3 auxScale{ btScalar(scale.x * 0.5), btScalar(scale.y * 0.5), btScalar(scale.z * 0.5) };
 	delete rigidBody->getCollisionShape();
 	btCollisionShape* shape = new btBoxShape(auxScale);
 	rigidBody->setCollisionShape(shape);

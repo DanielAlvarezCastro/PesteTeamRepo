@@ -11,6 +11,7 @@ protected:
 	std::string name;
 	btRigidBody* rigidBody;
 	btScalar mass;
+	bool mov_;
 
 	//para ver las lineas del collider en pantalla
 	Ogre::MeshPtr debugCollider;		
@@ -20,11 +21,13 @@ public:
 	///constructora por defecto que deja la masa a 0 (objeto inamovible)
 	RigidBody(GameObject* gameObject_, std::string name_);
 	///constructora con masa por parametro
-	RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_);
+	RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_, bool mov = false);
 	///contructora que calcula la masa propia con una densisad
-	RigidBody(GameObject* gameObject_, std::string name_, float density_);
+	RigidBody(GameObject* gameObject_, std::string name_, float density_, bool mov = false);
 	void setName(const std::string newName);
 	void setMass(const btScalar nmass_);
+
+	void setGravity(btScalar x, btScalar y, btScalar z) { if (rigidBody != NULL) rigidBody->setGravity(btVector3(x,y,z)); };
 
 	virtual void reciveMsg(Message* msg_) {};
 	virtual ~RigidBody();

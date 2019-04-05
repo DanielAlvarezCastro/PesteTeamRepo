@@ -96,18 +96,21 @@ bool SceneLoader::loadTestScene()
 	Nave->createEntity("SXR-72.mesh", "Player", escena1);
 	Nave->setScale(Vec3(2, 2, 2));
 	Nave->setPosition(Vec3(0, -7, 35));
+	RigidBody* rbn = new RigidBody(Nave, 5.0, "Nave", true);
+	rbn->setGravity(0,0,0);
+	escena1->addComponent(rbn);
 
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", escena1);
 	cubito->setScale(Vec3(0.1, 0.1, 0.1));
-	cubito->setPosition(Vec3(0, 10, 5));
-	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
+	cubito->setPosition(Vec3(0, 10, -15));
+	RigidBody* rb = new RigidBody(cubito, 5.0, "Cubito");
 	escena1->addComponent(rb);
 
 	GameObject* cubito2 = new GameObject();
 	cubito2->createEntity("cube.mesh", "Cubito2", escena1);
 	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
-	cubito2->setPosition(Vec3(0, -30, 5));
+	cubito2->setPosition(Vec3(0, -30, -15));
 	RigidBody* rb2 = new RigidBody(cubito2, "Cubito2");
 	escena1->addComponent(rb2);
 
