@@ -26,6 +26,8 @@ public:
 	void setName(const std::string newName);
 	void setMass(const btScalar nmass_);
 
+	void setGravity(btScalar x, btScalar y, btScalar z) { if (rigidBody != NULL) rigidBody->setGravity(btVector3(x,y,z)); };
+
 	virtual void reciveMsg(Message* msg_) {};
 	virtual ~RigidBody();
 	virtual void Update(float t);

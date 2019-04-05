@@ -86,6 +86,11 @@ void RigidBody::Update(float t)
 		rotation.getEulerZYX(auxZ, auxY, auxX);
 		gameObject->setDirection(Vec3(auxX, auxY, auxZ));
 	}
+	//comprobamos colision
+	auto& manifoldPoints = Physics::getInstance()->getObjectsCollisions()[rigidBody];
+	if (! manifoldPoints.empty()) {
+		cout << "choco" << endl;
+	}
 
 	//actualizamos caja de colision
 	Vec3 scale = gameObject->getBoundingBox();

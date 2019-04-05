@@ -15,6 +15,8 @@ private:
 	OgreDebugDrawer* mDebugDrawer;
 	bool debuged = false;
 
+	std::map<const btCollisionObject*, std::vector<btManifoldPoint*>> objectsCollisions;
+
 protected:
 	//elementos necesarios para la configuracion inicial
 	btDefaultCollisionConfiguration* collisionConfiguration;
@@ -36,6 +38,9 @@ public:
 	void trackAndChangeNameOfRigidBody(std::string oldName_, std::string newName_);
 	std::string getRigidBodyName(btRigidBody* toFind);
 	btRigidBody* getRigidBodyFromName(std::string toFind);
+
+	std::map<const btCollisionObject*, std::vector<btManifoldPoint*>> getObjectsCollisions() { return objectsCollisions; };
+	void setObjectCollisions(std::map<const btCollisionObject*, std::vector<btManifoldPoint*>> o) { objectsCollisions = o; };
 
 	btDynamicsWorld* getDynamicWorld() { return dynamicsWorld; };
 	int getNumberOfBodies() { return collisionShapes.size(); };

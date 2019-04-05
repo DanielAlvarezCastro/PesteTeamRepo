@@ -23,6 +23,27 @@ Physics::~Physics() {
 	physicsAccessors.clear();
 }
 
+void CollCallBack(btDynamicsWorld* world, btScalar t) {
+	std::map<const btCollisionObject*, std::vector<btManifoldPoint*>> objectsCollisions = Physics::getInstance()->getObjectsCollisions();
+	//objectsCollisions.clear();
+	//int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+	for (int i = 0; i < world->getDispatcher()->getNumManifolds(); i++) {
+		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
+		auto* obj1 = contactManifold->getBody0();
+		auto* obj2 = contactManifold->getBody1();
+
+		auto& collisionsA = objectsCollisions[obj1];
+		auto& collisionsB = objectsCollisions[obj2];
+
+		for (int j = 0; j < contactManifold->getNumContacts(); j++) {
+			btManifoldPoint& pt = contactManifold->getContactPoint(j);
+			collisionsA.push_back(&pt);
+			collisionsB.push_back(&pt);
+		}
+	}
+	Physics::getInstance()->setObjectCollisions(objectsCollisions);
+}
+
 void Physics::initPhysics() {
 	//inicializamos los elementos necesarios
 	collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -31,6 +52,7 @@ void Physics::initPhysics() {
 	solver = new btSequentialImpulseConstraintSolver();
 	//creamos el mundo fisico
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
+	dynamicsWorld->setInternalTickCallback(CollCallBack);
 	//para poder hacer debug
 	mDebugDrawer = new OgreDebugDrawer();
 }
