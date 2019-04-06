@@ -31,7 +31,7 @@ RigidBody::~RigidBody()
 void RigidBody::setIniConf() {
 	//forma del collider en funcion de la bounding box del GO
 	Vec3 scale = gameObject->getBoundingBox();
-	btVector3 auxScale{ btScalar(scale.x * 0.5), btScalar(scale.y * 0.5), btScalar(scale.z * 0.5) };
+	btVector3 auxScale{ btScalar(scale.x * 0.25), btScalar(scale.y * 0.25), btScalar(scale.z * 0.25) };
 	//de momento solo haremos collider con forma de cubos
 	btCollisionShape* shape = new btBoxShape(auxScale);
 
@@ -95,7 +95,7 @@ void RigidBody::Update(float t)
 
 	//actualizamos caja de colision
 	Vec3 scale = gameObject->getBoundingBox();
-	btVector3 auxScale{ btScalar(scale.x * 0.5), btScalar(scale.y * 0.5), btScalar(scale.z * 0.5) };
+	btVector3 auxScale{ btScalar(scale.x * 0.25), btScalar(scale.y * 0.25), btScalar(scale.z * 0.25) };
 	delete rigidBody->getCollisionShape();
 	btCollisionShape* shape = new btBoxShape(auxScale);
 	rigidBody->setCollisionShape(shape);
