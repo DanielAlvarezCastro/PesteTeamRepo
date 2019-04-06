@@ -2,7 +2,39 @@
 #include "MainApp.h"
 #include "OgreDebugUtils.h"
 
+#include"GameObject.h"
+
 Physics* Physics::instance_ = nullptr;
+
+void CollisionCallBack(btDynamicsWorld* world, btScalar t) {
+	//diccionario de objetos con colision en un determinado momento
+	//manifolspoint es un punto de contacto entre dos objetos en colision
+	std::map<const btCollisionObject*, std::vector<btManifoldPoint*>> objectsCollisions = Physics::getInstance()->getObjectsCollisions();
+	//limpiamos las colisiones que se hubieran detectado anteriormente
+	objectsCollisions.clear();
+	//conseguimos el numero de puntos de contacto
+	for (int i = 0; i < world->getDispatcher()->getNumManifolds(); i++) {
+		//analizamos la informacion de cada punto
+		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
+		auto* obj1 = contactManifold->getBody0();
+		auto* obj2 = contactManifold->getBody1();
+
+		auto& collisionsA = objectsCollisions[obj1];
+		auto& collisionsB = objectsCollisions[obj2];
+
+		int j = 0;
+		while(j < contactManifold->getNumContacts()){
+			btManifoldPoint & pt = contactManifold->getContactPoint(j);
+			collisionsA.push_back(&pt);
+			collisionsB.push_back(&pt);
+			j++;
+		}
+		if (j > 0)
+			static_cast<GameObject*>(obj1->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj2->getUserPointer()), collisionsA);
+			static_cast<GameObject*>(obj2->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj1->getUserPointer()), collisionsB);
+	}
+	Physics::getInstance()->setObjectCollisions(objectsCollisions);
+}
 
 Physics::Physics() {
 	initPhysics();
@@ -14,6 +46,7 @@ Physics::~Physics() {
 	dispatcher = nullptr;
 	overlappingPairCache = nullptr;
 	solver = nullptr;
+	delete dynamicsWorld;
 	dynamicsWorld = nullptr;
 	//vaciamos vector de collisionShapes
 	for (btCollisionShape* b : collisionShapes) {
@@ -21,27 +54,6 @@ Physics::~Physics() {
 	}
 	//limpiamos el map
 	physicsAccessors.clear();
-}
-
-void CollCallBack(btDynamicsWorld* world, btScalar t) {
-	std::map<const btCollisionObject*, std::vector<btManifoldPoint*>> objectsCollisions = Physics::getInstance()->getObjectsCollisions();
-	//objectsCollisions.clear();
-	//int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
-	for (int i = 0; i < world->getDispatcher()->getNumManifolds(); i++) {
-		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
-		auto* obj1 = contactManifold->getBody0();
-		auto* obj2 = contactManifold->getBody1();
-
-		auto& collisionsA = objectsCollisions[obj1];
-		auto& collisionsB = objectsCollisions[obj2];
-
-		for (int j = 0; j < contactManifold->getNumContacts(); j++) {
-			btManifoldPoint& pt = contactManifold->getContactPoint(j);
-			collisionsA.push_back(&pt);
-			collisionsB.push_back(&pt);
-		}
-	}
-	Physics::getInstance()->setObjectCollisions(objectsCollisions);
 }
 
 void Physics::initPhysics() {
@@ -52,7 +64,7 @@ void Physics::initPhysics() {
 	solver = new btSequentialImpulseConstraintSolver();
 	//creamos el mundo fisico
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
-	dynamicsWorld->setInternalTickCallback(CollCallBack);
+	dynamicsWorld->setInternalTickCallback(CollisionCallBack);
 	//para poder hacer debug
 	mDebugDrawer = new OgreDebugDrawer();
 }

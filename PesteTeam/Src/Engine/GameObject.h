@@ -98,6 +98,10 @@ public:
 	Vec3 getBoundingBox();
 #pragma endregion
 
+#pragma region Rigid Body Methods
+	RigidBody* getRigidBody() { return rigidBody; };
+#pragma endregion
+
 #pragma endregion
 #pragma endregion
 };

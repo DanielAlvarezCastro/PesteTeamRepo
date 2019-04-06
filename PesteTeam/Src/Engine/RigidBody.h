@@ -31,6 +31,8 @@ public:
 	virtual void reciveMsg(Message* msg_) {};
 	virtual ~RigidBody();
 	virtual void Update(float t);
+
+	virtual void onCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints);
 };
 
 #endif // _RIGIDBODY
