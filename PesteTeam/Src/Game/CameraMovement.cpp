@@ -15,7 +15,7 @@ void CameraMovement::Update(float t)
 	targetPos.z -= 100;
 	camera->lookAt(target->getPosition());*/
 
-	Ogre::Vector3 moveTo = target->getPosition() - target->getDirection() * 1000.0f + Ogre::Vector3(0,1,0) * 1.0f;
+	Ogre::Vector3 moveTo = target->getPosition() - target->getDirection() * 200.0f + Ogre::Vector3(0,1,0) * 1.0f;
 	float bias = 0.90f;
 	Ogre::Vector3 pos = target->getPosition() * bias + moveTo * (1.0f - bias);
 	camera->setPosition(pos);

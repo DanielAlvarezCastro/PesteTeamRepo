@@ -63,7 +63,7 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName)
 	//Itera sobre los gameobjects en el json de la escena
 	for (json::iterator it = scene_json["GameObjects"].begin(); it != scene_json["GameObjects"].end(); ++it) {
 
-		//Guarda el valor de su posición y de su tipo
+		//Guarda el valor de su posiciï¿½n y de su tipo
 		std::string prefabType = (*it)["Type"].get<std::string>();
 		std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
 		//Si el tipo de prefab existe entonces crea el gameobject a partir del diccionario
@@ -86,29 +86,42 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName)
 	return true;
 }
 
-//Escenas de prueba para meterlas desde código aquí
+//Escenas de prueba para meterlas desde cï¿½digo aquï¿½
 bool SceneLoader::loadTestScene()
 {
 	Scene* escena1 = new Scene();
 	escena1->createScene("primary");
 
 	GameObject* Nave = new GameObject();
-	Nave->createEntity("SkyGrasper.mesh", "Player", escena1);
+	Nave->createEntity("SXR-72.mesh", "Player", escena1);
 	Nave->setScale(Vec3(2, 2, 2));
-	Nave->setPosition(Vec3(0, -7, 35));
+	Nave->setPosition(Vec3(0, 40, 35));
+	RigidBody* rbn = new RigidBody(Nave, 5.0, "Nave", true);
+	rbn->setGravity(0,0,0);
+	escena1->addComponent(rbn);
 
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", escena1);
 	cubito->setScale(Vec3(0.1, 0.1, 0.1));
-	cubito->setPosition(Vec3(0, 10, 5));
+	cubito->setPosition(Vec3(0, 40, -15));
 	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
 	cubito->addRigidbody(rb);
 	escena1->addComponent(rb);
 
+	GameObject* edificio1 = new GameObject();
+	edificio1->createEntity("Building1.mesh", "Edificio1", escena1);
+	edificio1->setScale(Vec3(5, 5, 5));
+	edificio1->setPosition(Vec3(0, 0, -300));
+
+	GameObject* edificio2 = new GameObject();
+	edificio2->createEntity("Building2.mesh", "Edificio2", escena1);
+	edificio2->setScale(Vec3(5, 5, 5));
+	edificio2->setPosition(Vec3(100, 0, -100));
+
 	GameObject* cubito2 = new GameObject();
 	cubito2->createEntity("cube.mesh", "Cubito2", escena1);
 	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
-	cubito2->setPosition(Vec3(0, -30, 5));
+	cubito2->setPosition(Vec3(0, 10, -15));
 	RigidBody* rb2 = new RigidBody(cubito2, "Cubito2");
 	cubito2->addRigidbody(rb2);
 	escena1->addComponent(rb2);
@@ -119,6 +132,7 @@ bool SceneLoader::loadTestScene()
 	pointer->setPosition(Vec3(0, -7, 5));
 
 	escena1->addGameObject(Nave);
+	escena1->addGameObject(edificio1);
 	escena1->addGameObject(pointer);
 	escena1->addGameObject(cubito);
 
@@ -158,13 +172,13 @@ bool SceneLoader::loadTestScene()
 	GameObject* planeOb = new GameObject();
 	planeOb->createEntity("mPlane", "Floor", escena1);
 	planeOb->setMaterial("Test/FloorTile");
-	planeOb->setPosition(Vec3(0, -60, 0));
+	planeOb->setPosition(Vec3(0, 0, 0));
 	escena1->addGameObject(planeOb);
 
 	GameObject* planeOb2 = new GameObject();
 	planeOb2->createEntity("mPlane", "Floor2", escena1);
 	planeOb2->setMaterial("Test/FloorTileLight");
-	planeOb2->setPosition(Vec3(0, -59.9, 0));
+	planeOb2->setPosition(Vec3(0, 0.1, 0));
 	escena1->addGameObject(planeOb2);
 
 	
@@ -238,7 +252,7 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 		if (componentName == "HealthScript") {
 			float health = (*itComponent)["Health"].get<float>();
 			float time = (*itComponent)["Time"].get<float>();
-			//Hacer new Healthscript() y añadirselo al go
+			//Hacer new Healthscript() y aï¿½adirselo al go
 		}
 		else if (componentName == "Camera") {
 			Ogre::Camera* cam = scene->getSceneManager()->createCamera("mCamera");
