@@ -1,5 +1,5 @@
 #include "GameSceneManager.h"
-
+#include "GUIManager.h"
 
 GameSceneManager* GameSceneManager::instance_ = nullptr;
 GameSceneManager::GameSceneManager()
@@ -31,6 +31,7 @@ void GameSceneManager::LoadScene(string sceneName)
 	Scene* escena = loader->getScene(sceneName);
 	MainApp::instance()->setupViewport(escena->getCamera());
 	MainApp::instance()->AddScene(escena);
-	MainApp::instance()->getViewport();
+	GUIManager::instance()->initScene(escena);
+	GUIManager::instance()->createTextbox("Bueno dia, despierta con buena actitud", 0, 0, 500, 100, "TextBox", "TestTextBox", 30);
 	
 }

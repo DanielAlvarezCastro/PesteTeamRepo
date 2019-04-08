@@ -23,6 +23,7 @@
     <ClCompile Include="..\..\Src\Engine\BasicComponent.cpp" />
     <ClCompile Include="..\..\Src\Engine\GameObject.cpp" />
     <ClCompile Include="..\..\Src\Engine\GameTime.cpp" />
+    <ClCompile Include="..\..\Src\Engine\GUIManager.cpp" />
     <ClCompile Include="..\..\Src\Engine\MainApp.cpp" />
     <ClCompile Include="..\..\Src\Engine\OgreDebugUtils.cpp" />
     <ClCompile Include="..\..\Src\Engine\Physics.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="..\..\Src\Engine\BasicComponent.h" />
     <ClInclude Include="..\..\Src\Engine\GameObject.h" />
     <ClInclude Include="..\..\Src\Engine\GameTime.h" />
+    <ClInclude Include="..\..\Src\Engine\GUIManager.h" />
     <ClInclude Include="..\..\Src\Engine\MainApp.h" />
     <ClInclude Include="..\..\Src\Engine\NodeStack.h" />
     <ClInclude Include="..\..\Src\Engine\OgreDebugUtils.h" />
@@ -101,7 +103,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-2.0.8\include;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(SolutionDir)Dependencies\irrKlang-1.6.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\mygui\Platforms\Ogre\OgrePlatform\include;$(SolutionDir)Dependencies\mygui\MyGUIEngine\include;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-2.0.8\include;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(SolutionDir)Dependencies\irrKlang-1.6.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib;$(SolutionDir)Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -109,7 +111,7 @@
     <OutDir>$(SolutionDir)Lib</OutDir>
     <IntDir>$(SolutionDir)inter\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-2.0.8\include;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(SolutionDir)Dependencies\irrKlang-1.6.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\mygui\Platforms\Ogre\OgrePlatform\include;$(SolutionDir)Dependencies\mygui\MyGUIEngine\include;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-2.0.8\include;$(SolutionDir)Src\$(ProjectName);$(SolutionDir)Dependencies\OIS\includes;$(SolutionDir)Dependencies\ogre-1.11.5\Build\include;$(SolutionDir)Dependencies\ogre-1.11.5\Components\Overlay\include;$(SolutionDir)Dependencies\ogre-1.11.5\OgreMain\include;$(SolutionDir)Dependencies\bullet3-2.88\Build;$(SolutionDir)Dependencies\bullet3-2.88\src;$(SolutionDir)Dependencies\irrKlang-1.6.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\ogre-1.11.5\Build\zlib-1.2.11\RelWithDebInfo;$(SolutionDir)Dependencies\ogre-1.11.5\Build\SDL2-build\RelWithDebInfo;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib;$(SolutionDir)Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -138,8 +140,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OIS.lib;OgreMain.lib;OgreRTShaderSystem.lib;OgreOverlay.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;irrKlang.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Lib;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;MyGUI.OgrePlatform.lib;MyGUIEngine.lib;OIS.lib;OgreMain.lib;OgreRTShaderSystem.lib;OgreOverlay.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;irrKlang.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\mygui\Dependencies\lib\$(Configuration);$(SolutionDir)Dependencies\mygui\Build\lib\$(Configuration);$(SolutionDir)Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Lib;$(SolutionDir)Dependencies\bullet3-2.88\Build\lib\$(Configuration);$(SolutionDir)Dependencies\mygui\Build\lib$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -158,8 +160,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(SolutionDir)Lib;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\bullet3-2.88\Build\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OIS_d.lib;OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;irrKlang.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\mygui\Dependencies\lib\$(Configuration);$(SolutionDir)Dependencies\mygui\Build\lib\$(Configuration);$(SolutionDir)Dependencies\irrKlang-1.6.0\lib\Win32-visualStudio;$(SolutionDir)Lib;$(SolutionDir)Dependencies\ogre-1.11.5\Build\lib\$(Configuration);$(SolutionDir)Dependencies\bullet3-2.88\Build\lib\$(Configuration);$(SolutionDir)Dependencies\mygui\Build\lib$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype_d.lib;MyGUI.OgrePlatform_d.lib;MyGUIEngine_d.lib;OIS_d.lib;OgreMain_d.lib;OgreRTShaderSystem_d.lib;OgreOverlay_d.lib;SDL2.lib;SDL2main.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;irrKlang.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

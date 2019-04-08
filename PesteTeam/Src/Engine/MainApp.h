@@ -17,9 +17,6 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 #include <OISJoyStick.h>
-//#include "InputManager.h"
-//#include "Scene.h"
-//#include "SceneMachine.h"
 
 using namespace Ogre;
 using namespace OIS;
@@ -39,7 +36,7 @@ private:
 	Ogre::RenderSystem* renderSys;
 	
 	Ogre::Viewport* vp;
-
+	
 	SceneMachine* sceneMC;
 	GameTime* time;
 
