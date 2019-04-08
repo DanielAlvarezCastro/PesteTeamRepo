@@ -103,7 +103,7 @@ bool SceneLoader::loadTestScene()
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", escena1);
 	cubito->setScale(Vec3(0.1, 0.1, 0.1));
-	cubito->setPosition(Vec3(0, 40, -15));
+	cubito->setPosition(Vec3(10, 40, -15));
 	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
 	cubito->addRigidbody(rb);
 	escena1->addComponent(rb);

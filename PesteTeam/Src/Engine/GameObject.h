@@ -94,6 +94,7 @@ public:
 	void lookAt(Vec3 position, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TransformSpace::TS_WORLD) {
 		ogreNode->lookAt(position.getVector(), relativeTo); calculateDirection();;
 	}
+	void setOrientation(Ogre::Quaternion q) { ogreNode->setOrientation(q); };
 #pragma region Bounding Box Methods
 	Vec3 getBoundingBox();
 #pragma endregion

@@ -76,23 +76,30 @@ void RigidBody::Update(float t)
 {
 	//posicion del body
 	btTransform trans;
-	if (rigidBody && rigidBody->getMotionState() && !isKinematic) {
-		rigidBody->getMotionState()->getWorldTransform(trans);
-		//control sobre el gameObject
-		btQuaternion rotation = trans.getRotation();
-		gameObject->setPosition(Vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
-		//sacamos los euler desde el quaternion
-		btScalar auxX, auxY, auxZ;
-		rotation.getEulerZYX(auxZ, auxY, auxX);
-		gameObject->setDirection(Vec3(auxX, auxY, auxZ));
-	}
-	else if(isKinematic){
-		//conseguimos los datos del rb
-		rigidBody->getMotionState()->getWorldTransform(trans);
-		//actualizamos el transfrom, dominado por el GO
-		trans.setRotation(btQuaternion(gameObject->getYaw(), gameObject->getPitch(), gameObject->getRoll()));
-		trans.setOrigin(btVector3(gameObject->getPosition().x, gameObject->getPosition().y, gameObject->getPosition().z));
-		rigidBody->setWorldTransform(trans);
+	//condicion de objetos movibles
+	if (rigidBody && rigidBody->getMotionState()) {
+		//objetos cinematicos, el RB domina el movimiento del GO
+		if (!isKinematic) {
+			rigidBody->getMotionState()->getWorldTransform(trans);
+			//control sobre el gameObject
+			btQuaternion rotation = trans.getRotation();
+			gameObject->setPosition(Vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
+			//sacamos los euler desde el quaternion
+			//btScalar auxX, auxY, auxZ;
+			//rotation.getEulerZYX(auxZ, auxY, auxX);
+			//gameObject->setDirection(Vec3(auxX, auxY, auxZ));
+			gameObject->setOrientation(Ogre::Quaternion(rotation.getW(), rotation.getX(), rotation.getY(), rotation.getZ()));
+		}
+		//objetos kinematicos, el movimiento del GO domina al RB
+		else {
+			//conseguimos los datos del rb
+			rigidBody->getMotionState()->getWorldTransform(trans);
+			//actualizamos el transfrom,
+			trans.setRotation(btQuaternion(gameObject->getYaw(), gameObject->getPitch(), gameObject->getRoll()));
+			trans.setOrigin(btVector3(gameObject->getPosition().x, gameObject->getPosition().y, gameObject->getPosition().z));
+			//seteamos el rigidBody ya actualizado
+			rigidBody->setWorldTransform(trans);
+		}
 	}
 
 	btDynamicsWorld* dw = Physics::getInstance()->getDynamicWorld();
