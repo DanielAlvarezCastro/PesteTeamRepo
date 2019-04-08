@@ -10,12 +10,12 @@ RigidBody::RigidBody(GameObject* gameObject_, std::string name_) : BasicComponen
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_, bool mov) : BasicComponent(gameObject_), mass(mass_), name(name_), mov_(mov)
+RigidBody::RigidBody(GameObject* gameObject_, btScalar mass_, std::string name_, bool mov) : BasicComponent(gameObject_), mass(mass_), name(name_), isKinematic(mov)
 {
 	setIniConf();
 }
 
-RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density, bool mov) : BasicComponent(gameObject_), name(name_), mov_(mov)
+RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density, bool mov) : BasicComponent(gameObject_), name(name_), isKinematic(mov)
 {
 	//masa = dimension del gameObject * densidad establecida
 	mass = (gameObject->getScale().x * gameObject->getScale().y * gameObject->getScale().z) * density;
@@ -31,7 +31,7 @@ RigidBody::~RigidBody()
 void RigidBody::setIniConf() {
 	//forma del collider en funcion de la bounding box del GO
 	Vec3 scale = gameObject->getBoundingBox();
-	btVector3 auxScale{ btScalar(scale.x * 0.25), btScalar(scale.y * 0.25), btScalar(scale.z * 0.25) };
+	btVector3 auxScale{ btScalar(scale.x * 0.5), btScalar(scale.y * 0.5), btScalar(scale.z * 0.5) };
 	//de momento solo haremos collider con forma de cubos
 	btCollisionShape* shape = new btBoxShape(auxScale);
 
@@ -76,7 +76,7 @@ void RigidBody::Update(float t)
 {
 	//posicion del body
 	btTransform trans;
-	if (rigidBody && rigidBody->getMotionState() && !mov_) {
+	if (rigidBody && rigidBody->getMotionState() && !isKinematic) {
 		rigidBody->getMotionState()->getWorldTransform(trans);
 		//control sobre el gameObject
 		btQuaternion rotation = trans.getRotation();
@@ -86,19 +86,14 @@ void RigidBody::Update(float t)
 		rotation.getEulerZYX(auxZ, auxY, auxX);
 		gameObject->setDirection(Vec3(auxX, auxY, auxZ));
 	}
-
-	//comprobamos colision
-	//auto& manifoldPoints = Physics::getInstance()->getObjectsCollisions()[rigidBody];
-	//if (! manifoldPoints.empty()) {
-	//	cout << "choco" << endl;
-	//}
-
-	//actualizamos caja de colision
-	Vec3 scale = gameObject->getBoundingBox();
-	btVector3 auxScale{ btScalar(scale.x * 0.25), btScalar(scale.y * 0.25), btScalar(scale.z * 0.25) };
-	delete rigidBody->getCollisionShape();
-	btCollisionShape* shape = new btBoxShape(auxScale);
-	rigidBody->setCollisionShape(shape);
+	else if(isKinematic){
+		//conseguimos los datos del rb
+		rigidBody->getMotionState()->getWorldTransform(trans);
+		//actualizamos el transfrom, dominado por el GO
+		trans.setRotation(btQuaternion(gameObject->getYaw(), gameObject->getPitch(), gameObject->getRoll()));
+		trans.setOrigin(btVector3(gameObject->getPosition().x, gameObject->getPosition().y, gameObject->getPosition().z));
+		rigidBody->setWorldTransform(trans);
+	}
 
 	btDynamicsWorld* dw = Physics::getInstance()->getDynamicWorld();
 	btTransform wt = rigidBody->getWorldTransform();
@@ -110,4 +105,13 @@ void RigidBody::Update(float t)
 
 void RigidBody::onCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
 	std::cout << "I, " << gameObject->getName() << ", collided with " << other->getName() << std::endl;
+}
+
+void RigidBody::setRigidBodyScale(btScalar x, btScalar y, btScalar z) {
+	//actualizamos caja de colision
+	Vec3 scale = gameObject->getBoundingBox();
+	btVector3 auxScale{ btScalar(scale.x * 0.5 * x), btScalar(scale.y * 0.5 * y), btScalar(scale.z * 0.5 * z) };
+	delete rigidBody->getCollisionShape();
+	btCollisionShape* shape = new btBoxShape(auxScale);
+	rigidBody->setCollisionShape(shape);
 }
