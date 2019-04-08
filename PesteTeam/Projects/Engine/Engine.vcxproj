@@ -35,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\Engine\BehaviourComponent.h" />
     <ClInclude Include="..\..\Src\Engine\BasicComponent.h" />
+    <ClInclude Include="..\..\Src\Engine\Euler.h" />
     <ClInclude Include="..\..\Src\Engine\GameObject.h" />
     <ClInclude Include="..\..\Src\Engine\GameTime.h" />
     <ClInclude Include="..\..\Src\Engine\GUIManager.h" />

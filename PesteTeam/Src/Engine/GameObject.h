@@ -65,6 +65,8 @@ public:
 	void attachCamera(Ogre::Camera* cam);
 	void attachLight(Ogre::Light* lig);
 	void setMaterial(std::string materialName);
+	Ogre::Quaternion getOrientation() { return ogreNode->getOrientation(); };
+	Vec3 getGlobalPosition() { return ogreNode->_getDerivedPosition(); }
 
 #pragma region Transform functions
 #pragma region Trasform Getters

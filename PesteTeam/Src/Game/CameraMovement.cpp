@@ -1,7 +1,8 @@
 #include "CameraMovement.h"
 #include <GameObject.h>
-CameraMovement::CameraMovement(GameObject * camera_, GameObject * target_) :BehaviourComponent(camera_), camera(camera_), target(target_)
+CameraMovement::CameraMovement(GameObject * camera_, GameObject* _target, GameObject* _pivot) :BehaviourComponent(camera_),target(_target), pivot(_pivot)
 {
+	keyboard = MainApp::instance()->getKeyboard();
 }
 
 CameraMovement::~CameraMovement()
@@ -11,13 +12,48 @@ CameraMovement::~CameraMovement()
 
 void CameraMovement::Update(float t)
 {
-	/*Vec3 targetPos = target->getPosition();
-	targetPos.z -= 100;
-	camera->lookAt(target->getPosition());*/
 
-	Ogre::Vector3 moveTo = target->getPosition() - target->getDirection() * 200.0f + Ogre::Vector3(0,1,0) * 1.0f;
-	float bias = 0.90f;
-	Ogre::Vector3 pos = target->getPosition() * bias + moveTo * (1.0f - bias);
-	camera->setPosition(pos);
-	camera->lookAt(target->getPosition() + target->getDirection() * 10.0f);
+	if (keyboard->isKeyDown(OIS::KC_A)) {
+		if (gameObject->getPosition().x > -30) {
+			gameObject->translate(Vec3(-30 * t, 0, 0));
+		}
+	}
+	else if (keyboard->isKeyDown(OIS::KC_D)) {
+		if (gameObject->getPosition().x < 30) {
+			gameObject->translate(Vec3(30 * t, 0, 0));
+		}
+
+	}
+	else {
+		if (gameObject->getPosition().x > 1) {
+			gameObject->translate(Vec3(-20 * t, 0,0));
+		}
+		else if (gameObject->getPosition().x < -1) {
+			gameObject->translate(Vec3(20 * t, 0,0));
+		}
+	}
+	if (keyboard->isKeyDown(OIS::KC_W)) {
+		if (gameObject->getPosition().y < 10){
+			gameObject->translate(Vec3(0, 40 * t, 0));
+		}
+	}
+	else if (keyboard->isKeyDown(OIS::KC_S)){
+		if (gameObject->getPosition().y > -10){
+			gameObject->translate(Vec3(0, -40 * t, 0));
+
+		}
+
+	}
+
+	Euler e;
+	e.fromQuaternion(gameObject->getOrientation());
+	e.mRoll = 0;
+	gameObject->setOrientation(e);
+	gameObject->lookAt(pivot->getGlobalPosition());
+
+}
+
+void CameraMovement::reciveMsg(Message * msg)
+{
+
 }

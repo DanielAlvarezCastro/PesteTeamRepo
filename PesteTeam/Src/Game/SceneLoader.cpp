@@ -3,6 +3,7 @@
 #include <iostream>
 #include "PlayerController.h"
 #include "CameraMovement.h"
+#include "ShipController.h"
 #include <vector>
 using json = nlohmann::json;
 
@@ -92,13 +93,25 @@ bool SceneLoader::loadTestScene()
 	Scene* escena1 = new Scene();
 	escena1->createScene("primary");
 
+	GameObject* pointer = new GameObject();
+	pointer->createEmptyEntity("Pointer", escena1);
+	pointer->setPosition(Vec3(0, 0, 0));
+	pointer->setDirection(Vec3(0, 0, -1));
+	escena1->addGameObject(pointer);
+
 	GameObject* Nave = new GameObject();
 	Nave->createEntity("SXR-72.mesh", "Player", escena1);
-	Nave->setScale(Vec3(2, 2, 2));
-	Nave->setPosition(Vec3(0, 40, 35));
-	RigidBody* rbn = new RigidBody(Nave, 5.0, "Nave", true);
-	rbn->setGravity(0,0,0);
-	escena1->addComponent(rbn);
+	Nave->setScale(Vec3(3, 3, 3));
+	Nave->asingFather(pointer);
+	Nave->setPosition(Vec3(-1, 0, 0));
+	escena1->addGameObject(Nave);
+
+	GameObject* pivot = new GameObject();
+	pivot->createEmptyEntity("Pivot", escena1);
+	pivot->setScale(Vec3(0.02, 0.02, 0.02));
+	pivot->asingFather(pointer);
+	pivot->setPosition(Vec3(0, 0, -50));
+	escena1->addGameObject(pivot);
 
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", escena1);
@@ -126,10 +139,6 @@ bool SceneLoader::loadTestScene()
 	cubito2->addRigidbody(rb2);
 	escena1->addComponent(rb2);
 
-	GameObject* pointer = new GameObject();
-	pointer->createEntity("cube.mesh", "Pointer", escena1);
-	pointer->setScale(Vec3(0.05, 0.05, 0.05));
-	pointer->setPosition(Vec3(0, -7, 5));
 
 	escena1->addGameObject(Nave);
 	escena1->addGameObject(edificio1);
@@ -142,8 +151,8 @@ bool SceneLoader::loadTestScene()
 	GameObject* cameraOb = new GameObject();
 	cameraOb->createEmptyEntity("MainCam", escena1);
 	cameraOb->attachCamera(mCamera);
-	cameraOb->setPosition(Vec3(0, 0, 80));
-	cameraOb->lookAt(Vec3(0, 0, -300), Ogre::Node::TS_WORLD);
+	cameraOb->asingFather(pointer);
+	cameraOb->setPosition(Vec3(0, 0, 40));
 
 	escena1->addGameObject(cameraOb);
 
@@ -159,10 +168,13 @@ bool SceneLoader::loadTestScene()
 	l1Ob->attachLight(luz);
 	escena1->addGameObject(l1Ob);
 
-	PlayerController* pc = new PlayerController(Nave, pointer);
+	PlayerController* pc = new PlayerController(pointer);
 	escena1->addComponent(pc);
 
-	CameraMovement* cM = new CameraMovement(cameraOb, Nave);
+	ShipController* sc = new ShipController(Nave);
+	escena1->addComponent(sc);
+
+	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
 	escena1->addComponent(cM);
 
 
@@ -264,7 +276,8 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 		else if (componentName == "CameraMovement") {
 			std::string pName = (*itComponent)["GameObject"];
 			GameObject* target = scene->getGameObject(pName);
-			CameraMovement* cM = new CameraMovement(go, target);
+			GameObject* pivot = scene->getGameObject(pName);
+			CameraMovement* cM = new CameraMovement(go, target, pivot);
 			scene->addComponent(cM);
 		}
 		else if (componentName == "Light") {
@@ -278,7 +291,7 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 		else if (componentName == "PlayerController") {
 			std::string pName = (*itComponent)["GameObject"];
 			GameObject* pointer = scene->getGameObject(pName);
-			PlayerController* pc = new PlayerController(go, pointer);
+			PlayerController* pc = new PlayerController(pointer);
 			scene->addComponent(pc);
 		}
 	}	

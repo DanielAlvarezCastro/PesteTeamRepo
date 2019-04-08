@@ -1,17 +1,18 @@
 #pragma once
 #include <BehaviourComponent.h>
 #include <MainApp.h>
+#include <Euler.h>
 class CameraMovement :
 	public BehaviourComponent
 {
 public:
-	CameraMovement(GameObject* camera_, GameObject* target_);
+	CameraMovement(GameObject* camera_, GameObject* _target, GameObject* _pivot);
 	virtual ~CameraMovement();
-	GameObject* camera;
+
+	OIS::Keyboard* keyboard;
+	GameObject* pivot;
 	GameObject* target;
 
-
 	virtual void Update(float t);
-	virtual void reciveMsg(Message* msg) {};
+	virtual void reciveMsg(Message* msg);
 };
-
