@@ -32,6 +32,6 @@ void GameSceneManager::LoadScene(string sceneName)
 	MainApp::instance()->setupViewport(escena->getCamera());
 	MainApp::instance()->AddScene(escena);
 	GUIManager::instance()->initScene(escena);
-	GUIManager::instance()->createTextbox("Bueno dia, despierta con buena actitud", 0, 0, 500, 100, "TextBox", "TestTextBox", 30);
+	GUIManager::instance()->createTextbox("#FFFFFF TEST SCENE", 0, 0, 500, 100, "TextBox", "TestTextBox", 30);
 	
 }

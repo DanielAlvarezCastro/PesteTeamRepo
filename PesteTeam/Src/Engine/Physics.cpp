@@ -29,9 +29,11 @@ void CollisionCallBack(btDynamicsWorld* world, btScalar t) {
 			collisionsB.push_back(&pt);
 			j++;
 		}
-		if (j > 0)
+		if (j > 0) {
 			static_cast<GameObject*>(obj1->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj2->getUserPointer()), collisionsA);
 			static_cast<GameObject*>(obj2->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj1->getUserPointer()), collisionsB);
+
+		}
 	}
 	Physics::getInstance()->setObjectCollisions(objectsCollisions);
 }
