@@ -13,11 +13,6 @@ protected:
 	std::vector<GameObject*> gameObjects;
 	std::vector<BasicComponent*> components;
 
-	ISound* intro_;
-	ISound* body_;
-
-	bool playing_music_ = false;
-
 public:
 	Scene();
 	~Scene();
