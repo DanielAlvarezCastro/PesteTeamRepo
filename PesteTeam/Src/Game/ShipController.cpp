@@ -44,14 +44,14 @@ void ShipController::Update(float t)
 	}
 
 	if (keyboard->isKeyDown(OIS::KC_E) && canRoll) {
-		if (euler.mRoll < Radian(1.0) && euler.mRoll > Radian(-1.0)  && !isRolling) {
+		if (!isRolling) {
 			isRolling = true;
 			rollRight = true;
 			iniOrientation = euler.mRoll;
 		}
 	}
 	if (keyboard->isKeyDown(OIS::KC_Q) && canRoll) {
-		if (euler.mRoll > Radian(-1.0) && euler.mRoll > Radian(-1.0) && !isRolling) {
+		if (!isRolling) {
 			isRolling = true;
 			rollLeft = true;
 			iniOrientation = euler.mRoll;
