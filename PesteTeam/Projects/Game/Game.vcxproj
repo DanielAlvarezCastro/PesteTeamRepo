@@ -30,6 +30,7 @@
     <ClInclude Include="..\..\Src\Game\CameraMovement.h" />
     <ClInclude Include="..\..\Src\Game\GameSceneManager.h" />
     <ClInclude Include="..\..\Src\Game\json.hpp" />
+    <ClInclude Include="..\..\Src\Game\Messages.h" />
     <ClInclude Include="..\..\Src\Game\PlayerController.h" />
     <ClInclude Include="..\..\Src\Game\SceneLoader.h" />
     <ClInclude Include="..\..\Src\Game\ShipController.h" />

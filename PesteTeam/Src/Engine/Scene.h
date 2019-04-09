@@ -30,5 +30,6 @@ public:
 	} }
 	Ogre::Camera* getCamera() {	return mCamera;	};
 	Ogre::SceneManager* getSceneManager() { return mSceneMgr; };
+	void reciveMsg(Message* msg) { for (BasicComponent* cp : components) cp->reciveMsg(msg); };
 };
 

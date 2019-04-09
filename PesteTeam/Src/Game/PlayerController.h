@@ -2,6 +2,7 @@
 #include <BehaviourComponent.h>
 #include <MainApp.h>
 #include <Euler.h>
+#include "Messages.h"
 
 class PlayerController :
 	public BehaviourComponent

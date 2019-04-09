@@ -58,6 +58,7 @@ public:
 	void reciveMsg(Message* msg);
 
 	void asingFather(GameObject* father_);
+	Scene* getScene() { return MainApp::instance()->getCurrentScene(); };
 	void reciveChild(Ogre::SceneNode* childNode) { ogreNode->addChild(childNode); };
 	void createEntity(std::string mesh, std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
 	void createEmptyEntity(std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
@@ -65,11 +66,11 @@ public:
 	void attachCamera(Ogre::Camera* cam);
 	void attachLight(Ogre::Light* lig);
 	void setMaterial(std::string materialName);
-	Ogre::Quaternion getOrientation() { return ogreNode->getOrientation(); };
-	Vec3 getGlobalPosition() { return ogreNode->_getDerivedPosition(); }
 
 #pragma region Transform functions
 #pragma region Trasform Getters
+	Ogre::Quaternion getOrientation() { return ogreNode->getOrientation(); };
+	Vec3 getGlobalPosition() { return ogreNode->_getDerivedPosition(); }
 	std::string getName() { return name; };
 	Ogre::Vector3 getPosition() { return transform.position; };
 	Ogre::Vector3 getDirection() { return transform.direction; };
