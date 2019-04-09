@@ -95,7 +95,7 @@ bool SceneLoader::loadTestScene()
 
 	GameObject* pointer = new GameObject();
 	pointer->createEmptyEntity("Pointer", escena1);
-	pointer->setPosition(Vec3(0, 0, 0));
+	pointer->setPosition(Vec3(0, 40, 0));
 	pointer->setDirection(Vec3(0, 0, -1));
 	escena1->addGameObject(pointer);
 

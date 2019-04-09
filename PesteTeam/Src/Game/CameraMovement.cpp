@@ -51,6 +51,21 @@ void CameraMovement::Update(float t)
 
 	}
 
+	if (keyboard->isKeyDown(OIS::KC_SPACE)) {
+		if (gameObject->getPosition().z < 80) {
+			gameObject->translate(Vec3(0, 0, 80 * t));
+
+		}
+	}
+
+	else
+	{
+		if (gameObject->getPosition().z > 40) {
+			gameObject->translate(Vec3(0, 0, -70 * t));
+
+		}
+	}
+
 	Euler e;
 	e.fromQuaternion(gameObject->getOrientation());
 	e.mRoll = 0;
