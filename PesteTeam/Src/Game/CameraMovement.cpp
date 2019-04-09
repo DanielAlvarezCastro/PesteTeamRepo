@@ -33,14 +33,20 @@ void CameraMovement::Update(float t)
 		}
 	}
 	if (keyboard->isKeyDown(OIS::KC_W)) {
-		if (gameObject->getPosition().y < 10){
-			gameObject->translate(Vec3(0, 40 * t, 0));
+		if (gameObject->getPosition().y > -10) {
+			gameObject->translate(Vec3(0, -40 * t, 0));
+		}
+		if (pivot->getPosition().y < 10){
+			pivot->translate(Vec3(0, 40 * t, 0));
 		}
 	}
 	else if (keyboard->isKeyDown(OIS::KC_S)){
-		if (gameObject->getPosition().y > -10){
-			gameObject->translate(Vec3(0, -40 * t, 0));
 
+		if (gameObject->getPosition().y < 20){
+			gameObject->translate(Vec3(0, 40 * t, 0));
+		}
+		if (pivot->getPosition().y > -10) {
+			pivot->translate(Vec3(0,-40 * t, 0));
 		}
 
 	}
