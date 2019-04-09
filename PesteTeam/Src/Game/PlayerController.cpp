@@ -58,7 +58,10 @@ void PlayerController::Update(float t)
 		}
 	}
 	if (keyboard->isKeyDown(OIS::KC_SPACE)) {
-		gameObject->translate(euler.forward()*3);
+		gameObject->translate(euler.forward() * 120 * t);
+	}
+	else {
+		gameObject->translate(euler.forward() * 60* t);
 	}
 	if (keyboard->isKeyDown(OIS::KC_P)) {
 		GameSceneManager::instance()->LoadScene("Scene2");
