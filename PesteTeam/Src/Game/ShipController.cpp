@@ -43,14 +43,14 @@ void ShipController::Update(float t)
 		}
 	}
 
-	if (keyboard->isKeyDown(OIS::KC_E) && canRoll) {
+	if (keyboard->isKeyDown(OIS::KC_E)) {
 		if (!isRolling) {
 			isRolling = true;
 			rollRight = true;
 			iniOrientation = euler.mRoll;
 		}
 	}
-	if (keyboard->isKeyDown(OIS::KC_Q) && canRoll) {
+	if (keyboard->isKeyDown(OIS::KC_Q)) {
 		if (!isRolling) {
 			isRolling = true;
 			rollLeft = true;
@@ -58,17 +58,18 @@ void ShipController::Update(float t)
 		}
 	}
 	if (isRolling) {
-		if (rollRight && euler.mRoll > (Radian(-2.0 * pi) + iniOrientation)) {
+		if (rollRight && euler.mRoll > (Radian(-2.0 * pi) + iniOrientation) - Radian(-2 * pi)*t) {
 			euler.rotate(Ogre::Radian(0), Ogre::Radian(0), Ogre::Radian((-5 * pi)*t));
 			gameObject->setOrientation(euler);
 		}
-		else if (rollLeft && euler.mRoll < (Radian(2.0 * pi) + iniOrientation)) {
+		else if (rollLeft && euler.mRoll < (Radian(2.0 * pi) + iniOrientation)- Radian((2 * pi)*t)) {
 			euler.rotate(Ogre::Radian(0), Ogre::Radian(0), Ogre::Radian((5 * pi)*t));
 			gameObject->setOrientation(euler);
 		}
 		else {
+			cout << euler.mRoll << endl;
+			cout << iniOrientation << endl;
 			isRolling = false;
-			canRoll = true;
 			rollLeft = false;
 			rollRight = false;
 			euler.mRoll = iniOrientation;

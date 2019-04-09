@@ -111,7 +111,7 @@ void RigidBody::Update(float t)
 }
 
 void RigidBody::onCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
-	std::cout << "I, " << gameObject->getName() << ", collided with " << other->getName() << std::endl;
+	//std::cout << "I, " << gameObject->getName() << ", collided with " << other->getName() << std::endl;
 }
 
 void RigidBody::setRigidBodyScale(btScalar x, btScalar y, btScalar z) {

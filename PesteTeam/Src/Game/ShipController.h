@@ -10,7 +10,6 @@ private:
 	Ogre::Radian iniOrientation;
 	OIS::Keyboard* keyboard;
 	float pi = 3.14159265359;
-	bool canRoll = true;
 	bool isRolling = false;
 	bool rollRight = false;
 	bool rollLeft = false;
