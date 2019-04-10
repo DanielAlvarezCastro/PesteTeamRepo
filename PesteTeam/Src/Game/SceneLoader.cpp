@@ -177,21 +177,31 @@ bool SceneLoader::loadTestScene()
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
 	escena1->addComponent(cM);
 
+	//MeshManager::getSingleton().createPlane("mPlane", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	//	Plane(Ogre::Vector3::UNIT_Y, 0), 12000, 12000, 1, 1, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 
-	MeshManager::getSingleton().createPlane("mPlane", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		Plane(Ogre::Vector3::UNIT_Y, 0), 12000, 12000, 1, 1, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 
 	GameObject* planeOb = new GameObject();
-	planeOb->createEntity("mPlane", "Floor", escena1);
-	planeOb->setMaterial("Test/FloorTile");
-	planeOb->setPosition(Vec3(0, 0, 0));
+	planeOb->createEntity("FloorGrid.mesh", "Floor", escena1);
+	//planeOb->setMaterial("Test/FloorTile");
+	planeOb->setScale(Vec3(100, 100, 100));
+	planeOb->setPosition(Vec3(0, 0,-100));
 	escena1->addGameObject(planeOb);
 
-	GameObject* planeOb2 = new GameObject();
-	planeOb2->createEntity("mPlane", "Floor2", escena1);
+
+	GameObject* mountains = new GameObject();
+	mountains->createEntity("Mountains.mesh", "Mountains", escena1);
+	//planeOb->setMaterial("Test/FloorTile");
+	mountains->setScale(Vec3(100, 100, 100));
+	mountains->setPosition(Vec3(-2500, 350, -100));
+	escena1->addGameObject(mountains);
+
+	/*GameObject* planeOb2 = new GameObject();
+	planeOb2->createEntity("FloorTerrain.mesh", "Floor2", escena1);
 	planeOb2->setMaterial("Test/FloorTileLight");
+	planeOb2->setScale(Vec3(1, 1, 1));
 	planeOb2->setPosition(Vec3(0, 0.1, 0));
-	escena1->addGameObject(planeOb2);
+	escena1->addGameObject(planeOb2);*/
 
 	
 	
