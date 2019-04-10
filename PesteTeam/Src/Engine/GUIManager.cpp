@@ -24,7 +24,11 @@ void GUIManager::createImage(string fileName, int x, int y, int w, int h, string
 
 MyGUI::TextBox * GUIManager::getTextBox(string name)
 {
-	return MyGUI::Gui::getInstance().findWidget<MyGUI::TextBox>("ScoreTextBox");
+	return MyGUI::Gui::getInstance().findWidget<MyGUI::TextBox>(name);
+}
+MyGUI::ImageBox * GUIManager::getImage(string name)
+{
+	return MyGUI::Gui::getInstance().findWidget<MyGUI::ImageBox>(name);
 }
 
 GUIManager::GUIManager()

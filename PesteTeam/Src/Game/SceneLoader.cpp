@@ -4,6 +4,7 @@
 #include "PlayerController.h"
 #include "CameraMovement.h"
 #include "ShipController.h"
+#include "MainMenuManager.h"
 #include <vector>
 using json = nlohmann::json;
 
@@ -334,6 +335,10 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			std::string pName = (*itComponent)["GameObject"];
 			GameObject* pointer = scene->getGameObject(pName);
 			PlayerController* pc = new PlayerController(pointer);
+			scene->addComponent(pc);
+		}
+		else if (componentName == "MainMenuManager") {
+			MainMenuManager* pc = new MainMenuManager(go);
 			scene->addComponent(pc);
 		}
 	}	

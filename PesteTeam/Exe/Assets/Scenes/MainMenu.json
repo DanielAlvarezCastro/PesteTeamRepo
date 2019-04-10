@@ -3,17 +3,30 @@
 	{
 		"Name" : "Title",
 		"Type" : "ImageBox",		
-		"Position" : [100,100],
-		"Size" : [300,300],
-		"Src" : "HelpIcon.png"
+		"Position" : [200,0],
+		"Size" : [400,333],
+		"Src" : "TitleLogo.png"
 	},
 	{
-		"Name" : "Test",
-		"Type" : "TextBox",		
-		"Position" : [0,0],
-		"Size" : [100,100],
-		"Caption" : "#FFFFFF TEST",
-		"FontHeight" : 30
+		"Name" : "Play",
+		"Type" : "ImageBox",		
+		"Position" : [300,300],
+		"Size" : [200,100],
+		"Src" : "PlaySelected.png"
+	},
+	{
+		"Name" : "Credits",
+		"Type" : "ImageBox",		
+		"Position" : [300,400],
+		"Size" : [200,100],
+		"Src" : "CreditsUnSelected.png"
+	},
+	{
+		"Name" : "Exit",
+		"Type" : "ImageBox",		
+		"Position" : [300,500],
+		"Size" : [200,100],
+		"Src" : "ExitUnSelected.png"
 	}
 	],
     "GameObjects": [
@@ -40,6 +53,17 @@
 					"Type" : "Directional"
 				}
 			]
-		}	
+		},
+		{
+			"Name" : "MainMenuManager",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,0],
+			"Components" : [
+				{
+					"Name" : "MainMenuManager"
+				}
+			]
+		}
 	]
 }
