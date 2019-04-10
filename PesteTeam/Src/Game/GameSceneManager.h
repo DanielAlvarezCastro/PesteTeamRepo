@@ -11,7 +11,7 @@ public:
 	GameSceneManager();
 	~GameSceneManager();
 	bool LoadGame();
-	void LoadScene(string sceneName);
+	bool LoadScene(string sceneName);
 	static GameSceneManager* instance() {
 		if (instance_ == nullptr)
 			instance_ = new GameSceneManager();

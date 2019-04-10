@@ -41,8 +41,12 @@ bool SceneLoader::loadPrefabsFromFile()
 
 
 
-bool SceneLoader::loadSceneFromFile(std::string sceneName)
+bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 {
+	if (sceneName == "TestScene") {
+		loadTestScene(scene);
+		return true;
+	}
 	std::cout << "********Cargando " << sceneName << "********" << std::endl;
 	//Carga el archivo que contiene la escena
 	std::string sceneFilename;
@@ -57,9 +61,8 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName)
 	json scene_json;
 	sceneFile >> scene_json;
 
-	Scene* escena = new Scene();
-	escena->createScene("primary");
-	scenesMap.insert(pair<std::string, Scene*>(sceneName, escena));
+	scene->createScene("primary");
+	scenesMap.insert(pair<std::string, Scene*>(sceneName, scene));
 
 	//Itera sobre los gameobjects en el json de la escena
 	for (json::iterator it = scene_json["GameObjects"].begin(); it != scene_json["GameObjects"].end(); ++it) {
@@ -70,17 +73,26 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName)
 		//Si el tipo de prefab existe entonces crea el gameobject a partir del diccionario
 		if (prefabsMap.find(prefabType)!=prefabsMap.end()) {
 			json prefab_json = json::parse(prefabsMap[(*it)["Type"]]);
-			GameObject* go = createGameObject(prefab_json, position, escena);
-			escena->addGameObject(go);
-			addComponents(prefab_json["Components"], go, escena);
+			GameObject* go = createGameObject(prefab_json, position, scene);
+			scene->addGameObject(go);
+			addComponents(prefab_json["Components"], go, scene);
 		}
 		else {
 			//Si no existe entonces lo crea leyendo el json de la escena
-			GameObject* go= createGameObject((*it), position, escena);
-			addComponents((*it)["Components"], go, escena);
+			GameObject* go= createGameObject((*it), position, scene);
+			addComponents((*it)["Components"], go, scene);
 		}
 	}
+	//Set del viewport
+	MainApp::instance()->setupViewport(scene->getCamera());
 
+
+
+	//Itera sobre los elementos del GUI
+	for (json::iterator it = scene_json["GUI"].begin(); it != scene_json["GUI"].end(); ++it) {
+		GUIManager::instance()->initScene(scene);
+		createGUIObject(*it);
+	}
 	//Cierra el archivo de la escena
 	sceneFile.close();
 	std::cout << sceneName << " cargado con exito!" << std::endl;
@@ -88,126 +100,128 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName)
 }
 
 //Escenas de prueba para meterlas desde c�digo aqu�
-bool SceneLoader::loadTestScene()
+bool SceneLoader::loadTestScene(Scene* scene)
 {
-	Scene* escena1 = new Scene();
-	escena1->createScene("primary");
+	scene->createScene("primary");
 
 	GameObject* pointer = new GameObject();
-	pointer->createEmptyEntity("Pointer", escena1);
+	pointer->createEmptyEntity("Pointer", scene);
 	pointer->setPosition(Vec3(0, 40, 0));
 	pointer->setDirection(Vec3(0, 0, -1));
-	escena1->addGameObject(pointer);
+	scene->addGameObject(pointer);
 
 	GameObject* Nave = new GameObject();
-	Nave->createEntity("SXR-72.mesh", "Player", escena1);
+	Nave->createEntity("SXR-72.mesh", "Player", scene);
 	Nave->setScale(Vec3(3, 3, 3));
 	Nave->asingFather(pointer);
 	Nave->setPosition(Vec3(-1, 0, 0));
-	escena1->addGameObject(Nave);
+	scene->addGameObject(Nave);
 
 	GameObject* pivot = new GameObject();
-	pivot->createEmptyEntity("Pivot", escena1);
+	pivot->createEmptyEntity("Pivot", scene);
 	pivot->setScale(Vec3(0.02, 0.02, 0.02));
 	pivot->asingFather(pointer);
 	pivot->setPosition(Vec3(0, 0, -50));
-	escena1->addGameObject(pivot);
+	scene->addGameObject(pivot);
 
 	GameObject* cubito = new GameObject();
-	cubito->createEntity("cube.mesh", "Cubito", escena1);
+	cubito->createEntity("cube.mesh", "Cubito", scene);
 	cubito->setScale(Vec3(0.1, 0.1, 0.1));
 	cubito->setPosition(Vec3(10, 40, -15));
 	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
 	cubito->addRigidbody(rb);
-	escena1->addComponent(rb);
+	scene->addComponent(rb);
 
 	GameObject* edificio1 = new GameObject();
-	edificio1->createEntity("Building1.mesh", "Edificio1", escena1);
+	edificio1->createEntity("Building1.mesh", "Edificio1", scene);
 	edificio1->setScale(Vec3(5, 5, 5));
 	edificio1->setPosition(Vec3(0, 0, -300));
 
 	GameObject* edificio2 = new GameObject();
-	edificio2->createEntity("Building2.mesh", "Edificio2", escena1);
+	edificio2->createEntity("Building2.mesh", "Edificio2", scene);
 	edificio2->setScale(Vec3(5, 5, 5));
 	edificio2->setPosition(Vec3(100, 0, -100));
 
 	GameObject* cubito2 = new GameObject();
-	cubito2->createEntity("cube.mesh", "Cubito2", escena1);
+	cubito2->createEntity("cube.mesh", "Cubito2", scene);
 	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
 	cubito2->setPosition(Vec3(0, 10, -15));
 	RigidBody* rb2 = new RigidBody(cubito2, "Cubito2");
 	cubito2->addRigidbody(rb2);
-	escena1->addComponent(rb2);
+	scene->addComponent(rb2);
 
 
-	escena1->addGameObject(Nave);
-	escena1->addGameObject(edificio1);
-	escena1->addGameObject(pointer);
-	escena1->addGameObject(cubito);
+	scene->addGameObject(Nave);
+	scene->addGameObject(edificio1);
+	scene->addGameObject(pointer);
+	scene->addGameObject(cubito);
 
-	Ogre::Camera* mCamera = escena1->getSceneManager()->createCamera("MainCam");
+	Ogre::Camera* mCamera = scene->getSceneManager()->createCamera("MainCam");
 	mCamera->setNearClipDistance(5);
-	escena1->addCamera(mCamera);
+	scene->addCamera(mCamera);
 	GameObject* cameraOb = new GameObject();
-	cameraOb->createEmptyEntity("MainCam", escena1);
+	cameraOb->createEmptyEntity("MainCam", scene);
 	cameraOb->attachCamera(mCamera);
 	cameraOb->asingFather(pointer);
 	cameraOb->setPosition(Vec3(0, 0, 40));
 
-	escena1->addGameObject(cameraOb);
+	scene->addGameObject(cameraOb);
 
-	Ogre::Light* luz = escena1->getSceneManager()->createLight("Luz");
+	//Set del viewport
+	MainApp::instance()->setupViewport(scene->getCamera());
+
+	Ogre::Light* luz = scene->getSceneManager()->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
 	luz->setDiffuseColour(.75, .75, .75);
 	
 
-	escena1->getSceneManager()->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
+	scene->getSceneManager()->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
 	GameObject* l1Ob = new GameObject();
-	l1Ob->createEmptyEntity("mLight", escena1);
+	l1Ob->createEmptyEntity("mLight", scene);
 	l1Ob->attachLight(luz);
-	escena1->addGameObject(l1Ob);
+	scene->addGameObject(l1Ob);
 
 	PlayerController* pc = new PlayerController(pointer);
-	escena1->addComponent(pc);
+	scene->addComponent(pc);
 
 	ShipController* sc = new ShipController(Nave);
-	escena1->addComponent(sc);
+	scene->addComponent(sc);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
-	escena1->addComponent(cM);
+	scene->addComponent(cM);
 
 	//MeshManager::getSingleton().createPlane("mPlane", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 	//	Plane(Ogre::Vector3::UNIT_Y, 0), 12000, 12000, 1, 1, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
 
 
 	GameObject* planeOb = new GameObject();
-	planeOb->createEntity("FloorGrid.mesh", "Floor", escena1);
+	planeOb->createEntity("FloorGrid.mesh", "Floor", scene);
 	//planeOb->setMaterial("Test/FloorTile");
 	planeOb->setScale(Vec3(100, 100, 100));
 	planeOb->setPosition(Vec3(0, 0,-100));
-	escena1->addGameObject(planeOb);
+	scene->addGameObject(planeOb);
 
 
 	GameObject* mountains = new GameObject();
-	mountains->createEntity("Mountains.mesh", "Mountains", escena1);
+	mountains->createEntity("Mountains.mesh", "Mountains", scene);
 	//planeOb->setMaterial("Test/FloorTile");
 	mountains->setScale(Vec3(100, 100, 100));
 	mountains->setPosition(Vec3(-2500, 350, -100));
-	escena1->addGameObject(mountains);
+	scene->addGameObject(mountains);
 
 	/*GameObject* planeOb2 = new GameObject();
-	planeOb2->createEntity("FloorTerrain.mesh", "Floor2", escena1);
+	planeOb2->createEntity("FloorTerrain.mesh", "Floor2", scene);
 	planeOb2->setMaterial("Test/FloorTileLight");
 	planeOb2->setScale(Vec3(1, 1, 1));
 	planeOb2->setPosition(Vec3(0, 0.1, 0));
-	escena1->addGameObject(planeOb2);*/
+	scene->addGameObject(planeOb2);*/
 
 	
 	
 	
 
-	scenesMap.insert(pair<std::string, Scene*>("Scene1", escena1));
+	scenesMap.insert(pair<std::string, Scene*>("TestScene", scene));
 
 
 	Scene* escena2 = new Scene();
@@ -265,6 +279,24 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<floa
 	}
 
 	return ob;
+}
+
+void SceneLoader::createGUIObject(json gui_json)
+{
+	//Common gui attributes
+	std::string guiName = gui_json["Name"].get<std::string>();
+	std::string guiType = gui_json["Type"].get<std::string>();
+	std::vector<float> position = gui_json["Position"].get<std::vector<float>>();
+	std::vector<float> size = gui_json["Size"].get<std::vector<float>>();
+	if (guiType == "ImageBox") {
+		std::string source = gui_json["Src"].get<std::string>();
+		GUIManager::instance()->createImage(source, position[0], position[1], size[0], size[1], guiType, guiName);
+	}
+	else if (guiType == "TextBox") {
+		std::string caption = gui_json["Caption"].get<std::string>();
+		int fontHeight = gui_json["FontHeight"].get<int>();
+		GUIManager::instance()->createTextbox(caption, position[0], position[1], size[0], size[1], guiType, guiName, fontHeight);
+	}
 }
 
 void SceneLoader::addComponents(json components_json, GameObject * go, Scene* scene)

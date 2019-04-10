@@ -6,6 +6,7 @@
 #include "BehaviourComponent.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "GUIManager.h"
 #ifndef _SCENELOADER_H
 #define _SCENELOADER_H
 using json = nlohmann::json;
@@ -20,11 +21,12 @@ private:
 public:
 	SceneLoader(std::string scenesPath);
 	bool loadPrefabsFromFile();
-	bool loadSceneFromFile(std::string sceneName);
+	bool loadSceneFromFile(std::string sceneName, Scene* scene);
 
-	bool loadTestScene();
+	bool loadTestScene(Scene* scene);
 
 	GameObject* createGameObject(json gameObject_json, std::vector<float> position, Scene* scene);
+	void createGUIObject(json gui_json);
 	void addComponents(json components_json, GameObject* go, Scene* scene);
 	Scene* getScene(std::string sceneName);
 	~SceneLoader();

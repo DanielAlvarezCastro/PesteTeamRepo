@@ -1,0 +1,45 @@
+{
+	"GUI": [
+	{
+		"Name" : "Title",
+		"Type" : "ImageBox",		
+		"Position" : [100,100],
+		"Size" : [300,300],
+		"Src" : "HelpIcon.png"
+	},
+	{
+		"Name" : "Test",
+		"Type" : "TextBox",		
+		"Position" : [0,0],
+		"Size" : [100,100],
+		"Caption" : "#FFFFFF TEST",
+		"FontHeight" : 30
+	}
+	],
+    "GameObjects": [
+		{
+			"Name" : "CameraOb",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,80],			
+			"Components" : [
+				{
+					"Name" : "Camera",
+					"NearClipDistance" : 5
+				}
+			]
+		},		
+		{
+			"Name" : "LightOb1",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,0],			
+			"Components" : [
+				{
+					"Name" : "Light",
+					"Type" : "Directional"
+				}
+			]
+		}	
+	]
+}

@@ -16,22 +16,23 @@ bool GameSceneManager::LoadGame()
 	loader = new SceneLoader("./Assets/Scenes/");
 	if (!loader->loadPrefabsFromFile())
 		return false;
-	/*if (!loader->loadSceneFromFile("Scene1"))
+	/*if (!loader->loadSceneFromFile("MainMenu"))
+		return false;
+	if (!loader->loadSceneFromFile("Scene1"))
 		return false;
 	if (!loader->loadSceneFromFile("Scene2"))
-		return false;*/
-	if (!loader->loadTestScene())
 		return false;
+	if (!loader->loadTestScene())
+		return false;*/
 	return true;
 }
 
 //Carga una escena con un nombre determinado
-void GameSceneManager::LoadScene(string sceneName)
+bool GameSceneManager::LoadScene(string sceneName)
 {
-	Scene* escena = loader->getScene(sceneName);
-	MainApp::instance()->setupViewport(escena->getCamera());
-	MainApp::instance()->AddScene(escena);
-	GUIManager::instance()->initScene(escena);
-	GUIManager::instance()->createTextbox("#FFFFFF TEST SCENE", 0, 0, 500, 100, "TextBox", "TestTextBox", 30);
+	Scene* escena = new Scene();
+	MainApp::instance()->AddScene(escena);	
+	if (!loader->loadSceneFromFile(sceneName, escena))
+		return false;
 	
 }

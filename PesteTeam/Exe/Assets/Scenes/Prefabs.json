@@ -9,7 +9,7 @@
         {
             "Name" : "Player",
             "Type" : "Player",
-			"Mesh" : "SkyGrasper.mesh",
+			"Mesh" : "SXR-72.mesh",
 			"Scale" : [2,2,2],
             "Components" : [
 				{

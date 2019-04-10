@@ -9,11 +9,17 @@ void GUIManager::initScene(Scene* escena)
 	
 }
 
-void GUIManager::createTextbox(string text, int x, int y, int w, int h, string skinName, string name, int size)
+void GUIManager::createTextbox(string text, int x, int y, int w, int h, string skinName, string name, int fontHeight)
 {
 	MyGUI::TextBox* t = MyGUI::Gui::getInstance().createWidget<MyGUI::TextBox>(skinName, MyGUI::IntCoord(x, y, w, h), MyGUI::Align::Default, "Main", name);
 	t->setCaption(text);
-	t->setFontHeight(size);
+	t->setFontHeight(fontHeight);
+}
+
+void GUIManager::createImage(string fileName, int x, int y, int w, int h, string skinName, string name)
+{
+	MyGUI::ImageBox* image = MyGUI::Gui::getInstance().createWidget<MyGUI::ImageBox>("ImageBox", MyGUI::IntCoord(x,y,w,h), MyGUI::Align::Default, "Main", name);
+	image->setImageTexture(fileName);
 }
 
 MyGUI::TextBox * GUIManager::getTextBox(string name)
