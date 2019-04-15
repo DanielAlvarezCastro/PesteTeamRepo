@@ -217,7 +217,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	mountains->setScale(Vec3(100, 100, 100));
 	mountains->setPosition(Vec3(-2500, 350, -100));
 	scene->addGameObject(mountains);
-
+	Ogre::ColourValue fadeColour(0.0, 0.0, 0.0);
+	scene->getSceneManager()->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 	/*GameObject* planeOb2 = new GameObject();
 	planeOb2->createEntity("FloorTerrain.mesh", "Floor2", scene);
 	planeOb2->setMaterial("Test/FloorTileLight");
