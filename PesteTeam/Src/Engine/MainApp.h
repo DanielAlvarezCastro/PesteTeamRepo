@@ -65,6 +65,7 @@ public:
 		vp->setCamera(camera);
 	}
 	float deltaTime();
+	float timeSinceStart();
 	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT) {}
 
 	//getters

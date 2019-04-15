@@ -1,16 +1,47 @@
 #include "MainMenuManager.h"
 #include <GameObject.h>
+#include <math.h>
+#include <iostream>
+#define PI 3.14159265
 
-
-
-MainMenuManager::MainMenuManager(GameObject* gameObject): BehaviourComponent(gameObject)
+MainMenuManager::MainMenuManager(GameObject* gameObject)
+	: BehaviourComponent(gameObject), playProps("Play"), creditsProps("Credits"), exitProps("Exit"), activeProps("Play")
 {
 	keyboard = MainApp::instance()->getKeyboard();
+	GUIMgr = GUIManager::instance();
+	titleImage = GUIMgr->getImage("Title");
+	titleWidth = titleImage->getWidth();
+	titleHeight = titleImage->getHeight();
+	titleX = titleImage->getPosition().left;
+	titleY = titleImage->getPosition().top;
+	titleAmplitude = 0;
+	titleSinPeriod = 0;
+	activeButton = GUIMgr->getImage("Play");
 }
 
 
 MainMenuManager::~MainMenuManager()
 {
+}
+
+void MainMenuManager::setButtonSinPeriod(float sinP)
+{
+	buttonSinPeriod = sinP;
+}
+
+void MainMenuManager::setButtonAmplitude(float amplitude)
+{
+	buttonAmplitude = amplitude;
+}
+
+void MainMenuManager::setTitleSinPeriod(float sinP)
+{
+	titleSinPeriod = sinP;
+}
+
+void MainMenuManager::setTitleAmplitude(float amplitude)
+{
+	titleAmplitude = amplitude;
 }
 
 void MainMenuManager::Update(float t)
@@ -33,7 +64,8 @@ void MainMenuManager::Update(float t)
 		handleStates();
 		lastKey = OIS::KC_S;
 	}
-	
+	titleAnimation();
+	buttonAnimation();
 }
 void MainMenuManager::handleStates()
 {
@@ -41,22 +73,52 @@ void MainMenuManager::handleStates()
 	else if (state > 2) state = 0;
 	if (state == 0) //PLAY
 	{
-		GUIManager::instance()->getImage("Play")->setImageTexture("PlaySelected.png");
-		GUIManager::instance()->getImage("Credits")->setImageTexture("CreditsUnSelected.png");
-		GUIManager::instance()->getImage("Exit")->setImageTexture("ExitUnSelected.png");
+		activeButton = GUIMgr->getImage("Play");
+		activeProps = playProps;
+		GUIMgr->getImage("Play")->setImageTexture("PlaySelected.png");
+		GUIMgr->getImage("Credits")->setImageTexture("CreditsUnSelected.png");
+		GUIMgr->getImage("Exit")->setImageTexture("ExitUnSelected.png");
 	}
 	else if(state == 1) //CREDITS
 	{
-		GUIManager::instance()->getImage("Play")->setImageTexture("PlayUnSelected.png");
-		GUIManager::instance()->getImage("Credits")->setImageTexture("CreditsSelected.png");
-		GUIManager::instance()->getImage("Exit")->setImageTexture("ExitUnSelected.png");
+		GUIMgr->getImage("Play")->setImageTexture("PlayUnSelected.png");
+		GUIMgr->getImage("Credits")->setImageTexture("CreditsSelected.png");
+		activeButton = GUIMgr->getImage("Credits");
+		activeProps = creditsProps;
+		GUIMgr->getImage("Exit")->setImageTexture("ExitUnSelected.png");
 	}
 	else if (state == 2) //EXIT
 	{
-		GUIManager::instance()->getImage("Play")->setImageTexture("PlayUnSelected.png");
-		GUIManager::instance()->getImage("Credits")->setImageTexture("CreditsUnSelected.png");
-		GUIManager::instance()->getImage("Exit")->setImageTexture("ExitSelected.png");
+		GUIMgr->getImage("Play")->setImageTexture("PlayUnSelected.png");
+		GUIMgr->getImage("Credits")->setImageTexture("CreditsUnSelected.png");
+		GUIMgr->getImage("Exit")->setImageTexture("ExitSelected.png");
+		activeButton = GUIMgr->getImage("Exit");
+		activeProps = exitProps;
 	}
+}
+
+void MainMenuManager::buttonAnimation()
+{
+	//El título se hace grande siguiendo una funcion senoidal
+	int w = activeProps.w + buttonAmplitude * sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
+	int h = activeProps.h + buttonAmplitude * sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
+	//La x y la y se tienen que mover de acuerdo al tamaño para que el título crezca desde el centro
+	int x = activeProps.x + buttonAmplitude / 2 * -sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
+	int y = activeProps.y + buttonAmplitude / 2 * -sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
+	activeButton->setSize(w, h);
+	activeButton->setPosition(x, y);
+}
+
+void MainMenuManager::titleAnimation()
+{
+	//El título se hace grande siguiendo una funcion senoidal
+	int w = titleWidth + titleAmplitude * sin(MainApp::instance()->timeSinceStart()*titleSinPeriod);
+	int h = titleHeight + titleAmplitude * sin(MainApp::instance()->timeSinceStart()*titleSinPeriod);
+	//La x y la y se tienen que mover de acuerdo al tamaño para que el título crezca desde el centro
+	int x = titleX + titleAmplitude/2 * -sin(MainApp::instance()->timeSinceStart()*titleSinPeriod);
+	int y = titleY + titleAmplitude/2 * -sin(MainApp::instance()->timeSinceStart()*titleSinPeriod);
+	titleImage->setSize(w, h);
+	titleImage->setPosition(x, y);
 }
 
 

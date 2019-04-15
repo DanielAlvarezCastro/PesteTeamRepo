@@ -166,6 +166,11 @@ float MainApp::deltaTime()
 	return time->deltaTime();
 }
 
+float MainApp::timeSinceStart()
+{
+	return time->timeSinceStart();
+}
+
 Ogre::SceneManager * MainApp::getCurrentSceneMgr()
 {
 	return sceneMC->currentScene()->getSceneManager();

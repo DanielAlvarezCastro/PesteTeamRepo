@@ -1,5 +1,26 @@
 {
+	"Camera":[
+		{
+			"Name" : "CameraOb",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,80],			
+			"Components" : [
+				{
+					"Name" : "Camera",
+					"NearClipDistance" : 5
+				}
+			]
+		}	
+	],
 	"GUI": [
+	{
+		"Name" : "TitleCircle",
+		"Type" : "ImageBox",		
+		"Position" : [200,0],
+		"Size" : [400,333],
+		"Src" : "CircleLogo.png"
+	},
 	{
 		"Name" : "Title",
 		"Type" : "ImageBox",		
@@ -7,6 +28,7 @@
 		"Size" : [400,333],
 		"Src" : "TitleLogo.png"
 	},
+	
 	{
 		"Name" : "Play",
 		"Type" : "ImageBox",		
@@ -29,19 +51,7 @@
 		"Src" : "ExitUnSelected.png"
 	}
 	],
-    "GameObjects": [
-		{
-			"Name" : "CameraOb",
-			"Type" : "None",
-			"Mesh" : "None",
-			"Position" : [0,0,80],			
-			"Components" : [
-				{
-					"Name" : "Camera",
-					"NearClipDistance" : 5
-				}
-			]
-		},		
+    "GameObjects": [			
 		{
 			"Name" : "LightOb1",
 			"Type" : "None",
@@ -61,7 +71,11 @@
 			"Position" : [0,0,0],
 			"Components" : [
 				{
-					"Name" : "MainMenuManager"
+					"Name" : "MainMenuManager",
+					"TitleAmplitude" : 5,
+					"TitleSinPeriod" : 0.003,
+					"ButtonAmplitude" : 5,
+					"ButtonSinPeriod" : 0.003
 				}
 			]
 		}

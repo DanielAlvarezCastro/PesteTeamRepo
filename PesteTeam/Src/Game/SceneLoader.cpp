@@ -65,6 +65,22 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	scene->createScene("primary");
 	scenesMap.insert(pair<std::string, Scene*>(sceneName, scene));
 
+	//Primero carga la cámara para evitar conflictos con la inicialización de MyGUI
+	for (json::iterator it = scene_json["Camera"].begin(); it != scene_json["Camera"].end(); ++it) {
+		std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
+		GameObject* go = createGameObject((*it), position, scene);
+		addComponents((*it)["Components"], go, scene);
+	}
+	//Set del viewport
+	MainApp::instance()->setupViewport(scene->getCamera());
+
+	//Itera sobre los elementos del GUI
+	for (json::iterator it = scene_json["GUI"].begin(); it != scene_json["GUI"].end(); ++it) {
+		GUIManager::instance()->initScene(scene);
+		createGUIObject(*it);
+	}
+
+
 	//Itera sobre los gameobjects en el json de la escena
 	for (json::iterator it = scene_json["GameObjects"].begin(); it != scene_json["GameObjects"].end(); ++it) {
 
@@ -83,17 +99,8 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 			GameObject* go= createGameObject((*it), position, scene);
 			addComponents((*it)["Components"], go, scene);
 		}
-	}
-	//Set del viewport
-	MainApp::instance()->setupViewport(scene->getCamera());
-
-
-
-	//Itera sobre los elementos del GUI
-	for (json::iterator it = scene_json["GUI"].begin(); it != scene_json["GUI"].end(); ++it) {
-		GUIManager::instance()->initScene(scene);
-		createGUIObject(*it);
-	}
+	}	
+	
 	//Cierra el archivo de la escena
 	sceneFile.close();
 	std::cout << sceneName << " cargado con exito!" << std::endl;
@@ -338,8 +345,16 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			scene->addComponent(pc);
 		}
 		else if (componentName == "MainMenuManager") {
-			MainMenuManager* pc = new MainMenuManager(go);
-			scene->addComponent(pc);
+			int titleAmp = (*itComponent)["TitleAmplitude"];
+			float titleSinPeriod = (*itComponent)["TitleSinPeriod"];
+			int buttonAmp = (*itComponent)["ButtonAmplitude"];
+			float buttonSinPeriod = (*itComponent)["ButtonSinPeriod"];
+			MainMenuManager* MMM = new MainMenuManager(go);
+			MMM->setTitleAmplitude(titleAmp);
+			MMM->setTitleSinPeriod(titleSinPeriod);
+			MMM->setButtonAmplitude(buttonAmp);
+			MMM->setButtonSinPeriod(buttonSinPeriod);
+			scene->addComponent(MMM);
 		}
 	}	
 }
