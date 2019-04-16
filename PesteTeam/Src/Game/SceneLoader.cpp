@@ -235,9 +235,10 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GUIManager::instance()->initScene(scene);
 
-	MyGUI::ImageBox* b = GUIManager::instance()->createImage("CircleLogo.png", 0, 0, 200, 200, "ImageBox", "Circulo.png");
+	MyGUI::ImageBox* b = GUIManager::instance()->createImage("HealthBarBlue.png", 200, 20, 400, 40, "ImageBox", "HealthBar");
 	scene->addGUIObject(b);
-	
+	MyGUI::ImageBox* b2 = GUIManager::instance()->createImage("HealthBarFront.png", 200, 20, 400, 40, "ImageBox", "HealthBarFront");
+	scene->addGUIObject(b2);
 	
 
 	scenesMap.insert(pair<std::string, Scene*>("TestScene", scene));

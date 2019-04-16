@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\Game\CameraMovement.cpp" />
+    <ClCompile Include="..\..\Src\Game\GameGUI.cpp" />
     <ClCompile Include="..\..\Src\Game\GameSceneManager.cpp" />
     <ClCompile Include="..\..\Src\Game\main.cpp" />
     <ClCompile Include="..\..\Src\Game\MainMenuManager.cpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Game\CameraMovement.h" />
+    <ClInclude Include="..\..\Src\Game\GameGUI.h" />
     <ClInclude Include="..\..\Src\Game\GameSceneManager.h" />
     <ClInclude Include="..\..\Src\Game\json.hpp" />
     <ClInclude Include="..\..\Src\Game\MainMenuManager.h" />
