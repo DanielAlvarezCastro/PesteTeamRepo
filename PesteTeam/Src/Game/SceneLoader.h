@@ -25,6 +25,7 @@ public:
 	Scene* loadSceneFromMemory(std::string sceneName, Scene* scene);
 	bool sceneAlreadyLoaded(std::string sceneName);
 	bool loadTestScene(Scene* scene);
+	void deleteScene(std::string sceneName);
 
 	GameObject* createGameObject(json gameObject_json, std::vector<float> position, Scene* scene);
 	void createGUIObject(json gui_json, Scene* scene);

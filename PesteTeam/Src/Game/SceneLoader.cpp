@@ -246,6 +246,11 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	return true;
 }
 
+void SceneLoader::deleteScene(std::string sceneName)
+{
+	scenesMap.erase(sceneName);
+}
+
 GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<float> position, Scene* scene)
 {
 	GameObject* ob = new GameObject();
