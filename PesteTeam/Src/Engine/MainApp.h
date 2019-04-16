@@ -59,6 +59,7 @@ public:
 	bool runGame();
 
 	void AddScene(Scene* scene);
+	void QuitScene();
 	void setupViewport(Camera* camera);
 	void addViewport(Ogre::Camera* camera);
 	void changeCamera(Ogre::Camera* camera) {

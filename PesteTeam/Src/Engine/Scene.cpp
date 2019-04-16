@@ -12,7 +12,7 @@ Scene::~Scene()
 
 void Scene::createScene(String sceneName)
 {	
-	//mSceneMgr->setSkyDome(true, "Test/SpaceDome",5, 1.0);
+	name = sceneName;
 	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox", 10);
 }
 

@@ -64,6 +64,18 @@ void MainMenuManager::Update(float t)
 		handleStates();
 		lastKey = OIS::KC_S;
 	}
+	if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT)) {
+		if (state == 0) {
+			MainApp::instance()->getCurrentScene()->hideGUI();
+			GameSceneManager::instance()->LoadScene("TestScene");
+		}
+		else if (state == 1) {
+
+		}
+		else if (state == 2) {
+			MainApp::instance()->closeApp();
+		}
+	}
 	titleAnimation();
 	buttonAnimation();
 }

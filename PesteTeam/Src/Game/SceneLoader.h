@@ -22,11 +22,12 @@ public:
 	SceneLoader(std::string scenesPath);
 	bool loadPrefabsFromFile();
 	bool loadSceneFromFile(std::string sceneName, Scene* scene);
-
+	Scene* loadSceneFromMemory(std::string sceneName, Scene* scene);
+	bool sceneAlreadyLoaded(std::string sceneName);
 	bool loadTestScene(Scene* scene);
 
 	GameObject* createGameObject(json gameObject_json, std::vector<float> position, Scene* scene);
-	void createGUIObject(json gui_json);
+	void createGUIObject(json gui_json, Scene* scene);
 	void addComponents(json components_json, GameObject* go, Scene* scene);
 	Scene* getScene(std::string sceneName);
 	~SceneLoader();

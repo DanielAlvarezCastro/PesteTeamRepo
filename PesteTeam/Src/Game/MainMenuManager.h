@@ -3,6 +3,8 @@
 #include <MainApp.h>
 #include <GUIManager.h>
 #include "Messages.h"
+#include "GameSceneManager.h"
+
 class MainMenuManager :
 	public BehaviourComponent
 {

@@ -31,8 +31,22 @@ bool GameSceneManager::LoadGame()
 bool GameSceneManager::LoadScene(string sceneName)
 {
 	Scene* escena = new Scene();
-	MainApp::instance()->AddScene(escena);	
-	if (!loader->loadSceneFromFile(sceneName, escena))
-		return false;
-	
+	if (loader->sceneAlreadyLoaded(sceneName)) {
+		escena = loader->loadSceneFromMemory(sceneName, escena);
+	}
+	else {
+		MainApp::instance()->AddScene(escena);
+		if (!loader->loadSceneFromFile(sceneName, escena))
+			return false;
+	}
+	escena->showGUI();
+}
+
+void GameSceneManager::CloseScene()
+{
+	MainApp::instance()->getCurrentScene()->hideGUI();
+	MainApp::instance()->QuitScene();
+	Scene* scene = MainApp::instance()->getCurrentScene();
+	string sceneName = scene->getName();
+	LoadScene(sceneName);
 }

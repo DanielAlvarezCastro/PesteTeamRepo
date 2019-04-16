@@ -142,6 +142,9 @@ void MainApp::AddScene(Scene* scene)
 {
 	sceneMC->addScene(scene);
 }
+void MainApp::QuitScene() {
+	sceneMC->delScene();	
+}
 
 void MainApp::setupViewport(Camera* camera)
 {

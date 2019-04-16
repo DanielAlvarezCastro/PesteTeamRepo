@@ -1,6 +1,8 @@
+
 {
-    "GameObjects": [
-		{
+	"Camera" : 
+		[
+			{
 			"Name" : "CameraOb",
 			"Type" : "None",
 			"Mesh" : "None",
@@ -8,14 +10,14 @@
 			"Components" : [
 				{
 					"Name" : "Camera",
+					"CameraName" : "Camera2",
 					"NearClipDistance" : 5
-				},
-				{
-					"Name" : "CameraMovement",
-					"GameObject": "Player"
 				}
 			]
-		},
+		}
+		],
+    "GameObjects": [
+		
 		{
 			"Name" : "LightOb1",
 			"Type" : "None",
@@ -34,5 +36,14 @@
 			"Mesh" : "cube.mesh",
 			"Position" : [0,0,0]
 		}		
+	],
+	"GUI": [
+	{
+		"Name" : "Title2",
+		"Type" : "ImageBox",		
+		"Position" : [200,0],
+		"Size" : [400,333],
+		"Src" : "TitleLogo.png"
+	}
 	]
 }

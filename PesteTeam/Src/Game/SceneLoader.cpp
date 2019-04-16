@@ -44,6 +44,7 @@ bool SceneLoader::loadPrefabsFromFile()
 
 bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 {
+	scene->createScene(sceneName);
 	if (sceneName == "TestScene") {
 		loadTestScene(scene);
 		return true;
@@ -62,7 +63,6 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	json scene_json;
 	sceneFile >> scene_json;
 
-	scene->createScene("primary");
 	scenesMap.insert(pair<std::string, Scene*>(sceneName, scene));
 
 	//Primero carga la cámara para evitar conflictos con la inicialización de MyGUI
@@ -74,10 +74,10 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	//Set del viewport
 	MainApp::instance()->setupViewport(scene->getCamera());
 
+	GUIManager::instance()->initScene(scene);
 	//Itera sobre los elementos del GUI
 	for (json::iterator it = scene_json["GUI"].begin(); it != scene_json["GUI"].end(); ++it) {
-		GUIManager::instance()->initScene(scene);
-		createGUIObject(*it);
+		createGUIObject(*it, scene);
 	}
 
 
@@ -88,7 +88,7 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 		std::string prefabType = (*it)["Type"].get<std::string>();
 		std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
 		//Si el tipo de prefab existe entonces crea el gameobject a partir del diccionario
-		if (prefabsMap.find(prefabType)!=prefabsMap.end()) {
+		if (prefabsMap.find(prefabType) != prefabsMap.end()) {
 			json prefab_json = json::parse(prefabsMap[(*it)["Type"]]);
 			GameObject* go = createGameObject(prefab_json, position, scene);
 			scene->addGameObject(go);
@@ -96,22 +96,39 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 		}
 		else {
 			//Si no existe entonces lo crea leyendo el json de la escena
-			GameObject* go= createGameObject((*it), position, scene);
+			GameObject* go = createGameObject((*it), position, scene);
 			addComponents((*it)["Components"], go, scene);
 		}
-	}	
-	
+	}
+
 	//Cierra el archivo de la escena
 	sceneFile.close();
 	std::cout << sceneName << " cargado con exito!" << std::endl;
 	return true;
 }
 
+Scene* SceneLoader::loadSceneFromMemory(std::string sceneName, Scene * scene)
+{
+	scene = scenesMap[sceneName];
+	MainApp::instance()->setupViewport(scene->getCamera());
+	GUIManager::instance()->initScene(scene);
+	return scene;
+}
+
+bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
+{
+
+	//Si el nombre de la escena existe eso quiere decir que ya está cargada
+	if (scenesMap.find(sceneName) != scenesMap.end()) {
+		//scene = scenesMap[sceneName];
+		return true;
+	}
+	else return false;
+}
+
 //Escenas de prueba para meterlas desde c�digo aqu�
 bool SceneLoader::loadTestScene(Scene* scene)
 {
-	scene->createScene("primary");
-
 	GameObject* pointer = new GameObject();
 	pointer->createEmptyEntity("Pointer", scene);
 	pointer->setPosition(Vec3(0, 40, 0));
@@ -198,11 +215,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
 	scene->addComponent(cM);
-
-	//MeshManager::getSingleton().createPlane("mPlane", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	//	Plane(Ogre::Vector3::UNIT_Y, 0), 12000, 12000, 1, 1, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
-
-
+	   
 	GameObject* planeOb = new GameObject();
 	planeOb->createEntity("FloorGrid.mesh", "Floor", scene);
 	//planeOb->setMaterial("Test/FloorTile");
@@ -219,51 +232,16 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->addGameObject(mountains);
 	Ogre::ColourValue fadeColour(0.0, 0.0, 0.0);
 	scene->getSceneManager()->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
-	/*GameObject* planeOb2 = new GameObject();
-	planeOb2->createEntity("FloorTerrain.mesh", "Floor2", scene);
-	planeOb2->setMaterial("Test/FloorTileLight");
-	planeOb2->setScale(Vec3(1, 1, 1));
-	planeOb2->setPosition(Vec3(0, 0.1, 0));
-	scene->addGameObject(planeOb2);*/
 
-	
+	GUIManager::instance()->initScene(scene);
+
+	MyGUI::ImageBox* b = GUIManager::instance()->createImage("CircleLogo.png", 0, 0, 200, 200, "ImageBox", "Circulo.png");
+	scene->addGUIObject(b);
 	
 	
 
 	scenesMap.insert(pair<std::string, Scene*>("TestScene", scene));
 
-
-	Scene* escena2 = new Scene();
-	escena2->createScene("secondary");
-	GameObject* cameraOb2 = new GameObject();
-	Ogre::Camera* mCamera2 = escena2->getSceneManager()->createCamera("MainCam2");
-	mCamera2->setNearClipDistance(5);
-	cameraOb2->createEmptyEntity("MainCam2", escena2);
-	cameraOb2->attachCamera(mCamera2);
-	cameraOb2->setPosition(Vec3(0, 0, 80));
-	cameraOb2->lookAt(Vec3(0, 0, -300), Ogre::Node::TS_WORLD);
-
-	//GameObject* cubito = new GameObject();
-	//cubito->createEntity("cube.mesh", "Cubito", escena2);
-	//cubito->setScale(Vec3(0.2, 0.2, 0.2));
-	//cubito->setPosition(Vec3(0, -7, 5));
-	//escena2->addGameObject(cubito);
-	escena2->addCamera(mCamera2);
-
-	escena2->addGameObject(cameraOb2);
-
-
-	Ogre::Light* luz2 = escena2->getSceneManager()->createLight("Luz2");
-	luz2->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz2->setDiffuseColour(0.75, 0.75, 0.75);
-
-	GameObject* l2Ob = new GameObject();
-	l2Ob->createEmptyEntity("mLight2", escena2);
-	l2Ob->attachLight(luz2);
-
-	escena2->addGameObject(l2Ob);
-
-	scenesMap.insert(pair<std::string, Scene*>("Scene2", escena2));
 
 	return true;
 }
@@ -290,7 +268,7 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<floa
 	return ob;
 }
 
-void SceneLoader::createGUIObject(json gui_json)
+void SceneLoader::createGUIObject(json gui_json, Scene* scene)
 {
 	//Common gui attributes
 	std::string guiName = gui_json["Name"].get<std::string>();
@@ -299,7 +277,8 @@ void SceneLoader::createGUIObject(json gui_json)
 	std::vector<float> size = gui_json["Size"].get<std::vector<float>>();
 	if (guiType == "ImageBox") {
 		std::string source = gui_json["Src"].get<std::string>();
-		GUIManager::instance()->createImage(source, position[0], position[1], size[0], size[1], guiType, guiName);
+		MyGUI::ImageBox* b = GUIManager::instance()->createImage(source, position[0], position[1], size[0], size[1], guiType, guiName);
+		scene->addGUIObject(b);
 	}
 	else if (guiType == "TextBox") {
 		std::string caption = gui_json["Caption"].get<std::string>();
@@ -318,7 +297,8 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			//Hacer new Healthscript() y a�adirselo al go
 		}
 		else if (componentName == "Camera") {
-			Ogre::Camera* cam = scene->getSceneManager()->createCamera("mCamera");
+			std::string cameraName = (*itComponent)["CameraName"].get<std::string>();
+			Ogre::Camera* cam = scene->getSceneManager()->createCamera(cameraName);
 			int dist = (*itComponent)["NearClipDistance"].get<int>();
 			cam->setNearClipDistance(dist);			
 			go->attachCamera(cam);

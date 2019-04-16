@@ -64,6 +64,6 @@ void PlayerController::Update(float t)
 		gameObject->translate(euler.forward() * 60* t);
 	}
 	if (keyboard->isKeyDown(OIS::KC_P)) {
-		GameSceneManager::instance()->LoadScene("Scene2");
+		GameSceneManager::instance()->CloseScene();
 	}
 }

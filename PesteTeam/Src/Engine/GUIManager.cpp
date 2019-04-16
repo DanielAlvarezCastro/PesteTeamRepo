@@ -16,10 +16,11 @@ void GUIManager::createTextbox(string text, int x, int y, int w, int h, string s
 	t->setFontHeight(fontHeight);
 }
 
-void GUIManager::createImage(string fileName, int x, int y, int w, int h, string skinName, string name)
+MyGUI::ImageBox* GUIManager::createImage(string fileName, int x, int y, int w, int h, string skinName, string name)
 {
 	MyGUI::ImageBox* image = MyGUI::Gui::getInstance().createWidget<MyGUI::ImageBox>("ImageBox", MyGUI::IntCoord(x,y,w,h), MyGUI::Align::Default, "Main", name);
 	image->setImageTexture(fileName);
+	return image;
 }
 
 MyGUI::TextBox * GUIManager::getTextBox(string name)
