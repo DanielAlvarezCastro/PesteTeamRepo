@@ -27,6 +27,7 @@
     <ClCompile Include="..\..\Src\Game\PlayerController.cpp" />
     <ClCompile Include="..\..\Src\Game\SceneLoader.cpp" />
     <ClCompile Include="..\..\Src\Game\ShipController.cpp" />
+    <ClCompile Include="..\..\Src\Game\ShipSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Game\CameraMovement.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="..\..\Src\Game\PlayerController.h" />
     <ClInclude Include="..\..\Src\Game\SceneLoader.h" />
     <ClInclude Include="..\..\Src\Game\ShipController.h" />
+    <ClInclude Include="..\..\Src\Game\ShipSelection.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

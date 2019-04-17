@@ -9,7 +9,8 @@
 				{
 					"Name" : "Camera",
 					"CameraName" : "CameraMain",
-					"NearClipDistance" : 5
+					"NearClipDistance" : 5,
+					"LookAt" : [0,0,0]
 				}
 			]
 		}	

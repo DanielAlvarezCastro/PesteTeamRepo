@@ -6,6 +6,7 @@
 #include "ShipController.h"
 #include "MainMenuManager.h"
 #include <vector>
+#include "ShipSelection.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -69,6 +70,7 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	for (json::iterator it = scene_json["Camera"].begin(); it != scene_json["Camera"].end(); ++it) {
 		std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
 		GameObject* go = createGameObject((*it), position, scene);
+		scene->addGameObject(go);
 		addComponents((*it)["Components"], go, scene);
 	}
 	//Set del viewport
@@ -97,6 +99,7 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 		else {
 			//Si no existe entonces lo crea leyendo el json de la escena
 			GameObject* go = createGameObject((*it), position, scene);
+			scene->addGameObject(go);
 			addComponents((*it)["Components"], go, scene);
 		}
 	}
@@ -136,8 +139,15 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->addGameObject(pointer);
 
 	GameObject* Nave = new GameObject();
-	Nave->createEntity("SXR-72.mesh", "Player", scene);
-	Nave->setScale(Vec3(3, 3, 3));
+	Nave->createEntity(playerMesh, "Player", scene);
+	if (playerMesh == "SkyGrasper.mesh") {
+		Nave->setScale(Vec3(1, 1, 1));
+
+	}
+	else if (playerMesh == "SXR-72.mesh") {
+		Nave->setScale(Vec3(3, 3, 3));
+
+	}
 	Nave->asingFather(pointer);
 	Nave->setPosition(Vec3(-1, 0, 0));
 	scene->addGameObject(Nave);
@@ -252,11 +262,17 @@ void SceneLoader::deleteScene(std::string sceneName)
 	scenesMap.erase(sceneName);
 }
 
+void SceneLoader::setPlayerMesh(std::string meshName)
+{
+	playerMesh = meshName;
+}
+
 GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<float> position, Scene* scene)
 {
 	GameObject* ob = new GameObject();
 	std::string name= gameObject_json["Name"].get<std::string>();
 	std::string meshName = gameObject_json["Mesh"].get<std::string>();
+	//Si no tiene mesh crea una entidad vacía
 	if (meshName == "None") {
 		ob->createEmptyEntity(name, scene);
 	}
@@ -264,13 +280,18 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<floa
 
 	Vec3 pos(position[0], position[1], position[2]);
 	ob->setPosition(pos);
-
+	//Si tiene el parámetro escala lo asigna
 	if (gameObject_json.find("Scale") != gameObject_json.end()) {
 		std::vector<float> scale = gameObject_json["Scale"].get<std::vector<float>>();
 		Vec3 sc(scale[0], scale[1], scale[2]);
 		ob->setScale(sc);
 	}
-
+	//Si tiene parámetro father se lo asigna
+	if (gameObject_json.find("Father") != gameObject_json.end()) {
+		std::string pName = gameObject_json["Father"];
+		GameObject* father = scene->getGameObject(pName);
+		ob->asingFather(father);
+	}
 	return ob;
 }
 
@@ -305,9 +326,11 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 		else if (componentName == "Camera") {
 			std::string cameraName = (*itComponent)["CameraName"].get<std::string>();
 			Ogre::Camera* cam = scene->getSceneManager()->createCamera(cameraName);
+			std::vector<int> look = (*itComponent)["LookAt"].get<std::vector<int>>();
 			int dist = (*itComponent)["NearClipDistance"].get<int>();
 			cam->setNearClipDistance(dist);			
 			go->attachCamera(cam);
+			go->lookAt(Vec3(look[0], look[1], look[2]));
 			scene->addCamera(cam);
 		}
 		else if (componentName == "CameraMovement") {
@@ -342,6 +365,23 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			MMM->setButtonAmplitude(buttonAmp);
 			MMM->setButtonSinPeriod(buttonSinPeriod);
 			scene->addComponent(MMM);
+		}
+		else if (componentName == "ShipSelection") {
+			int shipDist = (*itComponent)["ShipDistance"];
+			std::string circlePivot = (*itComponent)["Pivot"];
+			GameObject* ob = scene->getGameObject(circlePivot);
+			ShipSelection* SS = new ShipSelection(go, shipDist, ob);
+			std::vector<std::string> names = (*itComponent)["Models"];
+			for (auto modelName:names) {
+				GameObject* ob = scene->getGameObject(modelName);
+				SS->addShipModel(ob);
+			}
+			std::vector<std::string> meshes = (*itComponent)["Meshes"];
+			for (auto mesh : meshes) {
+				SS->addShipMesh(mesh);
+			}
+			SS->setInitialShipsPosition();
+			scene->addComponent(SS);
 		}
 	}	
 }

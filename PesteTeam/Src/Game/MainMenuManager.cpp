@@ -67,7 +67,7 @@ void MainMenuManager::Update(float t)
 	if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT)) {
 		if (state == 0) {
 			MainApp::instance()->getCurrentScene()->hideGUI();
-			GameSceneManager::instance()->LoadScene("TestScene");
+			GameSceneManager::instance()->LoadScene("ShipSelection");
 		}
 		else if (state == 1) {
 

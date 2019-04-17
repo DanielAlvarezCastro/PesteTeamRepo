@@ -10,6 +10,7 @@ private:
 public:
 	GameSceneManager();
 	~GameSceneManager();
+	void setPlayerMesh(string meshName);
 	bool LoadGame();
 	bool LoadScene(string sceneName);
 	void CloseScene();

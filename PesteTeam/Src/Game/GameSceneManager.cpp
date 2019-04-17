@@ -10,6 +10,10 @@ GameSceneManager::GameSceneManager()
 GameSceneManager::~GameSceneManager()
 {
 }
+void GameSceneManager::setPlayerMesh(string meshName)
+{
+	loader->setPlayerMesh(meshName);
+}
 //Carga las escenas a través del SceneLoader que lee los json
 bool GameSceneManager::LoadGame()
 {

@@ -100,3 +100,8 @@ void GameObject::attachLight(Ogre::Light * lig)
 void GameObject::setMaterial(std::string materialName) {
 	ogreEntity->setMaterialName(materialName);
 }
+
+string GameObject::getMeshName()
+{
+	return ogreEntity->getMesh()->getName();
+}
