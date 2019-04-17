@@ -66,13 +66,12 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 
 	scenesMap.insert(pair<std::string, Scene*>(sceneName, scene));
 
+	//Se cargan las opciones de la escena
 	//Primero carga la cámara para evitar conflictos con la inicialización de MyGUI
-	for (json::iterator it = scene_json["Camera"].begin(); it != scene_json["Camera"].end(); ++it) {
-		std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
-		GameObject* go = createGameObject((*it), position, scene);
-		scene->addGameObject(go);
-		addComponents((*it)["Components"], go, scene);
-	}
+	std::string cameraName = scene_json["Camera"].get<std::string>();
+	Ogre::Camera* cam = scene->getSceneManager()->createCamera(cameraName);
+	scene->addCamera(cam);
+	
 	//Set del viewport
 	MainApp::instance()->setupViewport(scene->getCamera());
 
@@ -324,14 +323,14 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			//Hacer new Healthscript() y a�adirselo al go
 		}
 		else if (componentName == "Camera") {
-			std::string cameraName = (*itComponent)["CameraName"].get<std::string>();
-			Ogre::Camera* cam = scene->getSceneManager()->createCamera(cameraName);
+			//Atacheamos un gameobject a la cámara creada
+			std::string cameraName = (*itComponent)["CameraName"];
+			Ogre::Camera* cam = scene->getSceneManager()->getCamera(cameraName);
 			std::vector<int> look = (*itComponent)["LookAt"].get<std::vector<int>>();
 			int dist = (*itComponent)["NearClipDistance"].get<int>();
 			cam->setNearClipDistance(dist);			
 			go->attachCamera(cam);
-			go->lookAt(Vec3(look[0], look[1], look[2]));
-			scene->addCamera(cam);
+			go->lookAt(Vec3(look[0], look[1], look[2]));			
 		}
 		else if (componentName == "CameraMovement") {
 			std::string pName = (*itComponent)["GameObject"];

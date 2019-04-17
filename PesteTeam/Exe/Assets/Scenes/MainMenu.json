@@ -1,57 +1,43 @@
 {
-	"Camera":[
-		{
-			"Name" : "CameraOb",
-			"Type" : "None",
-			"Mesh" : "None",
-			"Position" : [0,0,80],			
-			"Components" : [
-				{
-					"Name" : "Camera",
-					"CameraName" : "CameraMain",
-					"NearClipDistance" : 5,
-					"LookAt" : [0,0,0]
-				}
-			]
-		}	
-	],
-	"GUI": [
-	{
-		"Name" : "TitleCircle",
-		"Type" : "ImageBox",		
-		"Position" : [200,0],
-		"Size" : [400,333],
-		"Src" : "CircleLogo.png"
-	},
-	{
-		"Name" : "Title",
-		"Type" : "ImageBox",		
-		"Position" : [200,0],
-		"Size" : [400,333],
-		"Src" : "TitleLogo.png"
-	},
 	
-	{
-		"Name" : "Play",
-		"Type" : "ImageBox",		
-		"Position" : [300,300],
-		"Size" : [200,100],
-		"Src" : "PlaySelected.png"
-	},
-	{
-		"Name" : "Credits",
-		"Type" : "ImageBox",		
-		"Position" : [300,400],
-		"Size" : [200,100],
-		"Src" : "CreditsUnSelected.png"
-	},
-	{
-		"Name" : "Exit",
-		"Type" : "ImageBox",		
-		"Position" : [300,500],
-		"Size" : [200,100],
-		"Src" : "ExitUnSelected.png"
-	}
+	"Camera" : "CameraMain"
+	,
+	"GUI": [
+		{
+			"Name" : "TitleCircle",
+			"Type" : "ImageBox",		
+			"Position" : [200,0],
+			"Size" : [400,333],
+			"Src" : "CircleLogo.png"
+		},
+		{
+			"Name" : "Title",
+			"Type" : "ImageBox",		
+			"Position" : [200,0],
+			"Size" : [400,333],
+			"Src" : "TitleLogo.png"
+		},		
+		{
+			"Name" : "Play",
+			"Type" : "ImageBox",		
+			"Position" : [300,300],
+			"Size" : [200,100],
+			"Src" : "PlaySelected.png"
+		},
+		{
+			"Name" : "Credits",
+			"Type" : "ImageBox",		
+			"Position" : [300,400],
+			"Size" : [200,100],
+			"Src" : "CreditsUnSelected.png"
+		},
+		{
+			"Name" : "Exit",
+			"Type" : "ImageBox",		
+			"Position" : [300,500],
+			"Size" : [200,100],
+			"Src" : "ExitUnSelected.png"
+		}
 	],
     "GameObjects": [			
 		{
@@ -78,6 +64,20 @@
 					"TitleSinPeriod" : 0.003,
 					"ButtonAmplitude" : 5,
 					"ButtonSinPeriod" : 0.003
+				}
+			]
+		},
+		{
+			"Name" : "CameraOb",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,80],			
+			"Components" : [
+				{
+					"Name" : "Camera",
+					"CameraName" : "CameraMain",
+					"NearClipDistance" : 5,
+					"LookAt" : [0,0,0]
 				}
 			]
 		}
