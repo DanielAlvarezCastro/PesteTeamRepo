@@ -379,6 +379,10 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			for (auto mesh : meshes) {
 				SS->addShipMesh(mesh);
 			}
+			std::vector<std::string> titles = (*itComponent)["Titles"];
+			for (auto title : titles) {
+				SS->addShipTitle(title);
+			}
 			SS->setInitialShipsPosition();
 			scene->addComponent(SS);
 		}

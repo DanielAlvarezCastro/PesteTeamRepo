@@ -60,7 +60,7 @@
 			"Components" : [
 				{
 					"Name" : "MainMenuManager",
-					"TitleAmplitude" : 5,
+					"TitleAmplitude" : 0,
 					"TitleSinPeriod" : 0.003,
 					"ButtonAmplitude" : 5,
 					"ButtonSinPeriod" : 0.003

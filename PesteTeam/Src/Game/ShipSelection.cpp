@@ -42,6 +42,34 @@ void ShipSelection::addShipModel(GameObject * go)
 	shipsNum++;
 }
 
+void ShipSelection::addShipTitle(string title)
+{
+	titles.push_back(title);
+}
+
+void ShipSelection::updateGUI()
+{
+	if (state >= shipsNum) {
+		state = shipsNum - 1;
+	}
+	else if (state < 0) {
+		state = 0;
+	}
+	if (state == shipsNum - 1) {
+		GUIMgr->getImage("RightArrow")->setImageTexture("UnSelectedArrowR.png");
+	}
+	else {
+		GUIMgr->getImage("RightArrow")->setImageTexture("SelectedArrowR.png");
+	}
+	if (state == 0) {
+		GUIMgr->getImage("LeftArrow")->setImageTexture("UnSelectedArrowL.png");
+	}
+	else {
+		GUIMgr->getImage("LeftArrow")->setImageTexture("SelectedArrowL.png");
+	}
+	GUIMgr->getImage("ShipTitle")->setImageTexture(titles[state]);
+}
+
 ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot)
 	: BehaviourComponent(gameObject), distance(shipDistance), shipsPivot(pivot)
 {
@@ -50,14 +78,9 @@ ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObj
 	initTimer = 0.5;
 }
 
-void ShipSelection::handleStates()
+void ShipSelection::moveShips()
 {
-	if (state >= shipsNum) {
-		state = shipsNum - 1;
-	}
-	else if (state < 0) {
-		state = 0;
-	}
+	
 	//Se desplaza con una velocidad hacia 
 	if (direction != 0 && currentPos < distanceBetweenShips) {
 		Ogre::Vector3 curr = shipsPivot->getPosition();
@@ -93,18 +116,20 @@ void ShipSelection::Update(float t)
 			state--;
 			direction = 1;
 			lastKey = OIS::KC_A;
+			updateGUI();
 		}
 		else if (keyboard->isKeyDown(OIS::KC_D) && lastKey != OIS::KC_D && state<shipsNum-1 && direction==0 ) {
 			//Con D aumenta el estado y rota a la derecha
 			state++;
 			direction = -1;
 			lastKey = OIS::KC_D;
+			updateGUI();
 		}
 		if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT)) {
 			MainApp::instance()->getCurrentScene()->hideGUI();
 			selectShip();
 		}
-		handleStates();
+		moveShips();
 		shipsAnimation();
 	}
 	else {
