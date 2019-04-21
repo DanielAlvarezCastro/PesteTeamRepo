@@ -5,20 +5,22 @@
 
 void ShipSelection::setInitialShipsPosition()
 {
-	//Coloca las naves en el radio de la circunferencia
+	//Coloca automaticamente las naves
 	for (int i = 0; i < ships.size(); i++) {
-		float x = distance * sin(PI*(360 *i/ ships.size()) / 180);
+		float x = -distance * i;
 		float y = ships[i]->getPosition().y;
-		float z = distance * cos(PI*(360 * i / ships.size()) / 180);
-		ships[i]->setPosition(Vec3(x,y,z));
+		float z = distance;
+		ships[i]->setPosition(Vec3(x, y, z));
 	}
-	maxRotation = PI * (360 / shipsNum) / 180;
+	distanceBetweenShips = -distance;
+	speed = 3;
 }
 
 void ShipSelection::shipsAnimation()
 {
+	//Las naves rotan lentamente
 	for (int i = 0; i < ships.size(); i++) {
-		ships[i]->yaw(0.05);
+		ships[i]->yaw(0.03);
 	}
 }
 
@@ -33,37 +35,42 @@ void ShipSelection::addShipMesh(string mesh)
 	meshes.push_back(mesh);
 }
 
+
 void ShipSelection::addShipModel(GameObject * go)
 {
 	ships.push_back(go);
 	shipsNum++;
 }
 
-ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObject* circle)
-	: BehaviourComponent(gameObject), distance(shipDistance), circlePivot(circle)
+ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot)
+	: BehaviourComponent(gameObject), distance(shipDistance), shipsPivot(pivot)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	GUIMgr = GUIManager::instance();
-	initTimer = 1.0;
+	initTimer = 0.5;
 }
 
 void ShipSelection::handleStates()
 {
 	if (state >= shipsNum) {
-		state = 0;
-	}
-	else if (state < 0) {
 		state = shipsNum - 1;
 	}
-	//Rota hasta que llega a la maxRotation que es la posición de reposo
-	if (rotate!=0 && currentRotation < maxRotation) {
-		circlePivot->yaw(rotate*0.15);
-		currentRotation += 0.15;
+	else if (state < 0) {
+		state = 0;
+	}
+	//Se desplaza con una velocidad hacia 
+	if (direction != 0 && currentPos < distanceBetweenShips) {
+		Ogre::Vector3 curr = shipsPivot->getPosition();
+		curr.x += direction * speed;
+		shipsPivot->setPosition(curr);
+
+		currentPos += speed;
 	}
 	else {
-		rotate = 0;
-		currentRotation = 0;
+		direction = 0;
+		currentPos = 0;
 	}
+	
 }
 
 ShipSelection::~ShipSelection()
@@ -82,17 +89,15 @@ void ShipSelection::Update(float t)
 			}
 		}
 		//Cuando pulsas A baja el estado y rota hacia la izquierda
-		if (keyboard->isKeyDown(OIS::KC_A) && lastKey != OIS::KC_A && rotate == 0) {
+		if (keyboard->isKeyDown(OIS::KC_A) && lastKey != OIS::KC_A && state>0 && direction==0) {
 			state--;
-			currentRotation = 0;
-			rotate = 1;
+			direction = 1;
 			lastKey = OIS::KC_A;
 		}
-		else if (keyboard->isKeyDown(OIS::KC_D) && lastKey != OIS::KC_D && rotate == 0) {
+		else if (keyboard->isKeyDown(OIS::KC_D) && lastKey != OIS::KC_D && state<shipsNum-1 && direction==0 ) {
 			//Con D aumenta el estado y rota a la derecha
 			state++;
-			currentRotation = 0;
-			rotate = -1;
+			direction = -1;
 			lastKey = OIS::KC_D;
 		}
 		if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT)) {

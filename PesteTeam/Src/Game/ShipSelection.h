@@ -21,11 +21,12 @@ private:
 	std::vector<string> meshes;
 	int shipsNum=0;
 	float distance = 0;
-	GameObject* circlePivot;
+	float distanceBetweenShips = 0;
+	GameObject* shipsPivot;
 	void shipsAnimation();
-	int rotate = 0;//0 no está rotando, -1 rota a la izquierda y 1 a la derecha
-	float maxRotation = 0.0;
-	float currentRotation = 0.0;
+	int direction = 0;//0 no se está moviendo, -1 mueve a la izquierda y 1 a la derecha
+	float currentPos = 0.0;
+	float speed = 0;
 
 	//Timer para que haya un delay al cargar la pantalla
 	float initTimer = 0.0;
@@ -34,7 +35,7 @@ public:
 	void selectShip();
 	void addShipMesh(string mesh);
 	void addShipModel(GameObject* go);
-	ShipSelection(GameObject* gameObject, float shipDistance, GameObject* circle);
+	ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot);
 	void setInitialShipsPosition();
 	virtual ~ShipSelection();
 	virtual void Update(float t);
