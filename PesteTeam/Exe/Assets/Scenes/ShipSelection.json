@@ -13,14 +13,14 @@
 		"Name" : "LeftArrow",
 		"Type" : "ImageBox",		
 		"Position" : [0,300],
-		"Size" : [100,100],
+		"Size" : [50,50],
 		"Src" : "SelectedArrowL.png"
 	},
 	{
 		"Name" : "RightArrow",
 		"Type" : "ImageBox",		
-		"Position" : [700,300],
-		"Size" : [100,100],
+		"Position" : [750,300],
+		"Size" : [50,50],
 		"Src" : "SelectedArrowR.png"
 	}
 	],
@@ -51,9 +51,9 @@
 			"Position" : [0,0,0]			
 		},
 		{
-			"Name" : "SXR-72Model",
+			"Name" : "SXRVengeanceModel",
 			"Type" : "None",
-			"Mesh" : "SXR-72.mesh",
+			"Mesh" : "SXRVengeance.mesh",
 			"Position" : [0,98,-10],
 			"Scale" : [1,1,1],
 			"Father" : "CirclePivot"
@@ -67,6 +67,14 @@
 			"Father" : "CirclePivot"
 		},
 		{
+			"Name" : "RoyalWaspModel",
+			"Type" : "None",
+			"Mesh" : "RoyalWasp.mesh",
+			"Position" : [0,98,-10],
+			"Scale" : [1,1,1],
+			"Father" : "CirclePivot"
+		},
+		{
 			"Name" : "ShipSelectionManager",
 			"Type" : "None",
 			"Mesh" : "None",
@@ -76,8 +84,8 @@
 					"Name" : "ShipSelection",
 					"ShipDistance" : -12,
 					"Pivot" : "CirclePivot",
-					"Models" : ["SXR-72Model","SkyGrasperModel"],
-					"Meshes" : ["SXR-72.mesh","SkyGrasper.mesh"]
+					"Models" : ["SXRVengeanceModel","SkyGrasperModel", "RoyalWaspModel"],
+					"Meshes" : ["SXRVengeance.mesh","SkyGrasper.mesh", "RoyalWasp.mesh"]
 				}
 			]
 		},

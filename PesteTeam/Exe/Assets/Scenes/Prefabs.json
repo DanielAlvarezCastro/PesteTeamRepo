@@ -9,7 +9,7 @@
         {
             "Name" : "Player",
             "Type" : "Player",
-			"Mesh" : "SXR-72.mesh",
+			"Mesh" : "SXRVengeance.mesh",
 			"Scale" : [2,2,2],
             "Components" : [
 				{

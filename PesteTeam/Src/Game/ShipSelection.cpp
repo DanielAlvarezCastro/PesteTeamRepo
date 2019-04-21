@@ -7,9 +7,9 @@ void ShipSelection::setInitialShipsPosition()
 {
 	//Coloca las naves en el radio de la circunferencia
 	for (int i = 0; i < ships.size(); i++) {
-		float x = distance * sin(PI*(360 / (i+1)) / 180);
+		float x = distance * sin(PI*(360 *i/ ships.size()) / 180);
 		float y = ships[i]->getPosition().y;
-		float z = distance * cos(PI*(360 / (i+1)) / 180);
+		float z = distance * cos(PI*(360 * i / ships.size()) / 180);
 		ships[i]->setPosition(Vec3(x,y,z));
 	}
 	maxRotation = PI * (360 / shipsNum) / 180;
@@ -51,6 +51,9 @@ void ShipSelection::handleStates()
 {
 	if (state >= shipsNum) {
 		state = 0;
+	}
+	else if (state < 0) {
+		state = shipsNum - 1;
 	}
 	//Rota hasta que llega a la maxRotation que es la posición de reposo
 	if (rotate!=0 && currentRotation < maxRotation) {

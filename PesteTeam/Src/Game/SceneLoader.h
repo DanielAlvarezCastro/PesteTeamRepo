@@ -18,7 +18,7 @@ private:
 	std::map<std::string, std::string> prefabsMap;
 	std::string scenesPath;
 	std::map<std::string, Scene*> scenesMap;
-	std::string playerMesh = "SXR-72.mesh";
+	std::string playerMesh = "SXRVengeance.mesh";
 public:
 	SceneLoader(std::string scenesPath);
 	bool loadPrefabsFromFile();

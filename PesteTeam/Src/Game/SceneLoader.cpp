@@ -143,7 +143,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 		Nave->setScale(Vec3(1, 1, 1));
 
 	}
-	else if (playerMesh == "SXR-72.mesh") {
+	else if (playerMesh == "SXRVengeance.mesh" || playerMesh == "RoyalWasp.mesh") {
 		Nave->setScale(Vec3(3, 3, 3));
 
 	}
