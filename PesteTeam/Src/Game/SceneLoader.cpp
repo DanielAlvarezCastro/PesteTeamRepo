@@ -7,6 +7,7 @@
 #include "MainMenuManager.h"
 #include <vector>
 #include "ShipSelection.h"
+#include "TurretBehaviour.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -169,7 +170,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	GameObject* edificio1 = new GameObject();
 	edificio1->createEntity("Building1.mesh", "Edificio1", scene);
 	edificio1->setScale(Vec3(5, 5, 5));
-	edificio1->setPosition(Vec3(0, 0, -500));
+	edificio1->setPosition(Vec3(-300, 0, -500));
 
 	GameObject* edificio2 = new GameObject();
 	edificio2->createEntity("Building2.mesh", "Edificio2", scene);
@@ -186,6 +187,20 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	edificio4->setScale(Vec3(10, 10, 10));
 	edificio4->setPosition(Vec3(900, 0, -500));
 
+	GameObject* turretBase = new GameObject();
+	turretBase->createEntity("TurretBase.mesh", "TurretBase", scene);
+	turretBase->setScale(Vec3(10, 10, 10));
+	turretBase->setPosition(Vec3(0, 0, -400));
+
+	GameObject* turret = new GameObject();
+	turret->createEntity("Turret.mesh", "Turret", scene);
+	turret->setScale(Vec3(10, 10, 10));
+	turret->setPosition(Vec3(0, 20, -400));
+	turret->lookAt(Vec3(-1, 0, 0));
+
+	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
+	scene->addComponent(tB);
+
 	GameObject* cubito2 = new GameObject();
 	cubito2->createEntity("cube.mesh", "Cubito2", scene);
 	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
@@ -194,7 +209,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	cubito2->addRigidbody(rb2);
 	scene->addComponent(rb2);
 
-
+	scene->addGameObject(turret);
+	scene->addGameObject(turretBase);
 	scene->addGameObject(Nave);
 	scene->addGameObject(edificio1);
 	scene->addGameObject(pointer);
