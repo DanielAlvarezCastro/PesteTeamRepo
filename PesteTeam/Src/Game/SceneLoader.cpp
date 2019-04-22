@@ -169,12 +169,22 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	GameObject* edificio1 = new GameObject();
 	edificio1->createEntity("Building1.mesh", "Edificio1", scene);
 	edificio1->setScale(Vec3(5, 5, 5));
-	edificio1->setPosition(Vec3(0, 0, -300));
+	edificio1->setPosition(Vec3(0, 0, -500));
 
 	GameObject* edificio2 = new GameObject();
 	edificio2->createEntity("Building2.mesh", "Edificio2", scene);
 	edificio2->setScale(Vec3(5, 5, 5));
-	edificio2->setPosition(Vec3(100, 0, -100));
+	edificio2->setPosition(Vec3(300, 0, -500));
+
+	GameObject* edificio3 = new GameObject();
+	edificio3->createEntity("Building3.mesh", "Edificio3", scene);
+	edificio3->setScale(Vec3(10, 10, 10));
+	edificio3->setPosition(Vec3(600, 0, -500));
+
+	GameObject* edificio4 = new GameObject();
+	edificio4->createEntity("Building4.mesh", "Edificio4", scene);
+	edificio4->setScale(Vec3(10, 10, 10));
+	edificio4->setPosition(Vec3(900, 0, -500));
 
 	GameObject* cubito2 = new GameObject();
 	cubito2->createEntity("cube.mesh", "Cubito2", scene);
@@ -228,16 +238,16 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	GameObject* planeOb = new GameObject();
 	planeOb->createEntity("FloorGrid.mesh", "Floor", scene);
 	//planeOb->setMaterial("Test/FloorTile");
-	planeOb->setScale(Vec3(100, 100, 100));
-	planeOb->setPosition(Vec3(0, 0,-100));
+	planeOb->setScale(Vec3(10, 10, 10));
+	planeOb->setPosition(Vec3(0, 0,0));
 	scene->addGameObject(planeOb);
 
 
 	GameObject* mountains = new GameObject();
 	mountains->createEntity("Mountains.mesh", "Mountains", scene);
 	//planeOb->setMaterial("Test/FloorTile");
-	mountains->setScale(Vec3(100, 100, 100));
-	mountains->setPosition(Vec3(-2500, 350, -100));
+	mountains->setScale(Vec3(10, 10, 10));
+	mountains->setPosition(Vec3(0, -50, 0));
 	scene->addGameObject(mountains);
 	Ogre::ColourValue fadeColour(0.0, 0.0, 0.0);
 	scene->getSceneManager()->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
