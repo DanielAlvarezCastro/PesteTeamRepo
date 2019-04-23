@@ -8,6 +8,8 @@
 
 int main() {
 
+	srand(time(NULL));
+
 	MainApp::instance()->initApp();
 
 	//Carga los recursos del juego las escenas y los gameobjects
@@ -16,8 +18,8 @@ int main() {
 
 	//Carga la escena número 1 ESTÁ DE PRUEBA
 	GameSceneManager::instance()->LoadScene("MainMenu");
+
 	SoundManager::instance()->Init();
-	SoundManager::instance()->PlaySound2D("SynthSong1.mp3", true, false);
 
 	MainApp::instance()->runGame();
 

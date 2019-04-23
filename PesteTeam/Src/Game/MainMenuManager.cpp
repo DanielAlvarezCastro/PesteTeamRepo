@@ -73,6 +73,9 @@ void MainMenuManager::Update(float t)
 		if (state == 0) {
 			MainApp::instance()->getCurrentScene()->hideGUI();
 			GameSceneManager::instance()->LoadScene("ShipSelection");
+
+			SoundManager::instance()->GetEngine()->stopAllSounds();
+			SoundManager::instance()->PlaySound2D("SynthSong3.mp3", true, false);
 		}
 		else if (state == 1) {
 

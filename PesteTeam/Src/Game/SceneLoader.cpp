@@ -16,11 +16,11 @@ SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 }
 
 void OnCuboCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
-	std::cout << "Soy un cubo y he chocado" << std::endl;
+	//std::cout << "Soy un cubo y he chocado" << std::endl;
 }
 
 void OnCubo2Collision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
-	std::cout << "Juan wapo" << std::endl;
+	//std::cout << "Juan wapo" << std::endl;
 }
 
 bool SceneLoader::loadPrefabsFromFile()
@@ -171,6 +171,20 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	pivot->asingFather(pointer);
 	pivot->setPosition(Vec3(0, 0, -50));
 	scene->addGameObject(pivot);
+
+	GameObject* pivot1 = new GameObject();
+	pivot1->createEmptyEntity("Pivot1", scene);
+	pivot1->asingFather(pointer);
+	pivot1->setPosition(Vec3(7, 0, -15));
+	pivot1->setDirection(Vec3(0, 0, -1));
+	scene->addGameObject(pivot1);
+
+	GameObject* pivot2 = new GameObject();
+	pivot2->createEmptyEntity("Pivot2", scene);
+	pivot2->asingFather(pointer);
+	pivot2->setPosition(Vec3(-7, 0, -15));
+	pivot2->setDirection(Vec3(0, 0, -1));
+	scene->addGameObject(pivot2);
 
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", scene);
