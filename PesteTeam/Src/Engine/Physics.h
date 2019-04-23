@@ -1,6 +1,7 @@
 #include<btBulletDynamicsCommon.h>
 #include<vector>
 #include<map>
+#include<Ogre.h>
 
 #ifndef _PHYSICS_H
 #define _PHYSICS_H
@@ -33,6 +34,7 @@ public:
 	~Physics();
 	void initPhysics();
 	void updatePhysics(float t);
+	void initDebuger(Ogre::SceneManager* sMrg);
 
 	void addRigidBodyToWorld(btRigidBody* bt,const std::string & btname);
 	void trackAndChangeNameOfRigidBody(std::string oldName_, std::string newName_);

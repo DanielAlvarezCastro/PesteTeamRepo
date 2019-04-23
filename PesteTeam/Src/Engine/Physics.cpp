@@ -76,11 +76,6 @@ void Physics::updatePhysics(float t) {
 		//actualizamos el tiempo
 		dynamicsWorld->stepSimulation(t);
 	}
-	
-	if (!debuged) {
-		mDebugDrawer->initDebugDrawer(MainApp::instance()->getCurrentSceneMgr());
-		debuged = true;
-	}
 
 	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
 	dynamicsWorld->setDebugDrawer(mDebugDrawer);
@@ -128,4 +123,8 @@ std::string Physics::getRigidBodyName(btRigidBody* rb) {
 
 btRigidBody* Physics::getRigidBodyFromName(std::string name) {
 	return physicsAccessors.at(name);
+}
+
+void Physics::initDebuger(Ogre::SceneManager* sMrg) {
+	mDebugDrawer->initDebugDrawer(sMrg);
 }
