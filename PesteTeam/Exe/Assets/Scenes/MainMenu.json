@@ -56,13 +56,13 @@
 			"Name" : "CameraOb",
 			"Type" : "None",
 			"Mesh" : "None",
-			"Position" : [0,0,80],			
+			"Position" : [0, 100,80],			
 			"Components" : [
 				{
 					"Name" : "Camera",
 					"CameraName" : "CameraMain",
 					"NearClipDistance" : 5,
-					"LookAt" : [0,0,0]
+					"LookAt" : [0,120,0]
 				}
 			]
 		},
