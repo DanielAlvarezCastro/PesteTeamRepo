@@ -4,8 +4,8 @@
 #include <iostream>
 #define PI 3.14159265
 
-MainMenuManager::MainMenuManager(GameObject* gameObject)
-	: BehaviourComponent(gameObject), playProps("Play"), creditsProps("Credits"), exitProps("Exit"), activeProps("Play")
+MainMenuManager::MainMenuManager(GameObject* gameObject, GameObject* camera)
+	: BehaviourComponent(gameObject), playProps("Play"), creditsProps("Credits"), exitProps("Exit"), activeProps("Play"), camera(camera)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	GUIMgr = GUIManager::instance();
@@ -44,6 +44,11 @@ void MainMenuManager::setTitleAmplitude(float amplitude)
 	titleAmplitude = amplitude;
 }
 
+void MainMenuManager::setCameraVelocity(float cameraVelocity)
+{
+	cameraVel = cameraVelocity;
+}
+
 void MainMenuManager::Update(float t)
 {
 	//Timer que regula la velocidad de input
@@ -78,6 +83,7 @@ void MainMenuManager::Update(float t)
 	}
 	titleAnimation();
 	buttonAnimation();
+	cameraRotation();
 }
 void MainMenuManager::handleStates()
 {
@@ -119,6 +125,11 @@ void MainMenuManager::buttonAnimation()
 	int y = activeProps.y + buttonAmplitude / 2 * -sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
 	activeButton->setSize(w, h);
 	activeButton->setPosition(x, y);
+}
+
+void MainMenuManager::cameraRotation()
+{
+	camera->yaw(cameraVel);
 }
 
 void MainMenuManager::titleAnimation()

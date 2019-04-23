@@ -398,11 +398,15 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			float titleSinPeriod = (*itComponent)["TitleSinPeriod"];
 			int buttonAmp = (*itComponent)["ButtonAmplitude"];
 			float buttonSinPeriod = (*itComponent)["ButtonSinPeriod"];
-			MainMenuManager* MMM = new MainMenuManager(go);
+			std::string cameraName = (*itComponent)["CameraObject"];
+			float cameraVel = (*itComponent)["CameraVel"];
+			GameObject* cam = scene->getGameObject(cameraName);
+			MainMenuManager* MMM = new MainMenuManager(go, cam);
 			MMM->setTitleAmplitude(titleAmp);
 			MMM->setTitleSinPeriod(titleSinPeriod);
 			MMM->setButtonAmplitude(buttonAmp);
 			MMM->setButtonSinPeriod(buttonSinPeriod);
+			MMM->setCameraVelocity(cameraVel);
 			scene->addComponent(MMM);
 		}
 		else if (componentName == "ShipSelection") {
