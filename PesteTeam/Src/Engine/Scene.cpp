@@ -20,9 +20,14 @@ void Scene::updateScene()
 {
 	Physics::getInstance()->updatePhysics(MainApp::instance()->deltaTime());
 
-	for (BasicComponent* c : components)
+	//for (BasicComponent* c : components)
+	//{
+	//	c->Update(MainApp::instance()->deltaTime());
+	//}
+
+	for (int i = 0; i < components.size(); i++)
 	{
-		c->Update(MainApp::instance()->deltaTime());
+		components[i]->Update(MainApp::instance()->deltaTime());
 	}
 
 	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
@@ -30,3 +35,22 @@ void Scene::updateScene()
 	}
 }
 
+void Scene::addGUIObject(MyGUI::Widget* ob)
+{
+	guiObjects.push_back(ob);
+}
+
+void Scene::addGameObject(GameObject* GO) 
+{ 
+	gameObjects.push_back(GO); 
+}
+
+void Scene::addComponent(BasicComponent* bc) 
+{ 
+	components.push_back(bc); 
+}
+
+void Scene::addCamera(Ogre::Camera* cam) 
+{ 
+	mCamera = cam; 
+}

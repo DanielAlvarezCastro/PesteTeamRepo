@@ -4,8 +4,7 @@
 #include <Euler.h>
 #include "Messages.h"
 
-class PlayerController :
-	public BehaviourComponent
+class PlayerController : public BehaviourComponent
 {
 private:
 	float pi = 3.14159265359;

@@ -2,8 +2,7 @@
 #include <BehaviourComponent.h>
 #include <MainApp.h>s
 #include <Euler.h>
-class ShipController :
-	public BehaviourComponent
+class ShipController : public BehaviourComponent
 {
 private:
 	Euler euler;

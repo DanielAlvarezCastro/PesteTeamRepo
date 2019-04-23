@@ -17,7 +17,7 @@ int main() {
 	//Carga la escena número 1 ESTÁ DE PRUEBA
 	GameSceneManager::instance()->LoadScene("MainMenu");
 	SoundManager::instance()->Init();
-	SoundManager::instance()->PlaySound2D("SynthSong2.mp3", true, false);
+	SoundManager::instance()->PlaySound2D("SynthSong1.mp3", true, false);
 
 	MainApp::instance()->runGame();
 

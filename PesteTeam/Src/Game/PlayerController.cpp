@@ -3,7 +3,7 @@
 #include "GameSceneManager.h"
 
 
-PlayerController::PlayerController(GameObject* gameObject):BehaviourComponent(gameObject)
+PlayerController::PlayerController(GameObject* gameObject) : BehaviourComponent(gameObject)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	gameObject->setOrientation(euler);

@@ -8,6 +8,7 @@
 #include <vector>
 #include "ShipSelection.h"
 #include "TurretBehaviour.h"
+#include "ShotBehaviour.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -247,6 +248,9 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	ShipController* sc = new ShipController(Nave);
 	scene->addComponent(sc);
+
+	ShotBehaviour* sb = new ShotBehaviour(pointer);
+	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
 	scene->addComponent(cM);
