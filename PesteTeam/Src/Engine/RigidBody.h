@@ -5,6 +5,8 @@
 #include"Physics.h"
 #include<Ogre.h>
 
+typedef void(*OnCollisionCallback)(GameObject* other, std::vector<btManifoldPoint*> contactPoints);
+
 class RigidBody : public BasicComponent
 {
 protected:
@@ -13,6 +15,7 @@ protected:
 	btScalar mass;
 	bool isKinematic;
 
+	OnCollisionCallback ocb;
 	//para ver las lineas del collider en pantalla
 	Ogre::MeshPtr debugCollider;		
 
@@ -34,6 +37,7 @@ public:
 	virtual ~RigidBody();
 	virtual void Update(float t);
 
+	void setCollisionCallback(OnCollisionCallback cb) { ocb = cb; };
 	virtual void onCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints);
 };
 

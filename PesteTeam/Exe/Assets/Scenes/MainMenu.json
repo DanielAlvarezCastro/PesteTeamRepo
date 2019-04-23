@@ -53,6 +53,20 @@
 			]
 		},
 		{
+			"Name" : "CameraOb",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0, 100,80],			
+			"Components" : [
+				{
+					"Name" : "Camera",
+					"CameraName" : "CameraMain",
+					"NearClipDistance" : 5,
+					"LookAt" : [0,120,0]
+				}
+			]
+		},
+		{
 			"Name" : "MainMenuManager",
 			"Type" : "None",
 			"Mesh" : "None",
@@ -60,24 +74,12 @@
 			"Components" : [
 				{
 					"Name" : "MainMenuManager",
+					"CameraObject" : "CameraOb",
 					"TitleAmplitude" : 0,
 					"TitleSinPeriod" : 0.003,
 					"ButtonAmplitude" : 5,
-					"ButtonSinPeriod" : 0.003
-				}
-			]
-		},
-		{
-			"Name" : "CameraOb",
-			"Type" : "None",
-			"Mesh" : "None",
-			"Position" : [0,0,80],			
-			"Components" : [
-				{
-					"Name" : "Camera",
-					"CameraName" : "CameraMain",
-					"NearClipDistance" : 5,
-					"LookAt" : [0,0,0]
+					"ButtonSinPeriod" : 0.003,
+					"CameraVel" : 0.001
 				}
 			]
 		}

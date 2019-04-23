@@ -15,6 +15,14 @@ SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 {
 }
 
+void OnCuboCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
+	std::cout << "Soy un cubo y he chocado" << std::endl;
+}
+
+void OnCubo2Collision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
+	std::cout << "Juan wapo" << std::endl;
+}
+
 bool SceneLoader::loadPrefabsFromFile()
 {
 	std::cout << "Cargando prefabs..." << std::endl;
@@ -133,6 +141,8 @@ bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
 //Escenas de prueba para meterlas desde c�digo aqu�
 bool SceneLoader::loadTestScene(Scene* scene)
 {
+	Physics::getInstance()->initDebuger(scene->getSceneManager());
+
 	GameObject* pointer = new GameObject();
 	pointer->createEmptyEntity("Pointer", scene);
 	pointer->setPosition(Vec3(0, 40, 0));
@@ -141,6 +151,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* Nave = new GameObject();
 	Nave->createEntity(playerMesh, "Player", scene);
+	RigidBody* rbNave = new RigidBody(Nave, "Nave", 5, true);
+	scene->addComponent(rbNave);
 	if (playerMesh == "SkyGrasper.mesh") {
 		Nave->setScale(Vec3(1, 1, 1));
 
@@ -165,7 +177,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	cubito->setScale(Vec3(0.1, 0.1, 0.1));
 	cubito->setPosition(Vec3(10, 40, -15));
 	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
-	cubito->addRigidbody(rb);
+	rb->setCollisionCallback(OnCuboCollision);
+	//cubito->addRigidbody(rb);
 	scene->addComponent(rb);
 
 	GameObject* edificio1 = new GameObject();
@@ -207,7 +220,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
 	cubito2->setPosition(Vec3(0, 10, -15));
 	RigidBody* rb2 = new RigidBody(cubito2, "Cubito2");
-	cubito2->addRigidbody(rb2);
+	rb2->setCollisionCallback(OnCubo2Collision);
+	//cubito2->addRigidbody(rb2);
 	scene->addComponent(rb2);
 
 	scene->addGameObject(turret);
@@ -388,11 +402,15 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			float titleSinPeriod = (*itComponent)["TitleSinPeriod"];
 			int buttonAmp = (*itComponent)["ButtonAmplitude"];
 			float buttonSinPeriod = (*itComponent)["ButtonSinPeriod"];
-			MainMenuManager* MMM = new MainMenuManager(go);
+			std::string cameraName = (*itComponent)["CameraObject"];
+			float cameraVel = (*itComponent)["CameraVel"];
+			GameObject* cam = scene->getGameObject(cameraName);
+			MainMenuManager* MMM = new MainMenuManager(go, cam);
 			MMM->setTitleAmplitude(titleAmp);
 			MMM->setTitleSinPeriod(titleSinPeriod);
 			MMM->setButtonAmplitude(buttonAmp);
 			MMM->setButtonSinPeriod(buttonSinPeriod);
+			MMM->setCameraVelocity(cameraVel);
 			scene->addComponent(MMM);
 		}
 		else if (componentName == "ShipSelection") {

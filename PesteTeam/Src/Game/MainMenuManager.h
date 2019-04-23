@@ -20,6 +20,7 @@ private:
 		}
 	};
 	GUIManager* GUIMgr = nullptr;
+	GameObject* camera = nullptr;
 	//States
 	int state = 0;// 0=Play  1=Credits  2=Exit
 	void handleStates();
@@ -42,11 +43,13 @@ private:
 	ButtonProps activeProps;
 	int buttonAmplitude = 0;
 	float buttonSinPeriod = 0;
+	float cameraVel = 0;
 
 	void titleAnimation();
 	void buttonAnimation();
+	void cameraRotation();
 public:
-	MainMenuManager(GameObject* gameObject);
+	MainMenuManager(GameObject* gameObject, GameObject* camera);
 	virtual ~MainMenuManager();
 
 	OIS::Keyboard* keyboard;
@@ -54,6 +57,7 @@ public:
 	void setButtonAmplitude(float amplitude);
 	void setTitleSinPeriod(float sinP);
 	void setTitleAmplitude(float amplitude);
+	void setCameraVelocity(float cameraVelocity);
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg);
 };
