@@ -48,7 +48,7 @@ void RigidBody::setIniConf() {
 	btVector3 localInertia{ 0,0,0 };
 	
 	shape->calculateLocalInertia(mass, localInertia);
-	btVector3 auxPos{ gameObject->getPosition().x, gameObject->getPosition().y, gameObject->getPosition().z };
+	btVector3 auxPos{ gameObject->getGlobalPosition().x, gameObject->getGlobalPosition().y, gameObject->getGlobalPosition().z };
 	startTransform.setOrigin(auxPos);
 
 	//estado inicial del cuerpo
@@ -98,7 +98,7 @@ void RigidBody::Update(float t)
 			rigidBody->getMotionState()->getWorldTransform(trans);
 			//actualizamos el transfrom,
 			trans.setRotation(btQuaternion(gameObject->getYaw(), gameObject->getPitch(), gameObject->getRoll()));
-			trans.setOrigin(btVector3(gameObject->getPosition().x, gameObject->getPosition().y, gameObject->getPosition().z));
+			trans.setOrigin(btVector3(gameObject->getGlobalPosition().x, gameObject->getGlobalPosition().y, gameObject->getGlobalPosition().z));
 			//seteamos el rigidBody ya actualizado
 			rigidBody->setWorldTransform(trans);
 		}

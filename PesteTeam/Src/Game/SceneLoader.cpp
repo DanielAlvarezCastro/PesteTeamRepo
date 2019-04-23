@@ -150,19 +150,18 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* Nave = new GameObject();
 	Nave->createEntity(playerMesh, "Player", scene);
-	RigidBody* rbNave = new RigidBody(Nave, "Nave", 5, true);
-	scene->addComponent(rbNave);
 	if (playerMesh == "SkyGrasper.mesh") {
 		Nave->setScale(Vec3(1, 1, 1));
 
 	}
 	else if (playerMesh == "SXRVengeance.mesh" || playerMesh == "RoyalWasp.mesh" || playerMesh=="NeonBlade.mesh") {
 		Nave->setScale(Vec3(3, 3, 3));
-
 	}
 	Nave->asingFather(pointer);
 	Nave->setPosition(Vec3(-1, 0, 0));
 	scene->addGameObject(Nave);
+	RigidBody* rbNave = new RigidBody(Nave, "Nave", 5, true);
+	scene->addComponent(rbNave);
 
 	GameObject* pivot = new GameObject();
 	pivot->createEmptyEntity("Pivot", scene);
@@ -173,9 +172,9 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", scene);
-	cubito->setScale(Vec3(0.1, 0.1, 0.1));
-	cubito->setPosition(Vec3(10, 40, -15));
-	RigidBody* rb = new RigidBody(cubito, "Cubito", 5.0);
+	cubito->setScale(Vec3(0.5, 0.5, 0.5));
+	cubito->setPosition(Vec3(10, 80, -15));
+	RigidBody* rb = new RigidBody(cubito, "Cubito", 0.0001);
 	rb->setCollisionCallback(OnCuboCollision);
 	//cubito->addRigidbody(rb);
 	scene->addComponent(rb);
