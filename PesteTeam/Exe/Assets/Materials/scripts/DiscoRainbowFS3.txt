@@ -1,0 +1,8 @@
+#version 330 core
+in vec2 vUv0; // out del vertex shader
+out vec4 fFragColor; // out del fragment shader
+uniform float tiempoA;
+void main() {
+	vec3 color = vec3(0.5+sin(4*(tiempoA+4)),0.5+ sin(4*(tiempoA)), 0.5+sin(4*(tiempoA+2)));
+	fFragColor = vec4(color, 1.0);
+}

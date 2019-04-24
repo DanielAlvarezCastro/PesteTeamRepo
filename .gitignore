@@ -5,7 +5,7 @@
 *.user
 *.dll
 *.ilk
-Ogre.log
+*.log
 
 ### FOLDERS ###
 Dependencies
