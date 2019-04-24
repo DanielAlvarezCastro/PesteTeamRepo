@@ -9,6 +9,7 @@
 #include "ShipSelection.h"
 #include "TurretBehaviour.h"
 #include "ShotBehaviour.h"
+#include "FlyerBehaviour.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -237,12 +238,25 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	//cubito2->addRigidbody(rb2);
 	scene->addComponent(rb2);
 
+	GameObject* flyer = new GameObject();
+	flyer->createEntity("Fly.mesh", "Flyer1", scene);
+	flyer->setScale(Vec3(0.35, 0.35, 0.35));
+	flyer->setPosition(Vec3(0, 100, -400));
+
+	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
+	scene->addComponent(tb2);
+
+	FlyerBehaviour* fb1 = new FlyerBehaviour(flyer, pointer, 100, 25);
+	scene->addComponent(fb1);
+
 	scene->addGameObject(turret);
 	scene->addGameObject(turretBase);
 	scene->addGameObject(Nave);
 	scene->addGameObject(edificio1);
 	scene->addGameObject(pointer);
 	scene->addGameObject(cubito);
+
+	scene->addGameObject(flyer);
 
 	Ogre::Camera* mCamera = scene->getSceneManager()->createCamera("MainCam");
 	mCamera->setNearClipDistance(5);

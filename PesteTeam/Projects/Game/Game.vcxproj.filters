@@ -51,6 +51,9 @@
     <ClCompile Include="..\..\Src\Game\BulletBehaviour.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\Game\FlyerBehaviour.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\Game\json.hpp">
@@ -90,6 +93,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\Game\BulletBehaviour.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Game\FlyerBehaviour.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
