@@ -82,6 +82,14 @@
 			"Father" : "RectPivot"
 		},
 		{
+			"Name" : "DiscoRainbowModel",
+			"Type" : "None",
+			"Mesh" : "DiscoRainbow.mesh",
+			"Position" : [0,98,-10],
+			"Scale" : [1,1,1],
+			"Father" : "RectPivot"
+		},
+		{
 			"Name" : "ShipSelectionManager",
 			"Type" : "None",
 			"Mesh" : "None",
@@ -91,9 +99,9 @@
 					"Name" : "ShipSelection",
 					"ShipDistance" : -12,
 					"Pivot" : "RectPivot",
-					"Models" : ["SXRVengeanceModel","RoyalWaspModel", "NeonBladeModel"],
-					"Meshes" : ["SXRVengeance.mesh","RoyalWasp.mesh", "NeonBlade.mesh"],
-					"Titles" : ["SXRVengeance.png","RoyalWasp.png", "NeonBlade.png"]
+					"Models" : ["SXRVengeanceModel","RoyalWaspModel", "NeonBladeModel","DiscoRainbowModel"],
+					"Meshes" : ["SXRVengeance.mesh","RoyalWasp.mesh", "NeonBlade.mesh", "DiscoRainbow.mesh"],
+					"Titles" : ["SXRVengeance.png","RoyalWasp.png", "NeonBlade.png", "NeonBlade.png"]
 				}
 			]
 		},
