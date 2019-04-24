@@ -51,9 +51,11 @@ void PlayerController::Update(float t)
 			}
 			if (lastT < 1 && !moved)
 			{				
-				lastT += t/2;
-				gameObject->setOrientation(Ogre::Quaternion::Slerp(lastT, gameObject->getOrientation(), e.toQuaternion()));
-				euler.fromQuaternion(gameObject->getOrientation());
+				lastT += t / 8;
+				euler.normalise();
+				Euler angle = euler.rotationTo(Ogre::Vector3(euler.forward().x, 0, euler.forward().z));
+				euler = euler + angle * lastT;
+				gameObject->setOrientation(euler);
 			}
 		}
 	}

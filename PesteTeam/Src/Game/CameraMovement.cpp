@@ -42,7 +42,7 @@ void CameraMovement::Update(float t)
 	}
 	else if (keyboard->isKeyDown(OIS::KC_S)){
 
-		if (gameObject->getPosition().y < 20){
+		if (gameObject->getPosition().y < 10){
 			gameObject->translate(Vec3(0, 40 * t, 0));
 		}
 		if (pivot->getPosition().y > -10) {
