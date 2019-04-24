@@ -28,6 +28,13 @@ void ShipSelection::selectShip()
 {
 	GameSceneManager::instance()->setPlayerMesh(meshes[state]);
 	GameSceneManager::instance()->LoadScene("TestScene");
+
+	int rnd = rand() % 2;
+	SoundManager::instance()->GetEngine()->stopAllSounds();
+	if (rnd == 0)
+		SoundManager::instance()->PlaySound2D("SynthSong1.mp3", true, false);
+	else
+		SoundManager::instance()->PlaySound2D("SynthSong2.mp3", true, false);
 }
 
 void ShipSelection::addShipMesh(string mesh)

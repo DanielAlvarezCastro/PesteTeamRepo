@@ -8,6 +8,7 @@
 #include <vector>
 #include "ShipSelection.h"
 #include "TurretBehaviour.h"
+#include "ShotBehaviour.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -15,11 +16,11 @@ SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 }
 
 void OnCuboCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
-	std::cout << "Soy un cubo y he chocado" << std::endl;
+	//std::cout << "Soy un cubo y he chocado" << std::endl;
 }
 
 void OnCubo2Collision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
-	std::cout << "Juan wapo" << std::endl;
+	//std::cout << "Juan wapo" << std::endl;
 }
 
 bool SceneLoader::loadPrefabsFromFile()
@@ -170,6 +171,20 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	pivot->setPosition(Vec3(0, 0, -50));
 	scene->addGameObject(pivot);
 
+	GameObject* pivot1 = new GameObject();
+	pivot1->createEmptyEntity("Pivot1", scene);
+	pivot1->asingFather(pointer);
+	pivot1->setPosition(Vec3(7, 0, -15));
+	pivot1->setDirection(Vec3(0, 0, -1));
+	scene->addGameObject(pivot1);
+
+	GameObject* pivot2 = new GameObject();
+	pivot2->createEmptyEntity("Pivot2", scene);
+	pivot2->asingFather(pointer);
+	pivot2->setPosition(Vec3(-7, 0, -15));
+	pivot2->setDirection(Vec3(0, 0, -1));
+	scene->addGameObject(pivot2);
+
 	GameObject* cubito = new GameObject();
 	cubito->createEntity("cube.mesh", "Cubito", scene);
 	cubito->setScale(Vec3(0.5, 0.5, 0.5));
@@ -260,6 +275,9 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	ShipController* sc = new ShipController(Nave);
 	scene->addComponent(sc);
+
+	ShotBehaviour* sb = new ShotBehaviour(pointer);
+	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
 	scene->addComponent(cM);
@@ -397,11 +415,15 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			float titleSinPeriod = (*itComponent)["TitleSinPeriod"];
 			int buttonAmp = (*itComponent)["ButtonAmplitude"];
 			float buttonSinPeriod = (*itComponent)["ButtonSinPeriod"];
-			MainMenuManager* MMM = new MainMenuManager(go);
+			std::string cameraName = (*itComponent)["CameraObject"];
+			float cameraVel = (*itComponent)["CameraVel"];
+			GameObject* cam = scene->getGameObject(cameraName);
+			MainMenuManager* MMM = new MainMenuManager(go, cam);
 			MMM->setTitleAmplitude(titleAmp);
 			MMM->setTitleSinPeriod(titleSinPeriod);
 			MMM->setButtonAmplitude(buttonAmp);
 			MMM->setButtonSinPeriod(buttonSinPeriod);
+			MMM->setCameraVelocity(cameraVel);
 			scene->addComponent(MMM);
 		}
 		else if (componentName == "ShipSelection") {

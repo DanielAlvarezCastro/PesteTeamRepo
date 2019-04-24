@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include <OgreSceneManager.h>
 #include "Scene.h"
+#include "Euler.h"
 
 GameObject::GameObject()
 {
@@ -104,4 +105,13 @@ void GameObject::setMaterial(std::string materialName) {
 string GameObject::getMeshName()
 {
 	return ogreEntity->getMesh()->getName();
+}
+
+Ogre::Vector3 GameObject::getDirection() 
+{ 
+	Euler tal;
+	tal.fromQuaternion(ogreNode->getOrientation());
+
+	return tal.forward();
+	//return transform.direction; 
 }

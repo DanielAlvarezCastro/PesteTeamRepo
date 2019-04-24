@@ -31,6 +31,7 @@ public:
 	// Plays a sound and returns the internal variable, we can access it to change the volume, pan & stuff
 	ISound* PlaySound2D(std::string file, bool loop = false, bool startPaused = false);
 	ISound* PlaySound3D(std::string file, vec3df pos, float minDist = 0.5f, bool loop = false, bool startPaused = false);
+	ISoundEngine* GetEngine() { return engine_; }
 
 	// We have to determine where is the listener for 3D sounds
 	void SetListenerPos(vec3df pos, vec3df dir);

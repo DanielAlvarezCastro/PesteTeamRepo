@@ -34,10 +34,10 @@ public:
 		}
 	}
 
-	void addGUIObject(MyGUI::Widget* ob) { guiObjects.push_back(ob); }
-	void addGameObject(GameObject* GO) { gameObjects.push_back(GO); };
-	void addComponent(BasicComponent* bc) { components.push_back(bc); };
-	void addCamera(Ogre::Camera* cam) { mCamera = cam; };
+	void addGUIObject(MyGUI::Widget* ob);
+	void addGameObject(GameObject* GO);
+	void addComponent(BasicComponent* bc);
+	void addCamera(Ogre::Camera* cam);
 	GameObject* getGameObject(std::string name) {
 		for (int i = 0; i < gameObjects.size(); i++) {
 			if (gameObjects[i]->getName() == name) {

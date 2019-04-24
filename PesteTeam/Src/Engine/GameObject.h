@@ -74,7 +74,7 @@ public:
 	Vec3 getGlobalPosition() { return ogreNode->_getDerivedPosition(); }
 	std::string getName() { return name; };
 	Ogre::Vector3 getPosition() { return transform.position; };
-	Ogre::Vector3 getDirection() { return transform.direction; };
+	Ogre::Vector3 getDirection();
 	Vec3 getScale() { return Vec3(transform.scale); };
 	float getRoll() { return ogreNode->getOrientation().getRoll().valueRadians(); }
 	float getPitch() { return (float)ogreNode->getOrientation().getPitch().valueRadians(); }

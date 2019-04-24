@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\Game\BulletBehaviour.cpp" />
     <ClCompile Include="..\..\Src\Game\CameraMovement.cpp" />
     <ClCompile Include="..\..\Src\Game\GameGUI.cpp" />
     <ClCompile Include="..\..\Src\Game\GameSceneManager.cpp" />
@@ -28,9 +29,11 @@
     <ClCompile Include="..\..\Src\Game\SceneLoader.cpp" />
     <ClCompile Include="..\..\Src\Game\ShipController.cpp" />
     <ClCompile Include="..\..\Src\Game\ShipSelection.cpp" />
+    <ClCompile Include="..\..\Src\Game\ShotBehaviour.cpp" />
     <ClCompile Include="..\..\Src\Game\TurretBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\Game\BulletBehaviour.h" />
     <ClInclude Include="..\..\Src\Game\CameraMovement.h" />
     <ClInclude Include="..\..\Src\Game\GameGUI.h" />
     <ClInclude Include="..\..\Src\Game\GameSceneManager.h" />
@@ -41,6 +44,7 @@
     <ClInclude Include="..\..\Src\Game\SceneLoader.h" />
     <ClInclude Include="..\..\Src\Game\ShipController.h" />
     <ClInclude Include="..\..\Src\Game\ShipSelection.h" />
+    <ClInclude Include="..\..\Src\Game\ShotBehaviour.h" />
     <ClInclude Include="..\..\Src\Game\TurretBehaviour.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
