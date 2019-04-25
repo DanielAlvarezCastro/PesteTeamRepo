@@ -324,8 +324,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GUIManager::instance()->initScene(scene);
 	
-	TargetController* ftc = new TargetController(farTarget, mCamera, "HealthBarFront.png", 30, 30);
-	TargetController* ntc = new TargetController(nearTarget, mCamera, "HealthBarFront.png", 60, 60);
+	TargetController* ftc = new TargetController(farTarget, mCamera, "SmallBlueSight.png","SmallRedSight.png","farSight",30, 30);
+	TargetController* ntc = new TargetController(nearTarget, mCamera, "BigBlueSight.png", "BigRedSight.png", "nearSight.png", 60, 60);
 	scene->addComponent(ftc);
 	scene->addComponent(ntc);
 

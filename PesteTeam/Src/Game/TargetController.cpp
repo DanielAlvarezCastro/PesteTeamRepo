@@ -1,10 +1,13 @@
 #include "TargetController.h"
 
-TargetController::TargetController(GameObject* target, Ogre::Camera* camera_, string sightPath, int w_, int h_): BehaviourComponent(target), camera(camera_), w(w_), h(h_)
+TargetController::TargetController(GameObject* target, Ogre::Camera* camera_, string sightPath, string secondSightPath, string GUIName, int w_, int h_): BehaviourComponent(target), camera(camera_), w(w_), h(h_)
 {
 	newPos = Ogre::Vector2(0, 0);
-	sight = GUIManager::instance()->createImage(sightPath, newPos.x, newPos.y, w, h, "ImageBox", "Sight");
+	sight = GUIManager::instance()->createImage(sightPath, newPos.x, newPos.y, w, h, "ImageBox", GUIName);
 	gameObject->getScene()->addGUIObject(sight);
+	keyboard = MainApp::instance()->getKeyboard();
+	sightName = sightPath;
+	secondSightName = secondSightPath;
 }
 
 TargetController::~TargetController()
@@ -18,6 +21,22 @@ void TargetController::Update(float t)
 		sight->setPosition(newPos.x, newPos.y);
 	}
 	else sight->setVisible(false);
+
+	//Auxiliar para determinar si el estado de disparo ha cambiado
+	int newState = 0;
+	if (keyboard->isKeyDown(OIS::KC_L)) {
+		newState = 1;
+	}
+	else newState = 0;
+
+	//Solo si el estado ha cambiado entonces cambia de sprite
+	if (newState != sightState) {
+		sightState = newState;
+		if (sightState == 0) {
+			sight->setImageTexture(sightName);
+		}
+		else sight->setImageTexture(secondSightName);
+	}
 }
 
 bool TargetController::getScreenspaceCoords(Ogre::SceneNode* object, Ogre::Vector2& result)
