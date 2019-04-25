@@ -55,6 +55,7 @@ public:
 	void addReference() { references++; };
 	void release();
 	void setActive(bool active_) { active = active_; };
+	bool isActive() { return active; }
 	void reciveMsg(Message* msg);
 
 	void asingFather(GameObject* father_);

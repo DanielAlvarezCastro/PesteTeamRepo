@@ -27,7 +27,8 @@ void Scene::updateScene()
 
 	for (int i = 0; i < components.size(); i++)
 	{
-		components[i]->Update(MainApp::instance()->deltaTime());
+		if (components[i]->isGOActive())
+			components[i]->Update(MainApp::instance()->deltaTime());
 	}
 
 	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {

@@ -10,17 +10,24 @@ class ShotBehaviour : public BehaviourComponent
 {
 private:
 	OIS::Keyboard* keyboard;
-	int bulletCount = 0;
-	int cooldown = 5;
-	bool keyDown = false;
 	Scene* scn;
+
+	int bulletCount = 0;
+	int cooldown = 25;
+	bool keyDown = false;
+
+	std::vector<GameObject*> bullets_;
+	std::vector<BulletBehaviour*> bComponents_;
 
 public:
 	ShotBehaviour(GameObject* gameObject);
 	virtual ~ShotBehaviour();
 
 	virtual void Update(float t);
-	void Shoot();
 	virtual void reciveMsg(Message* msg) {};
+
+	void getBullets();
+	void Shoot();
+	void UpdateValues(int i, std::pair<GameObject*, GameObject*> blls);
 };
 

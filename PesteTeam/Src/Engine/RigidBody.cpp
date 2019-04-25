@@ -58,6 +58,10 @@ void RigidBody::setIniConf() {
 	rigidBody = new btRigidBody(rbInfo);
 	rigidBody->setRestitution(1);
 	rigidBody->setUserPointer(gameObject);
+
+	if (isKinematic)
+		rigidBody->setGravity(btVector3(0, 0, 0));
+
 	//a�adimos el cuerpo al mundo fisico
 	Physics::getInstance()->addRigidBodyToWorld(rigidBody, name);
 }
