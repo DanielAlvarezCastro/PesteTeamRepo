@@ -240,8 +240,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* flyer = new GameObject();
 	flyer->createEntity("Fly.mesh", "Flyer1", scene);
-	flyer->setScale(Vec3(0.35, 0.35, 0.35));
-	flyer->setPosition(Vec3(0, 100, -400));
+	flyer->setScale(Vec3(0.5, 0.5, 0.5));
+	flyer->setPosition(Vec3(0, 200, -400));
 
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
 	scene->addComponent(tb2);

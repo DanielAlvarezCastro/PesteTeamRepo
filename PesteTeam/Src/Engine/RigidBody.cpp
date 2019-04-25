@@ -86,10 +86,6 @@ void RigidBody::Update(float t)
 			//control sobre el gameObject
 			btQuaternion rotation = trans.getRotation();
 			gameObject->setPosition(Vec3(trans.getOrigin().x(), trans.getOrigin().y(), trans.getOrigin().z()));
-			//sacamos los euler desde el quaternion
-			//btScalar auxX, auxY, auxZ;
-			//rotation.getEulerZYX(auxZ, auxY, auxX);
-			//gameObject->setDirection(Vec3(auxX, auxY, auxZ));
 			gameObject->setOrientation(Ogre::Quaternion(rotation.getW(), rotation.getX(), rotation.getY(), rotation.getZ()));
 		}
 		//objetos kinematicos, el movimiento del GO domina al RB
@@ -103,17 +99,20 @@ void RigidBody::Update(float t)
 			rigidBody->setWorldTransform(trans);
 		}
 	}
-
-	btDynamicsWorld* dw = Physics::getInstance()->getDynamicWorld();
-	btTransform wt = rigidBody->getWorldTransform();
-	btCollisionShape* cs = rigidBody->getCollisionShape();
-	btVector3 colour = { 0, 1, 0 };
-	dw->debugDrawObject(wt, cs, colour);
+	//si estamos debugeando pintamos la caja del rb
+	if (Physics::getInstance()->getDebugState()) {
+		btDynamicsWorld* dw = Physics::getInstance()->getDynamicWorld();
+		btTransform wt = rigidBody->getWorldTransform();
+		btCollisionShape* cs = rigidBody->getCollisionShape();
+		btVector3 colour = { 0, 1, 0 };
+		dw->debugDrawObject(wt, cs, colour);
+	}
 }
 
 void RigidBody::onCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
-	//std::cout << "I, " << gameObject->getName() << ", collided with " << other->getName() << std::endl;
+	//si esta definido el callback
 	if (0 != ocb) {
+		//lo llamamos
 		(*ocb)(other, contactPoints);
 	}
 }

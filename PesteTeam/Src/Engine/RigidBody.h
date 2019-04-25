@@ -15,9 +15,8 @@ protected:
 	btScalar mass;
 	bool isKinematic;
 
+	//callback para que cada objeto pueda definir su metodo de colision
 	OnCollisionCallback ocb;
-	//para ver las lineas del collider en pantalla
-	Ogre::MeshPtr debugCollider;		
 
 	void setIniConf();
 public:

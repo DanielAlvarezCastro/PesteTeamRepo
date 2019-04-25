@@ -10,7 +10,7 @@ FlyerBehaviour::FlyerBehaviour(GameObject* go, GameObject* target_, float radius
 }
 
 FlyerBehaviour::~FlyerBehaviour() {
-
+	target = nullptr;
 }
 
 void FlyerBehaviour::Update(float t) {
@@ -18,7 +18,7 @@ void FlyerBehaviour::Update(float t) {
 	if (timePassed >= 360)
 		timePassed -= 360;
 	//la coordenada y es la altura
-	Vec3 newPos = Vec3(cx + (Math::Sin(timePassed) * radius),cy + ( Math::Sin(timePassed)*height),cz + (Math::Cos(timePassed)*radius));
+	Vec3 newPos = Vec3(cx + (Math::Sin(timePassed) * radius),cy + ( Math::Sin(timePassed*4)*height),cz + (Math::Cos(timePassed)*radius));
 
 	gameObject->setPosition(newPos);
 }

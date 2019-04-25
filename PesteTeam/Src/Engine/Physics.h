@@ -36,6 +36,9 @@ public:
 	void updatePhysics(float t);
 	void initDebuger(Ogre::SceneManager* sMrg);
 
+	bool getDebugState() { return debuged; };
+	void setDebugState(bool b) { debuged = b; };
+
 	void addRigidBodyToWorld(btRigidBody* bt,const std::string & btname);
 	void trackAndChangeNameOfRigidBody(std::string oldName_, std::string newName_);
 	std::string getRigidBodyName(btRigidBody* toFind);
