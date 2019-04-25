@@ -10,6 +10,7 @@
 #include "TurretBehaviour.h"
 #include "ShotBehaviour.h"
 #include "FlyerBehaviour.h"
+#include "TargetController.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -165,6 +166,19 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	RigidBody* rbNave = new RigidBody(Nave, "Nave", 5, true);
 	scene->addComponent(rbNave);
 
+	GameObject* nearTarget = new GameObject();
+	nearTarget->createEmptyEntity("nearTarget", scene);
+	nearTarget->asingFather(pointer);
+	nearTarget->setPosition(Vec3(0, 0, -100));
+	scene->addGameObject(nearTarget);
+
+	GameObject* farTarget = new GameObject();
+	farTarget->createEmptyEntity("farTarget", scene);
+	farTarget->asingFather(pointer);
+	farTarget->setPosition(Vec3(0, 0, -200));
+	scene->addGameObject(farTarget);
+
+
 	GameObject* pivot = new GameObject();
 	pivot->createEmptyEntity("Pivot", scene);
 	pivot->setScale(Vec3(0.02, 0.02, 0.02));
@@ -314,6 +328,11 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->getSceneManager()->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
 	GUIManager::instance()->initScene(scene);
+	
+	TargetController* ftc = new TargetController(farTarget, mCamera, "HealthBarFront.png", 30, 30);
+	TargetController* ntc = new TargetController(nearTarget, mCamera, "HealthBarFront.png", 60, 60);
+	scene->addComponent(ftc);
+	scene->addComponent(ntc);
 
 	MyGUI::ImageBox* b = GUIManager::instance()->createImage("HealthBarBlue.png", 200, 20, 400, 40, "ImageBox", "HealthBar");
 	scene->addGUIObject(b);

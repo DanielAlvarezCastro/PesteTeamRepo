@@ -31,6 +31,7 @@
     <ClCompile Include="..\..\Src\Game\ShipController.cpp" />
     <ClCompile Include="..\..\Src\Game\ShipSelection.cpp" />
     <ClCompile Include="..\..\Src\Game\ShotBehaviour.cpp" />
+    <ClCompile Include="..\..\Src\Game\TargetController.cpp" />
     <ClCompile Include="..\..\Src\Game\TurretBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +48,7 @@
     <ClInclude Include="..\..\Src\Game\ShipController.h" />
     <ClInclude Include="..\..\Src\Game\ShipSelection.h" />
     <ClInclude Include="..\..\Src\Game\ShotBehaviour.h" />
+    <ClInclude Include="..\..\Src\Game\TargetController.h" />
     <ClInclude Include="..\..\Src\Game\TurretBehaviour.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
