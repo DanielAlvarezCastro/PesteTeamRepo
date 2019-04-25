@@ -11,7 +11,7 @@ class ShotBehaviour : public BehaviourComponent
 private:
 	OIS::Keyboard* keyboard;
 	int bulletCount = 0;
-	int cooldown = 10;
+	int cooldown = 5;
 	bool keyDown = false;
 	Scene* scn;
 

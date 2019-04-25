@@ -67,6 +67,7 @@ public:
 	void attachLight(Ogre::Light* lig);
 	void setMaterial(std::string materialName);
 	string getMeshName();
+	Ogre::SceneNode* getSceneNode() { return ogreNode; };
 
 #pragma region Transform functions
 #pragma region Trasform Getters
