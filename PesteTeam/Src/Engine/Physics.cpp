@@ -78,8 +78,8 @@ void Physics::updatePhysics(float t) {
 	}
 
 	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
-	dynamicsWorld->setDebugDrawer(mDebugDrawer);
-	dynamicsWorld->debugDrawWorld();
+	//dynamicsWorld->setDebugDrawer(mDebugDrawer);
+	//dynamicsWorld->debugDrawWorld();
 }
 
 void Physics::addRigidBodyToWorld(btRigidBody* bt,const std::string & btname) {
