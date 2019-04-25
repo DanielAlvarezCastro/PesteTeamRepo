@@ -8,6 +8,8 @@ TargetController::TargetController(GameObject* target, Ogre::Camera* camera_, st
 	keyboard = MainApp::instance()->getKeyboard();
 	sightName = sightPath;
 	secondSightName = secondSightPath;
+	screenW = MainApp::instance()->getRenderWindow()->getWidth();
+	screenH = MainApp::instance()->getRenderWindow()->getHeight();
 }
 
 TargetController::~TargetController()
@@ -55,8 +57,8 @@ bool TargetController::getScreenspaceCoords(Ogre::SceneNode* object, Ogre::Vecto
 	point = camera->getProjectionMatrix() * (camera->getViewMatrix() * point);
 
 	// Transform from coordinate space [-1, 1] to [0, 1] and update in-value
-	result.x = 800*((point.x / 2) + 0.5f)-(w/2);
-	result.y = 600*(-(point.y / 2) + 0.5f)-(h/2);
+	result.x = screenW*((point.x / 2) + 0.5f)-(w/2);
+	result.y = screenH*(-(point.y / 2) + 0.5f)-(h/2);
 
 	return true;
 }

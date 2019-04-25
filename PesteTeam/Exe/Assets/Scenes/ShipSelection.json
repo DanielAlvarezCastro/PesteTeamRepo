@@ -5,7 +5,7 @@
 	{
 		"Name" : "SelectYourShip",
 		"Type" : "ImageBox",		
-		"Position" : [150,20],
+		"Position" : [290,20],
 		"Size" : [500,70],
 		"Src" : "SelectYourShip.png"
 	},
@@ -19,7 +19,7 @@
 	{
 		"Name" : "RightArrow",
 		"Type" : "ImageBox",		
-		"Position" : [750,300],
+		"Position" : [1030,300],
 		"Size" : [50,50],
 		"Src" : "SelectedArrowR.png"
 	}
@@ -27,7 +27,7 @@
 	{
 		"Name" : "ShipTitle",
 		"Type" : "ImageBox",		
-		"Position" : [200,100],
+		"Position" : [340,100],
 		"Size" : [400,125],
 		"Src" : "SXRVengeance.png"
 	}

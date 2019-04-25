@@ -329,9 +329,9 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->addComponent(ftc);
 	scene->addComponent(ntc);
 
-	MyGUI::ImageBox* b = GUIManager::instance()->createImage("HealthBarBlue.png", 200, 20, 400, 40, "ImageBox", "HealthBar");
+	MyGUI::ImageBox* b = GUIManager::instance()->createImage("HealthBarBlue.png", 340, 20, 400, 40, "ImageBox", "HealthBar");
 	scene->addGUIObject(b);
-	MyGUI::ImageBox* b2 = GUIManager::instance()->createImage("HealthBarFront.png", 200, 20, 400, 40, "ImageBox", "HealthBarFront");
+	MyGUI::ImageBox* b2 = GUIManager::instance()->createImage("HealthBarFront.png", 340, 20, 400, 40, "ImageBox", "HealthBarFront");
 	scene->addGUIObject(b2);
 	
 

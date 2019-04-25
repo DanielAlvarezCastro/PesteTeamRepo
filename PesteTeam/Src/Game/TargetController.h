@@ -17,6 +17,8 @@ private:
 	Ogre::Camera* camera;
 	Ogre::Vector2 newPos;
 	OIS::Keyboard* keyboard;
+	int screenW;
+	int screenH;
 	
 	int sightState = 0;//0 normal 1 disparando
 	int w;

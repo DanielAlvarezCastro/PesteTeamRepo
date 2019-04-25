@@ -64,9 +64,10 @@ int MainApp::initOgre()
 		return false;
 
 	renderSys->setConfigOption("Full Screen", "No");
-	renderSys->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
+	renderSys->setConfigOption("Video Mode", "1080 x 720 @ 32-bit colour");
 
 	mWindow = mRoot->initialise(true, "Retrowave Spaceship FoxMcDonald");
+
 
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();

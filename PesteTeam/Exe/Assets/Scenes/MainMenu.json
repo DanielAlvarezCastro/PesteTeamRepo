@@ -6,35 +6,35 @@
 		{
 			"Name" : "TitleCircle",
 			"Type" : "ImageBox",		
-			"Position" : [200,0],
+			"Position" : [340,0],
 			"Size" : [400,333],
 			"Src" : "CircleLogo.png"
 		},
 		{
 			"Name" : "Title",
 			"Type" : "ImageBox",		
-			"Position" : [200,0],
+			"Position" : [340,0],
 			"Size" : [400,333],
 			"Src" : "TitleLogo.png"
 		},		
 		{
 			"Name" : "Play",
 			"Type" : "ImageBox",		
-			"Position" : [300,300],
+			"Position" : [440,300],
 			"Size" : [200,100],
 			"Src" : "PlaySelected.png"
 		},
 		{
 			"Name" : "Credits",
 			"Type" : "ImageBox",		
-			"Position" : [300,400],
+			"Position" : [440,400],
 			"Size" : [200,100],
 			"Src" : "CreditsUnSelected.png"
 		},
 		{
 			"Name" : "Exit",
 			"Type" : "ImageBox",		
-			"Position" : [300,500],
+			"Position" : [440,500],
 			"Size" : [200,100],
 			"Src" : "ExitUnSelected.png"
 		}
