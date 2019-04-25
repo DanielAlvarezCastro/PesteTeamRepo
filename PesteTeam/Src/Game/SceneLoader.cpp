@@ -152,13 +152,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* Nave = new GameObject();
 	Nave->createEntity(playerMesh, "Player", scene);
-	if (playerMesh == "SkyGrasper.mesh") {
-		Nave->setScale(Vec3(1, 1, 1));
-
-	}
-	else if (playerMesh == "SXRVengeance.mesh" || playerMesh == "RoyalWasp.mesh" || playerMesh=="NeonBlade.mesh" || playerMesh=="DiscoRainbow.mesh") {
-		Nave->setScale(Vec3(3, 3, 3));
-	}
+	Nave->setScale(Vec3(3, 3, 3));
+	
 	Nave->asingFather(pointer);
 	Nave->setPosition(Vec3(-1, 0, 0));
 	scene->addGameObject(Nave);
