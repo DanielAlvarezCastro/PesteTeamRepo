@@ -42,7 +42,6 @@ Vec3 GameObject::getBoundingBox()
 {
 	Ogre::AxisAlignedBox auxAABB = ogreEntity->getWorldBoundingBox(true);
 	Vec3 bb = auxAABB.getSize();
-	ogreNode->showBoundingBox(true);
 	return bb;
 }
 
