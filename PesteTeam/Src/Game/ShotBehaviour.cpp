@@ -9,6 +9,13 @@ ShotBehaviour::ShotBehaviour(GameObject* gameObject) : BehaviourComponent(gameOb
 ShotBehaviour::~ShotBehaviour()
 {
 	delete keyboard;
+
+	for (int i = 0; i < bullets_.size(); i++) {
+		delete bullets_[i];
+	}
+
+	// el vector de componentes no debe limpiar memoria aqui
+	// lo hara en la escena
 }
 
 void ShotBehaviour::Update(float t)

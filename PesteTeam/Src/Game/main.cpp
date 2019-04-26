@@ -20,6 +20,8 @@ int main() {
 	GameSceneManager::instance()->LoadScene("MainMenu");
 
 	SoundManager::instance()->Init();
+	SoundManager::instance()->GetEngine()->stopAllSounds();
+	SoundManager::instance()->PlaySound2D("SynthSong0.mp3", true, false);
 
 	MainApp::instance()->runGame();
 
