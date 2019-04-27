@@ -1,4 +1,5 @@
 #include "ShotBehaviour.h"
+#include "ParticleManager.h"
 
 ShotBehaviour::ShotBehaviour(GameObject* gameObject) : BehaviourComponent(gameObject)
 {
@@ -55,6 +56,8 @@ void ShotBehaviour::getBullets()
 		GameObject* bullet = new GameObject();
 		string name = "BalaLeft" + to_string(bulletCount);
 		bullet->createEntity("SXRVengeanceBullet.mesh", name, scn);
+		
+		
 
 		GameObject* bullet2 = new GameObject();
 		string name2 = "BalaRight" + to_string(bulletCount);
@@ -89,6 +92,8 @@ void ShotBehaviour::getBullets()
 		bullets_.push_back(bullet2);
 
 		bulletCount++;
+		
+		MainApp::instance()->getParticleManager()->createParticle(p2, scn, "Cross", 1.0);
 
 		std::pair<GameObject*, GameObject*> blls(bullet, bullet2);
 		UpdateValues(-1, blls);
@@ -96,6 +101,8 @@ void ShotBehaviour::getBullets()
 
 	else
 	{
+		Vec3 p2 = scn->getGameObject("Pivot2")->getGlobalPosition();
+		MainApp::instance()->getParticleManager()->createParticle(p2, scn, "Cross", 1.0);
 		std::pair<GameObject*, GameObject*> blls(bullets_[i], bullets_[i + 1]);
 		UpdateValues(i, blls);
 	}

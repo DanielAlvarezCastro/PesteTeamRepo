@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\Src\Engine\GUIManager.cpp" />
     <ClCompile Include="..\..\Src\Engine\MainApp.cpp" />
     <ClCompile Include="..\..\Src\Engine\OgreDebugUtils.cpp" />
+    <ClCompile Include="..\..\Src\Engine\ParticleManager.cpp" />
     <ClCompile Include="..\..\Src\Engine\Physics.cpp" />
     <ClCompile Include="..\..\Src\Engine\RigidBody.cpp" />
     <ClCompile Include="..\..\Src\Engine\Scene.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="..\..\Src\Engine\MainApp.h" />
     <ClInclude Include="..\..\Src\Engine\NodeStack.h" />
     <ClInclude Include="..\..\Src\Engine\OgreDebugUtils.h" />
+    <ClInclude Include="..\..\Src\Engine\ParticleManager.h" />
     <ClInclude Include="..\..\Src\Engine\Physics.h" />
     <ClInclude Include="..\..\Src\Engine\RigidBody.h" />
     <ClInclude Include="..\..\Src\Engine\Scene.h" />

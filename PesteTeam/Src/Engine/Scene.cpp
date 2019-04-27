@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+#include "ParticleManager.h"
 Scene::Scene()
 {
 	mSceneMgr = MainApp::instance()->getRoot()->createSceneManager();
@@ -24,7 +24,7 @@ void Scene::updateScene()
 	//{
 	//	c->Update(MainApp::instance()->deltaTime());
 	//}
-
+	MainApp::instance()->getParticleManager()->update(MainApp::instance()->deltaTime());
 	for (int i = 0; i < components.size(); i++)
 	{
 		if (components[i]->isGOActive())

@@ -18,9 +18,11 @@
 #include <OISMouse.h>
 #include <OISJoyStick.h>
 
+
 using namespace Ogre;
 using namespace OIS;
 
+class ParticleManager;
 class SceneMachine;
 class Scene;
 class GameTime;
@@ -39,6 +41,7 @@ private:
 	
 	SceneMachine* sceneMC;
 	GameTime* time;
+	ParticleManager* particleMgr;
 
 	OIS::InputManager* mInputMgr;
 	OIS::Mouse* mMouse;
@@ -76,6 +79,7 @@ public:
 	Ogre::Root* getRoot() { return mRoot; };
 	Ogre::SceneManager* getCurrentSceneMgr();
 	Scene* getCurrentScene();
+	ParticleManager* getParticleManager();
 
 	OIS::Mouse* getMouse() { return mMouse; }
 	OIS::Keyboard* getKeyboard() { return mKeyboard; }
