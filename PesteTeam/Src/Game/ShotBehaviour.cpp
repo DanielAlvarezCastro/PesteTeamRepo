@@ -25,7 +25,7 @@ void ShotBehaviour::Update(float t)
 			cooldown--;
 		else
 		{
-			cooldown = 10;
+			cooldown = 3;
 			keyDown = false;
 		}
 	}

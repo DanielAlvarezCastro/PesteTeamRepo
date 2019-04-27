@@ -13,7 +13,7 @@ private:
 	Scene* scn;
 
 	int bulletCount = 0;
-	int cooldown = 10;
+	int cooldown = 1;
 	bool keyDown = false;
 
 	std::vector<GameObject*> bullets_;
