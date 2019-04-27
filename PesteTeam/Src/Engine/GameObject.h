@@ -66,7 +66,11 @@ public:
 	void addRigidbody(RigidBody* rb);
 	void attachCamera(Ogre::Camera* cam);
 	void attachLight(Ogre::Light* lig);
+	void attachMovableObject(Ogre::MovableObject* ob);
+	void detachObject(std::string name);
+	void detachAllObjects();
 	void setMaterial(std::string materialName);
+	void setName(std::string n);
 	string getMeshName();
 	Ogre::SceneNode* getSceneNode() { return ogreNode; };
 

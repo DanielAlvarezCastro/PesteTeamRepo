@@ -97,8 +97,25 @@ void GameObject::attachLight(Ogre::Light * lig)
 
 	ogreNode->setDirection(Ogre::Vector3(-1, 0, -1));
 }
+void GameObject::attachMovableObject(Ogre::MovableObject * ob)
+{
+	ogreNode->attachObject(ob);	
+}
+void GameObject::detachObject(std::string name)
+{
+	ogreNode->detachObject(name);
+}
+void GameObject::detachAllObjects()
+{
+	ogreNode->detachAllObjects();
+}
 void GameObject::setMaterial(std::string materialName) {
 	ogreEntity->setMaterialName(materialName);
+}
+
+void GameObject::setName(std::string n)
+{
+	name = n;
 }
 
 string GameObject::getMeshName()

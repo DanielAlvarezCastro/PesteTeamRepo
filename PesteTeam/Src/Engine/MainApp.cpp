@@ -4,11 +4,13 @@
 #include "SceneMachine.h"
 #include "GameTime.h"
 
+#include <ParticleManager.h>
 MainApp* MainApp::instance_ = nullptr;
 
 MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogre::BLANKSTRING)
 {
 	sceneMC = new SceneMachine();
+	particleMgr = new ParticleManager();
 }
 
 MainApp::~MainApp()
@@ -183,4 +185,9 @@ Ogre::SceneManager * MainApp::getCurrentSceneMgr()
 Scene * MainApp::getCurrentScene()
 {
 	return sceneMC->currentScene();
+}
+
+ParticleManager * MainApp::getParticleManager()
+{
+	return particleMgr;
 }

@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include <SoundManager.h>
 #include <MyGUI.h>
+
 class Scene
 {
 protected:
