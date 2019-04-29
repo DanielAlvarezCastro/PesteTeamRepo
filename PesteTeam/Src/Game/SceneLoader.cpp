@@ -152,7 +152,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->addGameObject(pointer);
 
 	GameObject* Nave = new GameObject();
-	Nave->createEntity(playerMesh, "Player", scene);
+	Nave->createEntity(playerShip + ".mesh", "Player", scene);
 	Nave->setScale(Vec3(3, 3, 3));
 	
 	Nave->asingFather(pointer);
@@ -299,7 +299,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	ShipController* sc = new ShipController(Nave);
 	scene->addComponent(sc);
 
-	ShotBehaviour* sb = new ShotBehaviour(pointer);
+	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip + "Bullet.mesh");
 	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
@@ -346,9 +346,9 @@ void SceneLoader::deleteScene(std::string sceneName)
 	scenesMap.erase(sceneName);
 }
 
-void SceneLoader::setPlayerMesh(std::string meshName)
+void SceneLoader::setPlayerShip(std::string shipName)
 {
-	playerMesh = meshName;
+	playerShip = shipName;
 }
 
 GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<float> position, Scene* scene)
@@ -459,18 +459,14 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			std::string circlePivot = (*itComponent)["Pivot"];
 			GameObject* ob = scene->getGameObject(circlePivot);
 			ShipSelection* SS = new ShipSelection(go, shipDist, ob);
-			std::vector<std::string> names = (*itComponent)["Models"];
-			for (auto modelName:names) {
+			std::vector<std::string> models = (*itComponent)["Models"];
+			for (auto modelName:models) {
 				GameObject* ob = scene->getGameObject(modelName);
 				SS->addShipModel(ob);
 			}
-			std::vector<std::string> meshes = (*itComponent)["Meshes"];
-			for (auto mesh : meshes) {
-				SS->addShipMesh(mesh);
-			}
-			std::vector<std::string> titles = (*itComponent)["Titles"];
-			for (auto title : titles) {
-				SS->addShipTitle(title);
+			std::vector<std::string> names = (*itComponent)["Names"];
+			for (auto name : names) {
+				SS->addShipName(name);
 			}
 			SS->setInitialShipsPosition();
 			scene->addComponent(SS);

@@ -26,7 +26,7 @@ void ShipSelection::shipsAnimation()
 
 void ShipSelection::selectShip()
 {
-	GameSceneManager::instance()->setPlayerMesh(meshes[state]);
+	GameSceneManager::instance()->setPlayerShip(shipNames[state]);
 	GameSceneManager::instance()->LoadScene("TestScene");
 
 	int rnd = rand() % 2;
@@ -37,9 +37,9 @@ void ShipSelection::selectShip()
 		SoundManager::instance()->PlaySound2D("SynthSong2.mp3", true, false);
 }
 
-void ShipSelection::addShipMesh(string mesh)
+void ShipSelection::addShipName(string name)
 {
-	meshes.push_back(mesh);
+	shipNames.push_back(name);
 }
 
 
@@ -47,11 +47,6 @@ void ShipSelection::addShipModel(GameObject * go)
 {
 	ships.push_back(go);
 	shipsNum++;
-}
-
-void ShipSelection::addShipTitle(string title)
-{
-	titles.push_back(title);
 }
 
 void ShipSelection::updateGUI()
@@ -74,7 +69,7 @@ void ShipSelection::updateGUI()
 	else {
 		GUIMgr->getImage("LeftArrow")->setImageTexture("SelectedArrowL.png");
 	}
-	GUIMgr->getImage("ShipTitle")->setImageTexture(titles[state]);
+	GUIMgr->getImage("ShipTitle")->setImageTexture(shipNames[state]+ ".png");
 }
 
 ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot)

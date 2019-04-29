@@ -14,7 +14,7 @@
 		"Type" : "ImageBox",		
 		"Position" : [0,300],
 		"Size" : [50,50],
-		"Src" : "SelectedArrowL.png"
+		"Src" : "UnSelectedArrowL.png"
 	},
 	{
 		"Name" : "RightArrow",
@@ -108,8 +108,7 @@
 					"ShipDistance" : -12,
 					"Pivot" : "RectPivot",
 					"Models" : ["SXRVengeanceModel","CyberGrasperModel","RoyalWaspModel", "NeonBladeModel","StarRaveModel"],
-					"Meshes" : ["SXRVengeance.mesh","CyberGrasper.mesh","RoyalWasp.mesh", "NeonBlade.mesh", "StarRave.mesh"],
-					"Titles" : ["SXRVengeance.png","CyberGrasper.png","RoyalWasp.png", "NeonBlade.png", "StarRave.png"]
+					"Names" : ["SXRVengeance", "CyberGrasper", "RoyalWasp", "NeonBlade", "StarRave"]
 				}
 			]
 		},

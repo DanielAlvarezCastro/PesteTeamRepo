@@ -15,12 +15,13 @@ private:
 	int bulletCount = 0;
 	int cooldown = 10;
 	bool keyDown = false;
+	std::string bulletMesh_;
 
 	std::vector<GameObject*> bullets_;
 	std::vector<BulletBehaviour*> bComponents_;
 
 public:
-	ShotBehaviour(GameObject* gameObject);
+	ShotBehaviour(GameObject* gameObject, std::string bulletMesh);
 	virtual ~ShotBehaviour();
 
 	virtual void Update(float t);

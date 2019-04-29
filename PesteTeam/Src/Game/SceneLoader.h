@@ -18,7 +18,7 @@ private:
 	std::map<std::string, std::string> prefabsMap;
 	std::string scenesPath;
 	std::map<std::string, Scene*> scenesMap;
-	std::string playerMesh = "SXRVengeance.mesh";
+	std::string playerShip = "SXRVengeance";
 public:
 	SceneLoader(std::string scenesPath);
 	bool loadPrefabsFromFile();
@@ -27,7 +27,7 @@ public:
 	bool sceneAlreadyLoaded(std::string sceneName);
 	bool loadTestScene(Scene* scene);
 	void deleteScene(std::string sceneName);
-	void setPlayerMesh(std::string meshName);
+	void setPlayerShip(std::string shipName);
 
 	GameObject* createGameObject(json gameObject_json, std::vector<float> position, Scene* scene);
 	void createGUIObject(json gui_json, Scene* scene);

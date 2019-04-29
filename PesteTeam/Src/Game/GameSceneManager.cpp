@@ -10,9 +10,9 @@ GameSceneManager::GameSceneManager()
 GameSceneManager::~GameSceneManager()
 {
 }
-void GameSceneManager::setPlayerMesh(string meshName)
+void GameSceneManager::setPlayerShip(string shipName)
 {
-	loader->setPlayerMesh(meshName);
+	loader->setPlayerShip(shipName);
 }
 //Carga las escenas a través del SceneLoader que lee los json
 bool GameSceneManager::LoadGame()
