@@ -299,7 +299,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	ShipController* sc = new ShipController(Nave);
 	scene->addComponent(sc);
 
-	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip + "Bullet.mesh");
+	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip);
 	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);

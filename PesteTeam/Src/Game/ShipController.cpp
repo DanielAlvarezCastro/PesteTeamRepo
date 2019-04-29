@@ -1,6 +1,7 @@
 #include "ShipController.h"
 #include <GameObject.h>
 #include "GameSceneManager.h"
+#include "ParticleManager.h"
 
 
 ShipController::ShipController(GameObject* gameObject) :BehaviourComponent(gameObject)

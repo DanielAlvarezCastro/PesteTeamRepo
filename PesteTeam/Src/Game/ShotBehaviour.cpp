@@ -1,10 +1,11 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
 
-ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string bulletMesh) : BehaviourComponent(gameObject), bulletMesh_ (bulletMesh)
+ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : BehaviourComponent(gameObject), shipName_(shipName)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
+	bulletMeshName = shipName + "Bullet.mesh";
 }
 
 ShotBehaviour::~ShotBehaviour()
@@ -55,13 +56,12 @@ void ShotBehaviour::getBullets()
 	{
 		GameObject* bullet = new GameObject();
 		string name = "BalaLeft" + to_string(bulletCount);
-		bullet->createEntity(bulletMesh_, name, scn);
-		
-		
+		bullet->createEntity(bulletMeshName, name, scn);
+
 
 		GameObject* bullet2 = new GameObject();
 		string name2 = "BalaRight" + to_string(bulletCount);
-		bullet2->createEntity(bulletMesh_, name2, scn);
+		bullet2->createEntity(bulletMeshName, name2, scn);
 
 		bullet->setScale(Vec3(0.5, 0.5, 1.5));
 		bullet2->setScale(Vec3(0.5, 0.5, 1.5));
@@ -93,7 +93,6 @@ void ShotBehaviour::getBullets()
 
 		bulletCount++;
 		
-		//MainApp::instance()->getParticleManager()->createParticle(p2, scn, "Cross", 1.0);
 
 		std::pair<GameObject*, GameObject*> blls(bullet, bullet2);
 		UpdateValues(-1, blls);
@@ -102,7 +101,6 @@ void ShotBehaviour::getBullets()
 	else
 	{
 		Vec3 p2 = scn->getGameObject("Pivot2")->getGlobalPosition();
-		//MainApp::instance()->getParticleManager()->createParticle(p2, scn, "Cross", 1.0);
 		std::pair<GameObject*, GameObject*> blls(bullets_[i], bullets_[i + 1]);
 		UpdateValues(i, blls);
 	}

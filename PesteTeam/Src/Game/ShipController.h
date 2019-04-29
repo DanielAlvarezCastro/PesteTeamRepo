@@ -1,6 +1,6 @@
 #pragma once
 #include <BehaviourComponent.h>
-#include <MainApp.h>s
+#include <MainApp.h>
 #include <Euler.h>
 class ShipController : public BehaviourComponent
 {
