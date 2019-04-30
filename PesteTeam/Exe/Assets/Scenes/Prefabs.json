@@ -44,13 +44,37 @@
 					"Name" : "NearTarget",
 					"Type" : "NearTarget",
 					"Mesh" : "None",
-					"Position" : [0,0,-100]
+					"Scale" : [1,1,1],
+					"Position" : [0,0,-100],
+					"Components" : [
+						{
+							"Name" : "TargetController",
+							"CameraName" : "CameraMain",
+							"BlueImage" : "BigBlueSight.png",
+							"RedImage" : "BigRedSight.png",
+							"GUIName" : "NearSight",
+							"Width" : 60,
+							"Height" : 60
+						}
+					]
 				},
 				{
 					"Name" : "FarTarget",
 					"Type" : "FarTarget",
 					"Mesh" : "None",
-					"Position" : [0,0,-200]
+					"Scale" : [1,1,1],
+					"Position" : [0,0,-200],
+					"Components" : [
+						{
+							"Name" : "TargetController",
+							"CameraName" : "CameraMain",
+							"BlueImage" : "SmallBlueSight.png",
+							"RedImage" : "SmallRedSight.png",
+							"GUIName" : "FarSight",
+							"Width" : 30,
+							"Height" : 30
+						}
+					]
 				},
 				{
 					"Name" : "CameraOb",
@@ -83,43 +107,7 @@
 					"RightPivot" : "RightGunPivot"
 				}
             ]
-		},
-		{
-			"Name" : "NearTarget",
-			"Type" : "NearTarget",
-			"Mesh" : "None",
-			"Scale" : [1,1,1],
-			"Father" : "Pointer",
-			"Components" : [
-				{
-					"Name" : "TargetController",
-					"CameraName" : "CameraMain",
-					"BlueImage" : "BigBlueSight.png",
-					"RedImage" : "BigRedSight.png",
-					"GUIName" : "NearSight",
-					"Width" : 30,
-					"Height" : 30
-				}
-			]
-		},
-		{
-			"Name" : "FarTarget",
-			"Type" : "FarTarget",
-			"Mesh" : "None",
-			"Scale" : [1,1,1],
-			"Father" : "Pointer",
-			"Components" : [
-				{
-					"Name" : "TargetController",
-					"CameraName" : "CameraMain",
-					"BlueImage" : "SmallBlueSight.png",
-					"RedImage" : "SmallRedSight.png",
-					"GUIName" : "FarSight",
-					"Width" : 30,
-					"Height" : 30
-				}
-			]
-		},
+		},		
 		{
 			"Name" : "Building1",
 			"Type" : "Building1",
