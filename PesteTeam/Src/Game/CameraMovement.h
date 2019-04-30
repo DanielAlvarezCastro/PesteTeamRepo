@@ -13,7 +13,10 @@ private:
 	Real verticalLimit = 10;
 	Real verticalVel = 4;
 	Real aceleratedCameraOffset = 80;
+	Real deceledatedCameraOffset = 20;
 	Real cameraDefaulOffset = 40;
+	Real cameraAceleratedVel = 80;
+	Real cameraDeceletatedVel = 20;
 public:
 	CameraMovement(GameObject* camera_, GameObject* _target, GameObject* _pivot);
 	virtual ~CameraMovement();

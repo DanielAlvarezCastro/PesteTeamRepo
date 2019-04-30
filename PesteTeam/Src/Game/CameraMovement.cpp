@@ -53,15 +53,24 @@ void CameraMovement::Update(float t)
 
 	if (keyboard->isKeyDown(OIS::KC_SPACE)) {
 		if (gameObject->getPosition().z < aceleratedCameraOffset) {
-			gameObject->translate(Vec3(0, 0, 80 * t));
+			gameObject->translate(Vec3(0, 0, cameraAceleratedVel * t));
 
 		}
 	}
+	else if (keyboard->isKeyDown(OIS::KC_C)) {
+		if (gameObject->getPosition().z > deceledatedCameraOffset) {
+			gameObject->translate(Vec3(0, 0, -cameraDeceletatedVel * t));
 
+		}
+	}
 	else
 	{
-		if (gameObject->getPosition().z > cameraDefaulOffset) {
-			gameObject->translate(Vec3(0, 0, -70 * t));
+		if (gameObject->getPosition().z > cameraDefaulOffset +1) {
+			gameObject->translate(Vec3(0, 0, -cameraAceleratedVel * t));
+
+		}
+		else if (gameObject->getPosition().z < cameraDefaulOffset -1) {
+			gameObject->translate(Vec3(0, 0, cameraDeceletatedVel * t));
 
 		}
 	}

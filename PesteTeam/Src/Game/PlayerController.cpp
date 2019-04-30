@@ -62,8 +62,11 @@ void PlayerController::Update(float t)
 	if (keyboard->isKeyDown(OIS::KC_SPACE)) {
 		gameObject->translate(euler.forward() * fastSpeed * t);
 	}
+	else if (keyboard->isKeyDown(OIS::KC_C)) {
+		gameObject->translate(euler.forward() * slowSpeed * t);
+	}
 	else {
-		gameObject->translate(euler.forward() * normalSpeed* t);
+		gameObject->translate(euler.forward() *normalSpeed * t);
 	}
 	if (keyboard->isKeyDown(OIS::KC_P)) {
 		GameSceneManager::instance()->CloseScene();
