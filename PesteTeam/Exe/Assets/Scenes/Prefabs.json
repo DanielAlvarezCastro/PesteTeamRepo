@@ -3,61 +3,190 @@
 		{
 			"Name" : "Pointer",
 			"Type" : "Pointer",
-			"Mesh" : "cube.mesh",
-			"Scale" : [0.05,0.05,0.05]
-		},
-        {
-            "Name" : "Player",
-            "Type" : "Player",
-			"Mesh" : "SXRVengeance.mesh",
-			"Scale" : [2,2,2],
-            "Components" : [
+			"Mesh" : "None",
+			"Scale" : [1,1,1],
+			"Position" : [0,40,0],
+			"Childs" : [
 				{
-					"Name" : "PlayerController",
-					"GameObject" : "Pointer"
-				}
-            ]
-        },
-		{
-            "Name" : "Enemy1",
-            "Type" : "EnemyShip",
-            "Mesh" : "cube.mesh",
-            "Components" : [
+					"Name" : "Player",
+					"Type" : "Player",
+					"Mesh" : "SelectedShip",
+					"Scale" : [3,3,3],
+					"Position" : [-1,0,0],
+					"Components" : [
+						{
+							"Name" : "ShipController"
+						}
+					]
+				},				
 				{
-					"Name" : "HealthScript",
-					"Health" : 20,
-					"Time" : 0.1
+					"Name" : "CameraPivot",
+					"Type" : "CameraPivot",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [0,0,-50]
 				},
 				{
-					"Name" : "Shooter",
-					"Bullet" : "EnemyBullet",
-					"FireRate" : 0.1,
-					"Damage" : 10					
-				}
-            ]
-        },
-		{
-            "Name" : "Enemy1",
-            "Type" : "EnemyShip",
-            "Mesh" : "cube.mesh",
-            "Components" : [
-				{
-					"Name" : "HealthScript",
-					"Health" : 20,
-					"Time" : 0.1
+					"Name" : "LeftGunPivot",
+					"Type" : "LeftGunPivot",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [-7,0,-15]
 				},
 				{
-					"Name" : "Shooter",
-					"Bullet" : "EnemyBullet",
-					"FireRate" : 0.1,
-					"Damage" : 10					
+					"Name" : "RightGunPivot",
+					"Type" : "RightGunPivot",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [7,0,-15]
+				},
+				{
+					"Name" : "NearTarget",
+					"Type" : "NearTarget",
+					"Mesh" : "None",
+					"Position" : [0,0,-100]
+				},
+				{
+					"Name" : "FarTarget",
+					"Type" : "FarTarget",
+					"Mesh" : "None",
+					"Position" : [0,0,-200]
+				},
+				{
+					"Name" : "CameraOb",
+					"Type" : "None",
+					"Mesh" : "None",
+					"Position" : [0,0,40],	
+					"Components" : [
+						{
+							"Name" : "Camera",
+							"CameraName" : "CameraMain",
+							"NearClipDistance" : 5,
+							"LookAt" : [0,120,0]
+						},
+						{
+							"Name" : "CameraMovement",
+							"Pivot" : "CameraPivot",
+							"Target" : "Pointer"
+						}
+					]
+				}
+			
+			],
+			"Components" : [
+				{
+					"Name" : "PlayerController"
+				},
+				{
+					"Name" : "ShotBehaviour",
+					"LeftPivot" : "LeftGunPivot",
+					"RightPivot" : "RightGunPivot"
 				}
             ]
 		},
 		{
-            "Name" : "Cubito",
-            "Type" : "Cubito",
-            "Mesh" : "cube.mesh"
-        }
+			"Name" : "NearTarget",
+			"Type" : "NearTarget",
+			"Mesh" : "None",
+			"Scale" : [1,1,1],
+			"Father" : "Pointer",
+			"Components" : [
+				{
+					"Name" : "TargetController",
+					"CameraName" : "CameraMain",
+					"BlueImage" : "BigBlueSight.png",
+					"RedImage" : "BigRedSight.png",
+					"GUIName" : "NearSight",
+					"Width" : 30,
+					"Height" : 30
+				}
+			]
+		},
+		{
+			"Name" : "FarTarget",
+			"Type" : "FarTarget",
+			"Mesh" : "None",
+			"Scale" : [1,1,1],
+			"Father" : "Pointer",
+			"Components" : [
+				{
+					"Name" : "TargetController",
+					"CameraName" : "CameraMain",
+					"BlueImage" : "SmallBlueSight.png",
+					"RedImage" : "SmallRedSight.png",
+					"GUIName" : "FarSight",
+					"Width" : 30,
+					"Height" : 30
+				}
+			]
+		},
+		{
+			"Name" : "Building1",
+			"Type" : "Building1",
+			"Mesh" : "Building1.mesh",
+			"Scale" : [5,5,5]
+		},
+		{
+			"Name" : "Building2",
+			"Type" : "Building2",
+			"Mesh" : "Building2.mesh",
+			"Scale" : [5,5,5]
+		},
+		{
+			"Name" : "Building3",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Scale" : [10,10,10]
+		},
+		{
+			"Name" : "Building4",
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Scale" : [10,10,10]
+		},
+		{
+            "Name" : "TurretBase",
+            "Type" : "TurretBase",
+            "Mesh" : "TurretBase.mesh",
+			"Scale" : [10,10,10]
+        },
+		{
+            "Name" : "Turret",
+            "Type" : "Turret",
+            "Mesh" : "Turret.mesh",
+			"Scale" : [10,10,10],
+			 "Components" : [
+				 {
+					"Name" : "TurretBehaviour",
+					"Target" : "Pointer"
+				 }
+			 ]
+        },
+		{
+            "Name" : "Fly",
+            "Type" : "Fly",
+            "Mesh" : "Fly.mesh",
+			"Scale" : [1,1,1],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 100,
+					"Height" : 25
+				 }
+			]
+        },
+		{
+			"Name" : "FloorGrid",
+			"Type" : "FloorGrid",
+			"Mesh" : "FloorGrid.mesh",
+			"Scale" : [10,10,10]
+		},
+		{
+			"Name" : "Mountains",
+			"Type" : "Mountains",
+			"Mesh" : "Mountains.mesh",
+			"Scale" : [10,10,10]
+		}
     ]
 }

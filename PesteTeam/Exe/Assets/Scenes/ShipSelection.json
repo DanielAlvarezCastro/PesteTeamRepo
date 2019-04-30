@@ -55,48 +55,45 @@
 			"Name" : "RectPivot",
 			"Type" : "None",
 			"Mesh" : "None",
-			"Position" : [0,0,0]			
-		},
-		{
-			"Name" : "SXRVengeanceModel",
-			"Type" : "None",
-			"Mesh" : "SXRVengeance.mesh",
-			"Position" : [0,98,-10],
-			"Scale" : [1,1,1],
-			"Father" : "RectPivot"
-		},
-		{
-			"Name" : "CyberGrasperModel",
-			"Type" : "None",
-			"Mesh" : "CyberGrasper.mesh",
-			"Position" : [0,98,-10],
-			"Scale" : [1,1,1],
-			"Father" : "RectPivot"
-		},
-		{
-			"Name" : "RoyalWaspModel",
-			"Type" : "None",
-			"Mesh" : "RoyalWasp.mesh",
-			"Position" : [0,98,-10],
-			"Scale" : [1,1,1],
-			"Father" : "RectPivot"
-		},
-		{
-			"Name" : "NeonBladeModel",
-			"Type" : "None",
-			"Mesh" : "NeonBlade.mesh",
-			"Position" : [0,98,-10],
-			"Scale" : [1,1,1],
-			"Father" : "RectPivot"
-		},
-		{
-			"Name" : "StarRaveModel",
-			"Type" : "None",
-			"Mesh" : "StarRave.mesh",
-			"Position" : [0,98,-10],
-			"Scale" : [1,1,1],
-			"Father" : "RectPivot"
-		},
+			"Position" : [0,0,0],
+			"Childs" : [
+				{
+					"Name" : "SXRVengeanceModel",
+					"Type" : "None",
+					"Mesh" : "SXRVengeance.mesh",
+					"Position" : [0,98,-10],
+					"Scale" : [1,1,1]
+				},
+				{
+					"Name" : "CyberGrasperModel",
+					"Type" : "None",
+					"Mesh" : "CyberGrasper.mesh",
+					"Position" : [0,98,-10],
+					"Scale" : [1,1,1]
+				},
+				{
+					"Name" : "RoyalWaspModel",
+					"Type" : "None",
+					"Mesh" : "RoyalWasp.mesh",
+					"Position" : [0,98,-10],
+					"Scale" : [1,1,1]
+				},
+				{
+					"Name" : "NeonBladeModel",
+					"Type" : "None",
+					"Mesh" : "NeonBlade.mesh",
+					"Position" : [0,98,-10],
+					"Scale" : [1,1,1]
+				},
+				{
+					"Name" : "StarRaveModel",
+					"Type" : "None",
+					"Mesh" : "StarRave.mesh",
+					"Position" : [0,98,-10],
+					"Scale" : [1,1,1]
+				}
+			]
+		},		
 		{
 			"Name" : "ShipSelectionManager",
 			"Type" : "None",

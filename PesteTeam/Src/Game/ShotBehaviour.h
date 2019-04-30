@@ -18,11 +18,14 @@ private:
 	std::string shipName_;
 	std::string bulletMeshName;
 
+	GameObject* leftPivot;
+	GameObject* rightPivot;
+
 	std::vector<GameObject*> bullets_;
 	std::vector<BulletBehaviour*> bComponents_;
 
 public:
-	ShotBehaviour(GameObject* gameObject, std::string shipName);
+	ShotBehaviour(GameObject* gameObject, std::string shipName, GameObject* leftP, GameObject* rightP);
 	virtual ~ShotBehaviour();
 
 	virtual void Update(float t);
