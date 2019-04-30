@@ -13,6 +13,11 @@ private:
 	OIS::Keyboard* keyboard;
 	float lastT = 0;
 	Euler e;
+	Real rotationVel = pi / 4;//How fast ship rotates
+	Real pitchLimit = pi / 7;//Look up/down limit
+	Real normalSpeed = 60;
+	Real fastSpeed = 120;
+
 public:
 	PlayerController(GameObject* gameObject);
 	virtual ~PlayerController();

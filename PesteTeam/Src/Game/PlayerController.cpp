@@ -19,23 +19,23 @@ PlayerController::~PlayerController()
 void PlayerController::Update(float t)
 {
 	if (keyboard->isKeyDown(OIS::KC_A)) {
-		euler.rotate(Ogre::Radian((pi / 4)*t), Ogre::Radian(0), Ogre::Radian(0));
+		euler.rotate(Ogre::Radian(rotationVel*t), Ogre::Radian(0), Ogre::Radian(0));
 		gameObject->setOrientation(euler);
 	}
 	else if (keyboard->isKeyDown(OIS::KC_D)) {
-		euler.rotate(Ogre::Radian(-(pi / 4)*t), Ogre::Radian(0), Ogre::Radian(0));
+		euler.rotate(Ogre::Radian(-rotationVel *t), Ogre::Radian(0), Ogre::Radian(0));
 		gameObject->setOrientation(euler);
 	}
 	if (keyboard->isKeyDown(OIS::KC_W)) {
-		if(Math::Abs(euler.mPitch) < Radian((pi / 7))){
-			euler.rotate(Ogre::Radian(0), Ogre::Radian(-(pi / 4)*t), Ogre::Radian(0));
+		if(Math::Abs(euler.mPitch) < Radian(pitchLimit)){
+			euler.rotate(Ogre::Radian(0), Ogre::Radian(-rotationVel *t), Ogre::Radian(0));
 			gameObject->setOrientation(euler);
 			moved = true;
 		}
 	}
 	else if (keyboard->isKeyDown(OIS::KC_S)) {
-		if (Math::Abs(euler.mPitch) < Radian((pi / 7))){
-			euler.rotate(Ogre::Radian(0), Ogre::Radian((pi / 4)*t), Ogre::Radian(0));
+		if (Math::Abs(euler.mPitch) < Radian(pitchLimit)){
+			euler.rotate(Ogre::Radian(0), Ogre::Radian(rotationVel*t), Ogre::Radian(0));
 			gameObject->setOrientation(euler);
 			moved = true;
 		}
@@ -60,10 +60,10 @@ void PlayerController::Update(float t)
 		}
 	}
 	if (keyboard->isKeyDown(OIS::KC_SPACE)) {
-		gameObject->translate(euler.forward() * 120 * t);
+		gameObject->translate(euler.forward() * fastSpeed * t);
 	}
 	else {
-		gameObject->translate(euler.forward() * 60* t);
+		gameObject->translate(euler.forward() * normalSpeed* t);
 	}
 	if (keyboard->isKeyDown(OIS::KC_P)) {
 		GameSceneManager::instance()->CloseScene();

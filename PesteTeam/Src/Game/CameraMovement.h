@@ -6,6 +6,14 @@
 class CameraMovement :
 	public BehaviourComponent
 {
+private:
+	Real horizontalLimit = 30;
+	Real horizontaVel = 1;
+	Real horizontalBackVel = 20;
+	Real verticalLimit = 10;
+	Real verticalVel = 4;
+	Real aceleratedCameraOffset = 80;
+	Real cameraDefaulOffset = 40;
 public:
 	CameraMovement(GameObject* camera_, GameObject* _target, GameObject* _pivot);
 	virtual ~CameraMovement();
