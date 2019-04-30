@@ -1,6 +1,22 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
 
+
+void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
+{	
+	//si tiene rigidbody
+	if (other->getRigidBody() != nullptr && one->isActive()) { 
+		std::cout << "Soy una bala y he chocado" << std::endl;
+		one->setActive(false);
+	}
+
+	//si es un objeto con comportamiento procesa el choque
+	if (other->getBComponents().size() > 0) { 
+		DownLifeMsg Msg(10, other->getName());
+		other->getBComponents()[0]->sendSceneMsg(&Msg);
+	}
+}
+
 ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, GameObject* leftP, GameObject* rightP) : BehaviourComponent(gameObject), shipName_(shipName),
 leftPivot(leftP), rightPivot(rightP)
 {
@@ -64,16 +80,18 @@ void ShotBehaviour::getBullets()
 		string name2 = "BulletRight" + to_string(bulletCount);
 		bullet2->createEntity(bulletMeshName, name2, scn);
 
-		bullet->setScale(Vec3(0.5, 0.5, 1.5));
-		bullet2->setScale(Vec3(0.5, 0.5, 1.5));
+		bullet->setScale(Vec3(0.5, 0.5, 2.5));
+		bullet2->setScale(Vec3(0.5, 0.5, 2.5));
 
 		string rName = "rBulletLeft" + to_string(bulletCount);
 		RigidBody* rBullet = new RigidBody(bullet, rName, 10, true);
+		rBullet->setCollisionCallback(OnBulletCollision);
 		bullet->addRigidbody(rBullet);
 		scn->addComponent(rBullet);
 
 		string rName2 = "rBulletRight" + to_string(bulletCount);
 		RigidBody* rBullet2 = new RigidBody(bullet2, rName2, 10, true);
+		rBullet2->setCollisionCallback(OnBulletCollision);
 		bullet2->addRigidbody(rBullet2);
 		scn->addComponent(rBullet2);
 
@@ -93,7 +111,6 @@ void ShotBehaviour::getBullets()
 		bullets_.push_back(bullet2);
 
 		bulletCount++;
-		
 
 		std::pair<GameObject*, GameObject*> blls(bullet, bullet2);
 		UpdateValues(-1, blls);

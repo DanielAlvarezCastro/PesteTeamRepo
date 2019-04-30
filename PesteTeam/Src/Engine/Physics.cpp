@@ -30,8 +30,11 @@ void CollisionCallBack(btDynamicsWorld* world, btScalar t) {
 			j++;
 		}
 		if (j > 0) {
-			static_cast<GameObject*>(obj1->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj2->getUserPointer()), collisionsA);
-			static_cast<GameObject*>(obj2->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj1->getUserPointer()), collisionsB);
+			if (static_cast<GameObject*>(obj1->getUserPointer())->isActive())
+				static_cast<GameObject*>(obj1->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj1->getUserPointer()), static_cast<GameObject*>(obj2->getUserPointer()), collisionsA);
+			
+			if (static_cast<GameObject*>(obj2->getUserPointer())->isActive())
+				static_cast<GameObject*>(obj2->getUserPointer())->getRigidBody()->onCollision(static_cast<GameObject*>(obj2->getUserPointer()), static_cast<GameObject*>(obj1->getUserPointer()), collisionsB);
 
 		}
 	}

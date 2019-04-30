@@ -5,7 +5,7 @@
 #include"Physics.h"
 #include<Ogre.h>
 
-typedef void(*OnCollisionCallback)(GameObject* other, std::vector<btManifoldPoint*> contactPoints);
+typedef void(*OnCollisionCallback)(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints);
 
 class RigidBody : public BasicComponent
 {
@@ -37,7 +37,7 @@ public:
 	virtual void Update(float t);
 
 	void setCollisionCallback(OnCollisionCallback cb) { ocb = cb; };
-	virtual void onCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints);
+	virtual void onCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints);
 };
 
 #endif // _RIGIDBODY
