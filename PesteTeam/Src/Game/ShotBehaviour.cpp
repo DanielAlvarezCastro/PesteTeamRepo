@@ -1,7 +1,6 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
 
-
 void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
 {	
 	//si tiene rigidbody
@@ -17,8 +16,7 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 	}
 }
 
-ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, GameObject* leftP, GameObject* rightP) : BehaviourComponent(gameObject), shipName_(shipName),
-leftPivot(leftP), rightPivot(rightP)
+ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : BehaviourComponent(gameObject), shipName_(shipName)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
@@ -72,31 +70,31 @@ void ShotBehaviour::getBullets()
 	if (!found)
 	{
 		GameObject* bullet = new GameObject();
-		string name = "BulletLeft" + to_string(bulletCount);
+		string name = "BalaLeft" + to_string(bulletCount);
 		bullet->createEntity(bulletMeshName, name, scn);
 
 
 		GameObject* bullet2 = new GameObject();
-		string name2 = "BulletRight" + to_string(bulletCount);
+		string name2 = "BalaRight" + to_string(bulletCount);
 		bullet2->createEntity(bulletMeshName, name2, scn);
 
 		bullet->setScale(Vec3(0.5, 0.5, 2.5));
 		bullet2->setScale(Vec3(0.5, 0.5, 2.5));
 
-		string rName = "rBulletLeft" + to_string(bulletCount);
+		string rName = "rBalaLeft" + to_string(bulletCount);
 		RigidBody* rBullet = new RigidBody(bullet, rName, 10, true);
 		rBullet->setCollisionCallback(OnBulletCollision);
 		bullet->addRigidbody(rBullet);
 		scn->addComponent(rBullet);
 
-		string rName2 = "rBulletRight" + to_string(bulletCount);
+		string rName2 = "rBalaRight" + to_string(bulletCount);
 		RigidBody* rBullet2 = new RigidBody(bullet2, rName2, 10, true);
 		rBullet2->setCollisionCallback(OnBulletCollision);
 		bullet2->addRigidbody(rBullet2);
 		scn->addComponent(rBullet2);
 
-		Vec3 p1 = leftPivot->getGlobalPosition();
-		Vec3 p2 = rightPivot->getGlobalPosition();
+		Vec3 p1 = scn->getGameObject("Pivot1")->getGlobalPosition();
+		Vec3 p2 = scn->getGameObject("Pivot2")->getGlobalPosition();
 		BulletBehaviour* bb = new BulletBehaviour(bullet, p1, gameObject->getDirection());
 		scn->addComponent(bb);
 		bComponents_.push_back(bb);
@@ -118,7 +116,7 @@ void ShotBehaviour::getBullets()
 
 	else
 	{
-		Vec3 p2 = rightPivot->getGlobalPosition();
+		Vec3 p2 = scn->getGameObject("Pivot2")->getGlobalPosition();
 		std::pair<GameObject*, GameObject*> blls(bullets_[i], bullets_[i + 1]);
 		UpdateValues(i, blls);
 	}
@@ -135,8 +133,8 @@ void ShotBehaviour::UpdateValues(int i, std::pair<GameObject*, GameObject*> blls
 	auxDir.normalise();
 
 	Ogre::Vector3 centPos = gameObject->getPosition();
-	Vec3 auxPosLeft = leftPivot->getGlobalPosition();
-	Vec3 auxPosRight = leftPivot->getGlobalPosition();
+	Vec3 auxPosLeft = scn->getGameObject("Pivot1")->getGlobalPosition();
+	Vec3 auxPosRight = scn->getGameObject("Pivot2")->getGlobalPosition();
 
 	blls.first->setPosition(auxPosLeft);
 	blls.first->setDirection(gameObject->getDirection());

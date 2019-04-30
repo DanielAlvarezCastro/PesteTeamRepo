@@ -236,6 +236,8 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	turret->setScale(Vec3(10, 10, 10));
 	turret->setPosition(Vec3(0, 20, -400));
 	turret->lookAt(Vec3(-1, 0, 0));
+	RigidBody* rbt = new RigidBody(turret, "R_Turret", 5, true);
+	scene->addComponent(rbt);
 
 	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
 	scene->addComponent(tB);
@@ -260,7 +262,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	FlyerBehaviour* fb1 = new FlyerBehaviour(flyer, pointer, 100, 25);
 	scene->addComponent(fb1);
 
-	EnemyBehaviour* eb1 = new EnemyBehaviour(cubito, 40);
+	EnemyBehaviour* eb1 = new EnemyBehaviour(turret, 40);
 	scene->addComponent(eb1);
 
 	GameObject* enemyManager = new GameObject();
@@ -309,7 +311,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	ShipController* sc = new ShipController(Nave);
 	scene->addComponent(sc);
 
-	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip,pivot1,pivot2);
+	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip);
 	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
@@ -510,7 +512,7 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 
 			std::string rName = (*itComponent)["RightPivot"];
 			GameObject* rPivot = scene->getGameObject(rName);
-			ShotBehaviour* sb = new ShotBehaviour(go, playerShip, lPivot, rPivot);
+			ShotBehaviour* sb = new ShotBehaviour(go, playerShip);
 			scene->addComponent(sb);
 		}
 		else if (componentName == "TargetController") {
