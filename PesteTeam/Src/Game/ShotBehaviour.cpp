@@ -1,6 +1,14 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
 
+void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
+{	
+	if (other->getRigidBody() != nullptr && one->isActive()) {
+		std::cout << "Soy una bala y he chocado" << std::endl;
+		one->setActive(false);
+	}
+}
+
 ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : BehaviourComponent(gameObject), shipName_(shipName)
 {
 	keyboard = MainApp::instance()->getKeyboard();
@@ -68,11 +76,13 @@ void ShotBehaviour::getBullets()
 
 		string rName = "rBalaLeft" + to_string(bulletCount);
 		RigidBody* rBullet = new RigidBody(bullet, rName, 10, true);
+		rBullet->setCollisionCallback(OnBulletCollision);
 		bullet->addRigidbody(rBullet);
 		scn->addComponent(rBullet);
 
 		string rName2 = "rBalaRight" + to_string(bulletCount);
 		RigidBody* rBullet2 = new RigidBody(bullet2, rName2, 10, true);
+		rBullet2->setCollisionCallback(OnBulletCollision);
 		bullet2->addRigidbody(rBullet2);
 		scn->addComponent(rBullet2);
 
@@ -92,7 +102,6 @@ void ShotBehaviour::getBullets()
 		bullets_.push_back(bullet2);
 
 		bulletCount++;
-		
 
 		std::pair<GameObject*, GameObject*> blls(bullet, bullet2);
 		UpdateValues(-1, blls);

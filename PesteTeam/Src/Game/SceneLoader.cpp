@@ -17,11 +17,11 @@ SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 {
 }
 
-void OnCuboCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
+void OnCuboCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
 	//std::cout << "Soy un cubo y he chocado" << std::endl;
 }
 
-void OnCubo2Collision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
+void OnCubo2Collision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
 	//std::cout << "Juan wapo" << std::endl;
 }
 
