@@ -11,6 +11,8 @@
 #include "ShotBehaviour.h"
 #include "FlyerBehaviour.h"
 #include "TargetController.h"
+#include "EnemyBehaviour.h"
+#include "EnemyManager.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -257,6 +259,14 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	FlyerBehaviour* fb1 = new FlyerBehaviour(flyer, pointer, 100, 25);
 	scene->addComponent(fb1);
+
+	EnemyBehaviour* eb1 = new EnemyBehaviour(cubito, 40);
+	scene->addComponent(eb1);
+
+	GameObject* enemyManager = new GameObject();
+	EnemyManager* em = new EnemyManager(enemyManager);
+	em->addEnemy(eb1);
+	scene->addComponent(em);
 
 	scene->addGameObject(turret);
 	scene->addGameObject(turretBase);

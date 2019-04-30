@@ -3,9 +3,16 @@
 
 void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
 {	
-	if (other->getRigidBody() != nullptr && one->isActive()) {
+	//si tiene rigidbody
+	if (other->getRigidBody() != nullptr && one->isActive()) { 
 		std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
+	}
+
+	//si es un objeto con comportamiento procesa el choque
+	if (other->getBComponents().size() > 0) { 
+		DownLifeMsg Msg(10, other->getName());
+		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }
 
@@ -71,8 +78,8 @@ void ShotBehaviour::getBullets()
 		string name2 = "BalaRight" + to_string(bulletCount);
 		bullet2->createEntity(bulletMeshName, name2, scn);
 
-		bullet->setScale(Vec3(0.5, 0.5, 1.5));
-		bullet2->setScale(Vec3(0.5, 0.5, 1.5));
+		bullet->setScale(Vec3(0.5, 0.5, 2.5));
+		bullet2->setScale(Vec3(0.5, 0.5, 2.5));
 
 		string rName = "rBalaLeft" + to_string(bulletCount);
 		RigidBody* rBullet = new RigidBody(bullet, rName, 10, true);

@@ -11,7 +11,8 @@ struct TiltCameraBackMsg : public Message
 
 struct DownLifeMsg : public Message
 {
-	int Life;
+	int power;
+	string name;
 
-	DownLifeMsg(int l, string id = "QUITA_VIDA") : Message(id), Life(l) {}
+	DownLifeMsg(int p, string n, string id = "QUITA_VIDA") : Message(id), power(p), name(n) {}
 };
