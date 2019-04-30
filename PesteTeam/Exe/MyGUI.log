@@ -1,63 +1,63 @@
-12:43:48  |  Platform  |  Info  |  * Initialise: DataManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreDataManager.cpp  |  27
-12:43:48  |  Platform  |  Info  |  DataManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreDataManager.cpp  |  35
-12:43:48  |  Platform  |  Info  |  * Initialise: RenderManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreRenderManager.cpp  |  43
-12:43:48  |  Platform  |  Info  |  RenderManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreRenderManager.cpp  |  71
-12:43:48  |  Core  |  Info  |  * Initialise: Gui  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_Gui.cpp  |  61
-12:43:48  |  Core  |  Info  |  * MyGUI version 3.4.0  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_Gui.cpp  |  66
-12:43:48  |  Core  |  Info  |  * Initialise: ResourceManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  32
-12:43:48  |  Core  |  Info  |  ResourceManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  40
-12:43:48  |  Core  |  Info  |  * Initialise: LayerManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayerManager.cpp  |  33
-12:43:48  |  Core  |  Info  |  LayerManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayerManager.cpp  |  41
-12:43:48  |  Core  |  Info  |  * Initialise: WidgetManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_WidgetManager.cpp  |  53
-12:43:48  |  Core  |  Info  |  WidgetManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_WidgetManager.cpp  |  84
-12:43:48  |  Core  |  Info  |  * Initialise: InputManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_InputManager.cpp  |  46
-12:43:48  |  Core  |  Info  |  InputManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_InputManager.cpp  |  66
-12:43:48  |  Core  |  Info  |  * Initialise: SubWidgetManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SubWidgetManager.cpp  |  36
-12:43:48  |  Core  |  Info  |  SubWidgetManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SubWidgetManager.cpp  |  56
-12:43:48  |  Core  |  Info  |  * Initialise: SkinManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SkinManager.cpp  |  36
-12:43:48  |  Core  |  Info  |  SkinManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SkinManager.cpp  |  46
-12:43:48  |  Core  |  Info  |  * Initialise: FontManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FontManager.cpp  |  32
-12:43:48  |  Core  |  Info  |  FontManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FontManager.cpp  |  42
-12:43:48  |  Core  |  Info  |  * Initialise: ControllerManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ControllerManager.cpp  |  33
-12:43:48  |  Core  |  Info  |  ControllerManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ControllerManager.cpp  |  42
-12:43:48  |  Core  |  Info  |  * Initialise: PointerManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PointerManager.cpp  |  43
-12:43:48  |  Core  |  Info  |  PointerManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PointerManager.cpp  |  62
-12:43:48  |  Core  |  Info  |  * Initialise: ClipboardManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ClipboardManager.cpp  |  32
-12:43:48  |  Core  |  Info  |  ClipboardManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ClipboardManager.cpp  |  39
-12:43:48  |  Core  |  Info  |  * Initialise: LayoutManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayoutManager.cpp  |  28
-12:43:48  |  Core  |  Info  |  LayoutManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayoutManager.cpp  |  35
-12:43:48  |  Core  |  Info  |  * Initialise: DynLibManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_DynLibManager.cpp  |  26
-12:43:48  |  Core  |  Info  |  DynLibManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_DynLibManager.cpp  |  30
-12:43:48  |  Core  |  Info  |  * Initialise: PluginManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PluginManager.cpp  |  30
-12:43:48  |  Core  |  Info  |  PluginManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PluginManager.cpp  |  34
-12:43:48  |  Core  |  Info  |  * Initialise: LanguageManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LanguageManager.cpp  |  30
-12:43:48  |  Core  |  Info  |  LanguageManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LanguageManager.cpp  |  34
-12:43:48  |  Core  |  Info  |  * Initialise: FactoryManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FactoryManager.cpp  |  25
-12:43:48  |  Core  |  Info  |  FactoryManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FactoryManager.cpp  |  27
-12:43:48  |  Core  |  Info  |  * Initialise: ToolTipManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ToolTipManager.cpp  |  33
-12:43:48  |  Core  |  Info  |  ToolTipManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ToolTipManager.cpp  |  45
-12:43:48  |  Core  |  Info  |  Load ini file 'MyGUI_GeneratedFonts.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:48  |  Core  |  Info  |  Load ini file 'MyGUI_Fonts.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:48  |  Core  |  Info  |  ResourceTrueTypeFont: Font 'DejaVuSansFont_15' using texture size 128 x 256.  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceTrueTypeFont.cpp  |  717
-12:43:48  |  Core  |  Info  |  ResourceTrueTypeFont: Font 'DejaVuSansFont_15' using real height 17 pixels.  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceTrueTypeFont.cpp  |  718
-12:43:48  |  Core  |  Info  |  Load ini file 'MyGUI_CommonSkins.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:48  |  Core  |  Info  |  Register value : 'HCenter' = 0  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  228
-12:43:48  |  Core  |  Info  |  Register value : 'VCenter' = 0  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  229
-12:43:48  |  Core  |  Info  |  Register value : 'Center' = 0  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  230
-12:43:48  |  Core  |  Info  |  Register value : 'Left' = 2  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  231
-12:43:48  |  Core  |  Info  |  Register value : 'Right' = 4  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  232
-12:43:48  |  Core  |  Info  |  Register value : 'HStretch' = 6  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  233
-12:43:48  |  Core  |  Info  |  Register value : 'Top' = 8  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  234
-12:43:48  |  Core  |  Info  |  Register value : 'Bottom' = 16  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  235
-12:43:48  |  Core  |  Info  |  Register value : 'VStretch' = 24  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  236
-12:43:48  |  Core  |  Info  |  Register value : 'Stretch' = 30  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  237
-12:43:48  |  Core  |  Info  |  Register value : 'Default' = 10  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  238
-12:43:48  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteTheme.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:48  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteImages.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:48  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteSkins.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:49  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteTemplates.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:49  |  Core  |  Info  |  Load ini file 'MyGUI_PointerImages.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:49  |  Core  |  Info  |  Load ini file 'MyGUI_Pointers.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:49  |  Core  |  Info  |  Load ini file 'MyGUI_Layers.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:49  |  Core  |  Info  |  Load ini file 'MyGUI_Settings.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
-12:43:49  |  Core  |  Info  |  Gui successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_Gui.cpp  |  111
+13:08:33  |  Platform  |  Info  |  * Initialise: DataManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreDataManager.cpp  |  27
+13:08:33  |  Platform  |  Info  |  DataManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreDataManager.cpp  |  35
+13:08:33  |  Platform  |  Info  |  * Initialise: RenderManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreRenderManager.cpp  |  43
+13:08:33  |  Platform  |  Info  |  RenderManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\Platforms\Ogre\OgrePlatform\src\MyGUI_OgreRenderManager.cpp  |  71
+13:08:33  |  Core  |  Info  |  * Initialise: Gui  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_Gui.cpp  |  61
+13:08:33  |  Core  |  Info  |  * MyGUI version 3.4.0  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_Gui.cpp  |  66
+13:08:33  |  Core  |  Info  |  * Initialise: ResourceManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  32
+13:08:33  |  Core  |  Info  |  ResourceManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  40
+13:08:33  |  Core  |  Info  |  * Initialise: LayerManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayerManager.cpp  |  33
+13:08:33  |  Core  |  Info  |  LayerManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayerManager.cpp  |  41
+13:08:33  |  Core  |  Info  |  * Initialise: WidgetManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_WidgetManager.cpp  |  53
+13:08:33  |  Core  |  Info  |  WidgetManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_WidgetManager.cpp  |  84
+13:08:33  |  Core  |  Info  |  * Initialise: InputManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_InputManager.cpp  |  46
+13:08:33  |  Core  |  Info  |  InputManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_InputManager.cpp  |  66
+13:08:33  |  Core  |  Info  |  * Initialise: SubWidgetManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SubWidgetManager.cpp  |  36
+13:08:33  |  Core  |  Info  |  SubWidgetManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SubWidgetManager.cpp  |  56
+13:08:33  |  Core  |  Info  |  * Initialise: SkinManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SkinManager.cpp  |  36
+13:08:33  |  Core  |  Info  |  SkinManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_SkinManager.cpp  |  46
+13:08:33  |  Core  |  Info  |  * Initialise: FontManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FontManager.cpp  |  32
+13:08:33  |  Core  |  Info  |  FontManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FontManager.cpp  |  42
+13:08:33  |  Core  |  Info  |  * Initialise: ControllerManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ControllerManager.cpp  |  33
+13:08:33  |  Core  |  Info  |  ControllerManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ControllerManager.cpp  |  42
+13:08:33  |  Core  |  Info  |  * Initialise: PointerManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PointerManager.cpp  |  43
+13:08:33  |  Core  |  Info  |  PointerManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PointerManager.cpp  |  62
+13:08:33  |  Core  |  Info  |  * Initialise: ClipboardManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ClipboardManager.cpp  |  32
+13:08:33  |  Core  |  Info  |  ClipboardManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ClipboardManager.cpp  |  39
+13:08:33  |  Core  |  Info  |  * Initialise: LayoutManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayoutManager.cpp  |  28
+13:08:33  |  Core  |  Info  |  LayoutManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LayoutManager.cpp  |  35
+13:08:33  |  Core  |  Info  |  * Initialise: DynLibManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_DynLibManager.cpp  |  26
+13:08:33  |  Core  |  Info  |  DynLibManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_DynLibManager.cpp  |  30
+13:08:33  |  Core  |  Info  |  * Initialise: PluginManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PluginManager.cpp  |  30
+13:08:33  |  Core  |  Info  |  PluginManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_PluginManager.cpp  |  34
+13:08:33  |  Core  |  Info  |  * Initialise: LanguageManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LanguageManager.cpp  |  30
+13:08:33  |  Core  |  Info  |  LanguageManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_LanguageManager.cpp  |  34
+13:08:33  |  Core  |  Info  |  * Initialise: FactoryManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FactoryManager.cpp  |  25
+13:08:33  |  Core  |  Info  |  FactoryManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_FactoryManager.cpp  |  27
+13:08:33  |  Core  |  Info  |  * Initialise: ToolTipManager  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ToolTipManager.cpp  |  33
+13:08:33  |  Core  |  Info  |  ToolTipManager successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ToolTipManager.cpp  |  45
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_GeneratedFonts.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_Fonts.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  ResourceTrueTypeFont: Font 'DejaVuSansFont_15' using texture size 128 x 256.  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceTrueTypeFont.cpp  |  717
+13:08:33  |  Core  |  Info  |  ResourceTrueTypeFont: Font 'DejaVuSansFont_15' using real height 17 pixels.  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceTrueTypeFont.cpp  |  718
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_CommonSkins.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Register value : 'HCenter' = 0  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  228
+13:08:33  |  Core  |  Info  |  Register value : 'VCenter' = 0  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  229
+13:08:33  |  Core  |  Info  |  Register value : 'Center' = 0  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  230
+13:08:33  |  Core  |  Info  |  Register value : 'Left' = 2  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  231
+13:08:33  |  Core  |  Info  |  Register value : 'Right' = 4  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  232
+13:08:33  |  Core  |  Info  |  Register value : 'HStretch' = 6  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  233
+13:08:33  |  Core  |  Info  |  Register value : 'Top' = 8  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  234
+13:08:33  |  Core  |  Info  |  Register value : 'Bottom' = 16  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  235
+13:08:33  |  Core  |  Info  |  Register value : 'VStretch' = 24  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  236
+13:08:33  |  Core  |  Info  |  Register value : 'Stretch' = 30  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  237
+13:08:33  |  Core  |  Info  |  Register value : 'Default' = 10  |  c:\users\aramis\documents\pesteteamrepo\pesteteam\dependencies\mygui\myguiengine\include\MyGUI_Align.h  |  238
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteTheme.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteImages.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteSkins.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_BlueWhiteTemplates.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_PointerImages.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_Pointers.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_Layers.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Load ini file 'MyGUI_Settings.xml'  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_ResourceManager.cpp  |  114
+13:08:33  |  Core  |  Info  |  Gui successfully initialized  |  C:\Users\Aramis\Documents\PesteTeamRepo\PesteTeam\Dependencies\mygui\MyGUIEngine\src\MyGUI_Gui.cpp  |  111

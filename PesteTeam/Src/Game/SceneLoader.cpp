@@ -228,13 +228,13 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* turretBase = new GameObject();
 	turretBase->createEntity("TurretBase.mesh", "TurretBase", scene);
-	turretBase->setScale(Vec3(10, 10, 10));
+	turretBase->setScale(Vec3(20, 20, 20));
 	turretBase->setPosition(Vec3(0, 0, -400));
 
 	GameObject* turret = new GameObject();
 	turret->createEntity("Turret.mesh", "Turret", scene);
-	turret->setScale(Vec3(10, 10, 10));
-	turret->setPosition(Vec3(0, 20, -400));
+	turret->setScale(Vec3(20, 20, 20));
+	turret->setPosition(Vec3(0, 40, -400));
 	turret->lookAt(Vec3(-1, 0, 0));
 	RigidBody* rbt = new RigidBody(turret, "R_Turret", 5, true);
 	scene->addComponent(rbt);
@@ -253,8 +253,10 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* flyer = new GameObject();
 	flyer->createEntity("Fly.mesh", "Flyer1", scene);
-	flyer->setScale(Vec3(0.5, 0.5, 0.5));
+	flyer->setScale(Vec3(1.5, 1.5, 1.5));
 	flyer->setPosition(Vec3(0, 200, -400));
+	RigidBody* rbt2 = new RigidBody(flyer, "R_Flyer", 5, true);
+	scene->addComponent(rbt2);
 
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
 	scene->addComponent(tb2);
@@ -265,9 +267,13 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	EnemyBehaviour* eb1 = new EnemyBehaviour(turret, 40);
 	scene->addComponent(eb1);
 
+	EnemyBehaviour* eb2 = new EnemyBehaviour(flyer, 40);
+	scene->addComponent(eb2);
+
 	GameObject* enemyManager = new GameObject();
 	EnemyManager* em = new EnemyManager(enemyManager);
 	em->addEnemy(eb1);
+	em->addEnemy(eb2);
 	scene->addComponent(em);
 
 	scene->addGameObject(turret);

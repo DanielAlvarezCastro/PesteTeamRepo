@@ -18,7 +18,7 @@ void FlyerBehaviour::Update(float t) {
 	if (timePassed >= 360)
 		timePassed -= 360;
 	//la coordenada y es la altura
-	Vec3 newPos = Vec3(cx + (Math::Sin(timePassed) * radius),cy + ( Math::Sin(timePassed*4)*height),cz + (Math::Cos(timePassed)*radius));
+	Vec3 newPos = Vec3(cx + (Math::Sin(timePassed) * radius)/2 ,cy + ( Math::Sin(timePassed*2.5)*height), cz + (Math::Cos(timePassed)*radius)/2);
 
 	gameObject->setPosition(newPos);
 	//Hace un lookAt pero sin hacer yaw (rotar en el eje y)

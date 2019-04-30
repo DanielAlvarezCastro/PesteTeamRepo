@@ -1,8 +1,8 @@
 particle_system BulletCollision
 {
 	material SXRNeon
-	particle_width 0.152940002441406
-	particle_height 0.154119995117188
+	particle_width 1.52940002441406
+	particle_height 1.54119995117188
 	quota 500
 	cull_each false
 	sorted false

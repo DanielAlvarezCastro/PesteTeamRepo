@@ -7,6 +7,9 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 	if (other->getRigidBody() != nullptr && one->isActive()) { 
 		std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
+
+		Ogre::Vector3 pos = one->getPosition();
+		MainApp::instance()->getParticleManager()->createParticle(pos, "BulletCollision", 1.0f);
 	}
 
 	//si es un objeto con comportamiento procesa el choque
