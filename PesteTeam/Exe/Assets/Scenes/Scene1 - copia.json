@@ -21,7 +21,49 @@
 		{
 			"Name" : "Pointer",
 			"Type" : "Pointer",
-			"Mesh" : "None"
+			"Mesh" : "None",
+			"Position" : [0,40,0]
+		},
+        {
+            "Name" : "Player",
+            "Type" : "Player",
+			"Position" : [-1,0,0],
+			"Father" : "Pointer"
+        },
+		{
+			"Name" : "NearTarget",
+			"Type" : "NearTarget",
+			"Mesh" : "None",
+			"Position" : [0,0,-100],
+			"Father" : "Pointer"
+		},
+		{
+			"Name" : "FarTarget",
+			"Type" : "FarTarget",
+			"Mesh" : "None",
+			"Position" : [0,0,-200],
+			"Father" : "Pointer"
+		},
+		{
+			"Name" : "CameraPivot",
+			"Type" : "CameraPivot",
+			"Mesh" : "None",
+			"Father" : "Pointer",
+			"Position" : [0,0,-50]
+		},
+		{
+			"Name" : "LeftGunPivot",
+			"Type" : "LeftGunPivot",
+			"Mesh" : "None",
+			"Father" : "Pointer",
+			"Position" : [-7,0,-15]
+		},
+		{
+			"Name" : "RightGunPivot",
+			"Type" : "RightGunPivot",
+			"Mesh" : "None",
+			"Father" : "Pointer",
+			"Position" : [7,0,-15]
 		},
 		{
 			"Name" : "Building1",
@@ -86,6 +128,20 @@
 				{
 					"Name" : "Light",
 					"Type" : "Directional"
+				}
+			]
+		},
+		{
+			"Name" : "CameraOb",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,40],	
+			"Father" : "Pointer",
+			"Components" : [
+				{
+					"Name" : "Camera",
+					"CameraName" : "CameraMain",
+					"NearClipDistance" : 5
 				}
 			]
 		}		

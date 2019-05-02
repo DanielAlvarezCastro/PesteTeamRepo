@@ -1,8 +1,8 @@
-particle_system BulletCollision
+particle_system BarrelRoll
 {
-	material SXRNeon
-	particle_width 1.52940002441406
-	particle_height 1.54119995117188
+	material StarRaveNeon1
+	particle_width 0.152940002441406
+	particle_height 0.154119995117188
 	quota 500
 	cull_each false
 	sorted false
@@ -20,7 +20,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction 1.0 0.0 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 1
@@ -38,7 +38,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction 0.945459604263306 0.325739324092865 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 1
@@ -56,7 +56,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction 0.0 1.0 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 3
@@ -74,7 +74,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction 0.792449772357941 0.609937250614166 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 1
@@ -92,7 +92,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction -0.325739324092865 0.945459604263306 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 1
@@ -110,7 +110,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction -0.70710676908493 0.70710676908493 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 1
@@ -128,7 +128,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction 0.945459604263306 -0.325739324092865 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 1
@@ -146,7 +146,7 @@ particle_system BulletCollision
 		position 0.0 0.0 0.0
 		direction -0.51449579000473 -0.857492923736572 0.0
 		angle 0
-		emission_rate 10
+		emission_rate 100
 		velocity_min -10
 		velocity_max 10
 		time_to_live_min 1

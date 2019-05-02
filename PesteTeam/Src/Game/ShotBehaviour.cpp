@@ -1,10 +1,29 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
 
-ShotBehaviour::ShotBehaviour(GameObject* gameObject) : BehaviourComponent(gameObject)
+void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
+{	
+	//si tiene rigidbody
+	if (other->getRigidBody() != nullptr && one->isActive()) { 
+		std::cout << "Soy una bala y he chocado" << std::endl;
+		one->setActive(false);
+
+		Ogre::Vector3 pos = one->getPosition();
+		MainApp::instance()->getParticleManager()->createParticle(pos, "BulletCollision", 1.0f);
+	}
+
+	//si es un objeto con comportamiento procesa el choque
+	if (other->getBComponents().size() > 0) { 
+		DownLifeMsg Msg(10, other->getName());
+		other->getBComponents()[0]->sendSceneMsg(&Msg);
+	}
+}
+
+ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : BehaviourComponent(gameObject), shipName_(shipName)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
+	bulletMeshName = shipName + "Bullet.mesh";
 }
 
 ShotBehaviour::~ShotBehaviour()
@@ -55,24 +74,25 @@ void ShotBehaviour::getBullets()
 	{
 		GameObject* bullet = new GameObject();
 		string name = "BalaLeft" + to_string(bulletCount);
-		bullet->createEntity("SXRVengeanceBullet.mesh", name, scn);
-		
-		
+		bullet->createEntity(bulletMeshName, name, scn);
+
 
 		GameObject* bullet2 = new GameObject();
 		string name2 = "BalaRight" + to_string(bulletCount);
-		bullet2->createEntity("SXRVengeanceBullet.mesh", name2, scn);
+		bullet2->createEntity(bulletMeshName, name2, scn);
 
-		bullet->setScale(Vec3(0.5, 0.5, 1.5));
-		bullet2->setScale(Vec3(0.5, 0.5, 1.5));
+		bullet->setScale(Vec3(0.5, 0.5, 2.5));
+		bullet2->setScale(Vec3(0.5, 0.5, 2.5));
 
 		string rName = "rBalaLeft" + to_string(bulletCount);
 		RigidBody* rBullet = new RigidBody(bullet, rName, 10, true);
+		rBullet->setCollisionCallback(OnBulletCollision);
 		bullet->addRigidbody(rBullet);
 		scn->addComponent(rBullet);
 
 		string rName2 = "rBalaRight" + to_string(bulletCount);
 		RigidBody* rBullet2 = new RigidBody(bullet2, rName2, 10, true);
+		rBullet2->setCollisionCallback(OnBulletCollision);
 		bullet2->addRigidbody(rBullet2);
 		scn->addComponent(rBullet2);
 
@@ -92,8 +112,6 @@ void ShotBehaviour::getBullets()
 		bullets_.push_back(bullet2);
 
 		bulletCount++;
-		
-		MainApp::instance()->getParticleManager()->createParticle(p2, scn, "Cross", 1.0);
 
 		std::pair<GameObject*, GameObject*> blls(bullet, bullet2);
 		UpdateValues(-1, blls);
@@ -102,7 +120,6 @@ void ShotBehaviour::getBullets()
 	else
 	{
 		Vec3 p2 = scn->getGameObject("Pivot2")->getGlobalPosition();
-		MainApp::instance()->getParticleManager()->createParticle(p2, scn, "Cross", 1.0);
 		std::pair<GameObject*, GameObject*> blls(bullets_[i], bullets_[i + 1]);
 		UpdateValues(i, blls);
 	}

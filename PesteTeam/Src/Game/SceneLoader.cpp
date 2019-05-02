@@ -11,17 +11,19 @@
 #include "ShotBehaviour.h"
 #include "FlyerBehaviour.h"
 #include "TargetController.h"
+#include "EnemyBehaviour.h"
+#include "EnemyManager.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 {
 }
 
-void OnCuboCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
+void OnCuboCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
 	//std::cout << "Soy un cubo y he chocado" << std::endl;
 }
 
-void OnCubo2Collision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
+void OnCubo2Collision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
 	//std::cout << "Juan wapo" << std::endl;
 }
 
@@ -99,20 +101,20 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 
 		//Guarda el valor de su posici�n y de su tipo
 		std::string prefabType = (*it)["Type"].get<std::string>();
-		std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
 		//Si el tipo de prefab existe entonces crea el gameobject a partir del diccionario
 		if (prefabsMap.find(prefabType) != prefabsMap.end()) {
 			json prefab_json = json::parse(prefabsMap[(*it)["Type"]]);
-			GameObject* go = createGameObject(prefab_json, position, scene);
-			scene->addGameObject(go);
-			addComponents(prefab_json["Components"], go, scene);
+			GameObject* go = createGameObjectFromPrefab(prefab_json, (*it),  scene);
+			scene->addGameObject(go);		
+
 		}
 		else {
+			std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
 			//Si no existe entonces lo crea leyendo el json de la escena
-			GameObject* go = createGameObject((*it), position, scene);
+			GameObject* go = createGameObject((*it), scene);
 			scene->addGameObject(go);
-			addComponents((*it)["Components"], go, scene);
 		}
+		
 	}
 
 	//Cierra el archivo de la escena
@@ -152,7 +154,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->addGameObject(pointer);
 
 	GameObject* Nave = new GameObject();
-	Nave->createEntity(playerMesh, "Player", scene);
+	Nave->createEntity(playerShip + ".mesh", "Player", scene);
 	Nave->setScale(Vec3(3, 3, 3));
 	
 	Nave->asingFather(pointer);
@@ -226,14 +228,16 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* turretBase = new GameObject();
 	turretBase->createEntity("TurretBase.mesh", "TurretBase", scene);
-	turretBase->setScale(Vec3(10, 10, 10));
+	turretBase->setScale(Vec3(20, 20, 20));
 	turretBase->setPosition(Vec3(0, 0, -400));
 
 	GameObject* turret = new GameObject();
 	turret->createEntity("Turret.mesh", "Turret", scene);
-	turret->setScale(Vec3(10, 10, 10));
-	turret->setPosition(Vec3(0, 20, -400));
+	turret->setScale(Vec3(20, 20, 20));
+	turret->setPosition(Vec3(0, 40, -400));
 	turret->lookAt(Vec3(-1, 0, 0));
+	RigidBody* rbt = new RigidBody(turret, "R_Turret", 5, true);
+	scene->addComponent(rbt);
 
 	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
 	scene->addComponent(tB);
@@ -249,14 +253,28 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	GameObject* flyer = new GameObject();
 	flyer->createEntity("Fly.mesh", "Flyer1", scene);
-	flyer->setScale(Vec3(0.5, 0.5, 0.5));
+	flyer->setScale(Vec3(1.5, 1.5, 1.5));
 	flyer->setPosition(Vec3(0, 200, -400));
+	RigidBody* rbt2 = new RigidBody(flyer, "R_Flyer", 5, true);
+	scene->addComponent(rbt2);
 
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
 	scene->addComponent(tb2);
 
 	FlyerBehaviour* fb1 = new FlyerBehaviour(flyer, pointer, 100, 25);
 	scene->addComponent(fb1);
+
+	EnemyBehaviour* eb1 = new EnemyBehaviour(turret, 40);
+	scene->addComponent(eb1);
+
+	EnemyBehaviour* eb2 = new EnemyBehaviour(flyer, 40);
+	scene->addComponent(eb2);
+
+	GameObject* enemyManager = new GameObject();
+	EnemyManager* em = new EnemyManager(enemyManager);
+	em->addEnemy(eb1);
+	em->addEnemy(eb2);
+	scene->addComponent(em);
 
 	scene->addGameObject(turret);
 	scene->addGameObject(turretBase);
@@ -299,7 +317,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	ShipController* sc = new ShipController(Nave);
 	scene->addComponent(sc);
 
-	ShotBehaviour* sb = new ShotBehaviour(pointer);
+	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip);
 	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
@@ -346,16 +364,20 @@ void SceneLoader::deleteScene(std::string sceneName)
 	scenesMap.erase(sceneName);
 }
 
-void SceneLoader::setPlayerMesh(std::string meshName)
+void SceneLoader::setPlayerShip(std::string shipName)
 {
-	playerMesh = meshName;
+	playerShip = shipName;
 }
 
-GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<float> position, Scene* scene)
+GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene)
 {
 	GameObject* ob = new GameObject();
 	std::string name= gameObject_json["Name"].get<std::string>();
 	std::string meshName = gameObject_json["Mesh"].get<std::string>();
+	std::vector<float> position = gameObject_json["Position"].get<std::vector<float>>();
+	if (meshName == "SelectedShip") {
+		meshName = playerShip + ".mesh";
+	}
 	//Si no tiene mesh crea una entidad vacía
 	if (meshName == "None") {
 		ob->createEmptyEntity(name, scene);
@@ -370,12 +392,72 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, std::vector<floa
 		Vec3 sc(scale[0], scale[1], scale[2]);
 		ob->setScale(sc);
 	}
-	//Si tiene parámetro father se lo asigna
-	if (gameObject_json.find("Father") != gameObject_json.end()) {
-		std::string pName = gameObject_json["Father"];
-		GameObject* father = scene->getGameObject(pName);
-		ob->asingFather(father);
+
+
+	//Si tiene childs los recorre y va creando sus gameobjects y componentes
+	for (json::iterator iter = gameObject_json["Childs"].begin(); iter != gameObject_json["Childs"].end(); ++iter) {
+		GameObject* child = createGameObject((*iter), scene);
+		child->asingFather(ob);
+		scene->addGameObject(child);
 	}
+
+	addComponents(gameObject_json["Components"],ob, scene);
+	
+	return ob;
+}
+
+GameObject * SceneLoader::createGameObjectFromPrefab(json prefabs, json gameObject_json, Scene * scene)
+{
+	GameObject* ob = new GameObject();
+	std::string name = prefabs["Name"].get<std::string>();
+
+	//Si el objeto de escena tiene parámetro mesh ignora el del prefab
+	std::string meshName;
+	if (gameObject_json.find("Mesh") != gameObject_json.end()) {
+		meshName = gameObject_json["Mesh"].get<std::string>();
+	}
+	else {
+		meshName = prefabs["Mesh"].get<std::string>();
+	}
+	std::vector<float> position;
+	//Ignora la posicion del prefab si existe
+	if (gameObject_json.find("Position") != gameObject_json.end()) {
+		position = gameObject_json["Position"].get<std::vector<float>>();
+	}
+	else {
+		position = prefabs["Position"].get<std::vector<float>>();
+	}
+
+
+	if (meshName == "SelectedShip") {
+		meshName = playerShip + ".mesh";
+	}
+	//Si no tiene mesh crea una entidad vacía
+	if (meshName == "None") {
+		ob->createEmptyEntity(name, scene);
+	}
+	else ob->createEntity(meshName, name, scene);
+
+	Vec3 pos(position[0], position[1], position[2]);
+	ob->setPosition(pos);
+	//Si tiene el parámetro escala lo asigna
+	if (prefabs.find("Scale") != prefabs.end()) {
+		std::vector<float> scale = prefabs["Scale"].get<std::vector<float>>();
+		Vec3 sc(scale[0], scale[1], scale[2]);
+		ob->setScale(sc);
+	}
+
+
+	//Si tiene childs los recorre y va creando sus gameobjects y componentes
+	for (json::iterator iter = prefabs["Childs"].begin(); iter != prefabs["Childs"].end(); ++iter) {
+		GameObject* child = createGameObject((*iter), scene);
+		child->asingFather(ob);
+		scene->addGameObject(child);
+	}
+	   	
+
+	addComponents(prefabs["Components"], ob, scene);
+
 	return ob;
 }
 
@@ -408,21 +490,63 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			//Hacer new Healthscript() y a�adirselo al go
 		}
 		else if (componentName == "Camera") {
-			//Atacheamos un gameobject a la cámara creada
+			//Adjuntamos un gameobject a la cámara creada
 			std::string cameraName = (*itComponent)["CameraName"];
 			Ogre::Camera* cam = scene->getSceneManager()->getCamera(cameraName);
-			std::vector<int> look = (*itComponent)["LookAt"].get<std::vector<int>>();
 			int dist = (*itComponent)["NearClipDistance"].get<int>();
+			std::vector<int> look = (*itComponent)["LookAt"].get<std::vector<int>>();
+			go->lookAt(Vec3(look[0], look[1], look[2]));
 			cam->setNearClipDistance(dist);			
-			go->attachCamera(cam);
-			go->lookAt(Vec3(look[0], look[1], look[2]));			
+			go->attachCamera(cam);		
 		}
 		else if (componentName == "CameraMovement") {
-			std::string pName = (*itComponent)["GameObject"];
-			GameObject* target = scene->getGameObject(pName);
+			std::string pName = (*itComponent)["Pivot"];
+			std::string tName = (*itComponent)["Target"];
+			GameObject* target = scene->getGameObject(tName);
 			GameObject* pivot = scene->getGameObject(pName);
 			CameraMovement* cM = new CameraMovement(go, target, pivot);
 			scene->addComponent(cM);
+		}
+		else if (componentName == "ShipController") {
+			ShipController* sc = new ShipController(go);
+			scene->addComponent(sc);
+		}
+		else if (componentName == "ShotBehaviour") {
+			//Le pasamos el nombre de la nave actual y los pivotes de donde saldran las balas
+			std::string lName = (*itComponent)["LeftPivot"];
+			GameObject* lPivot = scene->getGameObject(lName);
+
+			std::string rName = (*itComponent)["RightPivot"];
+			GameObject* rPivot = scene->getGameObject(rName);
+			ShotBehaviour* sb = new ShotBehaviour(go, playerShip);
+			scene->addComponent(sb);
+		}
+		else if (componentName == "TargetController") {
+			std::string cameraName = (*itComponent)["CameraName"];
+			Ogre::Camera* mCamera = scene->getSceneManager()->getCamera(cameraName);
+			std::string blueImg = (*itComponent)["BlueImage"];
+			std::string redImg = (*itComponent)["RedImage"];
+			std::string guiN = (*itComponent)["GUIName"];
+			int w = (*itComponent)["Width"];
+			int h = (*itComponent)["Height"];
+			TargetController* tc = new TargetController(go, mCamera, blueImg,redImg,guiN,w, h);
+			scene->addComponent(tc);
+		}
+		else if (componentName == "TurretBehaviour") {
+			//Le pasamos el nombre de la nave actual
+			std::string tName = (*itComponent)["Target"];
+			GameObject* target = scene->getGameObject(tName);
+			TurretBehaviour* tB = new TurretBehaviour(go, target);
+			scene->addComponent(tB);
+		}
+		else if (componentName == "FlyerBehaviour") {
+			//Le pasamos el nombre de la nave actual
+			std::string tName = (*itComponent)["Target"];
+			GameObject* target = scene->getGameObject(tName);
+			int r = (*itComponent)["Radius"];
+			int h = (*itComponent)["Height"];
+			FlyerBehaviour* tB = new FlyerBehaviour(go, target, r, h);
+			scene->addComponent(tB);
 		}
 		else if (componentName == "Light") {
 			Ogre::Light* luz = scene->getSceneManager()->createLight("Luz");
@@ -433,9 +557,7 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			go->attachLight(luz);
 		}
 		else if (componentName == "PlayerController") {
-			std::string pName = (*itComponent)["GameObject"];
-			GameObject* pointer = scene->getGameObject(pName);
-			PlayerController* pc = new PlayerController(pointer);
+			PlayerController* pc = new PlayerController(go);
 			scene->addComponent(pc);
 		}
 		else if (componentName == "MainMenuManager") {
@@ -459,18 +581,14 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			std::string circlePivot = (*itComponent)["Pivot"];
 			GameObject* ob = scene->getGameObject(circlePivot);
 			ShipSelection* SS = new ShipSelection(go, shipDist, ob);
-			std::vector<std::string> names = (*itComponent)["Models"];
-			for (auto modelName:names) {
+			std::vector<std::string> models = (*itComponent)["Models"];
+			for (auto modelName:models) {
 				GameObject* ob = scene->getGameObject(modelName);
 				SS->addShipModel(ob);
 			}
-			std::vector<std::string> meshes = (*itComponent)["Meshes"];
-			for (auto mesh : meshes) {
-				SS->addShipMesh(mesh);
-			}
-			std::vector<std::string> titles = (*itComponent)["Titles"];
-			for (auto title : titles) {
-				SS->addShipTitle(title);
+			std::vector<std::string> names = (*itComponent)["Names"];
+			for (auto name : names) {
+				SS->addShipName(name);
 			}
 			SS->setInitialShipsPosition();
 			scene->addComponent(SS);

@@ -113,11 +113,11 @@ void RigidBody::Update(float t)
 	}
 }
 
-void RigidBody::onCollision(GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
+void RigidBody::onCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
 	//si esta definido el callback
 	if (0 != ocb) {
 		//lo llamamos
-		(*ocb)(other, contactPoints);
+		(*ocb)(one, other, contactPoints);
 	}
 }
 

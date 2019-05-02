@@ -1,6 +1,6 @@
 #pragma once
 #include <BehaviourComponent.h>
-#include <MainApp.h>s
+#include <MainApp.h>
 #include <Euler.h>
 class ShipController : public BehaviourComponent
 {
@@ -12,6 +12,9 @@ private:
 	bool isRolling = false;
 	bool rollRight = false;
 	bool rollLeft = false;
+	Real rollVel = pi / 2;
+	Real rollBackVel = pi / 4;
+	Real barrelVel = 5*pi;
 public:
 	ShipController(GameObject* gameObject);
 	virtual ~ShipController();

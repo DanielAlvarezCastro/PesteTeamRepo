@@ -17,8 +17,7 @@ private:
 	double lastTimePressed = 0;
 	OIS::Keyboard* keyboard;
 	std::vector<GameObject*> ships;
-	std::vector<string> meshes;
-	std::vector<string> titles;
+	std::vector<string> shipNames;
 	int shipsNum=0;
 	float distance = 0;
 	float distanceBetweenShips = 0;
@@ -36,9 +35,8 @@ private:
 	void updateGUI();
 public:
 	void selectShip();
-	void addShipMesh(string mesh);
+	void addShipName(string name);
 	void addShipModel(GameObject* go);
-	void addShipTitle(string title);
 	ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot);
 	void setInitialShipsPosition();
 	virtual ~ShipSelection();

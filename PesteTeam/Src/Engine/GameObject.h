@@ -54,7 +54,7 @@ public:
 	~GameObject();
 	void addReference() { references++; };
 	void release();
-	void setActive(bool active_) { active = active_; };
+	void setActive(bool active_) { active = active_; ogreNode->setVisible(active); };
 	bool isActive() { return active; }
 	void reciveMsg(Message* msg);
 
@@ -63,7 +63,6 @@ public:
 	void reciveChild(Ogre::SceneNode* childNode) { ogreNode->addChild(childNode); };
 	void createEntity(std::string mesh, std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
 	void createEmptyEntity(std::string name_, Scene* scene = MainApp::instance()->getCurrentScene());
-	void addRigidbody(RigidBody* rb);
 	void attachCamera(Ogre::Camera* cam);
 	void attachLight(Ogre::Light* lig);
 	void attachMovableObject(Ogre::MovableObject* ob);
@@ -110,7 +109,13 @@ public:
 #pragma endregion
 
 #pragma region Rigid Body Methods
+	void addRigidbody(RigidBody* rb) { rigidBody = rb; }
 	RigidBody* getRigidBody() { return rigidBody; };
+#pragma endregion
+
+#pragma region Components Methods
+	void addBComponent(BehaviourComponent* bc) { behaviourComponents.push_back(bc); }
+	std::vector<BehaviourComponent*> getBComponents() { return behaviourComponents; }
 #pragma endregion
 
 #pragma endregion

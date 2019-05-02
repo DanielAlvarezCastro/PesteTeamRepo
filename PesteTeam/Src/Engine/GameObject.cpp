@@ -79,11 +79,6 @@ void GameObject::createEmptyEntity(std::string name_, Scene * scene)
 	ogreNode = scnMgr->getRootSceneNode()->createChildSceneNode(name);
 }
 
-void GameObject::addRigidbody(RigidBody * rb)
-{
-	rigidBody = rb;
-}
-
 void GameObject::attachCamera(Ogre::Camera * cam)
 {
 	camera = cam;

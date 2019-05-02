@@ -23,3 +23,5 @@ void BasicComponent::sendSceneMsg(Message * msg_)
 }
 
 bool BasicComponent::isGOActive() { return gameObject->isActive(); }
+
+GameObject* BasicComponent::getGameObject() { return gameObject; }

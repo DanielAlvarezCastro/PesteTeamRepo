@@ -29,6 +29,7 @@ public:
 	virtual void reciveMsg(Message* msg_) = 0;
 
 	bool isGOActive();
+	GameObject* getGameObject();
 };
 
 #endif // _BASI_COMPONENT

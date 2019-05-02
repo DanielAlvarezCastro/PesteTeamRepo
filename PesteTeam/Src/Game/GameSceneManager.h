@@ -10,7 +10,7 @@ private:
 public:
 	GameSceneManager();
 	~GameSceneManager();
-	void setPlayerMesh(string meshName);
+	void setPlayerShip(string shipName);
 	bool LoadGame();
 	bool LoadScene(string sceneName);
 	void CloseScene();
