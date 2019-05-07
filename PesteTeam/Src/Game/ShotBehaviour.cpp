@@ -93,7 +93,7 @@ void ShotBehaviour::getBullets()
 		string rName2 = "rBalaRight" + to_string(bulletCount);
 		RigidBody* rBullet2 = new RigidBody(bullet2, rName2, 10, true);
 		rBullet2->setCollisionCallback(OnBulletCollision);
-		bullet2->addRigidbody(rBullet2);
+		//bullet2->addRigidbody(rBullet2);
 		scn->addComponent(rBullet2);
 
 		Vec3 p1 = scn->getGameObject("Pivot1")->getGlobalPosition();
