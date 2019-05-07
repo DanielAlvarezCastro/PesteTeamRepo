@@ -79,10 +79,11 @@ void Physics::updatePhysics(float t) {
 		//actualizamos el tiempo
 		dynamicsWorld->stepSimulation(t);
 	}
-
-	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
-	dynamicsWorld->setDebugDrawer(mDebugDrawer);
-	dynamicsWorld->debugDrawWorld();
+	if (debuged) {
+		mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+		dynamicsWorld->setDebugDrawer(mDebugDrawer);
+		dynamicsWorld->debugDrawWorld();
+	}
 }
 
 void Physics::addRigidBodyToWorld(btRigidBody* bt,const std::string & btname) {

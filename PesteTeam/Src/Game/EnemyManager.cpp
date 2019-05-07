@@ -12,7 +12,10 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Update(float t)
 {
-
+	if (enemies <= 0) {
+		MissionAccomplishedMsg mam;
+		sendSceneMsg(&mam);
+	}
 }
 
 void EnemyManager::reciveMsg(Message* msg) 

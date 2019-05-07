@@ -43,7 +43,6 @@ bool GameSceneManager::LoadScene(string sceneName)
 		if (!loader->loadSceneFromFile(sceneName, escena))
 			return false;
 	}
-	escena->showGUI();
 }
 
 void GameSceneManager::CloseScene()

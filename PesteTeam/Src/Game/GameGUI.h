@@ -9,6 +9,8 @@ class GameGUI :
 private:
 	GUIManager* GUIMgr = nullptr;
 	MyGUI::ImageBox* healthBar = nullptr;
+	MyGUI::ImageBox* gameOver = nullptr;
+	MyGUI::ImageBox* missionA = nullptr;
 public:
 	GameGUI(GameObject* gameObject);
 	virtual ~GameGUI();
