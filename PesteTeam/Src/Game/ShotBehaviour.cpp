@@ -4,7 +4,7 @@
 void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
 {	
 	//si tiene rigidbody
-	if (other->getRigidBody() != nullptr && one->isActive()) { 
+	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) { 
 		std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
 
