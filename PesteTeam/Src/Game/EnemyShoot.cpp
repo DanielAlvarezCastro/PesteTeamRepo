@@ -6,7 +6,7 @@
 void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints)
 {
 	//si tiene rigidbody
-	if (other->getRigidBody() != nullptr && one->isActive()) {
+	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) {
 		std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
 
@@ -26,12 +26,12 @@ EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, std
 	switch (type)
 	{
 	case enemyType::groundTurret:
-		range = 400;
+		range = 450;
 		ShootCd = 1.6;
 		break;
 	case enemyType::Flyer:
 		ShootCd = 2.4;
-		range = 550;
+		range = 900;
 		break;
 	default:
 		break;
@@ -45,11 +45,19 @@ EnemyShoot::~EnemyShoot()
 		bullets.pop_back();
 }
 
+bool EnemyShoot::inRange() {
+	//gameObject->getGlobalPosition().getVector().
+	float distance =gameObject->getGlobalPosition().getVector().distance(target->getGlobalPosition().getVector());
+	return range >= distance;
+}
+
 void EnemyShoot::Update(float t) {
 	auxTemp += t;
 	if (auxTemp >= ShootCd) {
-		auxTemp = 0;
-		shoot();
+		if (inRange()) {
+			auxTemp = 0;
+			shoot();
+		}
 	}
 }
 
@@ -58,9 +66,10 @@ void EnemyShoot::shoot() {
 	{
 	case groundTurret:
 		getBullet(0);
+		getBullet(1);
 		break;
 	case Flyer:
-		//GameObject* b = getBullet();
+		getBullet();
 		break;
 	default:
 		break;
@@ -76,7 +85,7 @@ void EnemyShoot::getBullet(int id) {
 		GameObject* nBullet = new GameObject();
 		string name = gameObject->getName() + "Bullet" + to_string(i);
 		nBullet->createEntity(bulletMeshName, name, MainApp::instance()->getCurrentScene());
-		nBullet->setScale(Vec3(0.5, 0.5, 2.5));
+		nBullet->setScale(Vec3(1, 1, 3.5));
 
 		string rBulletName = "Rb" + name;
 		RigidBody* rBullet = new RigidBody(nBullet, 1, rBulletName, true);
@@ -94,34 +103,34 @@ void EnemyShoot::getBullet(int id) {
 }
 
 void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
-	Vec3 aux = gameObject->getGlobalPosition();
 	Vec3 dir = gameObject->getDirection();
+	b->setDirection(dir);
 	switch (type)
 	{
 	case groundTurret:
 		switch (id)
 		{
 		case 0:
-			b->setPosition(aux);
-			b->setDirection(dir);
-			if (created && i >= 0) {
-				bulletComponents[i]->resetValues(aux, dir);
-			}
-			else {
-				BulletBehaviour* bh = new BulletBehaviour(b, aux, gameObject->getDirection());
-				MainApp::instance()->getCurrentScene()->addComponent(bh);
-				bulletComponents.push_back(bh);
-			}
+			b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject("PivotT1")->getGlobalPosition());
 			break;
 		case 1:
+			b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject("PivotT2")->getGlobalPosition());
 			break;
 		default:
 			break;
 		}
 		break;
 	case Flyer:
+		b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject("PivotF1")->getGlobalPosition());
 		break;
 	default:
 		break;
+	}
+	if (created && i >= 0)
+		bulletComponents[i]->resetValues(b->getGlobalPosition(), dir);
+	else {
+		BulletBehaviour* bh = new BulletBehaviour(b, b->getGlobalPosition(), gameObject->getDirection());
+		MainApp::instance()->getCurrentScene()->addComponent(bh);
+		bulletComponents.push_back(bh);
 	}
 }

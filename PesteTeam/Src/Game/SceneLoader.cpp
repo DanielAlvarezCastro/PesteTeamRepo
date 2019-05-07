@@ -245,9 +245,23 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
 	scene->addComponent(tB);
-
 	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, "NeonBladeBullet.mesh");
 	scene->addComponent(tBEH);
+
+	GameObject* pivotT1 = new GameObject();
+	pivotT1->createEmptyEntity("PivotT1", scene);
+	//como pilla la escala del padre la dividimos para dejarla a niveles globales
+	pivotT1->setScale(Vec3((1/turret->getScale().x)*0.05,( 1/turret->getScale().y)*0.05, (1/turret->getScale().z)*0.05));
+	pivotT1->asingFather(turret);
+	pivotT1->setPosition(Vec3(0.45, 0, -2.5));
+	scene->addGameObject(pivotT1);
+
+	GameObject* pivotT2 = new GameObject();
+	pivotT2->createEmptyEntity("PivotT2", scene);
+	pivotT2->setScale(Vec3((1 / turret->getScale().x)*0.05, (1 / turret->getScale().y)*0.05, (1 / turret->getScale().z)*0.05));
+	pivotT2->asingFather(turret);
+	pivotT2->setPosition(Vec3(-0.45, 0, -2.5));
+	scene->addGameObject(pivotT2);
 
 	GameObject* cubito2 = new GameObject();
 	cubito2->createEntity("cube.mesh", "Cubito2", scene);
@@ -264,6 +278,16 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	flyer->setPosition(Vec3(0, 200, -400));
 	RigidBody* rbt2 = new RigidBody(flyer, "R_Flyer", 5, true);
 	scene->addComponent(rbt2);
+
+	GameObject* pivotF1 = new GameObject();
+	pivotF1->createEmptyEntity("PivotF1", scene);
+	pivotF1->setScale(Vec3((1 / flyer->getScale().x*0.25), (1 / flyer->getScale().y*0.25), (1 / flyer->getScale().z*0.25)));
+	pivotF1->asingFather(flyer);
+	pivotF1->setPosition(Vec3(0, 0, -40));
+	scene->addGameObject(pivotF1);
+
+	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, "RoyalWaspBullet.mesh");
+	scene->addComponent(FES);
 
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
 	scene->addComponent(tb2);
