@@ -7,7 +7,7 @@ GameGUI::GameGUI(GameObject* gameObject) : BehaviourComponent(gameObject)
 	GUIMgr = GUIManager::instance();
 	healthBar = GUIMgr->getImage("HealthBar");
 	gameOver = GUIMgr->getImage("GameOver");
-	nextLevel = GUIMgr->getImage("NextLevel");
+	missionA = GUIMgr->getImage("MissionAccomplished");
 }
 
 
@@ -23,7 +23,7 @@ void GameGUI::Update(float t)
 void GameGUI::reciveMsg(Message * msg)
 {
 	if (msg->id == "MISSION_ACCOMPLISHED") {
-		nextLevel->setVisible(true);
+		missionA->setVisible(true);
 	}
 	else if (msg->id == "NEXT_LEVEL") {
 		GUIMgr->destroyWidget("NextLevel");
@@ -35,6 +35,7 @@ void GameGUI::reciveMsg(Message * msg)
 	//Activa el GUI de GAME_OVER y su booleano
 		gameOver->setVisible(true);
 		GameOverMsg* goMsg = static_cast<GameOverMsg*>(msg);
+		
 		
 	}
 }

@@ -14,6 +14,8 @@
 #include "EnemyBehaviour.h"
 #include "EnemyManager.h"
 #include "CreditsManager.h"
+#include "GameGUI.h"
+#include "GameManager.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -307,6 +309,11 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	scene->getSceneManager()->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
+
+	
+
+
+
 	GameObject* l1Ob = new GameObject();
 	l1Ob->createEmptyEntity("mLight", scene);
 	l1Ob->attachLight(luz);
@@ -352,6 +359,34 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->addGUIObject(b);
 	MyGUI::ImageBox* b2 = GUIManager::instance()->createImage("HealthBarFront.png", 340, 20, 400, 40, "ImageBox", "HealthBarFront");
 	scene->addGUIObject(b2);
+
+
+
+	MyGUI::ImageBox* g = GUIManager::instance()->createImage("GameOver.png", 0, 0, 1080, 720, "ImageBox", "GameOver");
+	g->setVisible(false);
+	scene->addGUIObject(g);
+	MyGUI::ImageBox* g2 = GUIManager::instance()->createImage("MissionAccomplished.png", 0, 0, 1080, 720, "ImageBox", "MissionAccomplished");
+	g2->setVisible(false);
+	scene->addGUIObject(g2);
+
+
+
+	GameObject* guiOB = new GameObject();
+	guiOB->createEmptyEntity("guiOb", scene);
+	scene->addGameObject(guiOB);
+
+	GameGUI* GGUI = new GameGUI(guiOB);
+
+	scene->addComponent(GGUI);
+
+
+	GameObject* gameManagerOb = new GameObject();
+	gameManagerOb->createEmptyEntity("gameManagerOb", scene);
+	scene->addGameObject(gameManagerOb);
+
+	GameManager* GM = new GameManager(gameManagerOb);
+
+	scene->addComponent(GM);
 	
 
 	scenesMap.insert(pair<std::string, Scene*>("TestScene", scene));
