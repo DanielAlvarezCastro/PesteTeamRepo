@@ -13,7 +13,7 @@ private:
 	Scene* scn;
 
 	int bulletCount = 0;
-	int cooldown = 1;
+	int cooldown = 5;
 	bool keyDown = false;
 	std::string shipName_;
 	std::string bulletMeshName;
@@ -28,8 +28,8 @@ public:
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg) {};
 
-	void getBullets();
-	void Shoot();
-	void UpdateValues(int i, std::pair<GameObject*, GameObject*> blls);
+	void getBullet(int id);
+	void shoot();
+	void situateBullet(GameObject*b, int id, bool created = false, int i = -1);
 };
 

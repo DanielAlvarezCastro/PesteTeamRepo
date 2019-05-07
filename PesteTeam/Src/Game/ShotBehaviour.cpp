@@ -4,7 +4,7 @@
 void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
 {	
 	//si tiene rigidbody
-	if (other->getRigidBody() != nullptr && one->isActive()) { 
+	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) { 
 		std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
 
@@ -42,7 +42,7 @@ void ShotBehaviour::Update(float t)
 {
 	if (keyboard->isKeyDown(OIS::KC_L) && !keyDown) 
 	{
-		Shoot();
+		shoot();
 		keyDown = true;
 	}
 
@@ -58,96 +58,66 @@ void ShotBehaviour::Update(float t)
 	}
 }
 
-void ShotBehaviour::getBullets()
+void ShotBehaviour::getBullet(int id)
 {
 	int i = 0;
-	bool found = false;
-	while (i < bullets_.size() && !found)
-	{
-		if (i < (bullets_.size() - 1) && !bullets_[i]->isActive() && !bullets_[i + 1]->isActive())
-			found = true;
-		else
-			i++;
-	}
+	while (i < bullets_.size() && bullets_[i]->isActive())
+		i++;
 
-	if (!found)
-	{
-		GameObject* bullet = new GameObject();
-		string name = "BalaLeft" + to_string(bulletCount);
-		bullet->createEntity(bulletMeshName, name, scn);
+	if (i >= bullets_.size()) {
+		GameObject* nBullet = new GameObject();
+		string name = gameObject->getName() + "PlayerBullet" + to_string(i);
+		nBullet->createEntity(bulletMeshName, name, MainApp::instance()->getCurrentScene());
+		nBullet->setScale(Vec3(0.5, 0.5, 2.5));
 
-
-		GameObject* bullet2 = new GameObject();
-		string name2 = "BalaRight" + to_string(bulletCount);
-		bullet2->createEntity(bulletMeshName, name2, scn);
-
-		bullet->setScale(Vec3(0.5, 0.5, 2.5));
-		bullet2->setScale(Vec3(0.5, 0.5, 2.5));
-
-		string rName = "rBalaLeft" + to_string(bulletCount);
-		RigidBody* rBullet = new RigidBody(bullet, rName, 10, true);
+		string rBulletName = "PlayerRb" + name;
+		RigidBody* rBullet = new RigidBody(nBullet, 1, rBulletName, true);
 		rBullet->setCollisionCallback(OnBulletCollision);
-		bullet->addRigidbody(rBullet);
 		scn->addComponent(rBullet);
+		situateBullet(nBullet, id);
 
-		string rName2 = "rBalaRight" + to_string(bulletCount);
-		RigidBody* rBullet2 = new RigidBody(bullet2, rName2, 10, true);
-		rBullet2->setCollisionCallback(OnBulletCollision);
-		bullet2->addRigidbody(rBullet2);
-		scn->addComponent(rBullet2);
-
-		Vec3 p1 = scn->getGameObject("Pivot1")->getGlobalPosition();
-		Vec3 p2 = scn->getGameObject("Pivot2")->getGlobalPosition();
-		BulletBehaviour* bb = new BulletBehaviour(bullet, p1, gameObject->getDirection());
-		scn->addComponent(bb);
-		bComponents_.push_back(bb);
-		BulletBehaviour* bb2 = new BulletBehaviour(bullet2, p2, gameObject->getDirection());
-		scn->addComponent(bb2);
-		bComponents_.push_back(bb2);
-
-		scn->addGameObject(bullet);
-		scn->addGameObject(bullet2);
-
-		bullets_.push_back(bullet);
-		bullets_.push_back(bullet2);
-
-		bulletCount++;
-
-		std::pair<GameObject*, GameObject*> blls(bullet, bullet2);
-		UpdateValues(-1, blls);
+		bullets_.push_back(nBullet);
+		scn->addGameObject(nBullet);
 	}
 
 	else
 	{
-		Vec3 p2 = scn->getGameObject("Pivot2")->getGlobalPosition();
-		std::pair<GameObject*, GameObject*> blls(bullets_[i], bullets_[i + 1]);
-		UpdateValues(i, blls);
+		bullets_[i]->setActive(true);
+		situateBullet(bullets_[i], id, true, i);
 	}
 }
 
-void ShotBehaviour::Shoot()
+void ShotBehaviour::shoot()
 {
-	getBullets();
+	getBullet(0);
+	getBullet(1);
 }
 
-void ShotBehaviour::UpdateValues(int i, std::pair<GameObject*, GameObject*> blls)
+void ShotBehaviour::situateBullet(GameObject* b, int id, bool created, int i) 
 {
-	Ogre::Vector3 auxDir = gameObject->getDirection();
-	auxDir.normalise();
+	Vec3 pos;
 
-	Ogre::Vector3 centPos = gameObject->getPosition();
-	Vec3 auxPosLeft = scn->getGameObject("Pivot1")->getGlobalPosition();
-	Vec3 auxPosRight = scn->getGameObject("Pivot2")->getGlobalPosition();
+	switch (id) {
+	case 0:
+		pos = scn->getGameObject("Pivot1")->getGlobalPosition();
+		b->setPosition(pos);
+		break;
+	case 1:
+		pos = scn->getGameObject("Pivot2")->getGlobalPosition();
+		b->setPosition(pos);
+		break;
+	default:
+		break;
+	}
 
-	blls.first->setPosition(auxPosLeft);
-	blls.first->setDirection(gameObject->getDirection());
-	blls.first->setActive(true);
-	if (i >= 0)
-		bComponents_[i]->resetValues(auxPosLeft, gameObject->getDirection());
+	Vec3 dir = gameObject->getDirection();
+	b->setDirection(dir);
 
-	blls.second->setPosition(auxPosRight);
-	blls.second->setDirection(gameObject->getDirection());
-	blls.second->setActive(true);
-	if (i >= 0)
-		bComponents_[i + 1]->resetValues(auxPosRight, gameObject->getDirection());
+	if (created && i >= 0) 
+		bComponents_[i]->resetValues(pos, dir);
+	else {
+		BulletBehaviour* bh = new BulletBehaviour(b, pos, dir);
+		scn->addComponent(bh);
+		bComponents_.push_back(bh);
+	}
 }
