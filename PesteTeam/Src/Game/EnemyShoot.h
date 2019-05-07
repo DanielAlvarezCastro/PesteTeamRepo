@@ -35,6 +35,6 @@ public:
 	void getBullet(int id);
 
 	virtual void Update(float t);
-	virtual void receiveMsg(Message* msg) {};
+	virtual void reciveMsg(Message* msg) {};
 };
 

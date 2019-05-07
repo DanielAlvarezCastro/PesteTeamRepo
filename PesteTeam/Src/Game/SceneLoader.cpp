@@ -14,6 +14,9 @@
 #include "EnemyBehaviour.h"
 #include "EnemyManager.h"
 #include "CreditsManager.h"
+
+#include "EnemyShoot.h"
+
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -242,6 +245,9 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
 	scene->addComponent(tB);
+
+	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, "NeonBladeBullet.mesh");
+	scene->addComponent(tBEH);
 
 	GameObject* cubito2 = new GameObject();
 	cubito2->createEntity("cube.mesh", "Cubito2", scene);

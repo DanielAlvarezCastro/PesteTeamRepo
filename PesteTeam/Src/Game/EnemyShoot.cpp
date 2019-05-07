@@ -21,7 +21,7 @@ void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btMa
 	}
 }
 
-EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, std::string bulletMesh): BehaviourComponent(go), type(type_), target(target_)
+EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, std::string bulletMesh): BehaviourComponent(go), type(type_), target(target_), bulletMeshName(bulletMesh)
 {
 	switch (type)
 	{
@@ -83,6 +83,9 @@ void EnemyShoot::getBullet(int id) {
 		rBullet->setCollisionCallback(OnEnemyBulletCollision);
 		MainApp::instance()->getCurrentScene()->addComponent(rBullet);
 		situateBullet(nBullet, id);
+
+		bullets.push_back(nBullet);
+		MainApp::instance()->getCurrentScene()->addGameObject(nBullet);
 	}
 	else { 
 		bullets[i]->setActive(true);
