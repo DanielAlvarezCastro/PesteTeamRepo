@@ -30,7 +30,7 @@ public:
 	void changeRange(float nRange) { range = nRange; };
 	void shoot();
 
-	void situateBullet(GameObject*b, int id, bool created = false,int i =-1);
+	void situateBullet(GameObject*b, int id, bool created = false, int i = -1);
 	
 	void getBullet(int id);
 

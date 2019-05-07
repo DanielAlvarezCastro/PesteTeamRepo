@@ -108,7 +108,7 @@ void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
 				bulletComponents[i]->resetValues(aux, dir);
 			}
 			else {
-				BulletBehaviour* bh = new BulletBehaviour(b, aux, gameObject->getDirection());
+				BulletBehaviour* bh = new BulletBehaviour(b, aux, dir);
 				MainApp::instance()->getCurrentScene()->addComponent(bh);
 				bulletComponents.push_back(bh);
 			}
