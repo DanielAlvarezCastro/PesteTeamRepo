@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\Src\Game\EnemyManager.cpp" />
     <ClCompile Include="..\..\Src\Game\FlyerBehaviour.cpp" />
     <ClCompile Include="..\..\Src\Game\GameGUI.cpp" />
+    <ClCompile Include="..\..\Src\Game\GameManager.cpp" />
     <ClCompile Include="..\..\Src\Game\GameSceneManager.cpp" />
     <ClCompile Include="..\..\Src\Game\main.cpp" />
     <ClCompile Include="..\..\Src\Game\MainMenuManager.cpp" />
@@ -45,6 +46,7 @@
     <ClInclude Include="..\..\Src\Game\EnemyManager.h" />
     <ClInclude Include="..\..\Src\Game\FlyerBehaviour.h" />
     <ClInclude Include="..\..\Src\Game\GameGUI.h" />
+    <ClInclude Include="..\..\Src\Game\GameManager.h" />
     <ClInclude Include="..\..\Src\Game\GameSceneManager.h" />
     <ClInclude Include="..\..\Src\Game\json.hpp" />
     <ClInclude Include="..\..\Src\Game\MainMenuManager.h" />
