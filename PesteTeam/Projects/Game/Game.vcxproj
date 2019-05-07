@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\Game\BulletBehaviour.cpp" />
     <ClCompile Include="..\..\Src\Game\CameraMovement.cpp" />
+    <ClCompile Include="..\..\Src\Game\CreditsManager.cpp" />
     <ClCompile Include="..\..\Src\Game\EnemyBehaviour.cpp" />
     <ClCompile Include="..\..\Src\Game\EnemyManager.cpp" />
     <ClCompile Include="..\..\Src\Game\EnemyShoot.cpp" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Src\Game\BulletBehaviour.h" />
     <ClInclude Include="..\..\Src\Game\CameraMovement.h" />
+    <ClInclude Include="..\..\Src\Game\CreditsManager.h" />
     <ClInclude Include="..\..\Src\Game\EnemyBehaviour.h" />
     <ClInclude Include="..\..\Src\Game\EnemyManager.h" />
     <ClInclude Include="..\..\Src\Game\EnemyShoot.h" />

@@ -13,6 +13,7 @@
 #include "TargetController.h"
 #include "EnemyBehaviour.h"
 #include "EnemyManager.h"
+#include "CreditsManager.h"
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -575,6 +576,12 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			MMM->setButtonSinPeriod(buttonSinPeriod);
 			MMM->setCameraVelocity(cameraVel);
 			scene->addComponent(MMM);
+		}
+		else if (componentName == "CreditsManager") {
+			int vel = (*itComponent)["Velocity"];
+			int YLimit = (*itComponent)["YLimit"];
+			CreditsManager* CM = new CreditsManager(go, vel, YLimit);
+			scene->addComponent(CM);
 		}
 		else if (componentName == "ShipSelection") {
 			int shipDist = (*itComponent)["ShipDistance"];

@@ -11,25 +11,25 @@ void GUIManager::initScene(Scene* escena)
 
 void GUIManager::createTextbox(string text, int x, int y, int w, int h, string skinName, string name, int fontHeight)
 {
-	MyGUI::TextBox* t = MyGUI::Gui::getInstance().createWidget<MyGUI::TextBox>(skinName, MyGUI::IntCoord(x, y, w, h), MyGUI::Align::Default, "Main", name);
+	MyGUI::TextBox* t = mGUI->createWidget<MyGUI::TextBox>(skinName, MyGUI::IntCoord(x, y, w, h), MyGUI::Align::Default, "Main", name);
 	t->setCaption(text);
 	t->setFontHeight(fontHeight);
 }
 
 MyGUI::ImageBox* GUIManager::createImage(string fileName, int x, int y, int w, int h, string skinName, string name)
 {
-	MyGUI::ImageBox* image = MyGUI::Gui::getInstance().createWidget<MyGUI::ImageBox>("ImageBox", MyGUI::IntCoord(x,y,w,h), MyGUI::Align::Default, "Main", name);
+	MyGUI::ImageBox* image = mGUI->createWidget<MyGUI::ImageBox>("ImageBox", MyGUI::IntCoord(x,y,w,h), MyGUI::Align::Default, "Main", name);
 	image->setImageTexture(fileName);
 	return image;
 }
 
 MyGUI::TextBox * GUIManager::getTextBox(string name)
 {
-	return MyGUI::Gui::getInstance().findWidget<MyGUI::TextBox>(name);
+	return mGUI->findWidget<MyGUI::TextBox>(name);
 }
 MyGUI::ImageBox * GUIManager::getImage(string name)
 {
-	return MyGUI::Gui::getInstance().findWidget<MyGUI::ImageBox>(name);
+	return mGUI->findWidget<MyGUI::ImageBox>(name);
 }
 
 GUIManager::GUIManager()
@@ -39,8 +39,14 @@ GUIManager::GUIManager()
 	mGUI = new MyGUI::Gui();
 	mGUI->initialise();
 	MyGUI::PointerManager::getInstance().setVisible(false);
+	
 }
 
+void GUIManager::destroyWidget(string name) {
+	//MyGUI::Widget* w = mGUI->findWidgetT(name);
+	MyGUI::ImageBox* w = mGUI->findWidget<MyGUI::ImageBox>(name);
+	mGUI->destroyWidget(w);
+}
 
 GUIManager::~GUIManager()
 {

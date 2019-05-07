@@ -1,0 +1,42 @@
+{
+	"Camera" : "CameraMain"
+	,
+	"GUI": [
+	{
+		"Name" : "CreditsImage",
+		"Type" : "ImageBox",		
+		"Position" : [0,0],
+		"Size" : [1080,4000],
+		"Src" : "Credits.png"
+	}
+	],
+    "GameObjects": [			
+		{
+			"Name" : "CreditsManager",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,0],			
+			"Components" : [
+				{
+					"Name" : "CreditsManager",
+					"Velocity" : 10,
+					"YLimit" : -3200
+				}
+			]
+		},
+		{
+			"Name" : "CameraOb",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,100,0],			
+			"Components" : [
+				{
+					"Name" : "Camera",
+					"CameraName" : "CameraMain",
+					"NearClipDistance" : 5,
+					"LookAt" : [0 ,90,-100]
+				}
+			]
+		}
+	]
+}

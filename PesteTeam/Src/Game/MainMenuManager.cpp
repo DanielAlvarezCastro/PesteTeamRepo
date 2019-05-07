@@ -78,7 +78,8 @@ void MainMenuManager::Update(float t)
 			SoundManager::instance()->PlaySound2D("SynthSong3.mp3", true, false);
 		}
 		else if (state == 1) {
-
+			MainApp::instance()->getCurrentScene()->hideGUI();
+			GameSceneManager::instance()->LoadScene("Credits");
 		}
 		else if (state == 2) {
 			MainApp::instance()->closeApp();
