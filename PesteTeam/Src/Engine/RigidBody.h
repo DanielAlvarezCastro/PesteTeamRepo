@@ -12,6 +12,8 @@ class RigidBody : public BasicComponent
 protected:
 	std::string name;
 	btRigidBody* rigidBody;
+	btCollisionShape* shape;
+	btDefaultMotionState* motionState;
 	btScalar mass;
 	bool isKinematic;
 

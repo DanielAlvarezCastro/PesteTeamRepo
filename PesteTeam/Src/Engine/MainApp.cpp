@@ -16,6 +16,9 @@ MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogr
 MainApp::~MainApp()
 {
 	delete mRoot;
+	delete sceneMC;
+	delete particleMgr;
+	delete time;
 }
 
 int MainApp::initApp() 

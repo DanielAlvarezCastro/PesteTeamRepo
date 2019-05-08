@@ -47,12 +47,13 @@ Physics::Physics() {
 
 Physics::~Physics() {
 	//limpiamos punteros
-	collisionConfiguration = nullptr;
-	dispatcher = nullptr;
-	overlappingPairCache = nullptr;
-	solver = nullptr;
+	delete collisionConfiguration;
+	delete dispatcher;
+	delete overlappingPairCache;;
+	delete solver;
 	delete dynamicsWorld;
-	dynamicsWorld = nullptr;
+	delete dynamicsWorld;
+	delete mDebugDrawer;
 	//vaciamos vector de collisionShapes
 	for (btCollisionShape* b : collisionShapes) {
 		delete b;
