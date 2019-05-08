@@ -152,7 +152,7 @@ bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
 bool SceneLoader::loadTestScene(Scene* scene)
 {
 	Physics::getInstance()->initDebuger(scene->getSceneManager());
-	//Physics::getInstance()->setDebugState(true);
+	Physics::getInstance()->setDebugState(true);
 
 	GameObject* pointer = new GameObject();
 	pointer->createEmptyEntity("Pointer", scene);
@@ -218,20 +218,32 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	edificio1->setScale(Vec3(5, 5, 5));
 	edificio1->setPosition(Vec3(-300, 0, -500));
 
+	RigidBody* rbBuild1 = new RigidBody(edificio1, "Edificio1");
+	scene->addComponent(rbBuild1);
+
 	GameObject* edificio2 = new GameObject();
 	edificio2->createEntity("Building2.mesh", "Edificio2", scene);
 	edificio2->setScale(Vec3(5, 5, 5));
 	edificio2->setPosition(Vec3(300, 0, -500));
+
+	RigidBody* rbBuild2 = new RigidBody(edificio2, "Edificio2");
+	scene->addComponent(rbBuild2);
 
 	GameObject* edificio3 = new GameObject();
 	edificio3->createEntity("Building3.mesh", "Edificio3", scene);
 	edificio3->setScale(Vec3(10, 10, 10));
 	edificio3->setPosition(Vec3(600, 0, -500));
 
+	RigidBody* rbBuild3 = new RigidBody(edificio3, "Edificio3");
+	scene->addComponent(rbBuild3);
+
 	GameObject* edificio4 = new GameObject();
 	edificio4->createEntity("Building4.mesh", "Edificio4", scene);
 	edificio4->setScale(Vec3(10, 10, 10));
 	edificio4->setPosition(Vec3(900, 0, -500));
+
+	RigidBody* rbBuild4 = new RigidBody(edificio4, "Edificio4");
+	scene->addComponent(rbBuild4);
 
 	GameObject* turretBase = new GameObject();
 	turretBase->createEntity("TurretBase.mesh", "TurretBase", scene);
