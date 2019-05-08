@@ -37,6 +37,7 @@ bool GameSceneManager::LoadScene(string sceneName)
 	Scene* escena = new Scene();
 	if (loader->sceneAlreadyLoaded(sceneName)) {
 		escena = loader->loadSceneFromMemory(sceneName, escena);
+		escena->showGUI();
 	}
 	else {
 		MainApp::instance()->AddScene(escena);

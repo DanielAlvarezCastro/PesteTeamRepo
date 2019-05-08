@@ -260,7 +260,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
 	scene->addComponent(tB);
-	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, "NeonBladeBullet.mesh");
+	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, "EnemyBullet.mesh");
 	scene->addComponent(tBEH);
 
 	GameObject* pivotT1 = new GameObject();
@@ -301,7 +301,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	pivotF1->setPosition(Vec3(0, 0, -40));
 	scene->addGameObject(pivotF1);
 
-	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, "RoyalWaspBullet.mesh");
+	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, "EnemyBullet.mesh");
 	scene->addComponent(FES);
 
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);

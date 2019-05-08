@@ -7,9 +7,11 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) { 
 		std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
-
+		
 		Ogre::Vector3 pos = one->getPosition();
-		MainApp::instance()->getParticleManager()->createParticle(pos, "BulletCollision", 1.0f);
+		BulletCollisionMsg Msg(pos);
+		other->getBComponents()[0]->sendSceneMsg(&Msg);
+		
 	}
 
 	//si es un objeto con comportamiento procesa el choque
@@ -24,6 +26,7 @@ ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : Beh
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
 	bulletMeshName = shipName + "Bullet.mesh";
+	bulletMaterialName = shipName + "Bullet.material";
 }
 
 ShotBehaviour::~ShotBehaviour()
@@ -55,6 +58,14 @@ void ShotBehaviour::Update(float t)
 			cooldown = 3;
 			keyDown = false;
 		}
+	}
+}
+
+void ShotBehaviour::reciveMsg(Message * msg)
+{
+	if (msg->id == "BULLET_COLLISION") {
+		BulletCollisionMsg* dlm = static_cast<BulletCollisionMsg*>(msg);
+		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, "BulletCollision", 1.0f, bulletMaterialName);
 	}
 }
 
