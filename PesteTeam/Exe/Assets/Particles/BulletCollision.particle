@@ -3,7 +3,7 @@ particle_system BulletCollision
 	material SXRNeon
 	particle_width 1.52940002441406
 	particle_height 1.54119995117188
-	quota 500
+	quota 50
 	cull_each false
 	sorted false
 	local_space false
@@ -27,8 +27,7 @@ particle_system BulletCollision
 		time_to_live_max 3
 		duration_min 0
 		duration_max 0
-		repeat_delay_min 0
-		repeat_delay_max 0
+		repeat_delay 3
 		colour_range_start 1 1 1 1
 		colour_range_end 0.666667 0 0 1
 	}
@@ -161,6 +160,6 @@ particle_system BulletCollision
 
 	affector Scaler
 	{
-		rate -0.050
+		rate -0.5
 	}
 }

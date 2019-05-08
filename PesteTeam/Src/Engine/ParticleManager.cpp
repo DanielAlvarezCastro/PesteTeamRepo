@@ -1,4 +1,5 @@
 #include "ParticleManager.h"
+#include <iostream>
 ParticleManager::ParticleManager()
 {
 	particleNum = 0;
@@ -24,6 +25,7 @@ void ParticleManager::update(float t)
 				//Si el tiempo que lleva viva es mayor a su duración entonces se desactiva la partícula
 				if (particles[i].currentDuration > particles[i].maxDuration) {
 					particles[i].parSys->setVisible(false);
+					particles[i].parSys->setEmitting(false);
 					particles[i].currentDuration = 0;
 				}
 			}
@@ -32,7 +34,7 @@ void ParticleManager::update(float t)
 	}
 }
 
-void ParticleManager::createParticle(Vec3 position, string particleName, float duration, string materialName)
+void ParticleManager::createParticle(Ogre::Vector3 position, string particleName, float duration, string materialName)
 {
 	Scene* scene = MainApp::instance()->getCurrentScene();
 	int i = 0;
@@ -45,10 +47,12 @@ void ParticleManager::createParticle(Vec3 position, string particleName, float d
 		}
 		else i++;		
 	}
+	found = false;
 	//Si encuentra una la hace visible, reinicia su timer y se coloca en la posición
 	if (found) {
-		particles[i].parSys->setVisible(true);
 		particles[i].gameObject->setPosition(position);
+		particles[i].parSys->setVisible(true);
+		particles[i].parSys->setEmitting(true);
 		particles[i].currentDuration = 0;
 	}
 	else {
@@ -58,13 +62,13 @@ void ParticleManager::createParticle(Vec3 position, string particleName, float d
 		string realName = particleName + to_string(particleNum);
 
 		ParticleSystem* parSys = scene->getSceneManager()->createParticleSystem(realName, particleName);
+		if (materialName != "None") {
+			parSys->setMaterialName(materialName);
+		}
 		particleOb->createEmptyEntity(realName, scene);
 		particleOb->setPosition(position);
 		particleOb->attachMovableObject(parSys);
 
-		if (materialName != "None") {
-			parSys->setMaterialName(materialName);
-		}
 		
 		ParticleInfo pInfo;
 		pInfo.gameObject = particleOb;

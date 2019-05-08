@@ -16,7 +16,10 @@ struct DownLifeMsg : public Message
 
 	DownLifeMsg(int p, string n, string id = "QUITA_VIDA") : Message(id), power(p), name(n) {}
 };
-
+struct BulletCollisionMsg : public Message {
+	Ogre::Vector3 pos;
+	BulletCollisionMsg(Ogre::Vector3 position,string id = "BULLET_COLLISION") : Message(id), pos(position) {}
+};
 struct GameOverMsg : public Message
 {
 	GameOverMsg(string id = "GAME_OVER") : Message(id) {}

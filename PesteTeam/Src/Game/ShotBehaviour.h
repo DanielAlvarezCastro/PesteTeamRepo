@@ -17,6 +17,7 @@ private:
 	bool keyDown = false;
 	std::string shipName_;
 	std::string bulletMeshName;
+	std::string bulletMaterialName;
 
 	std::vector<GameObject*> bullets_;
 	std::vector<BulletBehaviour*> bComponents_;
@@ -26,7 +27,7 @@ public:
 	virtual ~ShotBehaviour();
 
 	virtual void Update(float t);
-	virtual void reciveMsg(Message* msg) {};
+	virtual void reciveMsg(Message* msg);
 
 	void getBullet(int id);
 	void shoot();

@@ -11,7 +11,7 @@ void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btMa
 		one->setActive(false);
 
 		Ogre::Vector3 pos = one->getPosition();
-		MainApp::instance()->getParticleManager()->createParticle(pos, "BulletCollision", 1.0f);
+		MainApp::instance()->getParticleManager()->createParticle(pos, "BulletCollision", 1.0f, "EnemyBullet.material");
 	}
 
 	//si es un objeto con comportamiento procesa el choque

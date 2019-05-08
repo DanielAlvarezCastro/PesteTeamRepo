@@ -22,6 +22,6 @@ public:
 	void update(float t);
 	ParticleManager();
 	~ParticleManager();
-	void createParticle(Vec3 position, string particleName, float duration, string materialName = "None");
+	void createParticle(Ogre::Vector3  position, string particleName, float duration, string materialName = "None");
 };
 
