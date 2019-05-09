@@ -20,6 +20,8 @@ public:
 
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg) {};
+	/**@Vel is default set at 40 */
+	void setVel(int nVel) { vel_ = nVel; };
 
 	void resetValues(Vec3 pos, Vec3 dir);
 };

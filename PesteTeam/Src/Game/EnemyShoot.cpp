@@ -105,6 +105,7 @@ void EnemyShoot::getBullet(int id) {
 void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
 	Vec3 dir = gameObject->getDirection();
 	b->setDirection(dir);
+	int vel = 0;
 	switch (type)
 	{
 	case groundTurret:
@@ -119,9 +120,11 @@ void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
 		default:
 			break;
 		}
+		vel = 15;
 		break;
 	case Flyer:
 		b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject("PivotF1")->getGlobalPosition());
+		vel = 30;
 		break;
 	default:
 		break;
@@ -130,6 +133,7 @@ void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
 		bulletComponents[i]->resetValues(b->getGlobalPosition(), dir);
 	else {
 		BulletBehaviour* bh = new BulletBehaviour(b, b->getGlobalPosition(), gameObject->getDirection());
+		bh->setVel(vel);
 		MainApp::instance()->getCurrentScene()->addComponent(bh);
 		bulletComponents.push_back(bh);
 	}
