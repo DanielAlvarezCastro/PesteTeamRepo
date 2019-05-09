@@ -7,7 +7,7 @@ void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btMa
 {
 	//si tiene rigidbody
 	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) {
-		std::cout << "Soy una bala enemiga y he chocado" << std::endl;
+		//std::cout << "Soy una bala enemiga y he chocado" << std::endl;
 		one->setActive(false);
 
 		Ogre::Vector3 pos = one->getPosition();

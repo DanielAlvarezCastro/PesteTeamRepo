@@ -5,7 +5,7 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 {	
 	//si tiene rigidbody
 	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) { 
-		std::cout << "Soy una bala y he chocado" << std::endl;
+		//std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
 		
 		Ogre::Vector3 pos = one->getPosition();

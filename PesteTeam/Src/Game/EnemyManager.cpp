@@ -12,10 +12,7 @@ EnemyManager::~EnemyManager()
 
 void EnemyManager::Update(float t)
 {
-	if (enemies <= 0) {
-		MissionAccomplishedMsg mam;
-		sendSceneMsg(&mam);
-	}
+	
 }
 
 void EnemyManager::reciveMsg(Message* msg) 
@@ -32,6 +29,13 @@ void EnemyManager::reciveMsg(Message* msg)
 				found = true;
 			}
 			i++;
+		}
+	}
+	else if (msg->id == "ENEMY_DEAD") {
+		enemies--;
+		if (enemies <= 0) {
+			MissionAccomplishedMsg mam;
+			sendSceneMsg(&mam);
 		}
 	}
 }

@@ -9,6 +9,7 @@ private:
 	Ogre::Radian iniOrientation;
 	OIS::Keyboard* keyboard;
 	float pi = 3.14159265359;
+	int health;
 	bool isRolling = false;
 	bool rollRight = false;
 	bool rollLeft = false;
@@ -16,9 +17,9 @@ private:
 	Real rollBackVel = pi / 4;
 	Real barrelVel = 5*pi;
 public:
-	ShipController(GameObject* gameObject);
+	ShipController(GameObject* gameObject, int _health);
 	virtual ~ShipController();
 
 	virtual void Update(float t);
-	virtual void reciveMsg(Message* msg) {};
+	virtual void reciveMsg(Message* msg);
 };

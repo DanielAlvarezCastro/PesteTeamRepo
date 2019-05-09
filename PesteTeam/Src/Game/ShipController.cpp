@@ -2,9 +2,9 @@
 #include <GameObject.h>
 #include "GameSceneManager.h"
 #include "ParticleManager.h"
+#include "Messages.h"
 
-
-ShipController::ShipController(GameObject* gameObject) :BehaviourComponent(gameObject)
+ShipController::ShipController(GameObject* gameObject, int _health) :BehaviourComponent(gameObject), health(_health)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	gameObject->setOrientation(euler);
@@ -74,6 +74,23 @@ void ShipController::Update(float t)
 			rollLeft = false;
 			rollRight = false;
 			euler.mRoll = iniOrientation;
+		}
+	}
+}
+
+void ShipController::reciveMsg(Message * msg)
+{
+	if (msg->id == "QUITA_VIDA")
+	{
+		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
+		if (dlm->name == "Player") {
+			health -= dlm->power;
+			UpdateHealthBarMsg uhb(health);
+			sendSceneMsg(&uhb);
+			if (health <= 0) {
+				GameOverMsg msg;
+				sendSceneMsg(&msg);
+			}
 		}
 	}
 }

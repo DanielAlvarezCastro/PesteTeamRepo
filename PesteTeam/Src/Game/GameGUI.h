@@ -7,6 +7,8 @@ class GameGUI :
 	public BehaviourComponent
 {
 private:
+	int healthbarFullW = 400;
+	int fullHealth = 200;
 	GUIManager* GUIMgr = nullptr;
 	MyGUI::ImageBox* healthBar = nullptr;
 	MyGUI::ImageBox* gameOver = nullptr;
