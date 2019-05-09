@@ -26,7 +26,9 @@ RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density, 
 
 RigidBody::~RigidBody()
 {
-	rigidBody = nullptr;
+	delete shape;
+	delete motionState;
+	delete rigidBody;
 }
 
 void RigidBody::setIniConf() {
@@ -35,7 +37,7 @@ void RigidBody::setIniConf() {
 	Vec3 scale = gameObject->getBoundingBox();
 	btVector3 auxScale{ btScalar(scale.x * 0.5), btScalar(scale.y * 0.5), btScalar(scale.z * 0.5) };
 	//de momento solo haremos collider con forma de cubos
-	btCollisionShape* shape = new btBoxShape(auxScale);
+	shape = new btBoxShape(auxScale);
 
 	//posicion y rotacion
 	btTransform startTransform;
@@ -52,7 +54,7 @@ void RigidBody::setIniConf() {
 	startTransform.setOrigin(auxPos);
 
 	//estado inicial del cuerpo
-	btDefaultMotionState * motionState = new btDefaultMotionState(startTransform);
+	motionState = new btDefaultMotionState(startTransform);
 	//construimos el rigidbody con toda la informacion 
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, motionState, shape, localInertia);
 	rigidBody = new btRigidBody(rbInfo);
@@ -126,6 +128,6 @@ void RigidBody::setRigidBodyScale(btScalar x, btScalar y, btScalar z) {
 	Vec3 scale = gameObject->getBoundingBox();
 	btVector3 auxScale{ btScalar(scale.x * 0.5 * x), btScalar(scale.y * 0.5 * y), btScalar(scale.z * 0.5 * z) };
 	delete rigidBody->getCollisionShape();
-	btCollisionShape* shape = new btBoxShape(auxScale);
+	shape = new btBoxShape(auxScale);
 	rigidBody->setCollisionShape(shape);
 }
