@@ -92,6 +92,14 @@
 					"Position" : [0,98,-10],
 					"Scale" : [1,1,1]
 				}
+				,
+				{
+					"Name" : "BloodyAlmiranteModel",
+					"Type" : "None",
+					"Mesh" : "BloodyAlmirante.mesh",
+					"Position" : [0,98,-10],
+					"Scale" : [1,1,1]
+				}
 			]
 		},		
 		{
@@ -104,8 +112,8 @@
 					"Name" : "ShipSelection",
 					"ShipDistance" : -12,
 					"Pivot" : "RectPivot",
-					"Models" : ["SXRVengeanceModel","CyberGrasperModel","RoyalWaspModel", "NeonBladeModel","StarRaveModel"],
-					"Names" : ["SXRVengeance", "CyberGrasper", "RoyalWasp", "NeonBlade", "StarRave"]
+					"Models" : ["SXRVengeanceModel","CyberGrasperModel","RoyalWaspModel", "NeonBladeModel","StarRaveModel", "BloodyAlmiranteModel"],
+					"Names" : ["SXRVengeance", "CyberGrasper", "RoyalWasp", "NeonBlade", "StarRave", "BloodyAlmirante"]
 				}
 			]
 		},
