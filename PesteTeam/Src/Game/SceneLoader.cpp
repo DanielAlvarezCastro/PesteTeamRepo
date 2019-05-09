@@ -292,7 +292,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	scene->addComponent(rb2);
 
 	GameObject* flyer = new GameObject();
-	flyer->createEntity("Fly.mesh", "Flyer1", scene);
+	flyer->createEntity("Mogo.mesh", "Flyer1", scene);
 	flyer->setScale(Vec3(1.5, 1.5, 1.5));
 	flyer->setPosition(Vec3(0, 200, -400));
 	RigidBody* rbt2 = new RigidBody(flyer, "R_Flyer", 5, true);
@@ -392,8 +392,6 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	mountains->setScale(Vec3(10, 10, 10));
 	mountains->setPosition(Vec3(0, -50, 0));
 	scene->addGameObject(mountains);
-	Ogre::ColourValue fadeColour(0.0, 0.0, 0.0);
-	scene->getSceneManager()->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
 	GUIManager::instance()->initScene(scene);
 	
