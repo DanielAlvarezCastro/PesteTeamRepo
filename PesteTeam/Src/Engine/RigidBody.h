@@ -31,6 +31,8 @@ public:
 	void setName(const std::string newName);
 	void setMass(const btScalar nmass_);
 
+	void setOffset(float x=0, float y=0, float z=0);
+
 	void setGravity(btScalar x, btScalar y, btScalar z) { if (rigidBody != NULL) rigidBody->setGravity(btVector3(x,y,z)); };
 	void setRigidBodyScale(btScalar x, btScalar y, btScalar z);
 

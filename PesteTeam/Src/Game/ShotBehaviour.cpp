@@ -10,7 +10,8 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 		
 		Ogre::Vector3 pos = one->getPosition();
 		BulletCollisionMsg Msg(pos);
-		other->getBComponents()[0]->sendSceneMsg(&Msg);
+		if(other->getBComponents().size() > 0)
+			other->getBComponents()[0]->sendSceneMsg(&Msg);
 		
 	}
 

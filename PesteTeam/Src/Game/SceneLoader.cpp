@@ -219,6 +219,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	edificio1->setPosition(Vec3(-300, 0, -500));
 
 	RigidBody* rbBuild1 = new RigidBody(edificio1, "Edificio1");
+	rbBuild1->setOffset(0, edificio1->getBoundingBox().y / 2);
 	scene->addComponent(rbBuild1);
 
 	GameObject* edificio2 = new GameObject();
@@ -227,6 +228,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	edificio2->setPosition(Vec3(300, 0, -500));
 
 	RigidBody* rbBuild2 = new RigidBody(edificio2, "Edificio2");
+	rbBuild2->setOffset(0, edificio2->getBoundingBox().y / 2);
 	scene->addComponent(rbBuild2);
 
 	GameObject* edificio3 = new GameObject();
@@ -235,6 +237,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	edificio3->setPosition(Vec3(600, 0, -500));
 
 	RigidBody* rbBuild3 = new RigidBody(edificio3, "Edificio3");
+	rbBuild3->setOffset(0, edificio3->getBoundingBox().y / 2);
 	scene->addComponent(rbBuild3);
 
 	GameObject* edificio4 = new GameObject();
@@ -243,6 +246,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	edificio4->setPosition(Vec3(900, 0, -500));
 
 	RigidBody* rbBuild4 = new RigidBody(edificio4, "Edificio4");
+	rbBuild4->setOffset(0, edificio4->getBoundingBox().y / 2);
 	scene->addComponent(rbBuild4);
 
 	GameObject* turretBase = new GameObject();

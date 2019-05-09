@@ -80,6 +80,14 @@ void RigidBody::setMass(const btScalar nmass_) {
 	rigidBody->setMassProps(mass, localInertia);
 }
 
+void RigidBody::setOffset(float x, float y, float z)
+{
+	btTransform aux = rigidBody->getWorldTransform();
+	btVector3 newPos = aux.getOrigin() + btVector3(x,y,z);
+	aux.setOrigin(newPos);
+	rigidBody->setWorldTransform(aux);
+}
+
 void RigidBody::Update(float t)
 {
 	//posicion del body
@@ -131,3 +139,5 @@ void RigidBody::setRigidBodyScale(btScalar x, btScalar y, btScalar z) {
 	shape = new btBoxShape(auxScale);
 	rigidBody->setCollisionShape(shape);
 }
+
+
