@@ -311,7 +311,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
 	scene->addComponent(tb2);
 
-	FlyerBehaviour* fb1 = new FlyerBehaviour(flyer, pointer, 100, 25);
+	FlyerBehaviour* fb1 = new FlyerBehaviour(flyer, pointer, FlyerRoute::YCircular, 100, 25);
 	scene->addComponent(fb1);
 
 	EnemyBehaviour* eb1 = new EnemyBehaviour(turret, 40);
@@ -628,7 +628,7 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			GameObject* target = scene->getGameObject(tName);
 			int r = (*itComponent)["Radius"];
 			int h = (*itComponent)["Height"];
-			FlyerBehaviour* tB = new FlyerBehaviour(go, target, r, h);
+			FlyerBehaviour* tB = new FlyerBehaviour(go, target, FlyerRoute::Sinusoidal, r, h);
 			scene->addComponent(tB);
 		}
 		else if (componentName == "Light") {
