@@ -152,7 +152,7 @@ bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
 bool SceneLoader::loadTestScene(Scene* scene)
 {
 	Physics::getInstance()->initDebuger(scene->getSceneManager());
-	Physics::getInstance()->setDebugState(true);
+	//Physics::getInstance()->setDebugState(true);
 
 	GameObject* pointer = new GameObject();
 	pointer->createEmptyEntity("Pointer", scene);

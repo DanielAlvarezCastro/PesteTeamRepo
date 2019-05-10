@@ -85,11 +85,13 @@ void ShipController::reciveMsg(Message * msg)
 		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
 		if (dlm->name == "Player") {
 			health -= dlm->power;
+			ISound* aux = SoundManager::instance()->PlaySound2D("HurtPlayer.wav");
 			UpdateHealthBarMsg uhb(health);
 			sendSceneMsg(&uhb);
 			if (health <= 0) {
 				GameOverMsg msg;
 				sendSceneMsg(&msg);
+				ISound* aux = SoundManager::instance()->PlaySound2D("DeathPlayer.wav");
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 #include "EnemyManager.h"
 #include <GameObject.h>
 #include "Messages.h"
+#include<SoundManager.h>
 
 EnemyManager::EnemyManager(GameObject* go) : BehaviourComponent(go)
 {
@@ -36,6 +37,7 @@ void EnemyManager::reciveMsg(Message* msg)
 		if (enemies <= 0) {
 			MissionAccomplishedMsg mam;
 			sendSceneMsg(&mam);
+			SoundManager::instance()->PlaySound2D("LevelCompleted.wav");
 		}
 	}
 }
