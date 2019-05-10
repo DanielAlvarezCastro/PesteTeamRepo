@@ -15,7 +15,8 @@
 					"Position" : [-1,0,0],
 					"Components" : [
 						{
-							"Name" : "ShipController"
+							"Name" : "ShipController",
+							"Health" : 200
 						},
 						 {
 							"Name" : "Rigidbody",
@@ -95,7 +96,7 @@
 						},
 						{
 							"Name" : "CameraMovement",
-							"Pivot" : "CameraPivot",
+							"Pivot" : "PointerCameraPivot",
 							"Target" : "Pointer"
 						}
 					]
@@ -109,7 +110,8 @@
 				{
 					"Name" : "ShotBehaviour",
 					"LeftPivot" : "LeftGunPivot",
-					"RightPivot" : "RightGunPivot"
+					"RightPivot" : "RightGunPivot",
+					"Damage" : 5
 				}
             ]
 		},		
@@ -162,16 +164,72 @@
 			 ]
 		},
 		{
+			"Name" : "TurretBase",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Scale" : [10,10,10],
+			"Position" : [0,0,0]			
+		},
+		{
+			"Name" : "Turret",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Scale" : [10,10,10],
+			"Position" : [0,0,0],
+			 "Childs" : [
+				{
+					"Name" : "PivotT1",
+					"Type" : "PivotT1",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [0.45,0,-2.5]
+				},
+				{
+					"Name" : "PivotT2",
+					"Type" : "PivotT2",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [-0.45,0,-2.5]
+				}				
+			 ],
+			 "Components" : [
+				 {
+					"Name" : "TurretBehaviour",
+					"Target" : "Pointer"
+				 },
+				 {
+					"Name" : "EnemyShoot",
+					"Target" : "Pointer",
+					"BulletMesh" : "EnemyBullet.mesh",
+					"EnemyType" : "GroundTurret",
+					"Damage" : 5,
+					"Range" : 450
+				 },
+				 {
+					"Name" : "Rigidbody",
+					"Density" : 6,
+					"Kinematic" : true
+				 },
+				 {
+					"Name" : "EnemyBehaviour",
+					"Health" : 50
+				 }
+				
+			 ]
+		},
+		{
             "Name" : "TurretBase",
             "Type" : "TurretBase",
             "Mesh" : "TurretBase.mesh",
-			"Scale" : [10,10,10]
+			"Scale" : [10,10,10],
+			"Position" : [0,0,0]			
         },
 		{
-            "Name" : "Turret",
-            "Type" : "Turret",
+            "Name" : "TurretCannon",
+            "Type" : "TurretCannon",
             "Mesh" : "Turret.mesh",
-			"Scale" : [10,10,10],			 
+			"Scale" : [10,10,10],
+			"Position" : [0,20,0],
 			 "Childs" : [
 				{
 					"Name" : "PivotT1",
@@ -197,7 +255,9 @@
 					"Name" : "EnemyShoot",
 					"Target" : "Pointer",
 					"BulletMesh" : "EnemyBullet.mesh",
-					"EnemyType" : "GroundTurret"
+					"EnemyType" : "GroundTurret",
+					"Damage" : 5,
+					"Range" : 450
 				 },
 				 {
 					"Name" : "Rigidbody",
@@ -205,7 +265,8 @@
 					"Kinematic" : true
 				 },
 				 {
-					"Name" : "EnemyBehaviour"
+					"Name" : "EnemyBehaviour",
+					"Health" : 50
 				 }
 				
 			 ]
@@ -229,7 +290,8 @@
 					"Name" : "FlyerBehaviour",
 					"Target" : "Pointer",
 					"Radius" : 100,
-					"Height" : 25
+					"Height" : 25,
+					"Route" : "Sinusoidal"
 				 },
 				 {
 					"Name" : "Rigidbody",
@@ -240,10 +302,13 @@
 					"Name" : "EnemyShoot",
 					"Target" : "Pointer",
 					"EnemyType" : "Fly",
-					"BulletMesh" : "EnemyBullet.mesh"
+					"BulletMesh" : "EnemyBullet.mesh",
+					"Damage" : 5,
+					"Range" : 600
 				 },
 				 {
-					"Name" : "EnemyBehaviour"
+					"Name" : "EnemyBehaviour",
+					"Health" : 50
 				 }					 
 			]
         },

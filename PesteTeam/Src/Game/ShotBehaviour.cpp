@@ -19,12 +19,12 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 
 	//si es un objeto con comportamiento procesa el choque
 	if (other->getBComponents().size() > 0) { 
-		DownLifeMsg Msg(10, other->getName());
+		BulletCollideEntity Msg(other->getName());
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }
 
-ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : BehaviourComponent(gameObject), shipName_(shipName)
+ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, int _damage) : BehaviourComponent(gameObject), shipName_(shipName), damage(_damage)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
@@ -74,6 +74,15 @@ void ShotBehaviour::reciveMsg(Message * msg)
 		aux->setVolume(0.8);
 		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, "BulletCollision", 1.0f, bulletMaterialName);
 	}
+	else if (msg->id == "BULLET_COLLIDE_ENTITY") {
+		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
+		if (bce->name == "Player") {
+			DownLifeMsg Msg(damage, bce->name);
+			cout << "RecibeColision " << bce->name << endl;
+			sendSceneMsg(&Msg);
+		}
+		
+	}
 }
 
 void ShotBehaviour::getBullet(int id)
@@ -117,11 +126,11 @@ void ShotBehaviour::situateBullet(GameObject* b, int id, bool created, int i)
 
 	switch (id) {
 	case 0:
-		pos = scn->getGameObject("LeftGunPivot")->getGlobalPosition();
+		pos = scn->getGameObject(gameObject->getName() + "LeftGunPivot")->getGlobalPosition();
 		b->setPosition(pos);
 		break;
 	case 1:
-		pos = scn->getGameObject("RightGunPivot")->getGlobalPosition();
+		pos = scn->getGameObject(gameObject->getName() + "RightGunPivot")->getGlobalPosition();
 		b->setPosition(pos);
 		break;
 	default:

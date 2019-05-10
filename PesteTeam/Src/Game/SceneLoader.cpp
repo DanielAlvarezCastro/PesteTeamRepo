@@ -264,7 +264,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
 	scene->addComponent(tB);
-	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, "EnemyBullet.mesh");
+	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, 10,450,  "EnemyBullet.mesh");
 	scene->addComponent(tBEH);
 
 	GameObject* pivotT1 = new GameObject();
@@ -305,7 +305,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	pivotF1->setPosition(Vec3(0, 0, -40));
 	scene->addGameObject(pivotF1);
 
-	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, "EnemyBullet.mesh");
+	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, 10, 500, "EnemyBullet.mesh");
 	scene->addComponent(FES);
 
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
@@ -372,7 +372,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	ShipController* sc = new ShipController(Nave, 200);
 	scene->addComponent(sc);
 
-	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip);
+	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip, 10);
 	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
@@ -450,10 +450,10 @@ void SceneLoader::setPlayerShip(std::string shipName)
 	playerShip = shipName;
 }
 
-GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene)
+GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene, std::string fatherName)
 {
 	GameObject* ob = new GameObject();
-	std::string name= gameObject_json["Name"].get<std::string>();
+	std::string name= fatherName + gameObject_json["Name"].get<std::string>();
 	std::string meshName = gameObject_json["Mesh"].get<std::string>();
 	std::vector<float> position = gameObject_json["Position"].get<std::vector<float>>();
 	if (meshName == "SelectedShip") {
@@ -477,7 +477,7 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene)
 
 	//Si tiene childs los recorre y va creando sus gameobjects y componentes
 	for (json::iterator iter = gameObject_json["Childs"].begin(); iter != gameObject_json["Childs"].end(); ++iter) {
-		GameObject* child = createGameObject((*iter), scene);
+		GameObject* child = createGameObject((*iter), scene, ob->getName());
 		child->asingFather(ob);
 		scene->addGameObject(child);
 	}
@@ -490,7 +490,7 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene)
 GameObject * SceneLoader::createGameObjectFromPrefab(json prefabs, json gameObject_json, Scene * scene)
 {
 	GameObject* ob = new GameObject();
-	std::string name = prefabs["Name"].get<std::string>();
+	std::string name = gameObject_json["Name"].get<std::string>();
 
 	//Si el objeto de escena tiene parámetro mesh ignora el del prefab
 	std::string meshName;
@@ -531,7 +531,7 @@ GameObject * SceneLoader::createGameObjectFromPrefab(json prefabs, json gameObje
 
 	//Si tiene childs los recorre y va creando sus gameobjects y componentes
 	for (json::iterator iter = prefabs["Childs"].begin(); iter != prefabs["Childs"].end(); ++iter) {
-		GameObject* child = createGameObject((*iter), scene);
+		GameObject* child = createGameObject((*iter), scene, ob->getName());
 		child->asingFather(ob);
 		scene->addGameObject(child);
 	}
@@ -570,12 +570,7 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 {
 	for (json::iterator itComponent = components_json.begin(); itComponent != components_json.end(); ++itComponent) {
 		std::string componentName = (*itComponent)["Name"].get<std::string>();
-		if (componentName == "HealthScript") {
-			float health = (*itComponent)["Health"].get<float>();
-			float time = (*itComponent)["Time"].get<float>();
-			//Hacer new Healthscript() y a�adirselo al go
-		}
-		else if (componentName == "Camera") {
+		if (componentName == "Camera") {
 			//Adjuntamos un gameobject a la cámara creada
 			std::string cameraName = (*itComponent)["CameraName"];
 			Ogre::Camera* cam = scene->getSceneManager()->getCamera(cameraName);
@@ -594,7 +589,8 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			scene->addComponent(cM);
 		}
 		else if (componentName == "ShipController") {
-			ShipController* sc = new ShipController(go,200);
+			int health = (*itComponent)["Health"];
+			ShipController* sc = new ShipController(go,health);
 			scene->addComponent(sc);
 		}
 		else if (componentName == "ShotBehaviour") {
@@ -604,7 +600,9 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 
 			std::string rName = (*itComponent)["RightPivot"];
 			GameObject* rPivot = scene->getGameObject(rName);
-			ShotBehaviour* sb = new ShotBehaviour(go, playerShip);
+
+			int damage = (*itComponent)["Damage"];
+			ShotBehaviour* sb = new ShotBehaviour(go, playerShip, damage);
 			scene->addComponent(sb);
 		}
 		else if (componentName == "TargetController") {
@@ -623,12 +621,14 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			GameObject* target = scene->getGameObject(tName);
 			std::string bulletMesh = (*itComponent)["BulletMesh"];
 			std::string eType = (*itComponent)["EnemyType"];
+			int damage = (*itComponent)["Damage"];
+			int range = (*itComponent)["Range"];
 			enemyType type;
 			if (eType == "GroundTurret") {
 				type = enemyType::groundTurret;
 			}
 			else type = enemyType::Flyer;
-			EnemyShoot* FES = new EnemyShoot(go, type, target, bulletMesh);
+			EnemyShoot* FES = new EnemyShoot(go, type, target,damage, range, bulletMesh);
 			scene->addComponent(FES);
 		}
 		else if (componentName == "TurretBehaviour") {
@@ -644,7 +644,32 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			GameObject* target = scene->getGameObject(tName);
 			int r = (*itComponent)["Radius"];
 			int h = (*itComponent)["Height"];
-			FlyerBehaviour* tB = new FlyerBehaviour(go, target, FlyerRoute::Sinusoidal, r, h);
+
+			std::string route = (*itComponent)["Route"];
+
+			FlyerRoute fRoute = Sinusoidal;
+			if (route == "XCircular") {
+				fRoute = Sinusoidal;
+			}
+			else if (route == "YCircular") {
+				fRoute = YCircular;
+			}
+			else if (route == "ZCircular") {
+				fRoute = XCircular;
+			}
+			else if (route == "Vertical") {
+				fRoute = Vertical;
+			}
+			else if (route == "Horizontal") {
+				fRoute = Horizontal;
+			}
+			else if (route == "Transversal") {
+				fRoute = Transversal;
+			}
+			else if (route == "Sinusoidal") {
+				fRoute = Sinusoidal;
+			}
+			FlyerBehaviour* tB = new FlyerBehaviour(go, target, fRoute, r, h);
 			scene->addComponent(tB);
 		}
 		else if (componentName == "Rigidbody") {
@@ -684,7 +709,8 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			scene->addComponent(rb);
 		}
 		else if (componentName == "EnemyBehaviour") {
-			EnemyBehaviour* enem = new EnemyBehaviour(go, 40);
+			int health = (*itComponent)["Health"];
+			EnemyBehaviour* enem = new EnemyBehaviour(go, health);
 			enemies.push_back(enem);
 			scene->addComponent(enem);
 		}

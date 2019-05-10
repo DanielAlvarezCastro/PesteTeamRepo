@@ -65,22 +65,34 @@
 			"Position" : [900,0,-500]
 		},
 		{
-			"Name" : "TurretBase1",
-			"Type" : "TurretBase",
-			"Mesh" : "TurretBase.mesh",
-			"Position" : [0,0,-400]
-		},
-		{
 			"Name" : "Turret1",
 			"Type" : "Turret",
 			"Mesh" : "Turret.mesh",
 			"Position" : [0,20,-400]
 		},
 		{
+			"Name" : "TurretBase1",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [0,0,-400]
+		},
+		{
 			"Name" : "Fly1",
 			"Type" : "Fly",
 			"Mesh" : "Fly.mesh",
 			"Position" : [0,200,-400]
+		},
+		{
+			"Name" : "Mugu1",
+			"Type" : "Fly",
+			"Mesh" : "Mugu.mesh",
+			"Position" : [-200,200,-400]
+		},
+		{
+			"Name" : "Mogo1",
+			"Type" : "Fly",
+			"Mesh" : "Mogo.mesh",
+			"Position" : [200,200,-400]
 		},
 		{
 			"Name" : "FloorGrid",

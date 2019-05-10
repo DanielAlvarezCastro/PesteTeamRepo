@@ -8,6 +8,11 @@ struct TiltCameraBackMsg : public Message
 
 	TiltCameraBackMsg(string id, Radian negativeRadian) :Message(id), radian(negativeRadian) {};
 };
+struct BulletCollideEntity : public Message
+{
+	string name;
+	BulletCollideEntity(string n, string id = "BULLET_COLLIDE_ENTITY") : Message(id), name(n) {};
+};
 
 struct DownLifeMsg : public Message
 {
