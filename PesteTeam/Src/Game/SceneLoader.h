@@ -34,7 +34,7 @@ public:
 	GameObject* createGameObject(json gameObject_json, Scene* scene, std::string fatherName="");
 	GameObject* createGameObjectFromPrefab(json prefabs, json gameObject_json, Scene* scene);
 	void createGUIObject(json gui_json, Scene* scene);
-	void addComponents(json components_json, GameObject* go, Scene* scene);
+	void addComponent(json object_json, GameObject* go, Scene* scene);
 	Scene* getScene(std::string sceneName);
 	~SceneLoader();
 };

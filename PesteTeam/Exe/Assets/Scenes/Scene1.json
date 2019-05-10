@@ -80,7 +80,16 @@
 			"Name" : "Fly1",
 			"Type" : "Fly",
 			"Mesh" : "Fly.mesh",
-			"Position" : [0,200,-400]
+			"Position" : [0,200,-400],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 100,
+					"Height" : 25,
+					"Route" : "Transversal"
+				 }
+			 ]
 		},
 		{
 			"Name" : "Mugu1",
