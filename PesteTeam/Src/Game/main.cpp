@@ -25,8 +25,8 @@ int main() {
 	SoundManager::instance()->PlaySound2D("SynthSong0.mp3", true, false);
 
 	MainApp::instance()->runGame();
+	delete MainApp::instance();
 
-	SoundManager::instance()->Drop();
 	
 	return 0;
 }

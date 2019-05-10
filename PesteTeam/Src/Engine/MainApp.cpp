@@ -4,6 +4,11 @@
 #include "SceneMachine.h"
 #include "GameTime.h"
 
+//Otros Singleton
+#include "Physics.h"
+#include "GUIManager.h"
+#include "SoundManager.h"
+
 #include <ParticleManager.h>
 MainApp* MainApp::instance_ = nullptr;
 
@@ -15,6 +20,16 @@ MainApp::MainApp() : mRoot(0), mResourcesCfg(Ogre::BLANKSTRING), mPluginsCfg(Ogr
 
 MainApp::~MainApp()
 {
+	mInputMgr->destroyInputObject(mMouse);
+	mInputMgr->destroyInputObject(mKeyboard);
+	mInputMgr->destroyInputSystem(mInputMgr);
+	mMouse = 0;
+	mKeyboard = 0;
+	mMouse = 0;
+	delete Physics::getInstance();
+	delete GUIManager::instance();
+	SoundManager::instance()->Drop();
+	delete SoundManager::instance();
 	delete mRoot;
 	delete sceneMC;
 	delete particleMgr;
@@ -132,8 +147,10 @@ bool MainApp::runGame()
 {
 	while (appRunning) {
 		messagePump();
-		time->Update();
-		mWindow->update();
+		if (appRunning) {
+			mWindow->update();
+			time->Update();
+		}
 		if (mWindow->isClosed()) return false;
 
 		mKeyboard->capture();

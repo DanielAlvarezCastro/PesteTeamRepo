@@ -47,12 +47,11 @@ Physics::Physics() {
 
 Physics::~Physics() {
 	//limpiamos punteros
+	delete dynamicsWorld;
 	delete collisionConfiguration;
 	delete dispatcher;
 	delete overlappingPairCache;;
 	delete solver;
-	delete dynamicsWorld;
-	delete dynamicsWorld;
 	delete mDebugDrawer;
 	//vaciamos vector de collisionShapes
 	for (btCollisionShape* b : collisionShapes) {
