@@ -76,6 +76,25 @@ void ShipController::Update(float t)
 			euler.mRoll = iniOrientation;
 		}
 	}
+
+	Vec3 pos = gameObject->getGlobalPosition();
+	//Si se sale de la zona de combate manda un mensaje
+	if ((pos.x > 1400 || pos.x < -1400 || pos.z> 1400 || pos.z<-1400 || pos.y>1500) && !warningZone) {
+		EnterWarningZone msg;
+		sendSceneMsg(&msg);
+		warningZone = true;
+	}
+	else if (!(pos.x > 1400 || pos.x < -1400 || pos.z> 1400 || pos.z < -1400 || pos.y>1400) && warningZone) {
+		ExitWarningZone msg;
+		sendSceneMsg(&msg);
+		warningZone = false;
+	}
+	if ((pos.x > 1900 || pos.x < -1900 || pos.z> 1900 || pos.z < -1900 || pos.y>1900 || pos.y<=0)) {
+		GameOverMsg msg;
+		sendSceneMsg(&msg);
+		ExitWarningZone msg2;
+		sendSceneMsg(&msg2);
+	}
 }
 
 void ShipController::reciveMsg(Message * msg)

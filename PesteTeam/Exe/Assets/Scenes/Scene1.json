@@ -32,6 +32,14 @@
 			"Size" : [1080,720],
 			"Src" : "MissionAccomplished.png",
 			"Visible" : false
+		},
+		{
+			"Name" : "Warning",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "Warning.png",
+			"Visible" : false
 		}
 	],
     "GameObjects": [

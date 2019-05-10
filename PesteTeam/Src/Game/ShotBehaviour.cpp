@@ -78,7 +78,6 @@ void ShotBehaviour::reciveMsg(Message * msg)
 		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
 		if (bce->name == "Player") {
 			DownLifeMsg Msg(damage, bce->name);
-			cout << "RecibeColision " << bce->name << endl;
 			sendSceneMsg(&Msg);
 		}
 		

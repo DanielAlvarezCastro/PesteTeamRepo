@@ -18,7 +18,6 @@ void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btMa
 	if (other->getBComponents().size() > 0) {
 		BulletCollideEntity Msg(other->getName());
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
-		cout << "MensajeEntidad" << other->getName() << endl;
 	}
 }
 

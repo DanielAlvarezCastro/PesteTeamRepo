@@ -13,7 +13,12 @@ struct BulletCollideEntity : public Message
 	string name;
 	BulletCollideEntity(string n, string id = "BULLET_COLLIDE_ENTITY") : Message(id), name(n) {};
 };
-
+struct EnterWarningZone : public Message {
+	EnterWarningZone(string id = "ENTER_WARNING_ZONE") : Message(id) {};
+};
+struct ExitWarningZone : public Message {
+	ExitWarningZone(string id = "EXIT_WARNING_ZONE") : Message(id) {};
+};
 struct DownLifeMsg : public Message
 {
 	int power;
