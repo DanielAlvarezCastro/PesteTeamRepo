@@ -16,7 +16,12 @@
 					"Components" : [
 						{
 							"Name" : "ShipController"
-						}
+						},
+						 {
+							"Name" : "Rigidbody",
+							"Density" : 6,
+							"Kinematic" : true
+						 }						
 					]
 				},				
 				{
@@ -112,25 +117,49 @@
 			"Name" : "Building1",
 			"Type" : "Building1",
 			"Mesh" : "Building1.mesh",
-			"Scale" : [5,5,5]
+			"Scale" : [5,5,5],
+			"Components" : [
+				{
+					"Name" : "Rigidbody",
+					"YPivot": "Down"
+				 }
+			 ]
 		},
 		{
 			"Name" : "Building2",
 			"Type" : "Building2",
 			"Mesh" : "Building2.mesh",
-			"Scale" : [5,5,5]
+			"Scale" : [5,5,5],
+			"Components" : [
+				{
+					"Name" : "Rigidbody",
+					"YPivot": "Down"
+				 }
+			 ]
 		},
 		{
 			"Name" : "Building3",
 			"Type" : "Building3",
 			"Mesh" : "Building3.mesh",
-			"Scale" : [10,10,10]
+			"Scale" : [10,10,10],
+			"Components" : [
+				{
+					"Name" : "Rigidbody",
+					"YPivot": "Down"
+				 }
+			 ]
 		},
 		{
 			"Name" : "Building4",
 			"Type" : "Building4",
 			"Mesh" : "Building4.mesh",
-			"Scale" : [10,10,10]
+			"Scale" : [10,10,10],
+			"Components" : [
+				{
+					"Name" : "Rigidbody",
+					"YPivot": "Down"
+				 }
+			 ]
 		},
 		{
             "Name" : "TurretBase",
@@ -142,12 +171,43 @@
             "Name" : "Turret",
             "Type" : "Turret",
             "Mesh" : "Turret.mesh",
-			"Scale" : [10,10,10],
+			"Scale" : [10,10,10],			 
+			 "Childs" : [
+				{
+					"Name" : "PivotT1",
+					"Type" : "PivotT1",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [0.45,0,-2.5]
+				},
+				{
+					"Name" : "PivotT2",
+					"Type" : "PivotT2",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [-0.45,0,-2.5]
+				}
+			 ],
 			 "Components" : [
 				 {
 					"Name" : "TurretBehaviour",
 					"Target" : "Pointer"
+				 },
+				 {
+					"Name" : "EnemyShoot",
+					"Target" : "Pointer",
+					"BulletMesh" : "EnemyBullet.mesh",
+					"EnemyType" : "GroundTurret"
+				 },
+				 {
+					"Name" : "Rigidbody",
+					"Density" : 6,
+					"Kinematic" : true
+				 },
+				 {
+					"Name" : "EnemyBehaviour"
 				 }
+				
 			 ]
         },
 		{
@@ -155,13 +215,36 @@
             "Type" : "Fly",
             "Mesh" : "Fly.mesh",
 			"Scale" : [1,1,1],
+			"Childs" : [
+				{
+					"Name" : "PivotF1",
+					"Type" : "PivotF1",
+					"Mesh" : "None",
+					"Scale" : [1,1,1],
+					"Position" : [0,0,-40]
+				}
+			],
 			"Components" : [
 				 {
 					"Name" : "FlyerBehaviour",
 					"Target" : "Pointer",
 					"Radius" : 100,
 					"Height" : 25
-				 }
+				 },
+				 {
+					"Name" : "Rigidbody",
+					"Density" : 6,
+					"Kinematic" : true
+				 },
+				 {
+					"Name" : "EnemyShoot",
+					"Target" : "Pointer",
+					"EnemyType" : "Fly",
+					"BulletMesh" : "EnemyBullet.mesh"
+				 },
+				 {
+					"Name" : "EnemyBehaviour"
+				 }					 
 			]
         },
 		{
@@ -175,6 +258,39 @@
 			"Type" : "Mountains",
 			"Mesh" : "Mountains.mesh",
 			"Scale" : [10,10,10]
-		}
+		},
+		{
+            "Name" : "GameManager",
+            "Type" : "GameManager",
+            "Mesh" : "None",
+			"Scale" : [1,1,1],
+			"Components" : [
+				 {
+					"Name" : "GameManager"
+				 }		 
+			]
+        },
+		{
+            "Name" : "EnemyManager",
+            "Type" : "EnemyManager",
+            "Mesh" : "None",
+			"Scale" : [1,1,1],
+			"Components" : [
+				 {
+					"Name" : "EnemyManager"
+				 }		 
+			]
+        },
+		{
+            "Name" : "GameGUI",
+            "Type" : "GameGUI",
+            "Mesh" : "None",
+			"Scale" : [1,1,1],
+			"Components" : [
+				 {
+					"Name" : "GameGUI"
+				 }		 
+			]
+        }
     ]
 }

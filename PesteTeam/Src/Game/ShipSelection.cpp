@@ -27,7 +27,9 @@ void ShipSelection::shipsAnimation()
 void ShipSelection::selectShip()
 {
 	GameSceneManager::instance()->setPlayerShip(shipNames[state]);
-	GameSceneManager::instance()->LoadScene("TestScene");
+	GameSceneManager::instance()->LoadScene("Scene1");
+	Physics::getInstance()->initDebuger(MainApp::instance()->getCurrentSceneMgr());
+	Physics::getInstance()->setDebugState(true);
 
 	int rnd = rand() % 2;
 	SoundManager::instance()->GetEngine()->stopAllSounds();

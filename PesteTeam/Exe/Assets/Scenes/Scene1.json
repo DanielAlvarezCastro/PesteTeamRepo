@@ -16,6 +16,23 @@
 			"Size" : [400,40],
 			"Src" : "HealthBarFront.png"
 		}
+		,
+		{
+			"Name" : "GameOver",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "GameOver.png",
+			"Visible" : false
+		},
+		{
+			"Name" : "MissionAccomplished",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "MissionAccomplished.png",
+			"Visible" : false
+		}
 	],
     "GameObjects": [
 		{
@@ -76,6 +93,27 @@
 			"Type" : "Mountains",
 			"Mesh" : "Mountains.mesh",
 			"Position" : [0,-50,0]
+		},
+		{
+			"Name" : "GameManager",
+			"Type" : "GameManager",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
+		},
+		{
+			"Name" : "EnemyManager",
+			"Type" : "EnemyManager",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
+		},
+		{
+			"Name" : "GameGUI",
+			"Type" : "GameGUI",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
 		},
 		{
 			"Name" : "LightOb1",

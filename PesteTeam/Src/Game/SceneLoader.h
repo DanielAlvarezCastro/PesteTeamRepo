@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include "BehaviourComponent.h"
+#include "EnemyBehaviour.h"
 #include "GameObject.h"
 #include "Scene.h"
 #include "GUIManager.h"
@@ -19,6 +20,7 @@ private:
 	std::string scenesPath;
 	std::map<std::string, Scene*> scenesMap;
 	std::string playerShip = "SXRVengeance";
+	std::vector<EnemyBehaviour*> enemies;
 public:
 	SceneLoader(std::string scenesPath);
 	bool loadPrefabsFromFile();

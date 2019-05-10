@@ -111,11 +111,11 @@ void ShotBehaviour::situateBullet(GameObject* b, int id, bool created, int i)
 
 	switch (id) {
 	case 0:
-		pos = scn->getGameObject("Pivot1")->getGlobalPosition();
+		pos = scn->getGameObject("LeftGunPivot")->getGlobalPosition();
 		b->setPosition(pos);
 		break;
 	case 1:
-		pos = scn->getGameObject("Pivot2")->getGlobalPosition();
+		pos = scn->getGameObject("RightGunPivot")->getGlobalPosition();
 		b->setPosition(pos);
 		break;
 	default:

@@ -549,9 +549,14 @@ void SceneLoader::createGUIObject(json gui_json, Scene* scene)
 	std::string guiType = gui_json["Type"].get<std::string>();
 	std::vector<float> position = gui_json["Position"].get<std::vector<float>>();
 	std::vector<float> size = gui_json["Size"].get<std::vector<float>>();
+	bool visible = true;
+	if (gui_json.find("Visible") != gui_json.end()) {
+		visible = gui_json["Visible"];
+	}
 	if (guiType == "ImageBox") {
 		std::string source = gui_json["Src"].get<std::string>();
 		MyGUI::ImageBox* b = GUIManager::instance()->createImage(source, position[0], position[1], size[0], size[1], guiType, guiName);
+		b->setVisible(visible);
 		scene->addGUIObject(b);
 	}
 	else if (guiType == "TextBox") {
@@ -613,6 +618,19 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			TargetController* tc = new TargetController(go, mCamera, blueImg,redImg,guiN,w, h);
 			scene->addComponent(tc);
 		}
+		else if (componentName == "EnemyShoot") {
+			std::string tName = (*itComponent)["Target"];
+			GameObject* target = scene->getGameObject(tName);
+			std::string bulletMesh = (*itComponent)["BulletMesh"];
+			std::string eType = (*itComponent)["EnemyType"];
+			enemyType type;
+			if (eType == "GroundTurret") {
+				type = enemyType::groundTurret;
+			}
+			else type = enemyType::Flyer;
+			EnemyShoot* FES = new EnemyShoot(go, type, target, bulletMesh);
+			scene->addComponent(FES);
+		}
 		else if (componentName == "TurretBehaviour") {
 			//Le pasamos el nombre de la nave actual
 			std::string tName = (*itComponent)["Target"];
@@ -628,6 +646,62 @@ void SceneLoader::addComponents(json components_json, GameObject * go, Scene* sc
 			int h = (*itComponent)["Height"];
 			FlyerBehaviour* tB = new FlyerBehaviour(go, target, FlyerRoute::Sinusoidal, r, h);
 			scene->addComponent(tB);
+		}
+		else if (componentName == "Rigidbody") {
+			bool kinematic = false;
+			RigidBody* rb ;
+			int y = 0;
+			int x = 0;
+			if ((*itComponent).find("Kinematic") != (*itComponent).end()) {
+				kinematic = (*itComponent)["Kinematic"];
+			}
+			if ((*itComponent).find("Density") != (*itComponent).end()) {
+				int density = (*itComponent)["Density"];
+				rb = new RigidBody(go, go->getName(), density, kinematic);
+			}
+			else {
+				rb = new RigidBody(go, go->getName());
+			}
+			if ((*itComponent).find("YPivot") != (*itComponent).end()) {
+				std::string yPiv = (*itComponent)["YPivot"];
+				if (yPiv == "Down") {
+					y = go->getBoundingBox().y / 2;
+				}
+				else if(yPiv=="Up"){
+					y = -go->getBoundingBox().y / 2;
+				}
+			}
+			if ((*itComponent).find("XPivot") != (*itComponent).end()) {
+				std::string yPiv = (*itComponent)["XPivot"];
+				if (yPiv == "Right") {
+					x = -go->getBoundingBox().x / 2;
+				}
+				else if (yPiv == "Left") {
+					x = go->getBoundingBox().x / 2;
+				}
+			}
+			rb->setOffset(x, y);
+			scene->addComponent(rb);
+		}
+		else if (componentName == "EnemyBehaviour") {
+			EnemyBehaviour* enem = new EnemyBehaviour(go, 40);
+			enemies.push_back(enem);
+			scene->addComponent(enem);
+		}
+		else if (componentName == "EnemyManager") {
+			EnemyManager* em = new EnemyManager(go);
+			for (int i = 0; i < enemies.size(); i++) {
+				em->addEnemy(enemies[i]);
+			}
+			scene->addComponent(em);
+		}
+		else if (componentName == "GameGUI") {
+			GameGUI* GG = new GameGUI(go);
+			scene->addComponent(GG);
+		}
+		else if (componentName == "GameManager") {
+			GameManager* gm = new GameManager(go);
+			scene->addComponent(gm);
 		}
 		else if (componentName == "Light") {
 			Ogre::Light* luz = scene->getSceneManager()->createLight("Luz");
