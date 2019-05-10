@@ -50,4 +50,10 @@ void GUIManager::destroyWidget(string name) {
 
 GUIManager::~GUIManager()
 {
+	mGUI->shutdown();
+	delete mGUI;
+	mGUI = 0;
+	mPlatform->shutdown();
+	delete mPlatform;
+	mPlatform = 0;
 }

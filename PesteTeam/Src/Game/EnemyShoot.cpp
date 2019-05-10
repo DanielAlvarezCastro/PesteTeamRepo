@@ -57,6 +57,8 @@ void EnemyShoot::Update(float t) {
 		if (inRange()) {
 			auxTemp = 0;
 			shoot();
+			ISound* aux = SoundManager::instance()->PlaySound2D("ShootEnemy.wav");
+			aux->setVolume(0.7);
 		}
 	}
 }

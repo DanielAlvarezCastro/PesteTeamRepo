@@ -9,6 +9,8 @@ GameSceneManager::GameSceneManager()
 
 GameSceneManager::~GameSceneManager()
 {
+	delete loader;
+	delete GUIManager::instance();
 }
 void GameSceneManager::setPlayerShip(string shipName)
 {

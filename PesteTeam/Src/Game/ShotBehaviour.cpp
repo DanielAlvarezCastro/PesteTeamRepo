@@ -1,5 +1,7 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
+#include <random>
+#include <string>
 
 void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
 {	
@@ -45,7 +47,9 @@ ShotBehaviour::~ShotBehaviour()
 void ShotBehaviour::Update(float t)
 {
 	if (keyboard->isKeyDown(OIS::KC_L) && !keyDown) 
-	{
+	{ 
+		ISound* aux  = SoundManager::instance()->PlaySound2D("ShootPlayer.wav");
+		aux->setVolume(0.9);
 		shoot();
 		keyDown = true;
 	}
@@ -66,6 +70,8 @@ void ShotBehaviour::reciveMsg(Message * msg)
 {
 	if (msg->id == "BULLET_COLLISION") {
 		BulletCollisionMsg* dlm = static_cast<BulletCollisionMsg*>(msg);
+		ISound* aux = SoundManager::instance()->PlaySound2D("HurtEnemy.wav");
+		aux->setVolume(0.8);
 		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, "BulletCollision", 1.0f, bulletMaterialName);
 	}
 }
