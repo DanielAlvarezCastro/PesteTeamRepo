@@ -40,7 +40,7 @@ void Scene::clearScene()
 		delete bc;
 	}
 	if (MainApp::instance()->isRunning()) {
-		GUIManager::instance()->resetGUI();
+		//GUIManager::instance()->resetGUI();
 	}
 	components.clear();
 	for (GameObject* go : gameObjects) 
@@ -48,6 +48,10 @@ void Scene::clearScene()
 		delete go;
 	}
 	gameObjects.clear();
+	for (MyGUI::Widget* w  : guiObjects) {
+		GUIManager::instance()->destroyWidget(w);
+	}
+	guiObjects.clear();
 }
 
 void Scene::addGUIObject(MyGUI::Widget* ob)

@@ -21,7 +21,14 @@ void GameManager::Update(float t)
 		
 			std::string sceneName;
 			sceneName = "Scene" + to_string(currentLevel);
-			GameSceneManager::instance()->CloseScene(sceneName);
+			GameSceneManager::instance()->ChangeToNewScene(sceneName);
+		}
+	}
+	else if (GameOver) {
+		nextLevelTimer -= t;
+		if (nextLevelTimer <= 0) {
+			//GameSceneManager::instance()->ReturnToScene("ShipSelection");
+			GameSceneManager::instance()->CloseScene();
 		}
 	}
 }
@@ -31,12 +38,14 @@ void GameManager::reciveMsg(Message * msg)
 	
 	//Activa el booleano que activa la cuenta atrás para cambiar de escena
 	if (msg->id == "MISSION_ACCOMPLISHED") {
-		currentLevel++;
 		GameOver = false;
 		if (currentLevel == maxLevel) {
 
 		}
-		else nextLevel = true;
+		else {
+			currentLevel++;
+			nextLevel = true;
+		}
 	}
 	else if (msg->id == "GAME_OVER")
 	{//Cuando reciba el mensaje de que el juego ha terminado 
@@ -44,6 +53,7 @@ void GameManager::reciveMsg(Message * msg)
 		if (!nextLevel) {
 			GameOverMsg* goMsg = static_cast<GameOverMsg*>(msg);
 			GameOver = true;
+			currentLevel = 1;
 		}
 	}
 }

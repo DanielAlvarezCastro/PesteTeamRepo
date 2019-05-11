@@ -26,13 +26,13 @@ MainApp::~MainApp()
 	mMouse = 0;
 	mKeyboard = 0;
 	mMouse = 0;
-	delete GUIManager::instance();
 	SoundManager::instance()->Drop();
 	delete SoundManager::instance();
 	delete sceneMC;
 	delete particleMgr;
 	delete time;
 	delete Physics::getInstance();
+	delete GUIManager::instance();
 	vp->clear();
 	mWindow->destroy();
 	mRoot->shutdown();

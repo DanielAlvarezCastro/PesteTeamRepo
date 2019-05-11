@@ -13,7 +13,9 @@ public:
 	void setPlayerShip(string shipName);
 	bool LoadGame();
 	bool LoadScene(string sceneName);
-	void CloseScene(string nextScene ="");
+	void CloseScene();
+	void ChangeToNewScene(string nextScene);
+	void ReturnToScene(string sceneName);
 	static GameSceneManager* instance() {
 		if (instance_ == nullptr)
 			instance_ = new GameSceneManager();

@@ -19,6 +19,7 @@ public:
 	MyGUI::TextBox* getTextBox(string name);
 	MyGUI::ImageBox* getImage(string name);
 	void destroyWidget(string name);
+	void destroyWidget(MyGUI::Widget* name);
 	static GUIManager* instance() {
 		if (instance_ == nullptr)
 			instance_ = new GUIManager();

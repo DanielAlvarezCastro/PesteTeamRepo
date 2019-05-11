@@ -49,8 +49,8 @@ bool GameSceneManager::LoadScene(string sceneName)
 			return false;
 	}
 }
-
-void GameSceneManager::CloseScene(string nextScene)
+//Borra la escena actual y carga una nueva
+void GameSceneManager::ChangeToNewScene(string nextScene)
 {
 	//Esconde el GUI de la escena anterior
 	MainApp::instance()->getCurrentScene()->hideGUI();
@@ -59,13 +59,35 @@ void GameSceneManager::CloseScene(string nextScene)
 	loader->deleteScene(sceneName);
 	//La quita de la pila de escenas
 	MainApp::instance()->QuitScene();
-	if (nextScene == "") {
-		//Carga la siguiente escena en la pila
-		Scene* scene = MainApp::instance()->getCurrentScene();
-		string nextSceneName = scene->getName();
-		LoadScene(nextSceneName);
-	}
-	else {
-		LoadScene(nextScene);
-	}
+	LoadScene(nextScene);
+}
+//Borra las escenas necesarias hasta llegar a la indicada y cargarla
+void GameSceneManager::ReturnToScene(string sceneName)
+{
+	//Esconde el GUI de la escena anterior
+	string currentScene = MainApp::instance()->getCurrentScene()->getName();
+	MainApp::instance()->getCurrentScene()->hideGUI();
+	do {
+		//Borra de memoria la escena
+		loader->deleteScene(currentScene);
+		//La quita de la pila de escenas
+		MainApp::instance()->QuitScene();
+		currentScene = MainApp::instance()->getCurrentScene()->getName();
+	} while (currentScene != sceneName);
+	LoadScene(sceneName);
+}
+//Cierra la escena actual y carga la anterior en la pila
+void GameSceneManager::CloseScene()
+{
+	//Esconde el GUI de la escena anterior
+	MainApp::instance()->getCurrentScene()->hideGUI();
+	string sceneName = MainApp::instance()->getCurrentScene()->getName();
+	//Borra de memoria la escena
+	loader->deleteScene(sceneName);
+	//La quita de la pila de escenas
+	MainApp::instance()->QuitScene();
+	//Carga la siguiente escena en la pila
+	Scene* scene = MainApp::instance()->getCurrentScene();
+	string nextSceneName = scene->getName();
+	LoadScene(nextSceneName);
 }

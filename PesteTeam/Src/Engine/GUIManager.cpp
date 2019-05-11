@@ -47,6 +47,9 @@ void GUIManager::destroyWidget(string name) {
 	MyGUI::ImageBox* w = mGUI->findWidget<MyGUI::ImageBox>(name);
 	mGUI->destroyWidget(w);
 }
+void GUIManager::destroyWidget(MyGUI::Widget* name) {
+	mGUI->destroyWidget(name);
+}
 
 void GUIManager::resetGUI() 
 {
