@@ -16,22 +16,20 @@ void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btMa
 
 	//si es un objeto con comportamiento procesa el choque
 	if (other->getBComponents().size() > 0) {
-		DownLifeMsg Msg(10, other->getName());
+		BulletCollideEntity Msg(other->getName());
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }
 
-EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, std::string bulletMesh): BehaviourComponent(go), type(type_), target(target_), bulletMeshName(bulletMesh)
+EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh): BehaviourComponent(go), type(type_), target(target_), bulletMeshName(bulletMesh), damage(_damage), range(_range)
 {
 	switch (type)
 	{
 	case enemyType::groundTurret:
-		range = 450;
 		ShootCd = 1.6;
 		break;
 	case enemyType::Flyer:
 		ShootCd = 2.4;
-		range = 900;
 		break;
 	default:
 		break;
@@ -57,6 +55,19 @@ void EnemyShoot::Update(float t) {
 		if (inRange()) {
 			auxTemp = 0;
 			shoot();
+			ISound* aux = SoundManager::instance()->PlaySound2D("ShootEnemy.wav");
+			aux->setVolume(0.7);
+		}
+	}
+}
+
+void EnemyShoot::reciveMsg(Message * msg)
+{
+	if (msg->id == "BULLET_COLLIDE_ENTITY") {
+		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
+		if (bce->name != "PointerPlayer") {
+			DownLifeMsg Msg(damage, bce->name);
+			sendSceneMsg(&Msg);
 		}
 	}
 }
@@ -112,10 +123,10 @@ void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
 		switch (id)
 		{
 		case 0:
-			b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject("PivotT1")->getGlobalPosition());
+			b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject(gameObject->getName() + "PivotT1")->getGlobalPosition());
 			break;
 		case 1:
-			b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject("PivotT2")->getGlobalPosition());
+			b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject(gameObject->getName() + "PivotT2")->getGlobalPosition());
 			break;
 		default:
 			break;
@@ -123,7 +134,7 @@ void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
 		vel = 15;
 		break;
 	case Flyer:
-		b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject("PivotF1")->getGlobalPosition());
+		b->setPosition(MainApp::instance()->getCurrentScene()->getGameObject(gameObject->getName() + "PivotF1")->getGlobalPosition());
 		vel = 30;
 		break;
 	default:

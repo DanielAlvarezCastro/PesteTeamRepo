@@ -75,6 +75,25 @@ void ShipController::Update(float t)
 			euler.mRoll = iniOrientation;
 		}
 	}
+
+	Vec3 pos = gameObject->getGlobalPosition();
+	//Si se sale de la zona de combate manda un mensaje
+	if ((pos.x > 1400 || pos.x < -1400 || pos.z> 1400 || pos.z<-1400 || pos.y>1500) && !warningZone) {
+		EnterWarningZone msg;
+		sendSceneMsg(&msg);
+		warningZone = true;
+	}
+	else if (!(pos.x > 1400 || pos.x < -1400 || pos.z> 1400 || pos.z < -1400 || pos.y>1400) && warningZone) {
+		ExitWarningZone msg;
+		sendSceneMsg(&msg);
+		warningZone = false;
+	}
+	if ((pos.x > 1900 || pos.x < -1900 || pos.z> 1900 || pos.z < -1900 || pos.y>1900 || pos.y<=0)) {
+		GameOverMsg msg;
+		sendSceneMsg(&msg);
+		ExitWarningZone msg2;
+		sendSceneMsg(&msg2);
+	}
 }
 
 void ShipController::reciveMsg(Message * msg)
@@ -82,13 +101,16 @@ void ShipController::reciveMsg(Message * msg)
 	if (msg->id == "QUITA_VIDA")
 	{
 		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
-		if (dlm->name == "Player") {
+		if (dlm->name == "PointerPlayer") {
+			cout << "Daño: " << health << endl;
 			health -= dlm->power;
+			ISound* aux = SoundManager::instance()->PlaySound2D("HurtPlayer.wav");
 			UpdateHealthBarMsg uhb(health);
 			sendSceneMsg(&uhb);
 			if (health <= 0) {
 				GameOverMsg msg;
 				sendSceneMsg(&msg);
+				ISound* aux = SoundManager::instance()->PlaySound2D("DeathPlayer.wav");
 			}
 		}
 	}

@@ -8,6 +8,7 @@ GameGUI::GameGUI(GameObject* gameObject) : BehaviourComponent(gameObject)
 	healthBar = GUIMgr->getImage("HealthBar");
 	gameOver = GUIMgr->getImage("GameOver");
 	missionA = GUIMgr->getImage("MissionAccomplished");
+	warning = GUIMgr->getImage("Warning");
 }
 
 
@@ -39,8 +40,17 @@ void GameGUI::reciveMsg(Message * msg)
 	else if (msg->id == "GAME_OVER")
 	{//Cuando reciba el mensaje de que el juego ha terminado 
 	//Activa el GUI de GAME_OVER y su booleano
-		cout << "GAMEOVER" << endl;
-		gameOver->setVisible(true);
-		GameOverMsg* goMsg = static_cast<GameOverMsg*>(msg);		
+		//Si la misión no está cumplida entonces pierdes
+		if (!missionA->isVisible()) {
+			gameOver->setVisible(true);
+		}
+	}
+	else if (msg->id == "ENTER_WARNING_ZONE")
+	{
+		warning->setVisible(true);
+	}
+	else if (msg->id == "EXIT_WARNING_ZONE")
+	{
+		warning->setVisible(false);
 	}
 }

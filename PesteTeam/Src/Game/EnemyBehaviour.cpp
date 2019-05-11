@@ -1,6 +1,8 @@
 #include "EnemyBehaviour.h"
 #include <GameObject.h>
 #include "Messages.h"
+#include <SoundManager.h>
+
 EnemyBehaviour::EnemyBehaviour(GameObject* gameObject, int l) : BehaviourComponent(gameObject), life(l)
 {
 }
@@ -15,5 +17,7 @@ void EnemyBehaviour::Update(float t)
 		EnemyDeadMsg msg;
 		sendSceneMsg(&msg);
 		this->gameObject->setActive(false);
+		ISound* aux = SoundManager::instance()->PlaySound2D("Explotion.wav");
+		aux->setVolume(0.9);
 	}
 }

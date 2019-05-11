@@ -23,9 +23,10 @@ protected:
 
 	float ShootCd = 1,
 		auxTemp = 0;
-	float range = 100;
+	float range;
+	int damage;
 public:
-	EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, std::string bulletMesh);
+	EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh);
 	virtual ~EnemyShoot();
 	void changeRange(float nRange) { range = nRange; };
 	void shoot();
@@ -37,6 +38,6 @@ public:
 	void getBullet(int id=0);
 
 	virtual void Update(float t);
-	virtual void reciveMsg(Message* msg) {};
+	virtual void reciveMsg(Message* msg);
 };
 

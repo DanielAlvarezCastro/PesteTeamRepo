@@ -4,8 +4,10 @@ class GameManager : public BehaviourComponent
 {
 private:
 	bool GameOver;
-	bool missionA;
-	int currentLevel;
+	bool nextLevel;
+	static int currentLevel;
+	float nextLevelMaxTime;
+	float nextLevelTimer;
 public:
 	GameManager(GameObject* go);
 	virtual void Update(float t);

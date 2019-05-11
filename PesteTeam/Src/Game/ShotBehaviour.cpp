@@ -1,5 +1,7 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
+#include <random>
+#include <string>
 
 
 
@@ -19,12 +21,12 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 
 	//si es un objeto con comportamiento procesa el choque
 	if (other->getBComponents().size() > 0) { 
-		DownLifeMsg Msg(10, other->getName());
+		BulletCollideEntity Msg(other->getName());
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }
 
-ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : BehaviourComponent(gameObject), shipName_(shipName)
+ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, int _damage) : BehaviourComponent(gameObject), shipName_(shipName), damage(_damage)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
@@ -39,7 +41,9 @@ ShotBehaviour::~ShotBehaviour()
 void ShotBehaviour::Update(float t)
 {
 	if (keyboard->isKeyDown(OIS::KC_L) && !keyDown) 
-	{
+	{ 
+		ISound* aux  = SoundManager::instance()->PlaySound2D("ShootPlayer.wav");
+		aux->setVolume(0.9);
 		shoot();
 		keyDown = true;
 	}
@@ -60,7 +64,17 @@ void ShotBehaviour::reciveMsg(Message * msg)
 {
 	if (msg->id == "BULLET_COLLISION") {
 		BulletCollisionMsg* dlm = static_cast<BulletCollisionMsg*>(msg);
+		ISound* aux = SoundManager::instance()->PlaySound2D("HurtEnemy.wav");
+		aux->setVolume(0.8);
 		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, "BulletCollision", 1.0f, bulletMaterialName);
+	}
+	else if (msg->id == "BULLET_COLLIDE_ENTITY") {
+		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
+		if (bce->name == "PointerPlayer") {
+			DownLifeMsg Msg(damage, bce->name);
+			sendSceneMsg(&Msg);
+		}
+		
 	}
 }
 
@@ -105,11 +119,11 @@ void ShotBehaviour::situateBullet(GameObject* b, int id, bool created, int i)
 
 	switch (id) {
 	case 0:
-		pos = scn->getGameObject("Pivot1")->getGlobalPosition();
+		pos = scn->getGameObject(gameObject->getName() + "LeftGunPivot")->getGlobalPosition();
 		b->setPosition(pos);
 		break;
 	case 1:
-		pos = scn->getGameObject("Pivot2")->getGlobalPosition();
+		pos = scn->getGameObject(gameObject->getName() + "RightGunPivot")->getGlobalPosition();
 		b->setPosition(pos);
 		break;
 	default:

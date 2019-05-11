@@ -11,6 +11,7 @@ class ShotBehaviour : public BehaviourComponent
 private:
 	OIS::Keyboard* keyboard;
 	Scene* scn;
+	int damage;
 
 	int bulletCount = 0;
 	int cooldown = 5;
@@ -23,7 +24,7 @@ private:
 	std::vector<BulletBehaviour*> bComponents_;
 
 public:
-	ShotBehaviour(GameObject* gameObject, std::string shipName);
+	ShotBehaviour(GameObject* gameObject, std::string shipName, int damage);
 	virtual ~ShotBehaviour();
 
 	virtual void Update(float t);

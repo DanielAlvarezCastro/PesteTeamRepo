@@ -16,6 +16,31 @@
 			"Size" : [400,40],
 			"Src" : "HealthBarFront.png"
 		}
+		,
+		{
+			"Name" : "GameOver",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "GameOver.png",
+			"Visible" : false
+		},
+		{
+			"Name" : "MissionAccomplished",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "MissionAccomplished.png",
+			"Visible" : false
+		},
+		{
+			"Name" : "Warning",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "Warning.png",
+			"Visible" : false
+		}
 	],
     "GameObjects": [
 		{
@@ -48,22 +73,16 @@
 			"Position" : [900,0,-500]
 		},
 		{
-			"Name" : "TurretBase1",
-			"Type" : "TurretBase",
-			"Mesh" : "TurretBase.mesh",
-			"Position" : [0,0,-400]
-		},
-		{
 			"Name" : "Turret1",
 			"Type" : "Turret",
 			"Mesh" : "Turret.mesh",
 			"Position" : [0,20,-400]
 		},
 		{
-			"Name" : "Fly1",
-			"Type" : "Fly",
-			"Mesh" : "Fly.mesh",
-			"Position" : [0,200,-400]
+			"Name" : "TurretBase1",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [0,0,-400]
 		},
 		{
 			"Name" : "FloorGrid",
@@ -76,6 +95,27 @@
 			"Type" : "Mountains",
 			"Mesh" : "Mountains.mesh",
 			"Position" : [0,-50,0]
+		},
+		{
+			"Name" : "GameManager",
+			"Type" : "GameManager",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
+		},
+		{
+			"Name" : "EnemyManager",
+			"Type" : "EnemyManager",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
+		},
+		{
+			"Name" : "GameGUI",
+			"Type" : "GameGUI",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
 		},
 		{
 			"Name" : "LightOb1",

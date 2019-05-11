@@ -52,41 +52,41 @@
 			"Position" : [1.7,97,-10]
 		},
 		{
-			"Name" : "RectPivot",
+			"Name" : "Model",
 			"Type" : "None",
 			"Mesh" : "None",
 			"Position" : [0,0,0],
 			"Childs" : [
 				{
-					"Name" : "SXRVengeanceModel",
+					"Name" : "SXRVengeance",
 					"Type" : "None",
 					"Mesh" : "SXRVengeance.mesh",
 					"Position" : [0,98,-10],
 					"Scale" : [1,1,1]
 				},
 				{
-					"Name" : "CyberGrasperModel",
+					"Name" : "CyberGrasper",
 					"Type" : "None",
 					"Mesh" : "CyberGrasper.mesh",
 					"Position" : [0,98,-10],
 					"Scale" : [1,1,1]
 				},
 				{
-					"Name" : "RoyalWaspModel",
+					"Name" : "RoyalWasp",
 					"Type" : "None",
 					"Mesh" : "RoyalWasp.mesh",
 					"Position" : [0,98,-10],
 					"Scale" : [1,1,1]
 				},
 				{
-					"Name" : "NeonBladeModel",
+					"Name" : "NeonBlade",
 					"Type" : "None",
 					"Mesh" : "NeonBlade.mesh",
 					"Position" : [0,98,-10],
 					"Scale" : [1,1,1]
 				},
 				{
-					"Name" : "StarRaveModel",
+					"Name" : "StarRave",
 					"Type" : "None",
 					"Mesh" : "StarRave.mesh",
 					"Position" : [0,98,-10],
@@ -94,7 +94,7 @@
 				}
 				,
 				{
-					"Name" : "BloodyAlmiranteModel",
+					"Name" : "BloodyAlmirante",
 					"Type" : "None",
 					"Mesh" : "BloodyAlmirante.mesh",
 					"Position" : [0,98,-10],
@@ -111,8 +111,8 @@
 				{
 					"Name" : "ShipSelection",
 					"ShipDistance" : -12,
-					"Pivot" : "RectPivot",
-					"Models" : ["SXRVengeanceModel","CyberGrasperModel","RoyalWaspModel", "NeonBladeModel","StarRaveModel", "BloodyAlmiranteModel"],
+					"Pivot" : "Model",
+					"Models" : ["ModelSXRVengeance","ModelCyberGrasper","ModelRoyalWasp", "ModelNeonBlade","ModelStarRave", "ModelBloodyAlmirante"],
 					"Names" : ["SXRVengeance", "CyberGrasper", "RoyalWasp", "NeonBlade", "StarRave", "BloodyAlmirante"]
 				}
 			]
