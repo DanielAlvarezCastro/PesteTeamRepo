@@ -40,8 +40,10 @@ void GameGUI::reciveMsg(Message * msg)
 	else if (msg->id == "GAME_OVER")
 	{//Cuando reciba el mensaje de que el juego ha terminado 
 	//Activa el GUI de GAME_OVER y su booleano
-		cout << "GAMEOVER" << endl;
-		gameOver->setVisible(true);	
+		//Si la misión no está cumplida entonces pierdes
+		if (!missionA->isVisible()) {
+			gameOver->setVisible(true);
+		}
 	}
 	else if (msg->id == "ENTER_WARNING_ZONE")
 	{
