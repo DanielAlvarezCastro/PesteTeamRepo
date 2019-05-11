@@ -65,6 +65,7 @@ public:
 	void AddScene(Scene* scene);
 	void QuitScene();
 	void setupViewport(Camera* camera);
+	void addCompositor(std::string compositor);
 	void addViewport(Ogre::Camera* camera);
 	void changeCamera(Ogre::Camera* camera) {
 		vp->setCamera(camera);
@@ -77,7 +78,7 @@ public:
 	//getters
 	Ogre::RenderWindow* getRenderWindow() { return mWindow; }
 	Ogre::RenderSystem* getRenderSys() { return renderSys; }
-	Ogre::Viewport* getViewport() { return vp; }
+	Ogre::Viewport* getViewport() { return mWindow->getViewport(0); }
 	Ogre::Root* getRoot() { return mRoot; };
 	Ogre::SceneManager* getCurrentSceneMgr();
 	Scene* getCurrentScene();

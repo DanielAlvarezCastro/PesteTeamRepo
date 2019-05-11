@@ -180,8 +180,11 @@ void MainApp::setupViewport(Camera* camera)
 
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 	camera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
-	CompositorManager::getSingleton().addCompositor(vp, "Interference");
-	CompositorManager::getSingleton().setCompositorEnabled(vp,"Interference", true);
+	
+}
+void MainApp::addCompositor(std::string compositor) {
+	CompositorManager::getSingleton().addCompositor(mWindow->getViewport(0), compositor);
+	CompositorManager::getSingleton().setCompositorEnabled(mWindow->getViewport(0), compositor, true);
 }
 
 void MainApp::addViewport(Ogre::Camera* camera)

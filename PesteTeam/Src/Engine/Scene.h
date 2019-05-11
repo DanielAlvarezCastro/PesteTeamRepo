@@ -16,6 +16,7 @@ protected:
 	std::vector<MyGUI::Widget*> guiObjects;
 	
 	std::string name;
+	bool endFlag = false;
 public:
 	Scene();
 	~Scene();

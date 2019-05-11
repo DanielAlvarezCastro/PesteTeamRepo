@@ -30,6 +30,8 @@ bool GameSceneManager::LoadGame()
 		return false;
 	if (!loader->loadTestScene())
 		return false;*/
+	
+
 	return true;
 }
 
@@ -48,6 +50,7 @@ bool GameSceneManager::LoadScene(string sceneName)
 		if (!loader->loadSceneFromFile(sceneName, escena))
 			return false;
 	}
+	
 }
 //Borra la escena actual y carga una nueva
 void GameSceneManager::ChangeToNewScene(string nextScene)
