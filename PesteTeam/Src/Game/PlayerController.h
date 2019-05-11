@@ -24,6 +24,6 @@ public:
 	virtual ~PlayerController();
 
 	virtual void Update(float t);
-	virtual void reciveMsg(Message* msg) {};
+	virtual void reciveMsg(Message* msg) ;
 }; 
 

@@ -85,5 +85,7 @@ void CameraMovement::Update(float t)
 
 void CameraMovement::reciveMsg(Message * msg)
 {
-
+	if (msg->id == "GAME_OVER") {
+		gameObject->setActive(false);
+	}
 }

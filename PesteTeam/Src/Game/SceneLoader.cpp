@@ -397,7 +397,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	gameManagerOb->createEmptyEntity("gameManagerOb", scene);
 	scene->addGameObject(gameManagerOb);
 
-	GameManager* GM = new GameManager(gameManagerOb);
+	GameManager* GM = new GameManager(gameManagerOb, 2);
 
 	scene->addComponent(GM);
 	
@@ -715,7 +715,7 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		scene->addComponent(GG);
 	}
 	else if (componentName == "GameManager") {
-		GameManager* gm = new GameManager(go);
+		GameManager* gm = new GameManager(go,2);
 		scene->addComponent(gm);
 	}
 	else if (componentName == "Light") {

@@ -5,7 +5,7 @@
 
 int GameManager::currentLevel = 1;
 
-GameManager::GameManager(GameObject* go) : BehaviourComponent(go)
+GameManager::GameManager(GameObject* go, int _maxLevel) : BehaviourComponent(go), maxLevel(_maxLevel)
 {
 	GameOver = false;
 	nextLevel = false;
@@ -33,7 +33,10 @@ void GameManager::reciveMsg(Message * msg)
 	if (msg->id == "MISSION_ACCOMPLISHED") {
 		currentLevel++;
 		GameOver = false;
-		nextLevel = true;
+		if (currentLevel == maxLevel) {
+
+		}
+		else nextLevel = true;
 	}
 	else if (msg->id == "GAME_OVER")
 	{//Cuando reciba el mensaje de que el juego ha terminado 

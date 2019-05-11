@@ -6,10 +6,11 @@ private:
 	bool GameOver;
 	bool nextLevel;
 	static int currentLevel;
+	int maxLevel;
 	float nextLevelMaxTime;
 	float nextLevelTimer;
 public:
-	GameManager(GameObject* go);
+	GameManager(GameObject* go, int _maxLevel);
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg);
 	virtual ~GameManager();

@@ -114,4 +114,7 @@ void ShipController::reciveMsg(Message * msg)
 			}
 		}
 	}
+	else if (msg->id == "GAME_OVER") {
+		gameObject->setActive(false);
+	}
 }

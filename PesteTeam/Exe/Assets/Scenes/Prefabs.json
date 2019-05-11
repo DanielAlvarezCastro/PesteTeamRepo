@@ -16,7 +16,7 @@
 					"Components" : [
 						{
 							"Name" : "ShipController",
-							"Health" : 200
+							"Health" : 20
 						},
 						 {
 							"Name" : "Rigidbody",

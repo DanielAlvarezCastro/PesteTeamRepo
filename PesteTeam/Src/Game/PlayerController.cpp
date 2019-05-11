@@ -74,3 +74,10 @@ void PlayerController::Update(float t)
 		SoundManager::instance()->PlaySound2D("SynthSong3.mp3", true, false);
 	}
 }
+
+void PlayerController::reciveMsg(Message * msg)
+{
+	if (msg->id == "GAME_OVER") {
+		gameObject->setActive(false);
+	}
+}
