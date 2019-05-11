@@ -1,0 +1,550 @@
+{
+	"Camera" : "CameraMain"
+	,
+	"GUI": [
+		{
+			"Name" : "HealthBar",
+			"Type" : "ImageBox",		
+			"Position" : [340,20],
+			"Size" : [400,40],
+			"Src" : "HealthBarBlue.png"
+		},
+		{
+			"Name" : "HealthBarFront",
+			"Type" : "ImageBox",		
+			"Position" : [340,20],
+			"Size" : [400,40],
+			"Src" : "HealthBarFront.png"
+		}
+		,
+		{
+			"Name" : "GameOver",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "GameOver.png",
+			"Visible" : false
+		},
+		{
+			"Name" : "MissionAccomplished",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "MissionAccomplished.png",
+			"Visible" : false
+		},
+		{
+			"Name" : "Warning",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "Warning.png",
+			"Visible" : false
+		}
+	],
+    "GameObjects": [
+		{
+			"Name" : "Pointer",
+			"Type" : "Pointer",
+			"Mesh" : "None"
+		},
+		{
+			"Name" : "Building1",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [-175,0,-200]
+		},
+		{
+			"Name" : "Building2",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [175,0,-200]
+		},
+		{
+			"Name" : "Building3",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [0, 0, -400]
+		},
+		{
+			"Name" : "Building4",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [-250, 0, -1300]
+		},
+		{
+			"Name" : "Building5",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [250, 0, -1300]
+		},
+		{
+			"Name" : "Building6",
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [0, 0, -1100]
+		},
+		{
+			"Name" : "Building7",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [-1200, 0, 210]
+		},
+		{
+			"Name" : "Building8",
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [-1100, 0, 0]
+		},
+		{
+			"Name" : "Building9",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [-1200, 0, -210]
+		},
+		{
+			"Name" : "Building10",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [1200, 0, -210]
+		},
+		{
+			"Name" : "Building11",
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [1100, 0, 0]
+		},
+		{
+			"Name" : "Building12",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [1200, 0, 210]
+		},
+		{
+			"Name" : "Building13",
+			"Type" : "Building2",
+			"Mesh" : "Building2.mesh",
+			"Position" : [-500, 0, 1000]
+		},
+		{
+			"Name" : "Building14",
+			"Type" : "Building2",
+			"Mesh" : "Building2.mesh",
+			"Position" : [-200, 0, 800]
+		},
+		{
+			"Name" : "Building15",
+			"Type" : "Building2",
+			"Mesh" : "Building2.mesh",
+			"Position" : [200, 0, 800]
+		},
+		{
+			"Name" : "Building16",
+			"Type" : "Building2",
+			"Mesh" : "Building2.mesh",
+			"Position" : [500, 0, 1000]
+		},
+		{
+			"Name" : "Building17",
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [0, 0, 1050]
+		},
+		{
+			"Name" : "Building18",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [-300, 0, 1200]
+		},
+		{
+			"Name" : "Building19",
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [300, 0, 1200]
+		},
+		{
+			"Name" : "Turret1",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [0, 380, -1100]
+		},
+		{
+			"Name" : "TurretBase1",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [0,360,-1100]
+		},
+		{
+			"Name" : "Turret2",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [250, 380, -1300]
+		},
+		{
+			"Name" : "TurretBase2",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [250, 360, -1300]
+		},
+		{
+			"Name" : "Turret3",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [-250, 380, -1300]
+		},
+		{
+			"Name" : "TurretBase3",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [-250, 360, -1300]
+		},
+		{
+			"Name" : "Turret4",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [-1100, 380, 0]
+		},
+		{
+			"Name" : "TurretBase4",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [-1100, 360, 0]
+		},
+		{
+			"Name" : "Turret5",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [1100, 380, 0]
+		},
+		{
+			"Name" : "TurretBase5",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [1100, 360, 0]
+		},
+		{
+			"Name" : "Turret6",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [-500, 140, 1000]
+		},
+		{
+			"Name" : "TurretBase6",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [-500, 120, 1000]
+		},
+		{
+			"Name" : "Turret7",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [-200, 140, 800]
+		},
+		{
+			"Name" : "TurretBase7",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [-200, 120, 800]
+		},
+		{
+			"Name" : "Turret8",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [200, 140, 800]
+		},
+		{
+			"Name" : "TurretBase8",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [200, 120, 800]
+		},
+		{
+			"Name" : "Turret9",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [500, 140, 1000]
+		},
+		{
+			"Name" : "TurretBase9",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [500, 120, 1000]
+		},
+		{
+			"Name" : "Turret10",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [0, 380, 1050]
+		},
+		{
+			"Name" : "TurretBase10",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [0, 360, 1050]
+		},
+		{
+			"Name" : "Turret11",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [-300, 380, 1200]
+		},
+		{
+			"Name" : "TurretBase11",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [-300, 360, 1200]
+		},
+		{
+			"Name" : "Turret12",
+			"Type" : "Turret",
+			"Mesh" : "Turret.mesh",
+			"Position" : [300, 380, 1200]
+		},
+		{
+			"Name" : "TurretBase12",
+			"Type" : "TurretBase",
+			"Mesh" : "TurretBase.mesh",
+			"Position" : [300, 360, 1200]
+		},
+		{
+			"Name" : "Fly1",
+			"Type" : "Fly",
+			"Mesh" : "Fly.mesh",
+			"Position" : [-250,250,-1300],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 250,
+					"Height" : 0,
+					"Route" : "YCircular"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Fly2",
+			"Type" : "Fly",
+			"Mesh" : "Fly.mesh",
+			"Position" : [250, 250, -1300],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 250,
+					"Height" : 0,
+					"Route" : "YCircular"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Fly3",
+			"Type" : "Fly",
+			"Mesh" : "Fly.mesh",
+			"Position" : [0, 300, 1050],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 250,
+					"Height" : 100,
+					"Route" : "Sinusoidal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Fly4",
+			"Type" : "Fly",
+			"Mesh" : "Fly.mesh",
+			"Position" : [-300, 250, 1200],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 250,
+					"Height" : 0,
+					"Route" : "YCircular"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Fly5",
+			"Type" : "Fly",
+			"Mesh" : "Fly.mesh",
+			"Position" : [300, 250, 1200],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 250,
+					"Height" : 0,
+					"Route" : "YCircular"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mugu1",
+			"Type" : "Fly",
+			"Mesh" : "Mugu.mesh",
+			"Position" : [-1350, 200, 0],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 400,
+					"Route" : "Transversal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mogo1",
+			"Type" : "Fly",
+			"Mesh" : "Mogo.mesh",
+			"Position" : [-950, 225, 0],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 200,
+					"Route" : "Transversal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mugu2",
+			"Type" : "Fly",
+			"Mesh" : "Mugu.mesh",
+			"Position" : [1350, 200, 0],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 400,
+					"Route" : "Transversal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mogo2",
+			"Type" : "Fly",
+			"Mesh" : "Mogo.mesh",
+			"Position" : [950, 225, 0],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 200,
+					"Route" : "Transversal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mugu3",
+			"Type" : "Fly",
+			"Mesh" : "Mugu.mesh",
+			"Position" : [-550, 200, 1050],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 250,
+					"Route" : "Transversal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mugu4",
+			"Type" : "Fly",
+			"Mesh" : "Mugu.mesh",
+			"Position" : [550, 200, 1050],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 250,
+					"Route" : "Transversal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mogo3",
+			"Type" : "Fly",
+			"Mesh" : "Mogo.mesh",
+			"Position" : [0, 225, 700],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 300,
+					"Route" : "Horizontal"
+				 }
+			 ]
+		},
+		{
+			"Name" : "Mogo4",
+			"Type" : "Fly",
+			"Mesh" : "Mogo.mesh",
+			"Position" : [0, 225, 1300],
+			"Components" : [
+				 {
+					"Name" : "FlyerBehaviour",
+					"Target" : "Pointer",
+					"Radius" : 0,
+					"Height" : 150,
+					"Route" : "Vertical"
+				 }
+			 ]
+		},
+		{
+			"Name" : "FloorGrid",
+			"Type" : "FloorGrid",
+			"Mesh" : "FloorGrid.mesh",
+			"Position" : [0,0,0]
+		},
+		{
+			"Name" : "Mountains",
+			"Type" : "Mountains",
+			"Mesh" : "Mountains.mesh",
+			"Position" : [0,-50,0]
+		},
+		{
+			"Name" : "GameManager",
+			"Type" : "GameManager",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
+		},
+		{
+			"Name" : "EnemyManager",
+			"Type" : "EnemyManager",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
+		},
+		{
+			"Name" : "GameGUI",
+			"Type" : "GameGUI",
+			"Mesh" : "None",
+			"Position" : [0,0,0]
+			
+		},
+		{
+			"Name" : "LightOb1",
+			"Type" : "None",
+			"Mesh" : "None",
+			"Position" : [0,0,0],			
+			"Components" : [
+				{
+					"Name" : "Light",
+					"Type" : "Directional"
+				}
+			]
+		}		
+	]
+}
