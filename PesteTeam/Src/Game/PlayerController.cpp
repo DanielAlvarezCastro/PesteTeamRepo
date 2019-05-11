@@ -3,8 +3,10 @@
 #include "GameSceneManager.h"
 
 
-PlayerController::PlayerController(GameObject* gameObject) : BehaviourComponent(gameObject)
+PlayerController::PlayerController(GameObject* gameObject, float _normalSpeed) : BehaviourComponent(gameObject), normalSpeed(_normalSpeed)
 {
+	slowSpeed = normalSpeed / 2;
+	fastSpeed = normalSpeed * 2;
 	keyboard = MainApp::instance()->getKeyboard();
 	gameObject->setOrientation(euler);
 

@@ -7,7 +7,7 @@ private:
 	int life;
 
 public:
-	EnemyBehaviour(GameObject* gameObject, int l = 20);
+	EnemyBehaviour(GameObject* gameObject, int l);
 	virtual ~EnemyBehaviour();
 
 	virtual void Update(float t);

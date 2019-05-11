@@ -15,12 +15,12 @@ private:
 	Euler e;
 	Real rotationVel = pi / 4;//How fast ship rotates
 	Real pitchLimit = pi / 7;//Look up/down limit
-	Real slowSpeed = 30;
-	Real normalSpeed = 60;
-	Real fastSpeed = 120;
+	Real slowSpeed;
+	Real normalSpeed;
+	Real fastSpeed;
 
 public:
-	PlayerController(GameObject* gameObject);
+	PlayerController(GameObject* gameObject, float _normalSpeed);
 	virtual ~PlayerController();
 
 	virtual void Update(float t);

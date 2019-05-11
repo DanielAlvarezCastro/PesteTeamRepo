@@ -9,6 +9,28 @@ CameraMovement::~CameraMovement()
 {
 }
 
+void CameraMovement::setInitialValues(float _horizontaLimit, float _horizontalVel, float _horizontalBackVel, float _verticalLimit, float _verticalVel, float _aceleratedCameraOffset, float _deceleratedCameraOffset, float _cameraDefaultOffset, float _cameraAcceleratedVel, float _cameraDeceleratedVel, float _maxShakeDuration, float _shakeAmount)
+{
+	 horizontalLimit = _horizontaLimit ;
+	 horizontaVel = _horizontalVel;
+	 horizontalBackVel = _horizontalBackVel;
+	 verticalLimit = _verticalLimit;
+	 verticalVel = _verticalVel;
+	 aceleratedCameraOffset = _aceleratedCameraOffset;
+	 deceleratedCameraOffset = _deceleratedCameraOffset;
+	 cameraDefaulOffset = _cameraDefaultOffset;
+	 cameraAceleratedVel = _cameraAcceleratedVel;
+	 cameraDeceletatedVel = _cameraDeceleratedVel;
+
+	// How long the object should shake for.
+	 shakeDuration = 0.0f;
+	 maxShakeDuration = _maxShakeDuration;
+	// Amplitude of the shake. A larger value shakes the camera harder.
+	 shakeAmount = _shakeAmount;
+}
+
+
+
 
 void CameraMovement::Update(float t)
 {
@@ -58,7 +80,7 @@ void CameraMovement::Update(float t)
 		}
 	}
 	else if (keyboard->isKeyDown(OIS::KC_C)) {
-		if (gameObject->getPosition().z > deceledatedCameraOffset) {
+		if (gameObject->getPosition().z > deceleratedCameraOffset) {
 			gameObject->translate(Vec3(0, 0, -cameraDeceletatedVel * t));
 
 		}
@@ -74,7 +96,24 @@ void CameraMovement::Update(float t)
 
 		}
 	}
+	if (shake) {
+		if (shakeDuration > 0)
+		{
+			int x = rand() % 2 -1.0;
+			int y = rand() % 2 -1.0 ;
+			int z = rand() % 2 - 1.0
+				;
+			Ogre::Vector3 newPos = gameObject->getPosition() + Ogre::Vector3(x, y, z);
+			gameObject->setPosition(newPos);
 
+			shakeDuration -= t;
+		}
+		else {
+			shake = false;
+			gameObject->setPosition(originalPos);
+		}
+
+	}
 	Euler e;
 	e.fromQuaternion(gameObject->getOrientation());
 	e.mRoll = 0;
@@ -87,5 +126,17 @@ void CameraMovement::reciveMsg(Message * msg)
 {
 	if (msg->id == "GAME_OVER") {
 		gameObject->setActive(false);
+	}
+	else if (msg->id == "QUITA_VIDA")
+	{
+		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
+		if (dlm->name == "PointerPlayer") {
+			if (!shake) {
+				//La camara tiembla para dar mas feedback
+				shakeDuration = maxShakeDuration;
+				shake = true;
+				originalPos = gameObject->getPosition();
+			}
+		}
 	}
 }

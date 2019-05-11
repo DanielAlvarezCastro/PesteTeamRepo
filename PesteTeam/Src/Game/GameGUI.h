@@ -7,15 +7,16 @@ class GameGUI :
 	public BehaviourComponent
 {
 private:
-	int healthbarFullW = 400;
-	int fullHealth = 200;
+	int healthbarFullW;
+	int healthbarH;
+	int fullHealth;
 	GUIManager* GUIMgr = nullptr;
 	MyGUI::ImageBox* healthBar = nullptr;
 	MyGUI::ImageBox* gameOver = nullptr;
 	MyGUI::ImageBox* missionA = nullptr;
 	MyGUI::ImageBox* warning = nullptr;
 public:
-	GameGUI(GameObject* gameObject);
+	GameGUI(GameObject* gameObject, int _fullHealth);
 	virtual ~GameGUI();
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg);

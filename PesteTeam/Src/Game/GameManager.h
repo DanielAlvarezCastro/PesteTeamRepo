@@ -7,10 +7,10 @@ private:
 	bool nextLevel;
 	static int currentLevel;
 	int maxLevel;
-	float nextLevelMaxTime;
+	float nextLevelWaitTime;
 	float nextLevelTimer;
 public:
-	GameManager(GameObject* go, int _maxLevel);
+	GameManager(GameObject* go, int _maxLevel, float _nextLevelWaitTime);
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg);
 	virtual ~GameManager();

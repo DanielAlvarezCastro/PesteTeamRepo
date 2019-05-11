@@ -26,7 +26,7 @@ protected:
 	float range;
 	int damage;
 public:
-	EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh);
+	EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh, float shootCd);
 	virtual ~EnemyShoot();
 	void changeRange(float nRange) { range = nRange; };
 	void shoot();

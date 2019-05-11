@@ -21,19 +21,9 @@ void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btMa
 	}
 }
 
-EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh): BehaviourComponent(go), type(type_), target(target_), bulletMeshName(bulletMesh), damage(_damage), range(_range)
+EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh, float shootCd)
+	: BehaviourComponent(go), type(type_), target(target_), bulletMeshName(bulletMesh), damage(_damage), range(_range), ShootCd(shootCd)
 {
-	switch (type)
-	{
-	case enemyType::groundTurret:
-		ShootCd = 1.6;
-		break;
-	case enemyType::Flyer:
-		ShootCd = 2.4;
-		break;
-	default:
-		break;
-	}
 }
 
 EnemyShoot::~EnemyShoot()

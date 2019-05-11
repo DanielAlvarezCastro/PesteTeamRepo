@@ -17,11 +17,11 @@ void OnShipEnvironmentCollision(GameObject* one, GameObject* other, std::vector<
 	}
 }
 
-ShipController::ShipController(GameObject* gameObject, int _health, std::string _shipName) :BehaviourComponent(gameObject), health(_health), shipName(_shipName)
+ShipController::ShipController(GameObject* gameObject, int _health, std::string _shipName, float _rollingCooldown, int _warningZoneLength, int _deadZoneLength) 
+	:BehaviourComponent(gameObject), health(_health), shipName(_shipName), rollingCooldown(_rollingCooldown) , warningZoneLength(_warningZoneLength), deadZoneLength(_deadZoneLength)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	gameObject->setOrientation(euler);
-	rollingCooldown = 1.0;
 	rollingTimer = rollingCooldown;
 	gameObject->getRigidBody()->setCollisionCallback(OnShipEnvironmentCollision);
 }
@@ -97,17 +97,17 @@ void ShipController::Update(float t)
 
 	Vec3 pos = gameObject->getGlobalPosition();
 	//Si se sale de la zona de combate manda un mensaje
-	if ((pos.x > 1400 || pos.x < -1400 || pos.z> 1400 || pos.z<-1400 || pos.y>1500) && !warningZone) {
+	if ((pos.x > warningZoneLength || pos.x < -warningZoneLength || pos.z> warningZoneLength || pos.z<-warningZoneLength || pos.y>warningZoneLength) && !warningZone) {
 		EnterWarningZone msg;
 		sendSceneMsg(&msg);
 		warningZone = true;
 	}
-	else if (!(pos.x > 1400 || pos.x < -1400 || pos.z> 1400 || pos.z < -1400 || pos.y>1400) && warningZone) {
+	else if (!(pos.x > warningZoneLength || pos.x < -warningZoneLength || pos.z> warningZoneLength || pos.z < -warningZoneLength || pos.y>warningZoneLength) && warningZone) {
 		ExitWarningZone msg;
 		sendSceneMsg(&msg);
 		warningZone = false;
 	}
-	if ((pos.x > 1900 || pos.x < -1900 || pos.z> 1900 || pos.z < -1900 || pos.y>1900 || pos.y<=0)) {
+	if ((pos.x > deadZoneLength || pos.x < -deadZoneLength || pos.z> deadZoneLength || pos.z < -deadZoneLength || pos.y>deadZoneLength || pos.y<=0)) {
 		GameOverMsg msg;
 		sendSceneMsg(&msg);
 		ExitWarningZone msg2;

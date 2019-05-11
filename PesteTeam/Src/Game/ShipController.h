@@ -21,8 +21,10 @@ private:
 	Real barrelVel = 5*pi;
 	bool warningZone = false;
 	std::string shipName;
+	int warningZoneLength;
+	int deadZoneLength;
 public:
-	ShipController(GameObject* gameObject, int _health, std::string _shipName);
+	ShipController(GameObject* gameObject, int _health, std::string _shipName, float _rollingCooldown, int _warningZoneLength, int _deadZoneLength);
 	virtual ~ShipController();
 
 	virtual void Update(float t);

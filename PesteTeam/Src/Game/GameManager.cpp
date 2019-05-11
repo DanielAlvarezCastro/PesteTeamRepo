@@ -5,12 +5,11 @@
 
 int GameManager::currentLevel = 1;
 
-GameManager::GameManager(GameObject* go, int _maxLevel) : BehaviourComponent(go), maxLevel(_maxLevel)
+GameManager::GameManager(GameObject* go, int _maxLevel, float _nextLevelWaitTime) : BehaviourComponent(go), maxLevel(_maxLevel), nextLevelWaitTime(_nextLevelWaitTime)
 {
 	GameOver = false;
 	nextLevel = false;
-	nextLevelMaxTime = 5.0;
-	nextLevelTimer = nextLevelMaxTime;
+	nextLevelTimer = nextLevelWaitTime;
 }
 
 void GameManager::Update(float t)

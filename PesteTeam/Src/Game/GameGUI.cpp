@@ -2,13 +2,15 @@
 
 
 
-GameGUI::GameGUI(GameObject* gameObject) : BehaviourComponent(gameObject)
+GameGUI::GameGUI(GameObject* gameObject, int _fullHealth) : BehaviourComponent(gameObject), fullHealth(_fullHealth)
 {
 	GUIMgr = GUIManager::instance();
 	healthBar = GUIMgr->getImage("HealthBar");
 	gameOver = GUIMgr->getImage("GameOver");
 	missionA = GUIMgr->getImage("MissionAccomplished");
 	warning = GUIMgr->getImage("Warning");
+	healthbarFullW = healthBar->getSize().width;
+	healthbarH = healthBar->getSize().height;
 }
 
 
@@ -27,7 +29,7 @@ void GameGUI::reciveMsg(Message * msg)
 		UpdateHealthBarMsg* uMsg = static_cast<UpdateHealthBarMsg*>(msg);
 		int currentH = uMsg->currentHealth;
 		int w = healthbarFullW*currentH / fullHealth;
-		healthBar->setSize(w, 40);
+		healthBar->setSize(w, healthbarH);
 	}
 	else if (msg->id == "MISSION_ACCOMPLISHED") {
 		missionA->setVisible(true);

@@ -21,7 +21,10 @@
 						 },	
 						{
 							"Name" : "ShipController",
-							"Health" : 200
+							"Health" : 200,
+							"RollingCooldown" : 1.0,
+							"WarningZoneLength" : 1400,
+							"DeadZoneLength" : 1900
 						}
 						 					
 					]
@@ -98,7 +101,19 @@
 						{
 							"Name" : "CameraMovement",
 							"Pivot" : "PointerCameraPivot",
-							"Target" : "Pointer"
+							"Target" : "Pointer",
+							"horizontalLimit" : 30,
+							"horizontaVel" : 1,
+							"horizontalBackVel" : 20,
+							"verticalLimit" : 10,
+							"verticalVel" : 4,
+							"aceleratedCameraOffset" : 80,
+							"deceleratedCameraOffset" : 20,
+							"cameraDefaulOffset" : 40,
+							"cameraAceleratedVel" : 80,
+							"cameraDeceletatedVel" : 20,
+							"maxShakeDuration" : 0.05,
+							"shakeAmount" : 0.7
 						}
 					]
 				}
@@ -204,7 +219,8 @@
 					"BulletMesh" : "EnemyBullet.mesh",
 					"EnemyType" : "GroundTurret",
 					"Damage" : 5,
-					"Range" : 450
+					"Range" : 450,
+					"ShootCd" : 1.6
 				 },
 				 {
 					"Name" : "Rigidbody",
@@ -258,7 +274,8 @@
 					"BulletMesh" : "EnemyBullet.mesh",
 					"EnemyType" : "GroundTurret",
 					"Damage" : 10,
-					"Range" : 450
+					"Range" : 450,
+					"ShootCd" : 1.6
 				 },
 				 {
 					"Name" : "Rigidbody",
@@ -305,7 +322,8 @@
 					"EnemyType" : "Fly",
 					"BulletMesh" : "EnemyBullet.mesh",
 					"Damage" : 10,
-					"Range" : 600
+					"Range" : 600,
+					"ShootCd" : 2.4
 				 },
 				 {
 					"Name" : "EnemyBehaviour",
@@ -332,7 +350,9 @@
 			"Scale" : [1,1,1],
 			"Components" : [
 				 {
-					"Name" : "GameManager"
+					"Name" : "GameManager",
+					"MaxLevels" : 3,
+					"WaitTime" : 5.0
 				 }		 
 			]
         },
@@ -354,7 +374,8 @@
 			"Scale" : [1,1,1],
 			"Components" : [
 				 {
-					"Name" : "GameGUI"
+					"Name" : "GameGUI",
+					"FullHealth" : 200
 				 }		 
 			]
         }

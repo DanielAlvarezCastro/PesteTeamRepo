@@ -242,7 +242,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
 	scene->addComponent(tB);
-	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, 10,450,  "EnemyBullet.mesh");
+	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, 10,450,  "EnemyBullet.mesh", 1.6);
 	scene->addComponent(tBEH);
 
 	GameObject* pivotT1 = new GameObject();
@@ -276,7 +276,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	pivotF1->setPosition(Vec3(0, 0, -40));
 	scene->addGameObject(pivotF1);
 
-	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, 10, 500, "EnemyBullet.mesh");
+	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, 10, 500, "EnemyBullet.mesh", 2.4);
 	scene->addComponent(FES);
 
 	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
@@ -336,10 +336,10 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	l1Ob->attachLight(luz);
 	scene->addGameObject(l1Ob);
 
-	PlayerController* pc = new PlayerController(pointer);
+	PlayerController* pc = new PlayerController(pointer,60);
 	scene->addComponent(pc);
 
-	ShipController* sc = new ShipController(Nave, 200, playerShip);
+	ShipController* sc = new ShipController(Nave, 200, playerShip, 1.0, 1400, 1900);
 	scene->addComponent(sc);
 
 	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip, 10);
@@ -390,7 +390,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	guiOB->createEmptyEntity("guiOb", scene);
 	scene->addGameObject(guiOB);
 
-	GameGUI* GGUI = new GameGUI(guiOB);
+	GameGUI* GGUI = new GameGUI(guiOB, 200);
 
 	scene->addComponent(GGUI);
 
@@ -399,7 +399,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	gameManagerOb->createEmptyEntity("gameManagerOb", scene);
 	scene->addGameObject(gameManagerOb);
 
-	GameManager* GM = new GameManager(gameManagerOb, 2);
+	GameManager* GM = new GameManager(gameManagerOb, 3, 5.0);
 
 	scene->addComponent(GM);
 	
@@ -577,11 +577,32 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		GameObject* target = scene->getGameObject(tName);
 		GameObject* pivot = scene->getGameObject(pName);
 		CameraMovement* cM = new CameraMovement(go, target, pivot);
+
+		float horizontalLimit = object_json["horizontalLimit"];
+		float horizontaVel = object_json["horizontaVel"];
+		float horizontalBackVel = object_json["horizontalBackVel"];
+		float verticalLimit = object_json["verticalLimit"];
+		float verticalVel = object_json["verticalVel"];
+		float aceleratedCameraOffset = object_json["aceleratedCameraOffset"];
+		float deceleratedCameraOffset = object_json["deceleratedCameraOffset"];
+		float cameraDefaulOffset = object_json["cameraDefaulOffset"];
+		float cameraAceleratedVel = object_json["cameraAceleratedVel"];
+		float cameraDeceletatedVel = object_json["cameraDeceletatedVel"];
+		float maxShakeDuration = object_json["maxShakeDuration"];
+		float shakeAmount = object_json["shakeAmount"];
+
+		cM->setInitialValues(horizontalLimit, horizontaVel, horizontalBackVel, verticalLimit, verticalVel, aceleratedCameraOffset, deceleratedCameraOffset,
+			cameraDefaulOffset, cameraAceleratedVel, cameraDeceletatedVel, maxShakeDuration, shakeAmount);
+
 		scene->addComponent(cM);
 	}
 	else if (componentName == "ShipController") {
 		int health = object_json["Health"];
-		ShipController* sc = new ShipController(go,health, playerShip);
+		float rollingC = object_json["RollingCooldown"];
+		int WZL = object_json["WarningZoneLength"];
+		int DZL = object_json["DeadZoneLength"];
+		ShipController* sc = new ShipController(go,health, playerShip, rollingC, WZL, DZL);
+
 		scene->addComponent(sc);
 	}
 	else if (componentName == "ShotBehaviour") {
@@ -614,12 +635,13 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		std::string eType = object_json["EnemyType"];
 		int damage = object_json["Damage"];
 		int range = object_json["Range"];
+		float cd = object_json["ShootCd"];
 		enemyType type;
 		if (eType == "GroundTurret") {
 			type = enemyType::groundTurret;
 		}
 		else type = enemyType::Flyer;
-		EnemyShoot* FES = new EnemyShoot(go, type, target,damage, range, bulletMesh);
+		EnemyShoot* FES = new EnemyShoot(go, type, target,damage, range, bulletMesh,cd);
 		scene->addComponent(FES);
 	}
 	else if (componentName == "TurretBehaviour") {
@@ -713,11 +735,14 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		scene->addComponent(em);
 	}
 	else if (componentName == "GameGUI") {
-		GameGUI* GG = new GameGUI(go);
+		int fH = object_json["FullHealth"];
+		GameGUI* GG = new GameGUI(go, fH);
 		scene->addComponent(GG);
 	}
 	else if (componentName == "GameManager") {
-		GameManager* gm = new GameManager(go,2);
+		int levels = object_json["MaxLevels"];
+		int time = object_json["WaitTime"];
+		GameManager* gm = new GameManager(go,levels, time);
 		scene->addComponent(gm);
 	}
 	else if (componentName == "Light") {
@@ -729,7 +754,7 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		go->attachLight(luz);
 	}
 	else if (componentName == "PlayerController") {
-		PlayerController* pc = new PlayerController(go);
+		PlayerController* pc = new PlayerController(go, 60);
 		scene->addComponent(pc);
 	}
 	else if (componentName == "MainMenuManager") {
