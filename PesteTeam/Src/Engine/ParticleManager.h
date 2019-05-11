@@ -14,6 +14,10 @@ private:
 		ParticleSystem* parSys;
 		float maxDuration;
 		float currentDuration;
+
+		void release() {
+			delete gameObject;
+		}
 	};
 	int particleNum;
 	//Diccionario con un vector de los distintos tipos de partículas activos

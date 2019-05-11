@@ -4,12 +4,10 @@
 
 BasicComponent::BasicComponent(GameObject * gameObject_): gameObject(gameObject_)
 {
-	gameObject->addReference();
 }
 
 BasicComponent::~BasicComponent()
 {
-	gameObject->release();
 }
 
 void BasicComponent::sendObjectMsg(Message * msg_)

@@ -26,8 +26,6 @@ RigidBody::RigidBody(GameObject* gameObject_, std::string name_, float density, 
 
 RigidBody::~RigidBody()
 {
-	delete shape;
-	delete motionState;
 	delete rigidBody;
 }
 

@@ -21,6 +21,7 @@ public:
 	~Scene();
 	void createScene(String sceneName);
 	void updateScene();
+	void clearScene();
 
 	std::string getName() { return name; };
 

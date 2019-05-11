@@ -8,6 +8,7 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+	clearScene();
 }
 
 void Scene::createScene(String sceneName)
@@ -19,11 +20,6 @@ void Scene::createScene(String sceneName)
 void Scene::updateScene()
 {
 	Physics::getInstance()->updatePhysics(MainApp::instance()->deltaTime());
-
-	//for (BasicComponent* c : components)
-	//{
-	//	c->Update(MainApp::instance()->deltaTime());
-	//}
 	MainApp::instance()->getParticleManager()->update(MainApp::instance()->deltaTime());
 	for (int i = 0; i < components.size(); i++)
 	{
@@ -33,6 +29,16 @@ void Scene::updateScene()
 
 	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
 		MainApp::instance()->closeApp();
+	}
+}
+
+void Scene::clearScene()
+{
+	for (BasicComponent* bc : components) {
+		delete bc;
+	}
+  	for (GameObject* go : gameObjects) {
+		delete go;
 	}
 }
 

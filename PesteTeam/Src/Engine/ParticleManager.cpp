@@ -8,6 +8,13 @@ ParticleManager::ParticleManager()
 
 ParticleManager::~ParticleManager()
 {
+	for (std::map<std::string, std::vector<ParticleInfo>>::iterator iter = particlesMap.begin(); iter != particlesMap.end(); ++iter) 
+	{
+		for (ParticleInfo pI : iter->second) 
+		{
+			pI.release();
+		}
+	}
 	particlesMap.clear();
 }
 void ParticleManager::update(float t)

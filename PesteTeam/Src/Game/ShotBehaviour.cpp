@@ -1,6 +1,8 @@
 #include "ShotBehaviour.h"
 #include "ParticleManager.h"
 
+
+
 void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) 
 {	
 	//si tiene rigidbody
@@ -32,14 +34,6 @@ ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName) : Beh
 
 ShotBehaviour::~ShotBehaviour()
 {
-	delete keyboard;
-
-	for (int i = 0; i < bullets_.size(); i++) {
-		delete bullets_[i];
-	}
-
-	// el vector de componentes no debe limpiar memoria aqui
-	// lo hara en la escena
 }
 
 void ShotBehaviour::Update(float t)

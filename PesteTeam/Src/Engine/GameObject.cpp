@@ -11,23 +11,6 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::release()
-{
-	references--;
-	if (references == 0) 
-	{
-		if(rigidBody) delete rigidBody;
-		if (camera) delete camera;
-		if (light) delete light;
-		for (auto &bComponent : behaviourComponents)
-		{
-			delete bComponent;
-		}
-		//^Delete dynamic objects^
-		delete this;
-	}
-}
-
 void GameObject::calculateDirection()
 {
 	Ogre::Quaternion q = ogreNode->getOrientation();

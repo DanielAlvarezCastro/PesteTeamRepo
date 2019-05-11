@@ -222,32 +222,6 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	rbBuild1->setOffset(0, edificio1->getBoundingBox().y / 2);
 	scene->addComponent(rbBuild1);
 
-	GameObject* edificio2 = new GameObject();
-	edificio2->createEntity("Building2.mesh", "Edificio2", scene);
-	edificio2->setScale(Vec3(5, 5, 5));
-	edificio2->setPosition(Vec3(300, 0, -500));
-
-	RigidBody* rbBuild2 = new RigidBody(edificio2, "Edificio2");
-	rbBuild2->setOffset(0, edificio2->getBoundingBox().y / 2);
-	scene->addComponent(rbBuild2);
-
-	GameObject* edificio3 = new GameObject();
-	edificio3->createEntity("Building3.mesh", "Edificio3", scene);
-	edificio3->setScale(Vec3(10, 10, 10));
-	edificio3->setPosition(Vec3(600, 0, -500));
-
-	RigidBody* rbBuild3 = new RigidBody(edificio3, "Edificio3");
-	rbBuild3->setOffset(0, edificio3->getBoundingBox().y / 2);
-	scene->addComponent(rbBuild3);
-
-	GameObject* edificio4 = new GameObject();
-	edificio4->createEntity("Building4.mesh", "Edificio4", scene);
-	edificio4->setScale(Vec3(10, 10, 10));
-	edificio4->setPosition(Vec3(900, 0, -500));
-
-	RigidBody* rbBuild4 = new RigidBody(edificio4, "Edificio4");
-	rbBuild4->setOffset(0, edificio4->getBoundingBox().y / 2);
-	scene->addComponent(rbBuild4);
 
 	GameObject* turretBase = new GameObject();
 	turretBase->createEntity("TurretBase.mesh", "TurretBase", scene);
@@ -282,14 +256,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	pivotT2->setPosition(Vec3(-0.45, 0, -2.5));
 	scene->addGameObject(pivotT2);
 
-	GameObject* cubito2 = new GameObject();
-	cubito2->createEntity("cube.mesh", "Cubito2", scene);
-	cubito2->setScale(Vec3(0.2, 0.2, 0.2));
-	cubito2->setPosition(Vec3(0, 10, -15));
-	RigidBody* rb2 = new RigidBody(cubito2, "Cubito2");
-	rb2->setCollisionCallback(OnCubo2Collision);
-	//cubito2->addRigidbody(rb2);
-	scene->addComponent(rb2);
+
 
 	GameObject* flyer = new GameObject();
 	flyer->createEntity("Mogo.mesh", "Flyer1", scene);
@@ -326,11 +293,10 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	em->addEnemy(eb2);
 	scene->addComponent(em);
 
+	scene->addGameObject(enemyManager);
 	scene->addGameObject(turret);
 	scene->addGameObject(turretBase);
-	scene->addGameObject(Nave);
 	scene->addGameObject(edificio1);
-	scene->addGameObject(pointer);
 	scene->addGameObject(cubito);
 
 	scene->addGameObject(flyer);
@@ -442,6 +408,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 
 void SceneLoader::deleteScene(std::string sceneName)
 {
+	delete scenesMap[sceneName];
 	scenesMap.erase(sceneName);
 }
 
@@ -692,4 +659,5 @@ Scene* SceneLoader::getScene(std::string sceneName)
 
 SceneLoader::~SceneLoader()
 {
+	scenesMap.clear();
 }

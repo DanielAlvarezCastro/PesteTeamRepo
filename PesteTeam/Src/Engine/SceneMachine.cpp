@@ -6,6 +6,10 @@ SceneMachine::SceneMachine()
 
 SceneMachine::~SceneMachine()
 {
+	while (!sceneStack.empty()) {
+		delete sceneStack.top();
+		sceneStack.pop();
+	}
 }
 
 void SceneMachine::addScene(Scene* s) {

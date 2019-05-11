@@ -13,7 +13,6 @@ ShipController::ShipController(GameObject* gameObject, int _health) :BehaviourCo
 
 ShipController::~ShipController()
 {
-	delete keyboard;
 }
 
 void ShipController::Update(float t)

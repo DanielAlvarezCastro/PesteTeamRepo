@@ -40,7 +40,6 @@ private:
 	Ogre::Light* light;
 	RigidBody* rigidBody = nullptr;
 	std::vector<BehaviourComponent*>behaviourComponents;
-	int references = 0;
 	bool active = true;
 	//Ogre scene node
 	Ogre::SceneNode* ogreNode = nullptr;
@@ -52,8 +51,6 @@ private:
 public:
 	GameObject();
 	~GameObject();
-	void addReference() { references++; };
-	void release();
 	void setActive(bool active_) { active = active_; ogreNode->setVisible(active); };
 	bool isActive() { return active; }
 	void reciveMsg(Message* msg);

@@ -13,7 +13,6 @@ PlayerController::PlayerController(GameObject* gameObject) : BehaviourComponent(
 
 PlayerController::~PlayerController()
 {
-	delete keyboard;
 }
 
 void PlayerController::Update(float t)
