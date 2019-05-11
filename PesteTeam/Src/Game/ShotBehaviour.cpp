@@ -43,23 +43,44 @@ ShotBehaviour::~ShotBehaviour()
 
 void ShotBehaviour::Update(float t)
 {
-	if (keyboard->isKeyDown(OIS::KC_L) && !keyDown) 
-	{ 
-		ISound* aux  = SoundManager::instance()->PlaySound2D("ShootPlayer.wav");
+	if (overloaded) {
+		cOverload -= t;
+		//cout << cOverload << endl;
+		if (cOverload <= 0) {
+			cout << "Ya puedo volver a disparar" << endl;
+			cOverload = 0;
+			overloaded = false;
+		}
+	}
+	if (!overloaded && keyboard->isKeyDown(OIS::KC_L) && !keyDown)
+	{
+		ISound* aux = SoundManager::instance()->PlaySound2D("ShootPlayer.wav");
 		aux->setVolume(0.9);
 		shoot();
 		keyDown = true;
+		//aqui llegara cada vez que dispare, que ocurre cada cooldown de tiempo
+		cOverload+=cooldown;
+		//cout << cOverload << endl;
+		if (cOverload >= maxOverload) {
+			cout << "Sobrecalentado, volveré a poder disparar en: " << maxOverload << endl;
+			overloaded = true;
+		}
 	}
-
 	if (keyDown) 
 	{
-		if (cooldown > 0)
-			cooldown--;
+		if (currentCd > 0)
+			currentCd-= t;
 		else
 		{
-			cooldown = 3;
+			currentCd = cooldown;
 			keyDown = false;
 		}
+	}
+	if (!keyboard->isKeyDown(OIS::KC_L) && !overloaded) {
+		cOverload -= t;
+		if (cOverload < 0)
+			cOverload = 0;
+		//cout << cOverload << endl;
 	}
 }
 

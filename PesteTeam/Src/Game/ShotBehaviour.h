@@ -14,8 +14,13 @@ private:
 	int damage;
 
 	int bulletCount = 0;
-	int cooldown = 5;
+	float cooldown = 1.0/7.0,
+		currentCd = 0;
 	bool keyDown = false;
+	//controladores para la sobrecarga
+	float maxOverload = 10,
+		cOverload = 0;
+	bool overloaded = false;
 	std::string shipName_;
 	std::string bulletMeshName;
 	std::string bulletParticleCollisionName;
