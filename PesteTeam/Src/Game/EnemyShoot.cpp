@@ -65,7 +65,7 @@ void EnemyShoot::reciveMsg(Message * msg)
 {
 	if (msg->id == "BULLET_COLLIDE_ENTITY") {
 		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
-		if (bce->name != "Player") {
+		if (bce->name != "PointerPlayer") {
 			DownLifeMsg Msg(damage, bce->name);
 			sendSceneMsg(&Msg);
 		}

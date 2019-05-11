@@ -256,7 +256,7 @@
 					"Target" : "Pointer",
 					"BulletMesh" : "EnemyBullet.mesh",
 					"EnemyType" : "GroundTurret",
-					"Damage" : 5,
+					"Damage" : 10,
 					"Range" : 450
 				 },
 				 {
@@ -303,7 +303,7 @@
 					"Target" : "Pointer",
 					"EnemyType" : "Fly",
 					"BulletMesh" : "EnemyBullet.mesh",
-					"Damage" : 5,
+					"Damage" : 10,
 					"Range" : 600
 				 },
 				 {

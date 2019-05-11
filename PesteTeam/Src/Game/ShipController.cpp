@@ -102,8 +102,8 @@ void ShipController::reciveMsg(Message * msg)
 	if (msg->id == "QUITA_VIDA")
 	{
 		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
-		if (dlm->name == "Player") {
-			cout << "RecibeMensajeDaño" <<  dlm->name << endl;
+		if (dlm->name == "PointerPlayer") {
+			cout << "Daño: " << health << endl;
 			health -= dlm->power;
 			ISound* aux = SoundManager::instance()->PlaySound2D("HurtPlayer.wav");
 			UpdateHealthBarMsg uhb(health);

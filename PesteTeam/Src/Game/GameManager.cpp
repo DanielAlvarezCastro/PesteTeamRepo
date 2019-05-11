@@ -18,6 +18,7 @@ void GameManager::Update(float t)
 	if (nextLevel) {
 		nextLevelTimer -= t;
 		if (nextLevelTimer <= 0) {
+		
 			std::string sceneName;
 			sceneName = "Scene" + to_string(currentLevel);
 			GameSceneManager::instance()->CloseScene(sceneName);

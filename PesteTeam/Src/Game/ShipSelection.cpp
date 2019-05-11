@@ -28,9 +28,8 @@ void ShipSelection::selectShip()
 {
 	GameSceneManager::instance()->setPlayerShip(shipNames[state]);
 	//GameSceneManager::instance()->LoadScene("Scene1");
-	GameSceneManager::instance()->LoadScene("Scene2");
-	Physics::getInstance()->initDebuger(MainApp::instance()->getCurrentSceneMgr());
-	Physics::getInstance()->setDebugState(true);
+	GameSceneManager::instance()->LoadScene("Scene1");
+	
 
 	int rnd = rand() % 2;
 	SoundManager::instance()->GetEngine()->stopAllSounds();
