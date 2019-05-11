@@ -36,14 +36,14 @@ bool GameSceneManager::LoadGame()
 //Carga una escena con un nombre determinado
 bool GameSceneManager::LoadScene(string sceneName)
 {
-	Scene* escena = new Scene();
 	Physics::getInstance()->releasePhysics();
 	Physics::getInstance()->initPhysics();
 	if (loader->sceneAlreadyLoaded(sceneName)) {
-		escena = loader->loadSceneFromMemory(sceneName, escena);
+		Scene* escena = loader->loadSceneFromMemory(sceneName);
 		escena->showGUI();
 	}
 	else {
+		Scene* escena = new Scene();
 		MainApp::instance()->AddScene(escena);
 		if (!loader->loadSceneFromFile(sceneName, escena))
 			return false;

@@ -25,7 +25,7 @@ public:
 	SceneLoader(std::string scenesPath);
 	bool loadPrefabsFromFile();
 	bool loadSceneFromFile(std::string sceneName, Scene* scene);
-	Scene* loadSceneFromMemory(std::string sceneName, Scene* scene);
+	Scene* loadSceneFromMemory(std::string sceneName);
 	bool sceneAlreadyLoaded(std::string sceneName);
 	bool loadTestScene(Scene* scene);
 	void deleteScene(std::string sceneName);

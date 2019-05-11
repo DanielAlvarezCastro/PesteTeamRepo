@@ -131,9 +131,9 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	return true;
 }
 
-Scene* SceneLoader::loadSceneFromMemory(std::string sceneName, Scene * scene)
+Scene* SceneLoader::loadSceneFromMemory(std::string sceneName)
 {
-	scene = scenesMap[sceneName];
+	Scene* scene = scenesMap[sceneName];
 	MainApp::instance()->setupViewport(scene->getCamera());
 	GUIManager::instance()->initScene(scene);
 	return scene;
