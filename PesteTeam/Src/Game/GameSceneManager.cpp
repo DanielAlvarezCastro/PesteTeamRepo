@@ -1,5 +1,6 @@
 #include "GameSceneManager.h"
 #include "GUIManager.h"
+#include <Physics.h>
 
 GameSceneManager* GameSceneManager::instance_ = nullptr;
 GameSceneManager::GameSceneManager()
@@ -36,6 +37,8 @@ bool GameSceneManager::LoadGame()
 bool GameSceneManager::LoadScene(string sceneName)
 {
 	Scene* escena = new Scene();
+	Physics::getInstance()->releasePhysics();
+	Physics::getInstance()->initPhysics();
 	if (loader->sceneAlreadyLoaded(sceneName)) {
 		escena = loader->loadSceneFromMemory(sceneName, escena);
 		escena->showGUI();

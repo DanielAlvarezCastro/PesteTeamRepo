@@ -1,13 +1,10 @@
 #include "Scene.h"
 #include "ParticleManager.h"
-#include "Physics.h"
 #include "GUIManager.h"
 Scene::Scene()
 {
 	mSceneMgr = MainApp::instance()->getRoot()->createSceneManager();
 	mWindow = MainApp::instance()->getRenderWindow();
-	
-	Physics::getInstance()->initPhysics();
 }
 
 Scene::~Scene()
@@ -43,7 +40,6 @@ void Scene::clearScene()
 		delete bc;
 	}
 	if (MainApp::instance()->isRunning()) {
-		Physics::getInstance()->releasePhysics();
 		GUIManager::instance()->resetGUI();
 	}
 	components.clear();
