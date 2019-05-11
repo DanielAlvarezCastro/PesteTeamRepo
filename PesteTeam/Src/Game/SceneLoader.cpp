@@ -96,6 +96,7 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	
 	//Set del viewport
 	MainApp::instance()->setupViewport(scene->getCamera());
+	MainApp::instance()->addCompositor("Interference");
 
 	GUIManager::instance()->initScene(scene);
 	//Itera sobre los elementos del GUI
@@ -136,6 +137,7 @@ Scene* SceneLoader::loadSceneFromMemory(std::string sceneName)
 	Scene* scene = scenesMap[sceneName];
 	MainApp::instance()->setupViewport(scene->getCamera());
 	GUIManager::instance()->initScene(scene);
+	cout << sceneName << "cargado" << endl;
 	return scene;
 }
 
