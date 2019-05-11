@@ -668,13 +668,13 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 
 		FlyerRoute fRoute = Sinusoidal;
 		if (route == "XCircular") {
-			fRoute = Sinusoidal;
+			fRoute = XCircular;
 		}
 		else if (route == "YCircular") {
 			fRoute = YCircular;
 		}
 		else if (route == "ZCircular") {
-			fRoute = XCircular;
+			fRoute = ZCircular;
 		}
 		else if (route == "Vertical") {
 			fRoute = Vertical;
