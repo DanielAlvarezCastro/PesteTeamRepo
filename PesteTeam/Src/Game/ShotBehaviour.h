@@ -18,7 +18,7 @@ private:
 	bool keyDown = false;
 	std::string shipName_;
 	std::string bulletMeshName;
-	std::string bulletMaterialName;
+	std::string bulletParticleCollisionName;
 
 	std::vector<GameObject*> bullets_;
 	std::vector<BulletBehaviour*> bComponents_;

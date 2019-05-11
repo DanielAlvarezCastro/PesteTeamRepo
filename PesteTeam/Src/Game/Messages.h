@@ -11,7 +11,8 @@ struct TiltCameraBackMsg : public Message
 struct BulletCollideEntity : public Message
 {
 	string name;
-	BulletCollideEntity(string n, string id = "BULLET_COLLIDE_ENTITY") : Message(id), name(n) {};
+	Ogre::Vector3 pos;
+	BulletCollideEntity(Ogre::Vector3 position, string n, string id = "BULLET_COLLIDE_ENTITY") : Message(id), name(n), pos(position) {};
 };
 struct EnterWarningZone : public Message {
 	EnterWarningZone(string id = "ENTER_WARNING_ZONE") : Message(id) {};

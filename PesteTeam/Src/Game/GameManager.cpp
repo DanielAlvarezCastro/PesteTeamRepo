@@ -27,8 +27,8 @@ void GameManager::Update(float t)
 	else if (GameOver) {
 		nextLevelTimer -= t;
 		if (nextLevelTimer <= 0) {
-			//GameSceneManager::instance()->ReturnToScene("ShipSelection");
-			GameSceneManager::instance()->CloseScene();
+			GameSceneManager::instance()->ReturnToScene("MainMenu");
+			//GameSceneManager::instance()->CloseScene();
 		}
 	}
 }

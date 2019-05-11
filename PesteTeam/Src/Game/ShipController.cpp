@@ -4,10 +4,12 @@
 #include "ParticleManager.h"
 #include "Messages.h"
 
-ShipController::ShipController(GameObject* gameObject, int _health) :BehaviourComponent(gameObject), health(_health)
+ShipController::ShipController(GameObject* gameObject, int _health, std::string _shipName) :BehaviourComponent(gameObject), health(_health), shipName(_shipName)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	gameObject->setOrientation(euler);
+	rollingCooldown = 1.0;
+	rollingTimer = rollingCooldown;
 }
 
 
@@ -42,21 +44,26 @@ void ShipController::Update(float t)
 			gameObject->setOrientation(euler);
 		}
 	}
-
+	rollingTimer -= t;
 	if (keyboard->isKeyDown(OIS::KC_E)) {
-		if (!isRolling) {
+		if (!isRolling && rollingTimer<0) {
 			isRolling = true;
 			rollRight = true;
 			iniOrientation = euler.mRoll;
+			gameObject->getRigidBody()->setActive(false);
+			rollingTimer = rollingCooldown;
 		}
 	}
-	if (keyboard->isKeyDown(OIS::KC_Q)) {
-		if (!isRolling) {
+	if (keyboard->isKeyDown(OIS::KC_Q) && rollingTimer < 0) {
+		if (!isRolling&& rollingTimer < 0) {
 			isRolling = true;
 			rollLeft = true;
 			iniOrientation = euler.mRoll;
+			gameObject->getRigidBody()->setActive(false);
+			rollingTimer = rollingCooldown;
 		}
 	}
+	cout << rollingTimer << endl;
 	if (isRolling) {
 		if (rollRight && euler.mRoll > (-Radian(2 * pi) + iniOrientation) + Radian(2 * pi)*t) {
 			euler.rotate(Radian(0), Radian(0), -Radian(barrelVel)*t);
@@ -67,11 +74,10 @@ void ShipController::Update(float t)
 			gameObject->setOrientation(euler);
 		}
 		else {
-			cout << euler.mRoll << endl;
-			cout << iniOrientation << endl;
 			isRolling = false;
 			rollLeft = false;
 			rollRight = false;
+			gameObject->getRigidBody()->setActive(true);
 			euler.mRoll = iniOrientation;
 		}
 	}
@@ -116,5 +122,6 @@ void ShipController::reciveMsg(Message * msg)
 	}
 	else if (msg->id == "GAME_OVER") {
 		gameObject->setActive(false);
+		MainApp::instance()->getParticleManager()->createParticle(gameObject->getGlobalPosition().getVector(), shipName +"BulletCollision", 6.0f);
 	}
 }

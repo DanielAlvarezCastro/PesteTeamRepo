@@ -6,17 +6,17 @@
 void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints)
 {
 	//si tiene rigidbody
-	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) {
+	if (other->getRigidBody() != nullptr  && other->getRigidBody()->isActive() && other->isActive() && one->isActive()) {
 		//std::cout << "Soy una bala enemiga y he chocado" << std::endl;
 		one->setActive(false);
 
 		Ogre::Vector3 pos = one->getPosition();
-		MainApp::instance()->getParticleManager()->createParticle(pos, "BulletCollision", 1.0f, "EnemyBullet.material");
+		MainApp::instance()->getParticleManager()->createParticle(pos, "EnemyBulletCollision", 1.0f);
 	}
 
-	//si es un objeto con comportamiento procesa el choque
-	if (other->getBComponents().size() > 0) {
-		BulletCollideEntity Msg(other->getName());
+	//si es un objeto con comportamiento y con rigidbody activo procesa el choque
+	if (other->getBComponents().size() > 0 && other->getRigidBody()!=nullptr && other->getRigidBody()->isActive()) {
+		BulletCollideEntity Msg(other->getPosition(), other->getName());
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }

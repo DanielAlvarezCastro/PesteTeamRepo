@@ -30,6 +30,8 @@ public:
 	RigidBody(GameObject* gameObject_, std::string name_, float density_, bool isKinematic_ = false);
 	void setName(const std::string newName);
 	void setMass(const btScalar nmass_);
+	void setActive(bool _active);
+	bool isActive() { return active; };
 
 	void setOffset(float x=0, float y=0, float z=0);
 

@@ -24,7 +24,7 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 
 	//si es un objeto con comportamiento procesa el choque
 	if (other->getBComponents().size() > 0) { 
-		BulletCollideEntity Msg(other->getName());
+		BulletCollideEntity Msg(other->getPosition(), other->getName());
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }
@@ -34,7 +34,7 @@ ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, int _
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
 	bulletMeshName = shipName + "Bullet.mesh";
-	bulletMaterialName = shipName + "Bullet.material";
+	bulletParticleCollisionName = shipName + "BulletCollision";
 }
 
 ShotBehaviour::~ShotBehaviour()
@@ -69,7 +69,7 @@ void ShotBehaviour::reciveMsg(Message * msg)
 		BulletCollisionMsg* dlm = static_cast<BulletCollisionMsg*>(msg);
 		ISound* aux = SoundManager::instance()->PlaySound2D("HurtEnemy.wav");
 		aux->setVolume(0.8);
-		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, "BulletCollision", 1.0f, bulletMaterialName);
+		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, bulletParticleCollisionName, 1.0f);
 	}
 	else if (msg->id == "BULLET_COLLIDE_ENTITY") {
 		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);

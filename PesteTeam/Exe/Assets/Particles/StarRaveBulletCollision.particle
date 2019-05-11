@@ -1,6 +1,6 @@
-particle_system BulletCollision
+particle_system StarRaveBulletCollision
 {
-	material SXRNeon
+	material StarRaveBullet
 	particle_width 1.52940002441406
 	particle_height 1.54119995117188
 	quota 50

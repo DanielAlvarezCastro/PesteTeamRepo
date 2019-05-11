@@ -80,6 +80,9 @@ void RigidBody::setMass(const btScalar nmass_) {
 	//asignamos al rigidbody
 	rigidBody->setMassProps(mass, localInertia);
 }
+void RigidBody::setActive(bool _active) {
+	active = _active;
+}
 
 void RigidBody::setOffset(float x, float y, float z)
 {

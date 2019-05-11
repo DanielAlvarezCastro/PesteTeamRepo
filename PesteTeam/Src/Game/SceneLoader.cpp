@@ -337,7 +337,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	PlayerController* pc = new PlayerController(pointer);
 	scene->addComponent(pc);
 
-	ShipController* sc = new ShipController(Nave, 200);
+	ShipController* sc = new ShipController(Nave, 200, playerShip);
 	scene->addComponent(sc);
 
 	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip, 10);
@@ -579,7 +579,7 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 	}
 	else if (componentName == "ShipController") {
 		int health = object_json["Health"];
-		ShipController* sc = new ShipController(go,health);
+		ShipController* sc = new ShipController(go,health, playerShip);
 		scene->addComponent(sc);
 	}
 	else if (componentName == "ShotBehaviour") {
