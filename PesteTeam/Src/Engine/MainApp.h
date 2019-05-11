@@ -71,6 +71,7 @@ public:
 	}
 	float deltaTime();
 	float timeSinceStart();
+	bool isRunning() { return appRunning; };
 	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT) {}
 
 	//getters

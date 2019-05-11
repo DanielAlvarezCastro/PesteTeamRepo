@@ -13,6 +13,7 @@ public:
 	GUIManager();
 	~GUIManager();
 	void initScene(Scene* escena);
+	void resetGUI();
 	void createTextbox(string text, int x, int y, int w, int h, string skinName, string name, int fontHeight);
 	MyGUI::ImageBox* createImage(string fileName, int x, int y, int w, int h, string skinName, string name);
 	MyGUI::TextBox* getTextBox(string name);

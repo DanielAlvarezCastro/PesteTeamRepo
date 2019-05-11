@@ -42,10 +42,13 @@ void CollisionCallBack(btDynamicsWorld* world, btScalar t) {
 }
 
 Physics::Physics() {
-	initPhysics();
 }
 
 Physics::~Physics() {
+	releasePhysics();
+}
+void Physics::releasePhysics() 
+{
 	//limpiamos punteros
 	delete dynamicsWorld;
 	delete collisionConfiguration;
@@ -54,12 +57,11 @@ Physics::~Physics() {
 	delete solver;
 	delete mDebugDrawer;
 	//vaciamos vector de collisionShapes
-	for (btCollisionShape* b : collisionShapes) {
-		delete b;
-	}
+	collisionShapes.clear();
 	//limpiamos el map
 	physicsAccessors.clear();
 }
+
 
 void Physics::initPhysics() {
 	//inicializamos los elementos necesarios

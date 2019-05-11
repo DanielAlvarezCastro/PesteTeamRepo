@@ -1,9 +1,13 @@
 #include "Scene.h"
 #include "ParticleManager.h"
+#include "Physics.h"
+#include "GUIManager.h"
 Scene::Scene()
 {
 	mSceneMgr = MainApp::instance()->getRoot()->createSceneManager();
 	mWindow = MainApp::instance()->getRenderWindow();
+	
+	Physics::getInstance()->initPhysics();
 }
 
 Scene::~Scene()
@@ -34,12 +38,20 @@ void Scene::updateScene()
 
 void Scene::clearScene()
 {
-	for (BasicComponent* bc : components) {
+	for (BasicComponent* bc : components) 
+	{
 		delete bc;
 	}
-  	for (GameObject* go : gameObjects) {
+	if (MainApp::instance()->isRunning()) {
+		Physics::getInstance()->releasePhysics();
+		GUIManager::instance()->resetGUI();
+	}
+	components.clear();
+	for (GameObject* go : gameObjects) 
+	{
 		delete go;
 	}
+	gameObjects.clear();
 }
 
 void Scene::addGUIObject(MyGUI::Widget* ob)

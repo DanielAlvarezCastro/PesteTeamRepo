@@ -48,6 +48,19 @@ void GUIManager::destroyWidget(string name) {
 	mGUI->destroyWidget(w);
 }
 
+void GUIManager::resetGUI() 
+{
+	mGUI->shutdown();
+	delete mGUI;
+	mPlatform->shutdown();
+	delete mPlatform;
+	mPlatform = new MyGUI::OgrePlatform();
+	mPlatform->initialise(MainApp::instance()->getRenderWindow(), MainApp::instance()->getCurrentSceneMgr()); // mWindow is Ogre::RenderWindow*, mSceneManager is Ogre::SceneManager*
+	mGUI = new MyGUI::Gui();
+	mGUI->initialise();
+	MyGUI::PointerManager::getInstance().setVisible(false);
+}
+
 GUIManager::~GUIManager()
 {
 	mGUI->shutdown();

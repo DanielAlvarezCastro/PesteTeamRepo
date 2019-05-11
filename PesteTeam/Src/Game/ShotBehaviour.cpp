@@ -2,6 +2,9 @@
 #include "ParticleManager.h"
 #include <random>
 #include <string>
+#define _CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
 
 
 
@@ -85,13 +88,13 @@ void ShotBehaviour::getBullet(int id)
 		i++;
 
 	if (i >= bullets_.size()) {
-		GameObject* nBullet = new GameObject();
+		GameObject* nBullet = new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) GameObject();
 		string name = gameObject->getName() + "PlayerBullet" + to_string(i);
 		nBullet->createEntity(bulletMeshName, name, MainApp::instance()->getCurrentScene());
 		nBullet->setScale(Vec3(0.5, 0.5, 2.5));
 
 		string rBulletName = "PlayerRb" + name;
-		RigidBody* rBullet = new RigidBody(nBullet, 1, rBulletName, true);
+		RigidBody* rBullet = new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) RigidBody(nBullet, 1, rBulletName, true);
 		rBullet->setCollisionCallback(OnBulletCollision);
 		scn->addComponent(rBullet);
 		situateBullet(nBullet, id);
@@ -136,7 +139,7 @@ void ShotBehaviour::situateBullet(GameObject* b, int id, bool created, int i)
 	if (created && i >= 0) 
 		bComponents_[i]->resetValues(pos, dir);
 	else {
-		BulletBehaviour* bh = new BulletBehaviour(b, pos, dir);
+		BulletBehaviour* bh = new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) BulletBehaviour(b, pos, dir);
 		scn->addComponent(bh);
 		bComponents_.push_back(bh);
 	}

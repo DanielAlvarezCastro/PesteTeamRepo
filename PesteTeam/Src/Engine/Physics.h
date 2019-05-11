@@ -33,8 +33,10 @@ public:
 	Physics();
 	~Physics();
 	void initPhysics();
+	void releasePhysics();
 	void updatePhysics(float t);
 	void initDebuger(Ogre::SceneManager* sMrg);
+	void removeRigidBody(btRigidBody* rb) { dynamicsWorld->removeRigidBody(rb); };
 
 	bool getDebugState() { return debuged; };
 	void setDebugState(bool b) { debuged = b; };

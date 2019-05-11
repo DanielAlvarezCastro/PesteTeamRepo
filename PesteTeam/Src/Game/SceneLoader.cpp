@@ -18,7 +18,9 @@
 #include "GameManager.h"
 
 #include "EnemyShoot.h"
-
+#define _CRTDBG_MAP_ALLOC
+#include <cstdlib>
+#include <crtdbg.h>
 using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
@@ -410,6 +412,7 @@ void SceneLoader::deleteScene(std::string sceneName)
 {
 	delete scenesMap[sceneName];
 	scenesMap.erase(sceneName);
+	enemies.clear();
 }
 
 void SceneLoader::setPlayerShip(std::string shipName)
