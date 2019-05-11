@@ -15,14 +15,15 @@
 					"Position" : [-1,0,0],
 					"Components" : [
 						{
-							"Name" : "ShipController",
-							"Health" : 20
-						},
-						 {
 							"Name" : "Rigidbody",
 							"Density" : 6,
 							"Kinematic" : true
-						 }						
+						 },	
+						{
+							"Name" : "ShipController",
+							"Health" : 200
+						}
+						 					
 					]
 				},				
 				{

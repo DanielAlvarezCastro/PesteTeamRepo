@@ -4,12 +4,26 @@
 #include "ParticleManager.h"
 #include "Messages.h"
 
+//duplicado de shotBehaviour.cpp
+void OnShipEnvironmentCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints)
+{
+	//si la nave choca contra un edificio
+	if (other->getRigidBody() != nullptr  && other->getRigidBody()->isActive() && other->isActive() && one->isActive() && other->getBComponents().size() == 0) {
+		Ogre::Vector3 pos = one->getPosition();
+		if (one->getBComponents().size() > 0) {
+			GameOverMsg msg;
+			one->getBComponents()[0]->sendSceneMsg(&msg);
+		}
+	}
+}
+
 ShipController::ShipController(GameObject* gameObject, int _health, std::string _shipName) :BehaviourComponent(gameObject), health(_health), shipName(_shipName)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	gameObject->setOrientation(euler);
 	rollingCooldown = 1.0;
 	rollingTimer = rollingCooldown;
+	gameObject->getRigidBody()->setCollisionCallback(OnShipEnvironmentCollision);
 }
 
 
@@ -63,7 +77,6 @@ void ShipController::Update(float t)
 			rollingTimer = rollingCooldown;
 		}
 	}
-	cout << rollingTimer << endl;
 	if (isRolling) {
 		if (rollRight && euler.mRoll > (-Radian(2 * pi) + iniOrientation) + Radian(2 * pi)*t) {
 			euler.rotate(Radian(0), Radian(0), -Radian(barrelVel)*t);
@@ -108,7 +121,6 @@ void ShipController::reciveMsg(Message * msg)
 	{
 		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
 		if (dlm->name == "PointerPlayer") {
-			cout << "Daño: " << health << endl;
 			health -= dlm->power;
 			ISound* aux = SoundManager::instance()->PlaySound2D("HurtPlayer.wav");
 			UpdateHealthBarMsg uhb(health);
