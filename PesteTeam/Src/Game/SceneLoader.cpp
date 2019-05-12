@@ -25,6 +25,9 @@ using json = nlohmann::json;
 
 SceneLoader::SceneLoader(std::string scenesPath) : scenesPath(scenesPath)
 {
+	shipStats.push_back(3);
+	shipStats.push_back(3);
+	shipStats.push_back(3);
 }
 
 void OnCuboCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints) {
@@ -143,7 +146,7 @@ Scene* SceneLoader::loadSceneFromMemory(std::string sceneName)
 
 bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
 {
-
+	
 	//Si el nombre de la escena existe eso quiere decir que ya está cargada
 	if (scenesMap.find(sceneName) != scenesMap.end()) {
 		//scene = scenesMap[sceneName];
@@ -417,9 +420,10 @@ void SceneLoader::deleteScene(std::string sceneName)
 	enemies.clear();
 }
 
-void SceneLoader::setPlayerShip(std::string shipName)
+void SceneLoader::setPlayerShip(std::string shipName, std::vector<int> _shipStats)
 {
 	playerShip = shipName;
+	shipStats = _shipStats;
 }
 
 GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene, std::string fatherName)
@@ -601,7 +605,7 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		float rollingC = object_json["RollingCooldown"];
 		int WZL = object_json["WarningZoneLength"];
 		int DZL = object_json["DeadZoneLength"];
-		ShipController* sc = new ShipController(go,health, playerShip, rollingC, WZL, DZL);
+		ShipController* sc = new ShipController(go, shipStats[0]*health, playerShip, rollingC, WZL, DZL);
 
 		scene->addComponent(sc);
 	}
@@ -614,7 +618,7 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		GameObject* rPivot = scene->getGameObject(rName);
 
 		int damage = object_json["Damage"];
-		ShotBehaviour* sb = new ShotBehaviour(go, playerShip, damage);
+		ShotBehaviour* sb = new ShotBehaviour(go, playerShip, shipStats[1]*damage);
 		scene->addComponent(sb);
 	}
 	else if (componentName == "TargetController") {
@@ -735,8 +739,8 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		scene->addComponent(em);
 	}
 	else if (componentName == "GameGUI") {
-		int fH = object_json["FullHealth"];
-		GameGUI* GG = new GameGUI(go, fH);
+		int fH = object_json["Health"];
+		GameGUI* GG = new GameGUI(go, shipStats[0] * fH);
 		scene->addComponent(GG);
 	}
 	else if (componentName == "GameManager") {
@@ -754,7 +758,8 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		go->attachLight(luz);
 	}
 	else if (componentName == "PlayerController") {
-		PlayerController* pc = new PlayerController(go, 60);
+		int velocity = object_json["Velocity"];
+		PlayerController* pc = new PlayerController(go, shipStats[2]*velocity);
 		scene->addComponent(pc);
 	}
 	else if (componentName == "MainMenuManager") {
@@ -793,6 +798,8 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		for (auto name : names) {
 			SS->addShipName(name);
 		}
+		std::vector<std::vector<int>> stats = object_json["Stats"];
+		SS->addShipStats(stats);
 		SS->setInitialShipsPosition();
 		scene->addComponent(SS);
 	}

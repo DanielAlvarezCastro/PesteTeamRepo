@@ -21,7 +21,7 @@
 						 },	
 						{
 							"Name" : "ShipController",
-							"Health" : 200,
+							"Health" : 50,
 							"RollingCooldown" : 1.0,
 							"WarningZoneLength" : 1400,
 							"DeadZoneLength" : 1900
@@ -121,13 +121,14 @@
 			],
 			"Components" : [
 				{
-					"Name" : "PlayerController"
+					"Name" : "PlayerController",
+					"Velocity" : 20
 				},
 				{
 					"Name" : "ShotBehaviour",
 					"LeftPivot" : "LeftGunPivot",
 					"RightPivot" : "RightGunPivot",
-					"Damage" : 5
+					"Damage" : 2
 				}
             ]
 		},		
@@ -375,7 +376,7 @@
 			"Components" : [
 				 {
 					"Name" : "GameGUI",
-					"FullHealth" : 200
+					"Health" : 50
 				 }		 
 			]
         }

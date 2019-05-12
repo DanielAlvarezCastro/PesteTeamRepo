@@ -26,7 +26,7 @@ void ShipSelection::shipsAnimation()
 
 void ShipSelection::selectShip()
 {
-	GameSceneManager::instance()->setPlayerShip(shipNames[state]);
+	GameSceneManager::instance()->setPlayerShip(shipNames[state], shipStats[state]);
 	//GameSceneManager::instance()->LoadScene("Scene1");
 	GameSceneManager::instance()->LoadScene("Scene1");
 	
@@ -51,6 +51,11 @@ void ShipSelection::addShipModel(GameObject * go)
 	shipsNum++;
 }
 
+void ShipSelection::addShipStats(std::vector<std::vector<int>> _shipStats)
+{
+	shipStats = _shipStats;
+}
+
 void ShipSelection::updateGUI()
 {
 	if (state >= shipsNum) {
@@ -72,6 +77,7 @@ void ShipSelection::updateGUI()
 		GUIMgr->getImage("LeftArrow")->setImageTexture("SelectedArrowL.png");
 	}
 	GUIMgr->getImage("ShipTitle")->setImageTexture(shipNames[state]+ ".png");
+	GUIMgr->getImage("ShipStats")->setImageTexture(shipNames[state] + "Stats.png");
 }
 
 ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot)

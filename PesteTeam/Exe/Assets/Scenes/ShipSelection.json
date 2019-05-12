@@ -2,35 +2,42 @@
 	"Camera" : "CameraMain"
 	,
 	"GUI": [
-	{
-		"Name" : "SelectYourShip",
-		"Type" : "ImageBox",		
-		"Position" : [290,20],
-		"Size" : [500,70],
-		"Src" : "SelectYourShip.png"
-	},
-	{
-		"Name" : "LeftArrow",
-		"Type" : "ImageBox",		
-		"Position" : [0,300],
-		"Size" : [50,50],
-		"Src" : "UnSelectedArrowL.png"
-	},
-	{
-		"Name" : "RightArrow",
-		"Type" : "ImageBox",		
-		"Position" : [1030,300],
-		"Size" : [50,50],
-		"Src" : "SelectedArrowR.png"
-	}
-	,
-	{
-		"Name" : "ShipTitle",
-		"Type" : "ImageBox",		
-		"Position" : [340,100],
-		"Size" : [400,125],
-		"Src" : "SXRVengeance.png"
-	}
+		{
+			"Name" : "SelectYourShip",
+			"Type" : "ImageBox",		
+			"Position" : [290,20],
+			"Size" : [500,70],
+			"Src" : "SelectYourShip.png"
+		},
+		{
+			"Name" : "LeftArrow",
+			"Type" : "ImageBox",		
+			"Position" : [0,300],
+			"Size" : [50,50],
+			"Src" : "UnSelectedArrowL.png"
+		},
+		{
+			"Name" : "RightArrow",
+			"Type" : "ImageBox",		
+			"Position" : [1030,300],
+			"Size" : [50,50],
+			"Src" : "SelectedArrowR.png"
+		}
+		,
+		{
+			"Name" : "ShipTitle",
+			"Type" : "ImageBox",		
+			"Position" : [340,100],
+			"Size" : [400,125],
+			"Src" : "SXRVengeance.png"
+		},
+		{
+			"Name" : "ShipStats",
+			"Type" : "ImageBox",		
+			"Position" : [270,560],
+			"Size" : [540,70],
+			"Src" : "SXRVengeanceStats.png"
+		}
 	],
     "GameObjects": [			
 		{
@@ -113,7 +120,8 @@
 					"ShipDistance" : -12,
 					"Pivot" : "Model",
 					"Models" : ["ModelSXRVengeance","ModelCyberGrasper","ModelRoyalWasp", "ModelNeonBlade","ModelStarRave", "ModelBloodyAlmirante"],
-					"Names" : ["SXRVengeance", "CyberGrasper", "RoyalWasp", "NeonBlade", "StarRave", "BloodyAlmirante"]
+					"Names" : ["SXRVengeance", "CyberGrasper", "RoyalWasp", "NeonBlade", "StarRave", "BloodyAlmirante"],
+					"Stats" : [[3,3,3],[5,2,2],[2,2,5],[2,4,3],[2,3,4],[1,5,3]]
 				}
 			]
 		},

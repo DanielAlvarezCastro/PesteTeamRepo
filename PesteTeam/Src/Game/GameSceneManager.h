@@ -10,7 +10,7 @@ private:
 public:
 	GameSceneManager();
 	~GameSceneManager();
-	void setPlayerShip(string shipName);
+	void setPlayerShip(string shipName, std::vector<int> shipStats);
 	bool LoadGame();
 	bool LoadScene(string sceneName);
 	void CloseScene();

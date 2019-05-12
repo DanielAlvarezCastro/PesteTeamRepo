@@ -18,6 +18,7 @@ private:
 	OIS::Keyboard* keyboard;
 	std::vector<GameObject*> ships;
 	std::vector<string> shipNames;
+	std::vector<std::vector<int>> shipStats;
 	int shipsNum=0;
 	float distance = 0;
 	float distanceBetweenShips = 0;
@@ -37,6 +38,7 @@ public:
 	void selectShip();
 	void addShipName(string name);
 	void addShipModel(GameObject* go);
+	void addShipStats(std::vector<std::vector<int>> _shipStats);
 	ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot);
 	void setInitialShipsPosition();
 	virtual ~ShipSelection();

@@ -12,9 +12,9 @@ GameSceneManager::~GameSceneManager()
 {
 	delete loader;
 }
-void GameSceneManager::setPlayerShip(string shipName)
+void GameSceneManager::setPlayerShip(string shipName, std::vector<int> shipStats)
 {
-	loader->setPlayerShip(shipName);
+	loader->setPlayerShip(shipName,shipStats);
 }
 //Carga las escenas a través del SceneLoader que lee los json
 bool GameSceneManager::LoadGame()
