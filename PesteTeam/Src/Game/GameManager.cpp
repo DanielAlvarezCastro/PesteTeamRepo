@@ -10,6 +10,9 @@ GameManager::GameManager(GameObject* go, int _maxLevel, float _nextLevelWaitTime
 	GameOver = false;
 	nextLevel = false;
 	nextLevelTimer = nextLevelWaitTime;
+	if (MainApp::instance()->getCurrentScene()->getName() == "Scene1") {
+		currentLevel = 1;
+	}
 }
 
 void GameManager::Update(float t)

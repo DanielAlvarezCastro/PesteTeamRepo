@@ -3,17 +3,24 @@
 	,
 	"GUI": [
 	{
+		"Name" : "GamePaused",
+		"Type" : "ImageBox",		
+		"Position" : [265,20],
+		"Size" : [550,200],
+		"Src" : "GamePaused.png"
+	},
+	{
 		"Name" : "Resume",
 		"Type" : "ImageBox",		
-		"Position" : [340,100],
-		"Size" : [400,150],
+		"Position" : [330,250],
+		"Size" : [420,130],
 		"Src" : "ResumeSelected.png"
 	},
 	{
 		"Name" : "MainMenu",
 		"Type" : "ImageBox",		
-		"Position" : [340,300],
-		"Size" : [400,150],
+		"Position" : [330,450],
+		"Size" : [420,130],
 		"Src" : "MainMenuUnSelected.png"
 	}
 	],
@@ -22,13 +29,13 @@
 			"Name" : "CameraOb",
 			"Type" : "None",
 			"Mesh" : "None",
-			"Position" : [0,100,0],			
+			"Position" : [0, 100,80],			
 			"Components" : [
 				{
 					"Name" : "Camera",
 					"CameraName" : "CameraMain",
 					"NearClipDistance" : 5,
-					"LookAt" : [0 ,90,-100]
+					"LookAt" : [0,120,0]
 				}
 			]
 		},
