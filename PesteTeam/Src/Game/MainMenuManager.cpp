@@ -151,4 +151,12 @@ void MainMenuManager::titleAnimation()
 
 void MainMenuManager::reciveMsg(Message * msg)
 {
+	if (msg->id == "INIT_SCENE")
+	{//Activa el GUI cuando inicia la escene
+		titleImage->setVisible(true);
+		GUIMgr->getImage("Play")->setVisible(true);
+		GUIMgr->getImage("Credits")->setVisible(true);
+		GUIMgr->getImage("Exit")->setVisible(true);
+		GUIMgr->getImage("TitleCircle")->setVisible(true);
+	}
 }

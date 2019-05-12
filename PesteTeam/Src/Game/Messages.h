@@ -14,6 +14,9 @@ struct BulletCollideEntity : public Message
 	Ogre::Vector3 pos;
 	BulletCollideEntity(Ogre::Vector3 position, string n, string id = "BULLET_COLLIDE_ENTITY") : Message(id), name(n), pos(position) {};
 };
+struct InitSceneMsg : public Message {
+	InitSceneMsg(string id = "INIT_SCENE") : Message(id) {};
+};
 struct EnterWarningZone : public Message {
 	EnterWarningZone(string id = "ENTER_WARNING_ZONE") : Message(id) {};
 };

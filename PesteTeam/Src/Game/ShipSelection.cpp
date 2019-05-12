@@ -149,4 +149,12 @@ void ShipSelection::Update(float t)
 
 void ShipSelection::reciveMsg(Message * msg)
 {
+	if (msg->id == "INIT_SCENE")
+	{//Activa el GUI cuando inicia la escene
+		GUIMgr->getImage("RightArrow")->setVisible(true);
+		GUIMgr->getImage("LeftArrow")->setVisible(true);
+		GUIMgr->getImage("ShipTitle")->setVisible(true);
+		GUIMgr->getImage("ShipStats")->setVisible(true);
+		GUIMgr->getImage("SelectYourShip")->setVisible(true);
+	}
 }

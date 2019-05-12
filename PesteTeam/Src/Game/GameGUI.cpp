@@ -55,4 +55,12 @@ void GameGUI::reciveMsg(Message * msg)
 	{
 		warning->setVisible(false);
 	}
+
+	else if (msg->id == "INIT_SCENE")
+	{//Activa el GUI cuando inicia la escene
+		healthBar->setVisible(true);
+		gameOver->setVisible(false);
+		missionA->setVisible(false);
+		warning->setVisible(false);
+	}
 }

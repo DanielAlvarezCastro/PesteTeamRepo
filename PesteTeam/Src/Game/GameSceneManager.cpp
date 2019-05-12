@@ -1,6 +1,7 @@
 #include "GameSceneManager.h"
 #include "GUIManager.h"
 #include <Physics.h>
+#include "Messages.h"
 
 GameSceneManager* GameSceneManager::instance_ = nullptr;
 GameSceneManager::GameSceneManager()
@@ -42,14 +43,18 @@ bool GameSceneManager::LoadScene(string sceneName)
 	Physics::getInstance()->initPhysics();
 	if (loader->sceneAlreadyLoaded(sceneName)) {
 		Scene* escena = loader->loadSceneFromMemory(sceneName);
-		escena->showGUI();
+		InitSceneMsg msg;
+		escena->reciveMsg(&msg);
 	}
-	else {
+	else {		
 		Scene* escena = new Scene();
 		MainApp::instance()->AddScene(escena);
 		if (!loader->loadSceneFromFile(sceneName, escena))
 			return false;
+		InitSceneMsg msg;
+		escena->reciveMsg(&msg);
 	}
+
 	
 }
 //Borra la escena actual y carga una nueva
