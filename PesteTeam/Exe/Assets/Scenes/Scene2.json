@@ -15,8 +15,28 @@
 			"Position" : [340,20],
 			"Size" : [400,40],
 			"Src" : "HealthBarFront.png"
-		}
-		,
+		},		
+		{
+			"Name" : "AmmoRedBar",
+			"Type" : "ImageBox",		
+			"Position" : [440,65],
+			"Size" : [200,15],
+			"Src" : "AmmoRedBar.png"
+		},
+		{
+			"Name" : "AmmoBarFront",
+			"Type" : "ImageBox",		
+			"Position" : [440,65],
+			"Size" : [200,15],
+			"Src" : "AmmoBarFront.png"
+		},
+		{
+			"Name" : "Overloaded",
+			"Type" : "ImageBox",		
+			"Position" : [415,90],
+			"Size" : [250,50],
+			"Src" : "GunsOverloaded.png"
+		},
 		{
 			"Name" : "GameOver",
 			"Type" : "ImageBox",		
