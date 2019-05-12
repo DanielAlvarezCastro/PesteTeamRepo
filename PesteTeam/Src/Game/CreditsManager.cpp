@@ -22,7 +22,7 @@ void CreditsManager::Update(float t)
 		//GUIMgr->getImage("CreditsImage")->setPosition(0, posY);
 		GameSceneManager::instance()->CloseScene();
 	}
-	else if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_P)) {
+	else if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
 		//GUIMgr->destroyWidget("CreditsImage");
 		GameSceneManager::instance()->CloseScene();
 	}

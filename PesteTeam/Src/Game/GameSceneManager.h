@@ -7,6 +7,7 @@ class GameSceneManager
 private:
 	static GameSceneManager* instance_;
 	SceneLoader* loader;
+	bool loaded = false;
 public:
 	GameSceneManager();
 	~GameSceneManager();

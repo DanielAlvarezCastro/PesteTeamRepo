@@ -16,6 +16,7 @@
 #include "CreditsManager.h"
 #include "GameGUI.h"
 #include "GameManager.h"
+#include "PauseMenuManager.h"
 
 #include "EnemyShoot.h"
 #define _CRTDBG_MAP_ALLOC
@@ -729,6 +730,17 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		int health = object_json["Health"];
 		EnemyBehaviour* enem = new EnemyBehaviour(go, health);
 		enemies.push_back(enem);
+		scene->addComponent(enem);
+	}
+	else if (componentName == "PauseMenuManager") {
+		std::string cameraName = object_json["CameraObject"];
+		float cameraVel = object_json["CameraVel"];
+		int buttonAmp = object_json["ButtonAmplitude"];
+		float buttonSinPeriod = object_json["ButtonSinPeriod"];
+		GameObject* cam = scene->getGameObject(cameraName);
+		PauseMenuManager* enem = new PauseMenuManager(go, cam, cameraVel);
+		enem->setButtonAmplitude(buttonAmp);
+		enem->setButtonSinPeriod(buttonSinPeriod);
 		scene->addComponent(enem);
 	}
 	else if (componentName == "EnemyManager") {

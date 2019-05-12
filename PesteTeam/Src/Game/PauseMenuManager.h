@@ -4,8 +4,7 @@
 #include <GUIManager.h>
 #include "Messages.h"
 #include "GameSceneManager.h"
-
-class MainMenuManager :
+class PauseMenuManager :
 	public BehaviourComponent
 {
 private:
@@ -26,20 +25,12 @@ private:
 	void handleStates();
 	//Buffer
 	OIS::KeyCode lastKey;
-	double inputBufferTimer=0.2;
-	double lastTimePressed=0;
+	double inputBufferTimer = 0.2;
+	double lastTimePressed = 0;
 	//Animations
-	MyGUI::ImageBox* titleImage = nullptr;
-	int titleWidth=0;
-	int titleHeight=0;
-	int titleX = 0;
-	int titleY = 0;
-	int titleAmplitude = 0;
-	float titleSinPeriod = 0;
 	MyGUI::ImageBox* activeButton = nullptr;
-	ButtonProps playProps;
-	ButtonProps creditsProps;
-	ButtonProps exitProps;
+	ButtonProps resumeProps;
+	ButtonProps mainMenuProps;
 	ButtonProps activeProps;
 	int buttonAmplitude = 0;
 	float buttonSinPeriod = 0;
@@ -49,20 +40,15 @@ private:
 	float initTimer = 0.0;
 	float currentTime = 0.0;
 
-	void titleAnimation();
 	void buttonAnimation();
 	void cameraRotation();
-public:
-	MainMenuManager(GameObject* gameObject, GameObject* camera);
-	virtual ~MainMenuManager();
-
 	OIS::Keyboard* keyboard;
+public:
+	PauseMenuManager(GameObject* gameObject, GameObject* camera, float _cameraVel);
+	virtual~PauseMenuManager();
+	virtual void Update( float t);
+	virtual void reciveMsg(Message* msg) {};
 	void setButtonSinPeriod(float sinP);
 	void setButtonAmplitude(float amplitude);
-	void setTitleSinPeriod(float sinP);
-	void setTitleAmplitude(float amplitude);
-	void setCameraVelocity(float cameraVelocity);
-	virtual void Update(float t);
-	virtual void reciveMsg(Message* msg);
 };
 

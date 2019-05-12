@@ -3,6 +3,14 @@
 
 #include <iostream>
 
+ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot)
+	: BehaviourComponent(gameObject), distance(shipDistance), shipsPivot(pivot)
+{
+	keyboard = MainApp::instance()->getKeyboard();
+	GUIMgr = GUIManager::instance();
+	initTimer = 0.5;
+}
+
 void ShipSelection::setInitialShipsPosition()
 {
 	//Coloca automaticamente las naves
@@ -80,13 +88,7 @@ void ShipSelection::updateGUI()
 	GUIMgr->getImage("ShipStats")->setImageTexture(shipNames[state] + "Stats.png");
 }
 
-ShipSelection::ShipSelection(GameObject* gameObject, float shipDistance, GameObject* pivot)
-	: BehaviourComponent(gameObject), distance(shipDistance), shipsPivot(pivot)
-{
-	keyboard = MainApp::instance()->getKeyboard();
-	GUIMgr = GUIManager::instance();
-	initTimer = 0.5;
-}
+
 
 void ShipSelection::moveShips()
 {
@@ -135,16 +137,16 @@ void ShipSelection::Update(float t)
 			lastKey = OIS::KC_D;
 			updateGUI();
 		}
-		if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT)) {
+		if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT) || keyboard->isKeyDown(OIS::KC_RETURN)) {
 			MainApp::instance()->getCurrentScene()->hideGUI();
 			selectShip();
 		}
 		moveShips();
-		shipsAnimation();
 	}
 	else {
 		currentTime += MainApp::instance()->deltaTime();
 	}
+	shipsAnimation();
 }
 
 void ShipSelection::reciveMsg(Message * msg)

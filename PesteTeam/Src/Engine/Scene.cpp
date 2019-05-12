@@ -36,10 +36,6 @@ void Scene::updateScene()
 			components[i]->Update(MainApp::instance()->deltaTime());
 
 	}*/
-
-	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
-		MainApp::instance()->closeApp();
-	}
 }
 
 void Scene::clearScene()

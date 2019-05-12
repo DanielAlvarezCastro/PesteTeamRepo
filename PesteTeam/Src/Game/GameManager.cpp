@@ -30,6 +30,11 @@ void GameManager::Update(float t)
 			//GameSceneManager::instance()->CloseScene();
 		}
 	}
+
+	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
+		MainApp::instance()->getCurrentScene()->hideGUI();
+		GameSceneManager::instance()->LoadScene("PauseMenu");
+	}
 }
 
 void GameManager::reciveMsg(Message * msg)

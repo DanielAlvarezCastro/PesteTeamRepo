@@ -17,6 +17,7 @@ MainMenuManager::MainMenuManager(GameObject* gameObject, GameObject* camera)
 	titleAmplitude = 0;
 	titleSinPeriod = 0;
 	activeButton = GUIMgr->getImage("Play");
+	initTimer = 0.5;
 }
 
 
@@ -51,43 +52,49 @@ void MainMenuManager::setCameraVelocity(float cameraVelocity)
 
 void MainMenuManager::Update(float t)
 {
-	//Timer que regula la velocidad de input
-	if (lastKey == OIS::KC_W || lastKey == OIS::KC_S) {
-		lastTimePressed += t;
-		if (lastTimePressed > inputBufferTimer) {
-			lastKey = OIS::KC_U;
-			lastTimePressed = 0;
-		}
-	}
-	if (keyboard->isKeyDown(OIS::KC_W) && lastKey!= OIS::KC_W) {
-		state--;
-		handleStates();
-		lastKey = OIS::KC_W;
-	}
-	else if (keyboard->isKeyDown(OIS::KC_S) && lastKey != OIS::KC_S) {
-		state++;
-		handleStates();
-		lastKey = OIS::KC_S;
-	}
-	if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT)) {
-		if (state == 0) {
-			MainApp::instance()->getCurrentScene()->hideGUI();
-			GameSceneManager::instance()->LoadScene("ShipSelection");
-
-			SoundManager::instance()->GetEngine()->stopAllSounds();
-			SoundManager::instance()->PlaySound2D("SynthSong3.mp3", true, false);
-		}
-		else if (state == 1) {
-			MainApp::instance()->getCurrentScene()->hideGUI();
-			GameSceneManager::instance()->LoadScene("Credits");
-		}
-		else if (state == 2) {
-			MainApp::instance()->closeApp();
-		}
-	}
 	titleAnimation();
 	buttonAnimation();
 	cameraRotation();
+	if (currentTime > initTimer) {
+		//Timer que regula la velocidad de input
+		if (lastKey == OIS::KC_W || lastKey == OIS::KC_S) {
+			lastTimePressed += t;
+			if (lastTimePressed > inputBufferTimer) {
+				lastKey = OIS::KC_U;
+				lastTimePressed = 0;
+			}
+		}
+		if (keyboard->isKeyDown(OIS::KC_W) && lastKey != OIS::KC_W) {
+			state--;
+			handleStates();
+			lastKey = OIS::KC_W;
+		}
+		else if (keyboard->isKeyDown(OIS::KC_S) && lastKey != OIS::KC_S) {
+			state++;
+			handleStates();
+			lastKey = OIS::KC_S;
+		}
+		if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT) || keyboard->isKeyDown(OIS::KC_RETURN)) {
+			currentTime = 0;
+			if (state == 0) {
+				MainApp::instance()->getCurrentScene()->hideGUI();
+				GameSceneManager::instance()->LoadScene("ShipSelection");
+
+				SoundManager::instance()->GetEngine()->stopAllSounds();
+				SoundManager::instance()->PlaySound2D("SynthSong3.mp3", true, false);
+			}
+			else if (state == 1) {
+				MainApp::instance()->getCurrentScene()->hideGUI();
+				GameSceneManager::instance()->LoadScene("Credits");
+			}
+			else if (state == 2) {
+				MainApp::instance()->closeApp();
+			}
+		}
+	}
+	else {
+		currentTime += MainApp::instance()->deltaTime();
+	}
 }
 void MainMenuManager::handleStates()
 {
@@ -121,7 +128,7 @@ void MainMenuManager::handleStates()
 
 void MainMenuManager::buttonAnimation()
 {
-	//El título se hace grande siguiendo una funcion senoidal
+	//El botón se hace grande siguiendo una funcion senoidal
 	int w = activeProps.w + buttonAmplitude * sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
 	int h = activeProps.h + buttonAmplitude * sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
 	//La x y la y se tienen que mover de acuerdo al tamaño para que el título crezca desde el centro

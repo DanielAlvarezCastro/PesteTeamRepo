@@ -62,5 +62,6 @@ void GameGUI::reciveMsg(Message * msg)
 		gameOver->setVisible(false);
 		missionA->setVisible(false);
 		warning->setVisible(false);
+		GUIMgr->getImage("HealthBarFront")->setVisible(true);
 	}
 }

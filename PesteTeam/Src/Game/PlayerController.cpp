@@ -69,12 +69,6 @@ void PlayerController::Update(float t)
 	else {
 		gameObject->translate(euler.forward() *normalSpeed * t);
 	}
-	if (keyboard->isKeyDown(OIS::KC_P)) {
-		GameSceneManager::instance()->CloseScene();
-
-		SoundManager::instance()->GetEngine()->stopAllSounds();
-		SoundManager::instance()->PlaySound2D("SynthSong3.mp3", true, false);
-	}
 }
 
 void PlayerController::reciveMsg(Message * msg)

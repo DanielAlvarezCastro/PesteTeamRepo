@@ -31,6 +31,7 @@
     <ClCompile Include="..\..\Src\Game\GameSceneManager.cpp" />
     <ClCompile Include="..\..\Src\Game\main.cpp" />
     <ClCompile Include="..\..\Src\Game\MainMenuManager.cpp" />
+    <ClCompile Include="..\..\Src\Game\PauseMenuManager.cpp" />
     <ClCompile Include="..\..\Src\Game\PlayerController.cpp" />
     <ClCompile Include="..\..\Src\Game\SceneLoader.cpp" />
     <ClCompile Include="..\..\Src\Game\ShipController.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="..\..\Src\Game\json.hpp" />
     <ClInclude Include="..\..\Src\Game\MainMenuManager.h" />
     <ClInclude Include="..\..\Src\Game\Messages.h" />
+    <ClInclude Include="..\..\Src\Game\PauseMenuManager.h" />
     <ClInclude Include="..\..\Src\Game\PlayerController.h" />
     <ClInclude Include="..\..\Src\Game\SceneLoader.h" />
     <ClInclude Include="..\..\Src\Game\ShipController.h" />
