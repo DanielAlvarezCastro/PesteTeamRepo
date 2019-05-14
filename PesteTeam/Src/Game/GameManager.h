@@ -1,5 +1,7 @@
 #pragma once
 #include <BehaviourComponent.h>
+#include <SoundManager.h>
+
 class GameManager : public BehaviourComponent
 {
 private:
@@ -10,6 +12,7 @@ private:
 	float nextLevelWaitTime;
 	float nextLevelTimer;
 	bool victory;
+
 public:
 	GameManager(GameObject* go, int _maxLevel, float _nextLevelWaitTime);
 	virtual void Update(float t);

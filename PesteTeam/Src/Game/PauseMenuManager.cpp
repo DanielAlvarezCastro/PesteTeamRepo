@@ -41,6 +41,9 @@ void PauseMenuManager::Update(float t)
 			else{
 				MainApp::instance()->getCurrentScene()->hideGUI();
 				GameSceneManager::instance()->ReturnToScene("MainMenu");
+
+				SoundManager::instance()->GetEngine()->stopAllSounds();
+				SoundManager::instance()->PlaySound2D("SynthSong0.mp3", true, false);
 			}
 		}
 	}

@@ -24,18 +24,30 @@ void GameManager::Update(float t)
 			std::string sceneName;
 			sceneName = "Scene" + to_string(currentLevel);
 			GameSceneManager::instance()->ChangeToNewScene(sceneName);
+
+			SoundManager::instance()->GetEngine()->stopAllSounds();
+			if (currentLevel % 2 == 0)
+				SoundManager::instance()->PlaySound2D("SynthSong2.mp3", true, false);
+			else
+				SoundManager::instance()->PlaySound2D("SynthSong1.mp3", true, false);
 		}
 	}
 	else if (GameOver) {
 		nextLevelTimer -= t;
 		if (nextLevelTimer <= 0) {
 			GameSceneManager::instance()->ReturnToScene("MainMenu");
+
+			SoundManager::instance()->GetEngine()->stopAllSounds();
+			SoundManager::instance()->PlaySound2D("SynthSong0.mp3", true, false);
 		}
 	}
 	else if (victory) {
 		nextLevelTimer -= t;
 		if (nextLevelTimer <= 0) {
 			GameSceneManager::instance()->ReturnToScene("MainMenu");
+
+			SoundManager::instance()->GetEngine()->stopAllSounds();
+			SoundManager::instance()->PlaySound2D("SynthSong0.mp3", true, false);
 		}
 	}
 
@@ -47,7 +59,6 @@ void GameManager::Update(float t)
 
 void GameManager::reciveMsg(Message * msg)
 {
-	
 	//Activa el booleano que activa la cuenta atrás para cambiar de escena
 	if (msg->id == "MISSION_ACCOMPLISHED") {
 		GameOver = false;
@@ -61,6 +72,7 @@ void GameManager::reciveMsg(Message * msg)
 			nextLevel = true;
 		}
 	}
+
 	else if (msg->id == "GAME_OVER")
 	{//Cuando reciba el mensaje de que el juego ha terminado 
 	//Activa el GUI de GAME_OVER y su booleano
