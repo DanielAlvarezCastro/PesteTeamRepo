@@ -78,14 +78,14 @@
 		},
 		{
 			"Name" : "Building1",
-			"Type" : "Building1",
-			"Mesh" : "Building1.mesh",
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
 			"Position" : [-300,0,-500]
 		},
 		{
 			"Name" : "Building2",
-			"Type" : "Building2",
-			"Mesh" : "Building2.mesh",
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
 			"Position" : [300,0,-500]
 		},
 		{
