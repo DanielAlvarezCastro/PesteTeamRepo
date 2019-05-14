@@ -20,6 +20,7 @@ private:
 	//controladores para la sobrecarga
 	float maxOverload = 10,
 		cOverload = 0;
+	float ovRechargeMultiplier = 1.0;
 	bool overloaded = false;
 	std::string shipName_;
 	std::string bulletMeshName;
@@ -29,7 +30,7 @@ private:
 	std::vector<BulletBehaviour*> bComponents_;
 
 public:
-	ShotBehaviour(GameObject* gameObject, std::string shipName, int damage);
+	ShotBehaviour(GameObject* gameObject, std::string shipName, int damage, int maxOverload_, float shotCD_, float ovRechargeMultiplier_);
 	virtual ~ShotBehaviour();
 
 	virtual void Update(float t);

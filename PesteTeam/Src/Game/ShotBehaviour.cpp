@@ -29,7 +29,8 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 	}
 }
 
-ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, int _damage) : BehaviourComponent(gameObject), shipName_(shipName), damage(_damage)
+ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, int _damage, int maxOverload_, float shotCD, float ovRechargeMultiplier_) 
+	: BehaviourComponent(gameObject),shipName_(shipName), damage(_damage), cooldown(shotCD), maxOverload(maxOverload_), ovRechargeMultiplier(ovRechargeMultiplier_)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
@@ -44,7 +45,7 @@ ShotBehaviour::~ShotBehaviour()
 void ShotBehaviour::Update(float t)
 {
 	if (overloaded) {
-		cOverload -= t;
+		cOverload -= t*ovRechargeMultiplier;
 		//cout << cOverload << endl;
 		if (cOverload <= 0) {
 			cout << "Ya puedo volver a disparar" << endl;

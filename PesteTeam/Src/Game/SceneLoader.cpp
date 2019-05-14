@@ -346,7 +346,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	ShipController* sc = new ShipController(Nave, 200, playerShip, 1.0, 1400, 1900);
 	scene->addComponent(sc);
 
-	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip, 10);
+	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip, 10, 10, (1.0/7.0), 1.0);
 	scene->addComponent(sb);
 
 	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
@@ -618,8 +618,11 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		std::string rName = object_json["RightPivot"];
 		GameObject* rPivot = scene->getGameObject(rName);
 
-		int damage = object_json["Damage"];
-		ShotBehaviour* sb = new ShotBehaviour(go, playerShip, shipStats[1]*damage);
+		int damage = object_json["Damage"],
+			maxOv = object_json["MaxOverload"];
+		float shotCD = object_json["ShootCooldown"],
+			ovRecharge = object_json["OverloadRechargeMultiplier"];
+		ShotBehaviour* sb = new ShotBehaviour(go, playerShip, shipStats[1]*damage, maxOv, shotCD, ovRecharge);
 		scene->addComponent(sb);
 	}
 	else if (componentName == "TargetController") {
