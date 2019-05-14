@@ -52,8 +52,6 @@ bool GameSceneManager::LoadScene(string sceneName)
 		InitSceneMsg msg;
 		escena->reciveMsg(&msg);
 	}
-
-	
 }
 //Borra la escena actual y carga una nueva
 void GameSceneManager::ChangeToNewScene(string nextScene)

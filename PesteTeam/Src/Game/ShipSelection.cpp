@@ -35,16 +35,10 @@ void ShipSelection::shipsAnimation()
 void ShipSelection::selectShip()
 {
 	GameSceneManager::instance()->setPlayerShip(shipNames[state], shipStats[state]);
-	//GameSceneManager::instance()->LoadScene("Scene1");
 	GameSceneManager::instance()->LoadScene("Scene1");
-	
 
-	int rnd = rand() % 2;
 	SoundManager::instance()->GetEngine()->stopAllSounds();
-	if (rnd == 0)
-		SoundManager::instance()->PlaySound2D("SynthSong1.mp3", true, false);
-	else
-		SoundManager::instance()->PlaySound2D("SynthSong2.mp3", true, false);
+	SoundManager::instance()->PlaySound2D("SynthSong1.mp3", true, false);
 }
 
 void ShipSelection::addShipName(string name)
