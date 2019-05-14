@@ -6,7 +6,7 @@
 PlayerController::PlayerController(GameObject* gameObject, float _normalSpeed) : BehaviourComponent(gameObject), normalSpeed(_normalSpeed)
 {
 	slowSpeed = normalSpeed / 2;
-	fastSpeed = normalSpeed * 2;
+	fastSpeed = normalSpeed * 4;
 	keyboard = MainApp::instance()->getKeyboard();
 	gameObject->setOrientation(euler);
 
@@ -63,7 +63,7 @@ void PlayerController::Update(float t)
 	if (keyboard->isKeyDown(OIS::KC_SPACE)) {
 		gameObject->translate(euler.forward() * fastSpeed * t);
 	}
-	else if (keyboard->isKeyDown(OIS::KC_C)) {
+	else if (keyboard->isKeyDown(OIS::KC_LSHIFT)) {
 		gameObject->translate(euler.forward() * slowSpeed * t);
 	}
 	else {

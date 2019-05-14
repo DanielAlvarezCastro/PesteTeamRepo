@@ -159,256 +159,6 @@ bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
 //Escenas de prueba para meterlas desde c�digo aqu�
 bool SceneLoader::loadTestScene(Scene* scene)
 {
-	Physics::getInstance()->initDebuger(scene->getSceneManager());
-	//Physics::getInstance()->setDebugState(true);
-
-	GameObject* pointer = new GameObject();
-	pointer->createEmptyEntity("Pointer", scene);
-	pointer->setPosition(Vec3(0, 40, 0));
-	pointer->setDirection(Vec3(0, 0, -1));
-	scene->addGameObject(pointer);
-
-	GameObject* Nave = new GameObject();
-	Nave->createEntity(playerShip + ".mesh", "Player", scene);
-	Nave->setScale(Vec3(3, 3, 3));
-	
-	Nave->asingFather(pointer);
-	Nave->setPosition(Vec3(-1, 0, 0));
-	scene->addGameObject(Nave);
-	RigidBody* rbNave = new RigidBody(Nave, "Nave", 5, true);
-	scene->addComponent(rbNave);
-
-	GameObject* nearTarget = new GameObject();
-	nearTarget->createEmptyEntity("nearTarget", scene);
-	nearTarget->asingFather(pointer);
-	nearTarget->setPosition(Vec3(0, 0, -100));
-	scene->addGameObject(nearTarget);
-
-	GameObject* farTarget = new GameObject();
-	farTarget->createEmptyEntity("farTarget", scene);
-	farTarget->asingFather(pointer);
-	farTarget->setPosition(Vec3(0, 0, -200));
-	scene->addGameObject(farTarget);
-
-
-	GameObject* pivot = new GameObject();
-	pivot->createEmptyEntity("Pivot", scene);
-	pivot->setScale(Vec3(0.02, 0.02, 0.02));
-	pivot->asingFather(pointer);
-	pivot->setPosition(Vec3(0, 0, -50));
-	scene->addGameObject(pivot);
-
-	GameObject* pivot1 = new GameObject();
-	pivot1->createEmptyEntity("Pivot1", scene);
-	pivot1->asingFather(pointer);
-	pivot1->setPosition(Vec3(7, 0, -15));
-	pivot1->setDirection(Vec3(0, 0, -1));
-	scene->addGameObject(pivot1);
-
-	GameObject* pivot2 = new GameObject();
-	pivot2->createEmptyEntity("Pivot2", scene);
-	pivot2->asingFather(pointer);
-	pivot2->setPosition(Vec3(-7, 0, -15));
-	pivot2->setDirection(Vec3(0, 0, -1));
-	scene->addGameObject(pivot2);
-
-	GameObject* cubito = new GameObject();
-	cubito->createEntity("cube.mesh", "Cubito", scene);
-	cubito->setScale(Vec3(0.5, 0.5, 0.5));
-	cubito->setPosition(Vec3(10, 80, -15));
-	RigidBody* rb = new RigidBody(cubito, "Cubito", 0.0001);
-	rb->setCollisionCallback(OnCuboCollision);
-	//cubito->addRigidbody(rb);
-	scene->addComponent(rb);
-
-	GameObject* edificio1 = new GameObject();
-	edificio1->createEntity("Building1.mesh", "Edificio1", scene);
-	edificio1->setScale(Vec3(5, 5, 5));
-	edificio1->setPosition(Vec3(-300, 0, -500));
-
-	RigidBody* rbBuild1 = new RigidBody(edificio1, "Edificio1");
-	rbBuild1->setOffset(0, edificio1->getBoundingBox().y / 2);
-	scene->addComponent(rbBuild1);
-
-
-	GameObject* turretBase = new GameObject();
-	turretBase->createEntity("TurretBase.mesh", "TurretBase", scene);
-	turretBase->setScale(Vec3(20, 20, 20));
-	turretBase->setPosition(Vec3(0, 0, -400));
-
-	GameObject* turret = new GameObject();
-	turret->createEntity("Turret.mesh", "Turret", scene);
-	turret->setScale(Vec3(20, 20, 20));
-	turret->setPosition(Vec3(0, 40, -400));
-	turret->lookAt(Vec3(-1, 0, 0));
-	RigidBody* rbt = new RigidBody(turret, "R_Turret", 5, true);
-	scene->addComponent(rbt);
-
-	TurretBehaviour* tB = new TurretBehaviour(turret, pointer);
-	scene->addComponent(tB);
-	EnemyShoot* tBEH = new EnemyShoot(turret, enemyType::groundTurret, pointer, 10,450,  "EnemyBullet.mesh", 1.6);
-	scene->addComponent(tBEH);
-
-	GameObject* pivotT1 = new GameObject();
-	pivotT1->createEmptyEntity("PivotT1", scene);
-	//como pilla la escala del padre la dividimos para dejarla a niveles globales
-	pivotT1->setScale(Vec3((1/turret->getScale().x)*0.05,( 1/turret->getScale().y)*0.05, (1/turret->getScale().z)*0.05));
-	pivotT1->asingFather(turret);
-	pivotT1->setPosition(Vec3(0.45, 0, -2.5));
-	scene->addGameObject(pivotT1);
-
-	GameObject* pivotT2 = new GameObject();
-	pivotT2->createEmptyEntity("PivotT2", scene);
-	pivotT2->setScale(Vec3((1 / turret->getScale().x)*0.05, (1 / turret->getScale().y)*0.05, (1 / turret->getScale().z)*0.05));
-	pivotT2->asingFather(turret);
-	pivotT2->setPosition(Vec3(-0.45, 0, -2.5));
-	scene->addGameObject(pivotT2);
-
-
-
-	GameObject* flyer = new GameObject();
-	flyer->createEntity("Mogo.mesh", "Flyer1", scene);
-	flyer->setScale(Vec3(1.5, 1.5, 1.5));
-	flyer->setPosition(Vec3(0, 200, -400));
-	RigidBody* rbt2 = new RigidBody(flyer, "R_Flyer", 5, true);
-	scene->addComponent(rbt2);
-
-	GameObject* pivotF1 = new GameObject();
-	pivotF1->createEmptyEntity("PivotF1", scene);
-	pivotF1->setScale(Vec3((1 / flyer->getScale().x*0.25), (1 / flyer->getScale().y*0.25), (1 / flyer->getScale().z*0.25)));
-	pivotF1->asingFather(flyer);
-	pivotF1->setPosition(Vec3(0, 0, -40));
-	scene->addGameObject(pivotF1);
-
-	EnemyShoot* FES = new EnemyShoot(flyer, enemyType::Flyer, pointer, 10, 500, "EnemyBullet.mesh", 2.4);
-	scene->addComponent(FES);
-
-	TurretBehaviour* tb2 = new TurretBehaviour(flyer, pointer);
-	scene->addComponent(tb2);
-
-	FlyerBehaviour* fb1 = new FlyerBehaviour(flyer, pointer, FlyerRoute::YCircular, 100, 25);
-	scene->addComponent(fb1);
-
-	EnemyBehaviour* eb1 = new EnemyBehaviour(turret, 40);
-	scene->addComponent(eb1);
-
-	EnemyBehaviour* eb2 = new EnemyBehaviour(flyer, 40);
-	scene->addComponent(eb2);
-
-	GameObject* enemyManager = new GameObject();
-	EnemyManager* em = new EnemyManager(enemyManager);
-	em->addEnemy(eb1);
-	em->addEnemy(eb2);
-	scene->addComponent(em);
-
-	scene->addGameObject(enemyManager);
-	scene->addGameObject(turret);
-	scene->addGameObject(turretBase);
-	scene->addGameObject(edificio1);
-	scene->addGameObject(cubito);
-
-	scene->addGameObject(flyer);
-
-	Ogre::Camera* mCamera = scene->getSceneManager()->createCamera("MainCam");
-	mCamera->setNearClipDistance(5);
-	scene->addCamera(mCamera);
-	GameObject* cameraOb = new GameObject();
-	cameraOb->createEmptyEntity("MainCam", scene);
-	cameraOb->attachCamera(mCamera);
-	cameraOb->asingFather(pointer);
-	cameraOb->setPosition(Vec3(0, 0, 40));
-
-	scene->addGameObject(cameraOb);
-
-	//Set del viewport
-	MainApp::instance()->setupViewport(scene->getCamera());
-
-	Ogre::Light* luz = scene->getSceneManager()->createLight("Luz");
-	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz->setDiffuseColour(.75, .75, .75);
-	
-
-	scene->getSceneManager()->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
-
-
-	
-
-
-
-	GameObject* l1Ob = new GameObject();
-	l1Ob->createEmptyEntity("mLight", scene);
-	l1Ob->attachLight(luz);
-	scene->addGameObject(l1Ob);
-
-	PlayerController* pc = new PlayerController(pointer,60);
-	scene->addComponent(pc);
-
-	ShipController* sc = new ShipController(Nave, 200, playerShip, 1.0, 1400, 1900);
-	scene->addComponent(sc);
-
-	ShotBehaviour* sb = new ShotBehaviour(pointer, playerShip, 10, 10, (1.0/7.0), 1.0);
-	scene->addComponent(sb);
-
-	CameraMovement* cM = new CameraMovement(cameraOb, pointer, pivot);
-	scene->addComponent(cM);
-	   
-	GameObject* planeOb = new GameObject();
-	planeOb->createEntity("FloorGrid.mesh", "Floor", scene);
-	//planeOb->setMaterial("Test/FloorTile");
-	planeOb->setScale(Vec3(10, 10, 10));
-	planeOb->setPosition(Vec3(0, 0,0));
-	scene->addGameObject(planeOb);
-
-
-	GameObject* mountains = new GameObject();
-	mountains->createEntity("Mountains.mesh", "Mountains", scene);
-	//planeOb->setMaterial("Test/FloorTile");
-	mountains->setScale(Vec3(10, 10, 10));
-	mountains->setPosition(Vec3(0, -50, 0));
-	scene->addGameObject(mountains);
-
-	GUIManager::instance()->initScene(scene);
-	
-	TargetController* ftc = new TargetController(farTarget, mCamera, "SmallBlueSight.png","SmallRedSight.png","farSight",30, 30);
-	TargetController* ntc = new TargetController(nearTarget, mCamera, "BigBlueSight.png", "BigRedSight.png", "nearSight.png", 60, 60);
-	scene->addComponent(ftc);
-	scene->addComponent(ntc);
-
-	MyGUI::ImageBox* b = GUIManager::instance()->createImage("HealthBarBlue.png", 340, 20, 400, 40, "ImageBox", "HealthBar");
-	scene->addGUIObject(b);
-	MyGUI::ImageBox* b2 = GUIManager::instance()->createImage("HealthBarFront.png", 340, 20, 400, 40, "ImageBox", "HealthBarFront");
-	scene->addGUIObject(b2);
-
-
-
-	MyGUI::ImageBox* g = GUIManager::instance()->createImage("GameOver.png", 0, 0, 1080, 720, "ImageBox", "GameOver");
-	g->setVisible(false);
-	scene->addGUIObject(g);
-	MyGUI::ImageBox* g2 = GUIManager::instance()->createImage("MissionAccomplished.png", 0, 0, 1080, 720, "ImageBox", "MissionAccomplished");
-	g2->setVisible(false);
-	scene->addGUIObject(g2);
-
-
-
-	GameObject* guiOB = new GameObject();
-	guiOB->createEmptyEntity("guiOb", scene);
-	scene->addGameObject(guiOB);
-
-	GameGUI* GGUI = new GameGUI(guiOB, 200, 10);
-
-	scene->addComponent(GGUI);
-
-
-	GameObject* gameManagerOb = new GameObject();
-	gameManagerOb->createEmptyEntity("gameManagerOb", scene);
-	scene->addGameObject(gameManagerOb);
-
-	GameManager* GM = new GameManager(gameManagerOb, 3, 5.0);
-
-	scene->addComponent(GM);
-	
-
-	scenesMap.insert(pair<std::string, Scene*>("TestScene", scene));
 
 
 	return true;
@@ -602,11 +352,13 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		scene->addComponent(cM);
 	}
 	else if (componentName == "ShipController") {
+		//Las naves tienen una vida base, y a partir de ahí aumenta según los stats de la anve
+		int baseHealth = object_json["BaseHealth"];
 		int health = object_json["Health"];
 		float rollingC = object_json["RollingCooldown"];
 		int WZL = object_json["WarningZoneLength"];
 		int DZL = object_json["DeadZoneLength"];
-		ShipController* sc = new ShipController(go, shipStats[0]*health, playerShip, rollingC, WZL, DZL);
+		ShipController* sc = new ShipController(go, baseHealth + shipStats[0]*health, playerShip, rollingC, WZL, DZL);
 
 		scene->addComponent(sc);
 	}
@@ -622,7 +374,8 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 			maxOv = object_json["MaxOverload"];
 		float shotCD = object_json["ShootCooldown"],
 			ovRecharge = object_json["OverloadRechargeMultiplier"];
-		ShotBehaviour* sb = new ShotBehaviour(go, playerShip, shipStats[1]*damage, maxOv, shotCD, ovRecharge);
+		float bLifeTime = object_json["BLifeTime"];
+		ShotBehaviour* sb = new ShotBehaviour(go, playerShip, shipStats[1]*damage, maxOv, shotCD, ovRecharge, bLifeTime);
 		scene->addComponent(sb);
 	}
 	else if (componentName == "TargetController") {
@@ -649,7 +402,8 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 			type = enemyType::groundTurret;
 		}
 		else type = enemyType::Flyer;
-		EnemyShoot* FES = new EnemyShoot(go, type, target,damage, range, bulletMesh,cd);
+		float bLifeTime = object_json["BLifeTime"];
+		EnemyShoot* FES = new EnemyShoot(go, type, target,damage, range, bulletMesh,cd, bLifeTime);
 		scene->addComponent(FES);
 	}
 	else if (componentName == "TurretBehaviour") {
@@ -754,9 +508,10 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		scene->addComponent(em);
 	}
 	else if (componentName == "GameGUI") {
+		int baseHealth = object_json["BaseHealth"];
 		int fH = object_json["Health"];
 		int fO = object_json["Overload"];
-		GameGUI* GG = new GameGUI(go, shipStats[0] * fH, fO);
+		GameGUI* GG = new GameGUI(go, baseHealth +shipStats[0] * fH, fO);
 		scene->addComponent(GG);
 	}
 	else if (componentName == "GameManager") {

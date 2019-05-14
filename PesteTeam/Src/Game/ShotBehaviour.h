@@ -21,6 +21,7 @@ private:
 	float maxOverload = 10,
 		cOverload = 0;
 	float ovRechargeMultiplier = 1.0;
+	float bLifeTime;
 	bool overloaded = false;
 	std::string shipName_;
 	std::string bulletMeshName;
@@ -30,7 +31,7 @@ private:
 	std::vector<BulletBehaviour*> bComponents_;
 
 public:
-	ShotBehaviour(GameObject* gameObject, std::string shipName, int damage, int maxOverload_, float shotCD_, float ovRechargeMultiplier_);
+	ShotBehaviour(GameObject* gameObject, std::string shipName, int damage, int maxOverload_, float shotCD_, float ovRechargeMultiplier_, float _bLifeTime);
 	virtual ~ShotBehaviour();
 
 	virtual void Update(float t);

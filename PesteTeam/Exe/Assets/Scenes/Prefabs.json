@@ -21,7 +21,8 @@
 						 },	
 						{
 							"Name" : "ShipController",
-							"Health" : 50,
+							"BaseHealth" : 100,
+							"Health" : 30,
 							"RollingCooldown" : 1.0,
 							"WarningZoneLength" : 1400,
 							"DeadZoneLength" : 1900
@@ -131,7 +132,8 @@
 					"Damage" : 2,
 					"MaxOverload" : 10,
 					"ShootCooldown" : 0.14285,
-					"OverloadRechargeMultiplier" : 3.0
+					"OverloadRechargeMultiplier" : 3.0,
+					"BLifeTime" : 1.5
 				}
             ]
 		},		
@@ -224,7 +226,8 @@
 					"EnemyType" : "GroundTurret",
 					"Damage" : 5,
 					"Range" : 450,
-					"ShootCd" : 1.6
+					"ShootCd" : 1.6,
+					"BLifeTime" : 1.5
 				 },
 				 {
 					"Name" : "Rigidbody",
@@ -272,7 +275,8 @@
 					"BulletMesh" : "EnemyBullet.mesh",
 					"Damage" : 10,
 					"Range" : 600,
-					"ShootCd" : 2.4
+					"ShootCd" : 2.4,
+					"BLifeTime" : 1.5
 				 },
 				 {
 					"Name" : "EnemyBehaviour",
@@ -324,7 +328,8 @@
 			"Components" : [
 				 {
 					"Name" : "GameGUI",
-					"Health" : 50,
+					"BaseHealth" : 100,
+					"Health" : 30,
 					"Overload" : 10
 				 }		 
 			]

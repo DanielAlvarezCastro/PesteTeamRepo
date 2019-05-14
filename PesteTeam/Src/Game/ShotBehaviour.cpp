@@ -12,7 +12,6 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 {	
 	//si tiene rigidbody
 	if (other->getRigidBody() != nullptr && other->isActive() && one->isActive()) { 
-		//std::cout << "Soy una bala y he chocado" << std::endl;
 		one->setActive(false);
 		
 		Ogre::Vector3 pos = one->getPosition();
@@ -24,13 +23,17 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 
 	//si es un objeto con comportamiento procesa el choque
 	if (other->getBComponents().size() > 0) { 
-		BulletCollideEntity Msg(other->getPosition(), other->getName());
+		
+
+		int dmg = static_cast<BulletBehaviour*>(one->getBComponents()[0])->getDamage();
+		DownLifeMsg Msg(dmg, other->getName());
+		//Si la bala choca con una entdiad manda mensaje a toda la escena con el nombre del enemy
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }
 
-ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, int _damage, int maxOverload_, float shotCD, float ovRechargeMultiplier_) 
-	: BehaviourComponent(gameObject),shipName_(shipName), damage(_damage), cooldown(shotCD), maxOverload(maxOverload_), ovRechargeMultiplier(ovRechargeMultiplier_)
+ShotBehaviour::ShotBehaviour(GameObject* gameObject, std::string shipName, int _damage, int maxOverload_, float shotCD, float ovRechargeMultiplier_, float _bLifeTime)
+	: BehaviourComponent(gameObject),shipName_(shipName), damage(_damage), cooldown(shotCD), maxOverload(maxOverload_), ovRechargeMultiplier(ovRechargeMultiplier_), bLifeTime(_bLifeTime)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	scn = MainApp::instance()->getCurrentScene();
@@ -69,7 +72,6 @@ void ShotBehaviour::Update(float t)
 		cOverload+=cooldown;
 		UpdateOverloadBarMsg msg = UpdateOverloadBarMsg(cOverload);
 		sendSceneMsg(&msg);
-		//cout << cOverload << endl;
 		if (cOverload >= maxOverload) {
 			cout << "Sobrecalentado, volveré a poder disparar en: " << maxOverload << endl;
 			overloaded = true;
@@ -97,15 +99,17 @@ void ShotBehaviour::reciveMsg(Message * msg)
 		aux->setVolume(0.8);
 		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, bulletParticleCollisionName, 1.0f);
 	}
-	else if (msg->id == "BULLET_COLLIDE_ENTITY") {
-		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
-		if (bce->name == "PointerPlayer") {
-			
-			DownLifeMsg Msg(damage, bce->name);
-			sendSceneMsg(&Msg);
-		}
-		
-	}
+	//else if (msg->id == "BULLET_COLLIDE_ENTITY") {
+	//	BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
+	//	//Si recibe el mensaje de colision con entidad y 
+	//	//el objeto no es el player, manda mensaje de bajar vida con el damage del player y el nombre del enemigo
+	//	if (bce->type == "Enemy") {
+	//		
+	//		DownLifeMsg Msg(damage, bce->name);
+	//		sendSceneMsg(&Msg);
+	//	}
+	//	
+	//}
 }
 
 void ShotBehaviour::getBullet(int id)
@@ -166,7 +170,7 @@ void ShotBehaviour::situateBullet(GameObject* b, int id, bool created, int i)
 	if (created && i >= 0) 
 		bComponents_[i]->resetValues(pos, dir);
 	else {
-		BulletBehaviour* bh = new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) BulletBehaviour(b, pos, dir);
+		BulletBehaviour* bh = new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) BulletBehaviour(b, pos, dir, damage,bLifeTime);
 		scn->addComponent(bh);
 		bComponents_.push_back(bh);
 	}

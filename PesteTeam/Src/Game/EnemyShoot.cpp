@@ -7,22 +7,26 @@ void OnEnemyBulletCollision(GameObject* one, GameObject* other, std::vector<btMa
 {
 	//si tiene rigidbody
 	if (other->getRigidBody() != nullptr  && other->getRigidBody()->isActive() && other->isActive() && one->isActive()) {
-		//std::cout << "Soy una bala enemiga y he chocado" << std::endl;
 		one->setActive(false);
 
 		Ogre::Vector3 pos = one->getPosition();
 		MainApp::instance()->getParticleManager()->createParticle(pos, "EnemyBulletCollision", 1.0f);
 	}
 
-	//si es un objeto con comportamiento y con rigidbody activo procesa el choque
+	//si es un objeto con comportamiento y con rigidbody activo procesa el choque	
 	if (other->getBComponents().size() > 0 && other->getRigidBody()!=nullptr && other->getRigidBody()->isActive()) {
-		BulletCollideEntity Msg(other->getPosition(), other->getName());
+		//Si la bala choca manda mensaje a toda la escena con el nombre de la entidad en este caso sería el player
+
+		int dmg = static_cast<BulletBehaviour*>(one->getBComponents()[0])->getDamage();
+		DownLifeMsg Msg(dmg, other->getName());
+		//Si la bala choca con una entdiad manda mensaje a toda la escena con el nombre del enemy
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
+		
 	}
 }
 
-EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh, float shootCd)
-	: BehaviourComponent(go), type(type_), target(target_), bulletMeshName(bulletMesh), damage(_damage), range(_range), ShootCd(shootCd)
+EnemyShoot::EnemyShoot(GameObject* go, enemyType type_, GameObject* target_, int _damage, int _range, std::string bulletMesh, float shootCd, float _bLifeTime)
+	: BehaviourComponent(go), type(type_), target(target_), bulletMeshName(bulletMesh), damage(_damage), range(_range), ShootCd(shootCd), bLifeTime(_bLifeTime)
 {
 }
 
@@ -34,7 +38,6 @@ EnemyShoot::~EnemyShoot()
 }
 
 bool EnemyShoot::inRange() {
-	//gameObject->getGlobalPosition().getVector().
 	float distance =gameObject->getGlobalPosition().getVector().distance(target->getGlobalPosition().getVector());
 	return range >= distance;
 }
@@ -53,13 +56,6 @@ void EnemyShoot::Update(float t) {
 
 void EnemyShoot::reciveMsg(Message * msg)
 {
-	if (msg->id == "BULLET_COLLIDE_ENTITY") {
-		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
-		if (bce->name == gameObject->getName()) {
-			DownLifeMsg Msg(damage, bce->name);
-			sendSceneMsg(&Msg);
-		}
-	}
 }
 
 void EnemyShoot::shoot() {
@@ -133,7 +129,7 @@ void EnemyShoot::situateBullet(GameObject*b, int id, bool created, int i) {
 	if (created && i >= 0)
 		bulletComponents[i]->resetValues(b->getGlobalPosition(), dir);
 	else {
-		BulletBehaviour* bh = new BulletBehaviour(b, b->getGlobalPosition(), gameObject->getDirection());
+		BulletBehaviour* bh = new BulletBehaviour(b, b->getGlobalPosition(), gameObject->getDirection(), damage, bLifeTime);
 		bh->setVel(vel);
 		MainApp::instance()->getCurrentScene()->addComponent(bh);
 		bulletComponents.push_back(bh);

@@ -8,12 +8,6 @@ struct TiltCameraBackMsg : public Message
 
 	TiltCameraBackMsg(string id, Radian negativeRadian) :Message(id), radian(negativeRadian) {};
 };
-struct BulletCollideEntity : public Message
-{
-	string name;
-	Ogre::Vector3 pos;
-	BulletCollideEntity(Ogre::Vector3 position, string n, string id = "BULLET_COLLIDE_ENTITY") : Message(id), name(n), pos(position) {};
-};
 struct InitSceneMsg : public Message {
 	InitSceneMsg(string id = "INIT_SCENE") : Message(id) {};
 };

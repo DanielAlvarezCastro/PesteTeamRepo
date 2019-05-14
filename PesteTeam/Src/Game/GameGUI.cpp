@@ -16,6 +16,7 @@ GameGUI::GameGUI(GameObject* gameObject, int _fullHealth, int _fullOverload) : B
 	healthbarFullW = healthBar->getSize().width;
 	healthbarH = healthBar->getSize().height;
 	maxOverload = overloadBar->getSize().width;
+	overloadBar->setSize(0, overloadBar->getSize().height);
 }
 
 
