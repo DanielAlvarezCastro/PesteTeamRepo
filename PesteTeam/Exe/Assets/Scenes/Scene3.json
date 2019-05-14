@@ -78,174 +78,174 @@
 		},
 		{
 			"Name" : "Building1",
-			"Type" : "Building1",
-			"Mesh" : "Building1.mesh",
-			"Position" : [-450,0,-900]
+			"Type" : "Building3",
+			"Mesh" : "Building3.mesh",
+			"Position" : [0,0,-800]
 		},
 		{
 			"Name" : "Building2",
-			"Type" : "Building2",
-			"Mesh" : "Building2.mesh",
-			"Position" : [300,0,-1050]
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [150,0,600]
 		},
 		{
 			"Name" : "Building3",
-			"Type" : "Building2",
-			"Mesh" : "Building3.mesh",
-			"Position" : [1200, 0, -1010]
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [-150,0,600]
 		},
 		{
 			"Name" : "Building4",
-			"Type" : "Building3",
-			"Mesh" : "Building3.mesh",
-			"Position" : [-1150, 0, -1300]
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [150,0,735]
 		},
 		{
 			"Name" : "Building5",
-			"Type" : "Building2",
-			"Mesh" : "Building2.mesh",
-			"Position" : [-1000, 0, -1000]
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [-150,0,735]
 		},
 		{
 			"Name" : "Building6",
 			"Type" : "Building4",
 			"Mesh" : "Building4.mesh",
-			"Position" : [-1350, 0, 300]
+			"Position" : [150,0,870]
 		},
 		{
 			"Name" : "Building7",
-			"Type" : "Building3",
-			"Mesh" : "Building3.mesh",
-			"Position" : [-1060, 0, 510]
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [-150,0,870]
 		},
 		{
 			"Name" : "Building8",
 			"Type" : "Building4",
 			"Mesh" : "Building4.mesh",
-			"Position" : [1000, 0, 350]
+			"Position" : [150,0,1005]
 		},
 		{
 			"Name" : "Building9",
-			"Type" : "Building3",
-			"Mesh" : "Building3.mesh",
-			"Position" : [1250, 0, 75]
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [-150,0,1005]
 		},
 		{
 			"Name" : "Building10",
 			"Type" : "Building4",
-			"Mesh" : "Building3.mesh",
-			"Position" : [1100, 0, -150]
+			"Mesh" : "Building4.mesh",
+			"Position" : [150,0,1140]
 		},
 		{
 			"Name" : "Building11",
-			"Type" : "Building2",
-			"Mesh" : "Building2.mesh",
-			"Position" : [-210, 0, 1110]
+			"Type" : "Building4",
+			"Mesh" : "Building4.mesh",
+			"Position" : [-150,0,1140]
 		},
 		{
 			"Name" : "Building12",
-			"Type" : "Building3",
-			"Mesh" : "Building3.mesh",
-			"Position" : [275, 0, 1290]
+			"Type" : "Building2",
+			"Mesh" : "Building2.mesh",
+			"Position" : [400,0,-800]
 		},
 		{
 			"Name" : "Building13",
-			"Type" : "Building4",
-			"Mesh" : "Building4.mesh",
-			"Position" : [0, 0, 1200]
+			"Type" : "Building2",
+			"Mesh" : "Building2.mesh",
+			"Position" : [-400,0,-800]
+		},
+		{
+			"Name" : "Building14",
+			"Type" : "Building1",
+			"Mesh" : "Building1.mesh",
+			"Position" : [800,0,1140]
+		},
+		{
+			"Name" : "Building15",
+			"Type" : "Building1",
+			"Mesh" : "Building1.mesh",
+			"Position" : [-800,0,1140]
 		},
 		{
 			"Name" : "Turret1",
 			"Type" : "Turret",
 			"Mesh" : "Turret.mesh",
-			"Position" : [300,140,-1050]
+			"Position" : [-10,20,600]
 		},
 		{
 			"Name" : "TurretBase1",
 			"Type" : "TurretBase",
 			"Mesh" : "TurretBase.mesh",
-			"Position" : [300,120,-1050]
+			"Position" : [-10,0,600]
 		},
 		{
 			"Name" : "Turret2",
 			"Type" : "Turret",
 			"Mesh" : "Turret.mesh",
-			"Position" : [-1150,380,-1300]
+			"Position" : [-10,20,850]
 		},
 		{
 			"Name" : "TurretBase2",
 			"Type" : "TurretBase",
 			"Mesh" : "TurretBase.mesh",
-			"Position" : [-1150,360,-1300]
+			"Position" : [-10,0,850]
 		},
 		{
 			"Name" : "Turret3",
 			"Type" : "Turret",
 			"Mesh" : "Turret.mesh",
-			"Position" : [-210, 140, 1110]
+			"Position" : [-10,20,1100]
 		},
 		{
 			"Name" : "TurretBase3",
 			"Type" : "TurretBase",
 			"Mesh" : "TurretBase.mesh",
-			"Position" : [-210,120,1110]
+			"Position" : [-10,0,1100]
 		},
 		{
 			"Name" : "Turret4",
 			"Type" : "Turret",
 			"Mesh" : "Turret.mesh",
-			"Position" : [275, 380, 1290]
+			"Position" : [-790,115,1140]
 		},
 		{
 			"Name" : "TurretBase4",
 			"Type" : "TurretBase",
 			"Mesh" : "TurretBase.mesh",
-			"Position" : [275, 360, 1290]
+			"Position" : [-790,95,1140]
 		},
 		{
 			"Name" : "Turret5",
 			"Type" : "Turret",
 			"Mesh" : "Turret.mesh",
-			"Position" : [-50, 380, 1200]
+			"Position" : [810,115,1140]
 		},
 		{
 			"Name" : "TurretBase5",
 			"Type" : "TurretBase",
 			"Mesh" : "TurretBase.mesh",
-			"Position" : [-50, 360, 1200]
-		},
-		{
-			"Name" : "Turret6",
-			"Type" : "Turret",
-			"Mesh" : "Turret.mesh",
-			"Position" : [50, 380, 1200]
-		},
-		{
-			"Name" : "TurretBase6",
-			"Type" : "TurretBase",
-			"Mesh" : "TurretBase.mesh",
-			"Position" : [50, 360, 1200]
+			"Position" : [810,95,1140]
 		},
 		{
 			"Name" : "Fly1",
 			"Type" : "Fly",
 			"Mesh" : "Fly.mesh",
-			"Position" : [0,200,-1200],
+			"Position" : [10, 250, -800],
 			"Components" : [
 				 {
 					"Name" : "FlyerBehaviour",
 					"Target" : "Pointer",
-					"Radius" : 200,
+					"Radius" : 250,
 					"Height" : 0,
-					"Route" : "ZCircular"
+					"Route" : "YCircular"
 				 }
 			 ]
 		},
 		{
 			"Name" : "Fly2",
 			"Type" : "Fly",
-			"Mesh" : "Fly.mesh",
-			"Position" : [-1350, 300, 300],
+			"Mesh" : "Mogo.mesh",
+			"Position" : [410, 100, -800],
 			"Components" : [
 				 {
 					"Name" : "FlyerBehaviour",
@@ -259,60 +259,15 @@
 		{
 			"Name" : "Fly3",
 			"Type" : "Fly",
-			"Mesh" : "Fly.mesh",
-			"Position" : [275, 250, 1000],
-			"Components" : [
-				 {
-					"Name" : "FlyerBehaviour",
-					"Target" : "Pointer",
-					"Radius" : 175,
-					"Height" : 0,
-					"Route" : "XCircular"
-				 }
-			 ]
-		},
-		{
-			"Name" : "Fly4",
-			"Type" : "Fly",
-			"Mesh" : "Fly.mesh",
-			"Position" : [0, 250, 1200],
+			"Mesh" : "Mugu.mesh",
+			"Position" : [-390, 100, -800],
 			"Components" : [
 				 {
 					"Name" : "FlyerBehaviour",
 					"Target" : "Pointer",
 					"Radius" : 250,
-					"Height" : 50,
-					"Route" : "Sinusoidal"
-				 }
-			 ]
-		},
-		{
-			"Name" : "Mugu1",
-			"Type" : "Fly",
-			"Mesh" : "Mugu.mesh",
-			"Position" : [-1150, 300, -1150],
-			"Components" : [
-				 {
-					"Name" : "FlyerBehaviour",
-					"Target" : "Pointer",
-					"Radius" : 0,
-					"Height" : 200,
-					"Route" : "Horizontal"
-				 }
-			 ]
-		},
-		{
-			"Name" : "Mogo1",
-			"Type" : "Fly",
-			"Mesh" : "Mogo.mesh",
-			"Position" : [1200, 350, -1010],
-			"Components" : [
-				 {
-					"Name" : "FlyerBehaviour",
-					"Target" : "Pointer",
-					"Radius" : 0,
-					"Height" : 100,
-					"Route" : "Vertical"
+					"Height" : 0,
+					"Route" : "YCircular"
 				 }
 			 ]
 		},
