@@ -1,9 +1,9 @@
 particle_system BarrelRoll
 {
-	material StarRaveNeon1
-	particle_width 0.152940002441406
-	particle_height 0.154119995117188
-	quota 500
+	material StarRaveBullet
+	particle_width 0.25
+	particle_height 0.25
+	quota 50
 	cull_each false
 	sorted false
 	local_space false
@@ -15,20 +15,18 @@ particle_system BarrelRoll
 	point_rendering false
 	accurate_facing false
 
-	emitter Point
+emitter Point
 	{
 		position 0.0 0.0 0.0
 		direction 1.0 0.0 0.0
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 1
 		time_to_live_max 3
 		duration_min 0
 		duration_max 0
-		repeat_delay_min 0
-		repeat_delay_max 0
+		repeat_delay 3
 		colour_range_start 1 1 1 1
 		colour_range_end 0.666667 0 0 1
 	}
@@ -36,11 +34,10 @@ particle_system BarrelRoll
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction 0.945459604263306 0.325739324092865 0.0
+		direction 1.0 -1.0 0.0
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 1
 		time_to_live_max 3
 		duration_min 0
@@ -54,11 +51,10 @@ particle_system BarrelRoll
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction 0.0 1.0 0.0
+		direction 0.0 -1.0 0.0
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 3
 		time_to_live_max 3
 		duration_min 0
@@ -72,11 +68,10 @@ particle_system BarrelRoll
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction 0.792449772357941 0.609937250614166 0.0
+		direction -1.0 -1.0 0.0
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 1
 		time_to_live_max 3
 		duration_min 0
@@ -90,11 +85,10 @@ particle_system BarrelRoll
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction -0.325739324092865 0.945459604263306 0.0
+		direction -1.0 0.0 0.3
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 1
 		time_to_live_max 3
 		duration_min 0
@@ -108,11 +102,10 @@ particle_system BarrelRoll
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction -0.70710676908493 0.70710676908493 0.0
+		direction -1.0 1.0 0.6
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 1
 		time_to_live_max 3
 		duration_min 0
@@ -126,11 +119,10 @@ particle_system BarrelRoll
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction 0.945459604263306 -0.325739324092865 0.0
+		direction 0.0 1.0 0.0
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 1
 		time_to_live_max 3
 		duration_min 0
@@ -144,11 +136,10 @@ particle_system BarrelRoll
 	emitter Point
 	{
 		position 0.0 0.0 0.0
-		direction -0.51449579000473 -0.857492923736572 0.0
+		direction 1.0 1.0 0.0
 		angle 0
-		emission_rate 100
-		velocity_min -10
-		velocity_max 10
+		emission_rate 3
+		velocity 10
 		time_to_live_min 1
 		time_to_live_max 3
 		duration_min 0
@@ -159,8 +150,4 @@ particle_system BarrelRoll
 		colour_range_end 1 1 1 1
 	}
 
-	affector Scaler
-	{
-		rate -0.050
-	}
 }
