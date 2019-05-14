@@ -128,7 +128,10 @@
 					"Name" : "ShotBehaviour",
 					"LeftPivot" : "LeftGunPivot",
 					"RightPivot" : "RightGunPivot",
-					"Damage" : 2
+					"Damage" : 2,
+					"MaxOverload" : 10,
+					"ShootCooldown" : 0.14285,
+					"OverloadRechargeMultiplier" : 1.0
 				}
             ]
 		},		
