@@ -16,10 +16,15 @@ void GUIManager::createTextbox(string text, int x, int y, int w, int h, string s
 	t->setFontHeight(fontHeight);
 }
 
-MyGUI::ImageBox* GUIManager::createImage(string fileName, int x, int y, int w, int h, string skinName, string name)
+MyGUI::ImageBox* GUIManager::createImage(string fileName, int x, int y, int w, int h, string skinName, string name, string anchor)
 {
 	MyGUI::ImageBox* image = mGUI->createWidget<MyGUI::ImageBox>("ImageBox", MyGUI::IntCoord(x,y,w,h), MyGUI::Align::Default, "Main", name);
 	image->setImageTexture(fileName);
+	//Si queremos tomar el punto de referencia desde abajo de la pantalla
+	if (anchor == "DOWN") {
+		int wH = MainApp::instance()->getRenderWindow()->getHeight();
+		image->setPosition(x, wH-y);
+	}
 	return image;
 }
 

@@ -300,9 +300,13 @@ void SceneLoader::createGUIObject(json gui_json, Scene* scene)
 	if (gui_json.find("Visible") != gui_json.end()) {
 		visible = gui_json["Visible"];
 	}
+	std::string anchor = "UP";
+	if (gui_json.find("Anchor") != gui_json.end()) {
+		anchor = gui_json["Anchor"].get<std::string>();
+	}
 	if (guiType == "ImageBox") {
 		std::string source = gui_json["Src"].get<std::string>();
-		MyGUI::ImageBox* b = GUIManager::instance()->createImage(source, position[0], position[1], size[0], size[1], guiType, guiName);
+		MyGUI::ImageBox* b = GUIManager::instance()->createImage(source, position[0], position[1], size[0], size[1], guiType, guiName, anchor);
 		b->setVisible(visible);
 		scene->addGUIObject(b);
 	}
