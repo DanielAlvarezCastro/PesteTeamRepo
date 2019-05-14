@@ -9,6 +9,7 @@ private:
 	int maxLevel;
 	float nextLevelWaitTime;
 	float nextLevelTimer;
+	bool victory;
 public:
 	GameManager(GameObject* go, int _maxLevel, float _nextLevelWaitTime);
 	virtual void Update(float t);

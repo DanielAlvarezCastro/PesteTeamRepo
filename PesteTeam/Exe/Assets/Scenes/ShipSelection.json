@@ -34,7 +34,7 @@
 		{
 			"Name" : "ShipStats",
 			"Type" : "ImageBox",		
-			"Position" : [270,560],
+			"Position" : [270,620],
 			"Size" : [540,70],
 			"Src" : "SXRVengeanceStats.png"
 		}
