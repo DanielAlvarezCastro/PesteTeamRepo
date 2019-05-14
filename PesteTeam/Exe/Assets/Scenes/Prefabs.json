@@ -131,7 +131,7 @@
 					"Damage" : 2,
 					"MaxOverload" : 10,
 					"ShootCooldown" : 0.14285,
-					"OverloadRechargeMultiplier" : 1.0
+					"OverloadRechargeMultiplier" : 3.0
 				}
             ]
 		},		

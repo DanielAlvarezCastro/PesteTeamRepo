@@ -12,6 +12,8 @@ private:
 	int fullHealth;
 	int fullOverload;
 	int maxOverload;
+
+	bool overloadAux;
 	GUIManager* GUIMgr = nullptr;
 	MyGUI::ImageBox* healthBar = nullptr;
 	MyGUI::ImageBox* overloadBar = nullptr;

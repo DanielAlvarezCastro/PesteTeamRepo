@@ -43,6 +43,7 @@ void GameGUI::reciveMsg(Message * msg)
 	}
 	else if (msg->id == "OVERLOADED") {
 		OverloadedMsg* oMsg = static_cast<OverloadedMsg*>(msg);
+		overloadAux = oMsg->isOverloaded;
 		if (oMsg->isOverloaded)
 			overloaded->setVisible(true);
 		else overloaded->setVisible(false);
@@ -82,6 +83,9 @@ void GameGUI::reciveMsg(Message * msg)
 		warning->setVisible(false);
 		victory->setVisible(false);
 		GUIMgr->getImage("HealthBarFront")->setVisible(true);
+		GUIMgr->getImage("MaxOverloadFront")->setVisible(true);
+		overloadBar->setVisible(true);
+		overloaded->setVisible(overloadAux);
 	}
 	else if (msg->id == "VICTORY") {
 		missionA->setVisible(false);
