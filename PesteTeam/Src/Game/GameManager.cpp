@@ -30,7 +30,12 @@ void GameManager::Update(float t)
 		nextLevelTimer -= t;
 		if (nextLevelTimer <= 0) {
 			GameSceneManager::instance()->ReturnToScene("MainMenu");
-			//GameSceneManager::instance()->CloseScene();
+		}
+	}
+	else if (victory) {
+		nextLevelTimer -= t;
+		if (nextLevelTimer <= 0) {
+			GameSceneManager::instance()->ReturnToScene("MainMenu");
 		}
 	}
 
@@ -47,7 +52,9 @@ void GameManager::reciveMsg(Message * msg)
 	if (msg->id == "MISSION_ACCOMPLISHED") {
 		GameOver = false;
 		if (currentLevel == maxLevel) {
-
+			victory = true;
+			VictoryMsg msg;
+			sendSceneMsg(&msg);
 		}
 		else {
 			currentLevel++;
@@ -57,7 +64,7 @@ void GameManager::reciveMsg(Message * msg)
 	else if (msg->id == "GAME_OVER")
 	{//Cuando reciba el mensaje de que el juego ha terminado 
 	//Activa el GUI de GAME_OVER y su booleano
-		if (!nextLevel) {
+		if (!nextLevel && !victory) {
 			GameOverMsg* goMsg = static_cast<GameOverMsg*>(msg);
 			GameOver = true;
 			currentLevel = 1;

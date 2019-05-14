@@ -12,6 +12,7 @@ GameGUI::GameGUI(GameObject* gameObject, int _fullHealth, int _fullOverload) : B
 	gameOver = GUIMgr->getImage("GameOver");
 	missionA = GUIMgr->getImage("MissionAccomplished");
 	warning = GUIMgr->getImage("Warning");
+	victory = GUIMgr->getImage("Victory");
 	healthbarFullW = healthBar->getSize().width;
 	healthbarH = healthBar->getSize().height;
 	maxOverload = overloadBar->getSize().width;
@@ -47,7 +48,9 @@ void GameGUI::reciveMsg(Message * msg)
 		else overloaded->setVisible(false);
 	}
 	else if (msg->id == "MISSION_ACCOMPLISHED") {
-		missionA->setVisible(true);
+		if (!victory->isVisible()) {
+			missionA->setVisible(true);
+		}
 	}
 	else if (msg->id == "NEXT_LEVEL") {
 		GUIMgr->destroyWidget("NextLevel");
@@ -58,7 +61,7 @@ void GameGUI::reciveMsg(Message * msg)
 	{//Cuando reciba el mensaje de que el juego ha terminado 
 	//Activa el GUI de GAME_OVER y su booleano
 		//Si la misión no está cumplida entonces pierdes
-		if (!missionA->isVisible()) {
+		if (!missionA->isVisible() && !victory->isVisible()) {
 			gameOver->setVisible(true);
 		}
 	}
@@ -77,6 +80,11 @@ void GameGUI::reciveMsg(Message * msg)
 		gameOver->setVisible(false);
 		missionA->setVisible(false);
 		warning->setVisible(false);
+		victory->setVisible(false);
 		GUIMgr->getImage("HealthBarFront")->setVisible(true);
+	}
+	else if (msg->id == "VICTORY") {
+		missionA->setVisible(false);
+		victory->setVisible(true);
 	}
 }

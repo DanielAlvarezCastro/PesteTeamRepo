@@ -60,6 +60,14 @@
 			"Size" : [1080,720],
 			"Src" : "Warning.png",
 			"Visible" : false
+		},
+		{
+			"Name" : "Victory",
+			"Type" : "ImageBox",		
+			"Position" : [0,0],
+			"Size" : [1080,720],
+			"Src" : "Victory.png",
+			"Visible" : false
 		}
 	],
     "GameObjects": [

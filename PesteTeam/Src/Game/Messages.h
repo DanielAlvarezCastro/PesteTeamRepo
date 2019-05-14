@@ -56,6 +56,9 @@ struct GameOverMsg : public Message
 struct MissionAccomplishedMsg : public Message {
 	MissionAccomplishedMsg(string id = "MISSION_ACCOMPLISHED") : Message(id){}
 };
+struct VictoryMsg : public Message {
+	VictoryMsg(string id = "VICTORY") : Message(id) {}
+};
 struct NextLevelMsg : public Message
 {
 	NextLevelMsg(string id = "NEXT_LEVEL") : Message(id) {}

@@ -19,6 +19,7 @@ private:
 	MyGUI::ImageBox* gameOver = nullptr;
 	MyGUI::ImageBox* missionA = nullptr;
 	MyGUI::ImageBox* warning = nullptr;
+	MyGUI::ImageBox* victory = nullptr;
 public:
 	GameGUI(GameObject* gameObject, int _fullHealth, int _fullOverload);
 	virtual ~GameGUI();

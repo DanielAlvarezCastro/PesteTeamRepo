@@ -100,6 +100,7 @@ void ShotBehaviour::reciveMsg(Message * msg)
 	else if (msg->id == "BULLET_COLLIDE_ENTITY") {
 		BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
 		if (bce->name == "PointerPlayer") {
+			
 			DownLifeMsg Msg(damage, bce->name);
 			sendSceneMsg(&Msg);
 		}
