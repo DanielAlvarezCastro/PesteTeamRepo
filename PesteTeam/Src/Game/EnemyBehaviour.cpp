@@ -19,5 +19,12 @@ void EnemyBehaviour::Update(float t)
 		this->gameObject->setActive(false);
 		ISound* aux = SoundManager::instance()->PlaySound2D("Explotion.wav");
 		aux->setVolume(0.9);
+		
 	}
+}
+
+void EnemyBehaviour::hit(int value)
+{
+	life -= value; 
+	cout << life << endl;
 }

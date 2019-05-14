@@ -24,7 +24,7 @@ void EnemyManager::reciveMsg(Message* msg)
 		int i = 0;
 		bool found = false;
 		while(i < enemies_c.size() && !found) {
-			if (enemies_c[i]->getGameObject()->getName() == dlm->name)
+			if (enemies_c[i]->getGameObject()->getName() == dlm->name && enemies_c[i]->getGameObject()->isActive())
 			{
 				enemies_c[i]->hit(dlm->power);
 				found = true;

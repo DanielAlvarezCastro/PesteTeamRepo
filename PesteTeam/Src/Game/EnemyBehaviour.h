@@ -13,6 +13,6 @@ public:
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg) {};
 
-	void hit(int value) { life -= value; }
+	void hit(int value);
 };
 
