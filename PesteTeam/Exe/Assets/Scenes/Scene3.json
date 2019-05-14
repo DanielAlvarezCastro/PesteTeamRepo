@@ -17,14 +17,14 @@
 			"Src" : "HealthBarFront.png"
 		},		
 		{
-			"Name" : "AmmoRedBar",
+			"Name" : "OverloadBar",
 			"Type" : "ImageBox",		
 			"Position" : [440,65],
 			"Size" : [200,15],
 			"Src" : "AmmoRedBar.png"
 		},
 		{
-			"Name" : "AmmoBarFront",
+			"Name" : "MaxOverloadFront",
 			"Type" : "ImageBox",		
 			"Position" : [440,65],
 			"Size" : [200,15],

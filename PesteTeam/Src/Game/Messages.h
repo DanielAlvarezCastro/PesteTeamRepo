@@ -33,9 +33,17 @@ struct DownLifeMsg : public Message
 struct EnemyDeadMsg : public Message {
 	EnemyDeadMsg(string id = "ENEMY_DEAD") : Message(id) {};
 };
+struct OverloadedMsg : public Message {
+	bool isOverloaded;
+	OverloadedMsg(bool is, string id = "OVERLOADED") : Message(id), isOverloaded(is) {}
+};
 struct UpdateHealthBarMsg : public Message {
 	int currentHealth;
 	UpdateHealthBarMsg(int _currentHealth, string id = "UPDATE_HEALTHBAR") : Message(id), currentHealth(_currentHealth) {};
+};
+struct UpdateOverloadBarMsg : public Message {
+	float currentOverload;
+	UpdateOverloadBarMsg(float _currentOverload, string id = "UPDATE_OVERLOADBAR") : Message(id), currentOverload(_currentOverload) {};
 };
 struct BulletCollisionMsg : public Message {
 	Ogre::Vector3 pos;

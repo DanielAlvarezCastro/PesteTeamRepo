@@ -2,15 +2,19 @@
 
 
 
-GameGUI::GameGUI(GameObject* gameObject, int _fullHealth) : BehaviourComponent(gameObject), fullHealth(_fullHealth)
+GameGUI::GameGUI(GameObject* gameObject, int _fullHealth, int _fullOverload) : BehaviourComponent(gameObject), fullHealth(_fullHealth), fullOverload(_fullOverload)
 {
 	GUIMgr = GUIManager::instance();
 	healthBar = GUIMgr->getImage("HealthBar");
+	overloadBar = GUIMgr->getImage("OverloadBar");
+	overloaded = GUIMgr->getImage("Overloaded");
+	overloaded->setVisible(false);
 	gameOver = GUIMgr->getImage("GameOver");
 	missionA = GUIMgr->getImage("MissionAccomplished");
 	warning = GUIMgr->getImage("Warning");
 	healthbarFullW = healthBar->getSize().width;
 	healthbarH = healthBar->getSize().height;
+	maxOverload = overloadBar->getSize().width;
 }
 
 
@@ -30,6 +34,17 @@ void GameGUI::reciveMsg(Message * msg)
 		int currentH = uMsg->currentHealth;
 		int w = healthbarFullW*currentH / fullHealth;
 		healthBar->setSize(w, healthbarH);
+	}
+	else if (msg->id == "UPDATE_OVERLOADBAR") {
+		UpdateOverloadBarMsg* oMsg = static_cast<UpdateOverloadBarMsg*>(msg);
+		int w = maxOverload * oMsg->currentOverload / fullOverload;
+		overloadBar->setSize(w, overloadBar->getSize().height);
+	}
+	else if (msg->id == "OVERLOADED") {
+		OverloadedMsg* oMsg = static_cast<OverloadedMsg*>(msg);
+		if (oMsg->isOverloaded)
+			overloaded->setVisible(true);
+		else overloaded->setVisible(false);
 	}
 	else if (msg->id == "MISSION_ACCOMPLISHED") {
 		missionA->setVisible(true);

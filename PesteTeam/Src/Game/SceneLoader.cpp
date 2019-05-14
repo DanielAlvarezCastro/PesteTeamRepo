@@ -394,7 +394,7 @@ bool SceneLoader::loadTestScene(Scene* scene)
 	guiOB->createEmptyEntity("guiOb", scene);
 	scene->addGameObject(guiOB);
 
-	GameGUI* GGUI = new GameGUI(guiOB, 200);
+	GameGUI* GGUI = new GameGUI(guiOB, 200, 10);
 
 	scene->addComponent(GGUI);
 
@@ -755,7 +755,8 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 	}
 	else if (componentName == "GameGUI") {
 		int fH = object_json["Health"];
-		GameGUI* GG = new GameGUI(go, shipStats[0] * fH);
+		int fO = object_json["Overload"];
+		GameGUI* GG = new GameGUI(go, shipStats[0] * fH, fO);
 		scene->addComponent(GG);
 	}
 	else if (componentName == "GameManager") {

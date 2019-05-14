@@ -10,13 +10,17 @@ private:
 	int healthbarFullW;
 	int healthbarH;
 	int fullHealth;
+	int fullOverload;
+	int maxOverload;
 	GUIManager* GUIMgr = nullptr;
 	MyGUI::ImageBox* healthBar = nullptr;
+	MyGUI::ImageBox* overloadBar = nullptr;
+	MyGUI::ImageBox* overloaded = nullptr;
 	MyGUI::ImageBox* gameOver = nullptr;
 	MyGUI::ImageBox* missionA = nullptr;
 	MyGUI::ImageBox* warning = nullptr;
 public:
-	GameGUI(GameObject* gameObject, int _fullHealth);
+	GameGUI(GameObject* gameObject, int _fullHealth, int _fullOverload);
 	virtual ~GameGUI();
 	virtual void Update(float t);
 	virtual void reciveMsg(Message* msg);

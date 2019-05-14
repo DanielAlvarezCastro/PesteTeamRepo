@@ -239,61 +239,6 @@
 			 ]
 		},
 		{
-            "Name" : "TurretBase",
-            "Type" : "TurretBase",
-            "Mesh" : "TurretBase.mesh",
-			"Scale" : [10,10,10],
-			"Position" : [0,0,0]			
-        },
-		{
-            "Name" : "TurretCannon",
-            "Type" : "TurretCannon",
-            "Mesh" : "Turret.mesh",
-			"Scale" : [10,10,10],
-			"Position" : [0,20,0],
-			 "Childs" : [
-				{
-					"Name" : "PivotT1",
-					"Type" : "PivotT1",
-					"Mesh" : "None",
-					"Scale" : [1,1,1],
-					"Position" : [0.45,0,-2.5]
-				},
-				{
-					"Name" : "PivotT2",
-					"Type" : "PivotT2",
-					"Mesh" : "None",
-					"Scale" : [1,1,1],
-					"Position" : [-0.45,0,-2.5]
-				}
-			 ],
-			 "Components" : [
-				 {
-					"Name" : "TurretBehaviour",
-					"Target" : "Pointer"
-				 },
-				 {
-					"Name" : "EnemyShoot",
-					"Target" : "Pointer",
-					"BulletMesh" : "EnemyBullet.mesh",
-					"EnemyType" : "GroundTurret",
-					"Damage" : 10,
-					"Range" : 450,
-					"ShootCd" : 1.6
-				 },
-				 {
-					"Name" : "Rigidbody",
-					"Density" : 6,
-					"Kinematic" : true
-				 },
-				 {
-					"Name" : "EnemyBehaviour",
-					"Health" : 50
-				 }
-				
-			 ]
-        },
-		{
             "Name" : "Fly",
             "Type" : "Fly",
             "Mesh" : "Fly.mesh",
@@ -379,7 +324,8 @@
 			"Components" : [
 				 {
 					"Name" : "GameGUI",
-					"Health" : 50
+					"Health" : 50,
+					"Overload" : 10
 				 }		 
 			]
         }

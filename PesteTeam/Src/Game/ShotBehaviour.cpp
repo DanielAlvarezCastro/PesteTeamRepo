@@ -44,13 +44,19 @@ ShotBehaviour::~ShotBehaviour()
 
 void ShotBehaviour::Update(float t)
 {
-	if (overloaded) {
-		cOverload -= t*ovRechargeMultiplier;
-		//cout << cOverload << endl;
-		if (cOverload <= 0) {
-			cout << "Ya puedo volver a disparar" << endl;
-			cOverload = 0;
-			overloaded = false;
+	if (overloaded || (!keyboard->isKeyDown(OIS::KC_L) && !overloaded)) {
+		if (cOverload > 0) {
+			cOverload -= t * ovRechargeMultiplier;
+			UpdateOverloadBarMsg msg = UpdateOverloadBarMsg(cOverload);
+			sendSceneMsg(&msg);
+			//cout << cOverload << endl;
+			if (cOverload <= 0 && overloaded) {
+				cout << "Ya puedo volver a disparar" << endl;
+				cOverload = 0;
+				overloaded = false;
+				OverloadedMsg omsg = OverloadedMsg(overloaded);
+				sendSceneMsg(&omsg);
+			}
 		}
 	}
 	if (!overloaded && keyboard->isKeyDown(OIS::KC_L) && !keyDown)
@@ -61,10 +67,14 @@ void ShotBehaviour::Update(float t)
 		keyDown = true;
 		//aqui llegara cada vez que dispare, que ocurre cada cooldown de tiempo
 		cOverload+=cooldown;
+		UpdateOverloadBarMsg msg = UpdateOverloadBarMsg(cOverload);
+		sendSceneMsg(&msg);
 		//cout << cOverload << endl;
 		if (cOverload >= maxOverload) {
 			cout << "Sobrecalentado, volveré a poder disparar en: " << maxOverload << endl;
 			overloaded = true;
+			OverloadedMsg omsg = OverloadedMsg(overloaded);
+			sendSceneMsg(&omsg);
 		}
 	}
 	if (keyDown) 
@@ -76,12 +86,6 @@ void ShotBehaviour::Update(float t)
 			currentCd = cooldown;
 			keyDown = false;
 		}
-	}
-	if (!keyboard->isKeyDown(OIS::KC_L) && !overloaded) {
-		cOverload -= t;
-		if (cOverload < 0)
-			cOverload = 0;
-		//cout << cOverload << endl;
 	}
 }
 
