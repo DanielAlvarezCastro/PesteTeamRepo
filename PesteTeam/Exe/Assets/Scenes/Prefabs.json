@@ -304,7 +304,7 @@
 			"Components" : [
 				 {
 					"Name" : "GameManager",
-					"MaxLevels" : 3,
+					"MaxLevels" : 5,
 					"WaitTime" : 5.0
 				 }		 
 			]
