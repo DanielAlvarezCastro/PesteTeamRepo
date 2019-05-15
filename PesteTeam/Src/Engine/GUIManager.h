@@ -3,6 +3,7 @@
 #include <MyGUI.h>
 #include <MyGUI_OgrePlatform.h>
 #include "Scene.h"
+//Clase que se encarga de crear objetos GUI y añadirlos a la escena
 class GUIManager
 {
 private:

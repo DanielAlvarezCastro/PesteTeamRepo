@@ -22,16 +22,7 @@ bool GameSceneManager::LoadGame()
 {
 	loader = new SceneLoader("./Assets/Scenes/");
 	if (!loader->loadPrefabsFromFile())
-		return false;
-	/*if (!loader->loadSceneFromFile("MainMenu"))
-		return false;
-	if (!loader->loadSceneFromFile("Scene1"))
-		return false;
-	if (!loader->loadSceneFromFile("Scene2"))
-		return false;
-	if (!loader->loadTestScene())
-		return false;*/
-	Physics::getInstance()->initPhysics();
+		return false;	
 
 	return true;
 }
@@ -39,12 +30,15 @@ bool GameSceneManager::LoadGame()
 //Carga una escena con un nombre determinado
 bool GameSceneManager::LoadScene(string sceneName)
 {
+	//Si la escena ya ha sido cargada porque está debajo en la pila de escenas
+	//entonces la carga de memoria
 	if (loader->sceneAlreadyLoaded(sceneName)) {
 		Scene* escena = loader->loadSceneFromMemory(sceneName);
 		InitSceneMsg msg;
 		escena->reciveMsg(&msg);
 	}
 	else {		
+		//Si no está en memoria entonces la lee de json
 		Scene* escena = new Scene();
 		MainApp::instance()->AddScene(escena);
 		if (!loader->loadSceneFromFile(sceneName, escena))

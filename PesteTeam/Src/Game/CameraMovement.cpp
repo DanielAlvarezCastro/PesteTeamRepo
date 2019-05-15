@@ -22,10 +22,10 @@ void CameraMovement::setInitialValues(float _horizontaLimit, float _horizontalVe
 	 cameraAceleratedVel = _cameraAcceleratedVel;
 	 cameraDeceletatedVel = _cameraDeceleratedVel;
 
-	// How long the object should shake for.
+	 //Auxiliar para el contador del temblor
 	 shakeDuration = 0.0f;
 	 maxShakeDuration = _maxShakeDuration;
-	// Amplitude of the shake. A larger value shakes the camera harder.
+	
 	 shakeAmount = _shakeAmount;
 }
 

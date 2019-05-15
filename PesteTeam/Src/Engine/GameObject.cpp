@@ -13,6 +13,7 @@ GameObject::~GameObject()
 
 void GameObject::calculateDirection()
 {
+	//A través de la orientación de ogre calcula la dirección
 	Ogre::Quaternion q = ogreNode->getOrientation();
 	Ogre::Vector3 dir= Ogre::Vector3::ZERO;
 	dir.x = 2 * (q.x * q.z - q.w* q.y);
@@ -30,6 +31,7 @@ Vec3 GameObject::getBoundingBox()
 
 void GameObject::reciveMsg(Message * msg)
 {
+	//Llama al método receiveMsg de todos sus componentes
 	if (rigidBody) rigidBody->reciveMsg(msg);
 	for (auto &bComponent: behaviourComponents)
 	{
@@ -45,17 +47,18 @@ void GameObject::asingFather(GameObject * father_)
 }
 void GameObject::createEntity(std::string mesh, std::string name_, Scene* scene)
 {
+	//Crea una entidad en la escena 
 	name = name_;
 	Ogre::SceneManager* scnMgr = scene->getSceneManager();
 	ogreEntity = scnMgr->createEntity(mesh);
 
 	ogreNode = scnMgr->getRootSceneNode()->createChildSceneNode(name);
 	ogreNode->attachObject(ogreEntity);
-	ogreNode->setScale(0.1, 0.1, 0.1);
 }
 
 void GameObject::createEmptyEntity(std::string name_, Scene * scene)
 {
+	//Crea una entidad vacía sin mesh
 	name = name_;
 	Ogre::SceneManager* scnMgr = scene->getSceneManager();
 
@@ -107,5 +110,4 @@ Ogre::Vector3 GameObject::getDirection()
 	tal.fromQuaternion(ogreNode->getOrientation());
 
 	return tal.forward();
-	//return transform.direction; 
 }

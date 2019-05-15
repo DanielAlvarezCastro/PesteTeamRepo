@@ -7,6 +7,8 @@
 #ifndef _GAMEOBJECT_H
 #define _GAMEOBJECT_H
 class Scene;
+//Clase que hicimos en un principio para no usar el Vector3, más tarde nos dimos cuenta de que no tenía sentido
+//meter una capa de abstracción y la dejamos
 struct Vec3 
 {
 	float x;

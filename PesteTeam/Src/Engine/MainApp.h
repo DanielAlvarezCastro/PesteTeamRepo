@@ -19,6 +19,7 @@
 #include <OISMouse.h>
 #include <OISJoyStick.h>
 
+//Clase principal del motor
 
 using namespace Ogre;
 using namespace OIS;

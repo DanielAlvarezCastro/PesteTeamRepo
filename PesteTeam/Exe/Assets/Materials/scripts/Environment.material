@@ -35,7 +35,7 @@ material Test/FloorTileLight {
 			}
 		} } 
 }
-material Examples/SpaceSkyBox
+material SpaceSkyBox
 {
 	technique
 	{
