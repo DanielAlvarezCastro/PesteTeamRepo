@@ -44,48 +44,29 @@ void ParticleManager::update(float t)
 void ParticleManager::createParticle(Ogre::Vector3 position, string particleName, float duration, string materialName)
 {
 	Scene* scene = MainApp::instance()->getCurrentScene();
-	int i = 0;
-	bool found = false;
-	//Busca si existe una partícula de su tipo que esté desactivada para hacer pooling
 	std::vector<ParticleInfo> particles = particlesMap[particleName];
-	while (i < particles.size() && !found) {
-		if (!particles[i].parSys->isVisible()) {
-			found = true;
-		}
-		else i++;		
-	}
-	found = false;
-	//Si encuentra una la hace visible, reinicia su timer y se coloca en la posición
-	if (found) {
-		particles[i].gameObject->setPosition(position);
-		particles[i].parSys->setVisible(true);
-		particles[i].parSys->setEmitting(true);
-		particles[i].currentDuration = 0;
-	}
-	else {
-		//Crea una partícula nueva y la mete en el diccionario
-		particleNum++;
-		GameObject* particleOb = new GameObject();
-		string realName = particleName + to_string(particleNum);
+	
+	//Crea una partícula nueva y la mete en el diccionario
+	particleNum++;
+	GameObject* particleOb = new GameObject();
+	string realName = particleName + to_string(particleNum);
 
-		ParticleSystem* parSys = scene->getSceneManager()->createParticleSystem(realName, particleName);
-		if (materialName != "None") {
-			parSys->setMaterialName(materialName);
-		}
-		particleOb->createEmptyEntity(realName, scene);
-		particleOb->setPosition(position);
-		particleOb->attachMovableObject(parSys);
-
-		
-		ParticleInfo pInfo;
-		pInfo.gameObject = particleOb;
-		pInfo.parSys = parSys;
-		pInfo.maxDuration = duration;
-		pInfo.currentDuration = 0;
-		
-		particles.push_back(pInfo);
-			
-		
+	ParticleSystem* parSys = scene->getSceneManager()->createParticleSystem(realName, particleName);
+	if (materialName != "None") {
+		parSys->setMaterialName(materialName);
 	}
+	particleOb->createEmptyEntity(realName, scene);
+	particleOb->setPosition(position);
+	particleOb->attachMovableObject(parSys);
+	
+	//Usamos un struct ParticleInfo para reunir toda la info de las partículas y acceder a ella más fácilmente
+	ParticleInfo pInfo;
+	pInfo.gameObject = particleOb;
+	pInfo.parSys = parSys;
+	pInfo.maxDuration = duration;
+	pInfo.currentDuration = 0;
+		
+	particles.push_back(pInfo);		
+	
 	particlesMap[particleName] = particles;
 }

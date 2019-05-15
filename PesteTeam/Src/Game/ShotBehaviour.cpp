@@ -27,7 +27,7 @@ void OnBulletCollision(GameObject* one, GameObject* other, std::vector<btManifol
 
 		int dmg = static_cast<BulletBehaviour*>(one->getBComponents()[0])->getDamage();
 		DownLifeMsg Msg(dmg, other->getName());
-		//Si la bala choca con una entdiad manda mensaje a toda la escena con el nombre del enemy
+		//Si la bala choca con una entdiad manda mensaje  con el nombre del enemy
 		other->getBComponents()[0]->sendSceneMsg(&Msg);
 	}
 }
@@ -52,9 +52,7 @@ void ShotBehaviour::Update(float t)
 			cOverload -= t * ovRechargeMultiplier;
 			UpdateOverloadBarMsg msg = UpdateOverloadBarMsg(cOverload);
 			sendSceneMsg(&msg);
-			//cout << cOverload << endl;
 			if (cOverload <= 0 && overloaded) {
-				cout << "Ya puedo volver a disparar" << endl;
 				cOverload = 0;
 				overloaded = false;
 				OverloadedMsg omsg = OverloadedMsg(overloaded);
@@ -73,7 +71,6 @@ void ShotBehaviour::Update(float t)
 		UpdateOverloadBarMsg msg = UpdateOverloadBarMsg(cOverload);
 		sendSceneMsg(&msg);
 		if (cOverload >= maxOverload) {
-			cout << "Sobrecalentado, volveré a poder disparar en: " << maxOverload << endl;
 			overloaded = true;
 			OverloadedMsg omsg = OverloadedMsg(overloaded);
 			sendSceneMsg(&omsg);
@@ -105,19 +102,6 @@ void ShotBehaviour::reciveMsg(Message * msg)
 	else if (msg->id == "BARREL_END") {
 		isRolling = false;
 	}
-
-
-	//else if (msg->id == "BULLET_COLLIDE_ENTITY") {
-	//	BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
-	//	//Si recibe el mensaje de colision con entidad y 
-	//	//el objeto no es el player, manda mensaje de bajar vida con el damage del player y el nombre del enemigo
-	//	if (bce->type == "Enemy") {
-	//		
-	//		DownLifeMsg Msg(damage, bce->name);
-	//		sendSceneMsg(&Msg);
-	//	}
-	//	
-	//}
 }
 
 void ShotBehaviour::getBullet(int id)

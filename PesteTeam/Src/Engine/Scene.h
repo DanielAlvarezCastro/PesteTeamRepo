@@ -20,7 +20,6 @@ protected:
 public:
 	Scene();
 	~Scene();
-	void createScene(String sceneName);
 	void updateScene();
 	void clearScene();
 
@@ -50,5 +49,6 @@ public:
 	Ogre::Camera* getCamera() {	return mCamera;	};
 	Ogre::SceneManager* getSceneManager() { return mSceneMgr; };
 	void reciveMsg(Message* msg) { for (BasicComponent* cp : components) cp->reciveMsg(msg); };
+	void setName(std::string n) { name = n; };
 };
 

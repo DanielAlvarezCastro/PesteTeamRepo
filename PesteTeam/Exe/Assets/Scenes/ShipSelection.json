@@ -1,6 +1,7 @@
 {
 	"Camera" : "CameraMain"
 	,
+	"SkyBox" : "SpaceSkyBox",
 	"GUI": [
 		{
 			"Name" : "SelectYourShip",
@@ -58,7 +59,8 @@
 			"Name" : "ShipsBase",
 			"Type" : "None",
 			"Mesh" : "ShipsBase.mesh",
-			"Position" : [1.7,97,-10]
+			"Position" : [1.7,97,-10],
+			"Scale" : [0.1,0.1,0.1]
 		},
 		{
 			"Name" : "Model",

@@ -12,12 +12,6 @@ Scene::~Scene()
 	clearScene();
 }
 
-void Scene::createScene(String sceneName)
-{	
-	name = sceneName;
-	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox", 10);
-}
-
 void Scene::updateScene()
 {
 	Physics::getInstance()->updatePhysics(MainApp::instance()->deltaTime());
@@ -29,13 +23,6 @@ void Scene::updateScene()
 			components[i]->Update(MainApp::instance()->deltaTime());
 		i++;
 	}
-	/*
-	for (int i = 0; i < components.size(); i++)
-	{
-		if (components[i]->isGOActive())
-			components[i]->Update(MainApp::instance()->deltaTime());
-
-	}*/
 }
 
 void Scene::clearScene()

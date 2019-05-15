@@ -23,6 +23,7 @@ void EnemyManager::reciveMsg(Message* msg)
 		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
 		int i = 0;
 		bool found = false;
+		//Busca el enemigo que ha recibido el golpe y llama a su método hit
 		while(i < enemies_c.size() && !found) {
 			if (enemies_c[i]->getGameObject()->getName() == dlm->name && enemies_c[i]->getGameObject()->isActive())
 			{

@@ -4,6 +4,7 @@
 #include <string>
 #include "Scene.h"
 #include <map>
+//Clase para crear partículas y añadirlas a la escena
 using namespace std;
 class ParticleManager
 {

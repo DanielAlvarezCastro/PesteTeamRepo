@@ -2,7 +2,7 @@
 #include "NodeStack.h"
 #include "Scene.h"
 #include <stack>
-
+//Clase que hace de pila de escenas
 class SceneMachine
 {
 protected:

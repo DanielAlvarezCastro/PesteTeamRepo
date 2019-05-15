@@ -1,6 +1,7 @@
 #include "OgreDebugUtils.h"
 
 using namespace Ogre;
+//Clase de Ogre para debugear las bounding boxes (Extraida de la wiki de Ogre)
 
 OgreDebugDrawer::OgreDebugDrawer()
 {

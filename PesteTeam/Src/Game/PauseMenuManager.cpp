@@ -1,5 +1,7 @@
 #include "PauseMenuManager.h"
 
+//Clase muy parecida al MainMenuManager
+
 PauseMenuManager::PauseMenuManager(GameObject* gameObject, GameObject* camera, float _cameraVel) 
 	: BehaviourComponent(gameObject), camera(camera), resumeProps("Resume"), mainMenuProps("MainMenu"), cameraVel(_cameraVel), activeProps("Resume")
 {

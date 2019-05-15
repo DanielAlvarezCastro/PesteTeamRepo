@@ -71,7 +71,11 @@ bool SceneLoader::loadPrefabsFromFile()
 
 bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 {
-	scene->createScene(sceneName);
+	//Carga una escena de un archivo json
+	scene->setName(sceneName);
+
+	//Si el nombre es TestScene carga del método loadTestScene, que usamos al principio para debuguear antes
+	//de haber implementado totalmente la carga de escenas, se podría borrar perfectamente
 	if (sceneName == "TestScene") {
 		loadTestScene(scene);
 		return true;
@@ -90,7 +94,14 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	json scene_json;
 	sceneFile >> scene_json;
 
+	//Mete la escena en el diccionario
 	scenesMap.insert(pair<std::string, Scene*>(sceneName, scene));
+
+	//Lee el apartado SkyBox y lo crea
+	if (scene_json.find("SkyBox") != scene_json.end()) {
+		scene->getSceneManager()->setSkyBox(true, scene_json["SkyBox"], 10);
+	}
+
 
 	//Se cargan las opciones de la escena
 	//Primero carga la cámara para evitar conflictos con la inicialización de MyGUI
@@ -102,6 +113,7 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 	MainApp::instance()->setupViewport(scene->getCamera());
 	MainApp::instance()->addCompositor("Interference");
 
+	//Inicializa la escena en ogre
 	GUIManager::instance()->initScene(scene);
 	//Itera sobre los elementos del GUI
 	for (json::iterator it = scene_json["GUI"].begin(); it != scene_json["GUI"].end(); ++it) {
@@ -122,7 +134,6 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 
 		}
 		else {
-			std::vector<float> position = (*it)["Position"].get<std::vector<float>>();
 			//Si no existe entonces lo crea leyendo el json de la escena
 			GameObject* go = createGameObject((*it), scene);
 			scene->addGameObject(go);
@@ -138,6 +149,9 @@ bool SceneLoader::loadSceneFromFile(std::string sceneName, Scene* scene)
 
 Scene* SceneLoader::loadSceneFromMemory(std::string sceneName)
 {
+	//Asigna la escena de memoria
+	//Esto ocurre en los casos en los que se hace pop de la pila de escenas
+	//para cargar el estado de la escena anterior 
 	Scene* scene = scenesMap[sceneName];
 	MainApp::instance()->setupViewport(scene->getCamera());
 	GUIManager::instance()->initScene(scene);
@@ -150,7 +164,6 @@ bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
 	
 	//Si el nombre de la escena existe eso quiere decir que ya está cargada
 	if (scenesMap.find(sceneName) != scenesMap.end()) {
-		//scene = scenesMap[sceneName];
 		return true;
 	}
 	else return false;
@@ -159,7 +172,8 @@ bool SceneLoader::sceneAlreadyLoaded(std::string sceneName)
 //Escenas de prueba para meterlas desde c�digo aqu�
 bool SceneLoader::loadTestScene(Scene* scene)
 {
-
+	//Aquí teníamos metido todo el código de creación de gameobjects y componentes
+	//Lo hemos borrado ahora que no lo utilizábamos porque ocupaba muchas líneas
 
 	return true;
 }
@@ -179,10 +193,13 @@ void SceneLoader::setPlayerShip(std::string shipName, std::vector<int> _shipStat
 
 GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene, std::string fatherName)
 {
+	//Crea un gameobject leyendo sus atributos del json
 	GameObject* ob = new GameObject();
 	std::string name= fatherName + gameObject_json["Name"].get<std::string>();
 	std::string meshName = gameObject_json["Mesh"].get<std::string>();
 	std::vector<float> position = gameObject_json["Position"].get<std::vector<float>>();
+
+	
 	if (meshName == "SelectedShip") {
 		meshName = playerShip + ".mesh";
 	}
@@ -209,6 +226,7 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene, st
 		scene->addGameObject(child);
 	}
 
+	//Recorre su lista de componentes para crearlos
 	for (json::iterator itComponent = gameObject_json["Components"].begin(); itComponent != gameObject_json["Components"].end(); ++itComponent) {
 		addComponent(*itComponent, ob, scene);
 	}
@@ -218,6 +236,9 @@ GameObject* SceneLoader::createGameObject(json gameObject_json, Scene* scene, st
 
 GameObject * SceneLoader::createGameObjectFromPrefab(json prefabs, json gameObject_json, Scene * scene)
 {
+	//Crea gameobjects desde el diccionario de prefabs, 
+	//recibe los dos parámetros por si queremos sobrescribir algo
+	//de los prefabs
 	GameObject* ob = new GameObject();
 	std::string name = gameObject_json["Name"].get<std::string>();
 
@@ -291,34 +312,35 @@ GameObject * SceneLoader::createGameObjectFromPrefab(json prefabs, json gameObje
 
 void SceneLoader::createGUIObject(json gui_json, Scene* scene)
 {
-	//Common gui attributes
-	std::string guiName = gui_json["Name"].get<std::string>();
-	std::string guiType = gui_json["Type"].get<std::string>();
-	std::vector<float> position = gui_json["Position"].get<std::vector<float>>();
-	std::vector<float> size = gui_json["Size"].get<std::vector<float>>();
+	//Atributos comunes de los objetos GUI
+	std::string guiName = gui_json["Name"];
+	std::string guiType = gui_json["Type"];
+	std::vector<float> position = gui_json["Position"];
+	std::vector<float> size = gui_json["Size"];
 	bool visible = true;
 	if (gui_json.find("Visible") != gui_json.end()) {
 		visible = gui_json["Visible"];
 	}
 	std::string anchor = "UP";
 	if (gui_json.find("Anchor") != gui_json.end()) {
-		anchor = gui_json["Anchor"].get<std::string>();
+		anchor = gui_json["Anchor"].get<string>();
 	}
 	if (guiType == "ImageBox") {
-		std::string source = gui_json["Src"].get<std::string>();
+		std::string source = gui_json["Src"];
 		MyGUI::ImageBox* b = GUIManager::instance()->createImage(source, position[0], position[1], size[0], size[1], guiType, guiName, anchor);
 		b->setVisible(visible);
 		scene->addGUIObject(b);
 	}
 	else if (guiType == "TextBox") {
-		std::string caption = gui_json["Caption"].get<std::string>();
-		int fontHeight = gui_json["FontHeight"].get<int>();
+		std::string caption = gui_json["Caption"];
+		int fontHeight = gui_json["FontHeight"];
 		GUIManager::instance()->createTextbox(caption, position[0], position[1], size[0], size[1], guiType, guiName, fontHeight);
 	}
 }
 
 void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 {	
+	//Cadena de else if que dependiendo del nombre del componente a meter inicializa de una forma u otra
 	std::string componentName = object_json["Name"];
 	if (componentName == "Camera") {
 		//Adjuntamos un gameobject a la cámara creada
@@ -355,6 +377,42 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 
 		scene->addComponent(cM);
 	}
+	else if (componentName == "Rigidbody") {
+		bool kinematic = false;
+		RigidBody* rb;
+		int y = 0;
+		int x = 0;
+		if (object_json.find("Kinematic") != object_json.end()) {
+			kinematic = object_json["Kinematic"];
+		}
+		if (object_json.find("Density") != object_json.end()) {
+			int density = object_json["Density"];
+			rb = new RigidBody(go, go->getName(), density, kinematic);
+		}
+		else {
+			rb = new RigidBody(go, go->getName());
+		}
+		if (object_json.find("YPivot") != object_json.end()) {
+			std::string yPiv = object_json["YPivot"];
+			if (yPiv == "Down") {
+				y = go->getBoundingBox().y / 2;
+			}
+			else if (yPiv == "Up") {
+				y = -go->getBoundingBox().y / 2;
+			}
+		}
+		if (object_json.find("XPivot") != object_json.end()) {
+			std::string yPiv = object_json["XPivot"];
+			if (yPiv == "Right") {
+				x = -go->getBoundingBox().x / 2;
+			}
+			else if (yPiv == "Left") {
+				x = go->getBoundingBox().x / 2;
+			}
+		}
+		rb->setOffset(x, y);
+		scene->addComponent(rb);
+	}
 	else if (componentName == "ShipController") {
 		//Las naves tienen una vida base, y a partir de ahí aumenta según los stats de la anve
 		int baseHealth = object_json["BaseHealth"];
@@ -365,6 +423,11 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		ShipController* sc = new ShipController(go, baseHealth + shipStats[0]*health, playerShip, rollingC, WZL, DZL);
 
 		scene->addComponent(sc);
+	}
+	else if (componentName == "PlayerController") {
+		int velocity = object_json["Velocity"];
+		PlayerController* pc = new PlayerController(go, shipStats[2] * velocity);
+		scene->addComponent(pc);
 	}
 	else if (componentName == "ShotBehaviour") {
 		//Le pasamos el nombre de la nave actual y los pivotes de donde saldran las balas
@@ -392,6 +455,13 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		int h = object_json["Height"];
 		TargetController* tc = new TargetController(go, mCamera, blueImg,redImg,guiN,w, h);
 		scene->addComponent(tc);
+	}
+	else if (componentName == "EnemyManager") {
+	EnemyManager* em = new EnemyManager(go);
+	for (int i = 0; i < enemies.size(); i++) {
+		em->addEnemy(enemies[i]);
+	}
+	scene->addComponent(em);
 	}
 	else if (componentName == "EnemyShoot") {
 		std::string tName = object_json["Target"];
@@ -450,67 +520,13 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		}
 		FlyerBehaviour* tB = new FlyerBehaviour(go, target, fRoute, r, h);
 		scene->addComponent(tB);
-	}
-	else if (componentName == "Rigidbody") {
-		bool kinematic = false;
-		RigidBody* rb ;
-		int y = 0;
-		int x = 0;
-		if (object_json.find("Kinematic") != object_json.end()) {
-			kinematic = object_json["Kinematic"];
-		}
-		if (object_json.find("Density") != object_json.end()) {
-			int density = object_json["Density"];
-			rb = new RigidBody(go, go->getName(), density, kinematic);
-		}
-		else {
-			rb = new RigidBody(go, go->getName());
-		}
-		if (object_json.find("YPivot") != object_json.end()) {
-			std::string yPiv = object_json["YPivot"];
-			if (yPiv == "Down") {
-				y = go->getBoundingBox().y / 2;
-			}
-			else if(yPiv=="Up"){
-				y = -go->getBoundingBox().y / 2;
-			}
-		}
-		if (object_json.find("XPivot") != object_json.end()) {
-			std::string yPiv = object_json["XPivot"];
-			if (yPiv == "Right") {
-				x = -go->getBoundingBox().x / 2;
-			}
-			else if (yPiv == "Left") {
-				x = go->getBoundingBox().x / 2;
-			}
-		}
-		rb->setOffset(x, y);
-		scene->addComponent(rb);
-	}
+	}	
 	else if (componentName == "EnemyBehaviour") {
 		int health = object_json["Health"];
 		EnemyBehaviour* enem = new EnemyBehaviour(go, health);
 		enemies.push_back(enem);
 		scene->addComponent(enem);
-	}
-	else if (componentName == "PauseMenuManager") {
-		std::string cameraName = object_json["CameraObject"];
-		float cameraVel = object_json["CameraVel"];
-		int buttonAmp = object_json["ButtonAmplitude"];
-		float buttonSinPeriod = object_json["ButtonSinPeriod"];
-		GameObject* cam = scene->getGameObject(cameraName);
-		PauseMenuManager* enem = new PauseMenuManager(go, cam, cameraVel);
-		enem->setButtonAmplitude(buttonAmp);
-		enem->setButtonSinPeriod(buttonSinPeriod);
-		scene->addComponent(enem);
-	}
-	else if (componentName == "EnemyManager") {
-		EnemyManager* em = new EnemyManager(go);
-		for (int i = 0; i < enemies.size(); i++) {
-			em->addEnemy(enemies[i]);
-		}
-		scene->addComponent(em);
-	}
+	}		
 	else if (componentName == "GameGUI") {
 		int baseHealth = object_json["BaseHealth"];
 		int fH = object_json["Health"];
@@ -524,18 +540,16 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		GameManager* gm = new GameManager(go,levels, time);
 		scene->addComponent(gm);
 	}
-	else if (componentName == "Light") {
-		Ogre::Light* luz = scene->getSceneManager()->createLight("Luz");
-		if (object_json["Type"]=="Directional") {
-			luz->setType(Ogre::Light::LT_DIRECTIONAL);
-		}
-		luz->setDiffuseColour(0.75, 0.75, 0.75);
-		go->attachLight(luz);
-	}
-	else if (componentName == "PlayerController") {
-		int velocity = object_json["Velocity"];
-		PlayerController* pc = new PlayerController(go, shipStats[2]*velocity);
-		scene->addComponent(pc);
+	else if (componentName == "PauseMenuManager") {
+	std::string cameraName = object_json["CameraObject"];
+	float cameraVel = object_json["CameraVel"];
+	int buttonAmp = object_json["ButtonAmplitude"];
+	float buttonSinPeriod = object_json["ButtonSinPeriod"];
+	GameObject* cam = scene->getGameObject(cameraName);
+	PauseMenuManager* enem = new PauseMenuManager(go, cam, cameraVel);
+	enem->setButtonAmplitude(buttonAmp);
+	enem->setButtonSinPeriod(buttonSinPeriod);
+	scene->addComponent(enem);
 	}
 	else if (componentName == "MainMenuManager") {
 		int titleAmp = object_json["TitleAmplitude"];
@@ -577,6 +591,14 @@ void SceneLoader::addComponent(json object_json, GameObject * go, Scene* scene)
 		SS->addShipStats(stats);
 		SS->setInitialShipsPosition();
 		scene->addComponent(SS);
+	}
+	else if (componentName == "Light") {
+	Ogre::Light* luz = scene->getSceneManager()->createLight("Luz");
+	if (object_json["Type"] == "Directional") {
+		luz->setType(Ogre::Light::LT_DIRECTIONAL);
+	}
+	luz->setDiffuseColour(0.75, 0.75, 0.75);
+	go->attachLight(luz);
 	}
 	
 }

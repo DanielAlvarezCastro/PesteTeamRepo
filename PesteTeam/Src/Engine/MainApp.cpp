@@ -41,10 +41,12 @@ MainApp::~MainApp()
 
 int MainApp::initApp() 
 {
+	
 	initOgre();
 	initOIS();	
 	appRunning = true;
 	time = new GameTime();
+	Physics::getInstance()->initPhysics();
 	return 1;
 }
 void MainApp::messagePump()
@@ -80,7 +82,6 @@ int MainApp::initOgre()
 	mRoot->setRenderSystem(renderSys);
 
 	// initialise root
-	// mRoot->initialise(false);
 	locateResources();
 
 	if (!(mRoot->restoreConfig() || mRoot->showConfigDialog(NULL)))
@@ -99,6 +100,7 @@ int MainApp::initOgre()
 
 void MainApp::initOIS()
 {
+	//Inicialización de OIS
 	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
 	OIS::ParamList paramList;
 	size_t windowHnd = 0;
@@ -148,6 +150,7 @@ void MainApp::closeApp()
 
 bool MainApp::runGame()
 {
+	//Bucle principal del motor
 	while (appRunning) {
 		messagePump();
 		if (appRunning) {
@@ -166,14 +169,17 @@ bool MainApp::runGame()
 
 void MainApp::AddScene(Scene* scene)
 {
+	//Añade una escena a la pila
 	sceneMC->addScene(scene);
 }
 void MainApp::QuitScene() {
+	//Borra una escena de la pila
 	sceneMC->delScene();	
 }
 
 void MainApp::setupViewport(Camera* camera)
 {
+	//Inicializa el viewport con una cámara dada
 	mWindow->removeAllViewports();
 	
 	Ogre::Viewport *vp = mWindow->addViewport(camera); //Our Viewport linked to the camera
@@ -183,6 +189,7 @@ void MainApp::setupViewport(Camera* camera)
 	
 }
 void MainApp::addCompositor(std::string compositor) {
+	//Añade un compositor
 	CompositorManager::getSingleton().addCompositor(mWindow->getViewport(0), compositor);
 	CompositorManager::getSingleton().setCompositorEnabled(mWindow->getViewport(0), compositor, true);
 }

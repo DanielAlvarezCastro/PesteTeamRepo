@@ -8,6 +8,10 @@
 void OnShipEnvironmentCollision(GameObject* one, GameObject* other, std::vector<btManifoldPoint*> contactPoints)
 {
 	//si la nave choca contra un edificio
+	//Lo hemos hecho mirando si choca contra un gameobject que no tiene ningún componente de comportamiento
+	//Lo ideal sería haber definido una variable para los rigidbody que defina su "layer de colisión"
+	//como Enemy, Player, Environment
+	//Y con esto comprobar con qué ha chocado
 	if (other->getRigidBody() != nullptr  && other->getRigidBody()->isActive() && other->isActive() && one->isActive() && other->getBComponents().size() == 0) {
 		Ogre::Vector3 pos = one->getPosition();
 		if (one->getBComponents().size() > 0) {
@@ -109,11 +113,13 @@ void ShipController::Update(float t)
 		warningZone = true;
 	}
 	else if (!(pos.x > warningZoneLength || pos.x < -warningZoneLength || pos.z> warningZoneLength || pos.z < -warningZoneLength || pos.y>warningZoneLength) && warningZone) {
+		//Si vuelve a la zona de combate manda un mensaje
 		ExitWarningZone msg;
 		sendSceneMsg(&msg);
 		warningZone = false;
 	}
 	if ((pos.x > deadZoneLength || pos.x < -deadZoneLength || pos.z> deadZoneLength || pos.z < -deadZoneLength || pos.y>deadZoneLength || pos.y<=0)) {
+		//Si se sale del mapa manda mensaje de que ha muerto
 		GameOverMsg msg;
 		sendSceneMsg(&msg);
 		ExitWarningZone msg2;
@@ -125,6 +131,8 @@ void ShipController::reciveMsg(Message * msg)
 {
 	if (msg->id == "QUITA_VIDA")
 	{
+		//Si recibe el mensaje  de que ha sufrido daño entonces resta su vida ,
+		//Si la vida baja de 0 entonces manda el mensaje de que ha muerto
 		DownLifeMsg* dlm = static_cast<DownLifeMsg*>(msg);
 		if (dlm->name == "PointerPlayer") {
 			health -= dlm->power;

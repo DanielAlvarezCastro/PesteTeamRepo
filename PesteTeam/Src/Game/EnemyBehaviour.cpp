@@ -26,5 +26,4 @@ void EnemyBehaviour::Update(float t)
 void EnemyBehaviour::hit(int value)
 {
 	life -= value; 
-	cout << life << endl;
 }

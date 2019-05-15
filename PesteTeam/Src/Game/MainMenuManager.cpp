@@ -9,6 +9,7 @@ MainMenuManager::MainMenuManager(GameObject* gameObject, GameObject* camera)
 {
 	keyboard = MainApp::instance()->getKeyboard();
 	GUIMgr = GUIManager::instance();
+	//Guarda los atributos del título y de los botones
 	titleImage = GUIMgr->getImage("Title");
 	titleWidth = titleImage->getWidth();
 	titleHeight = titleImage->getHeight();
@@ -76,6 +77,7 @@ void MainMenuManager::Update(float t)
 		}
 		if (keyboard->isKeyDown(OIS::KC_SPACE) || keyboard->isKeyDown(OIS::KC_INSERT) || keyboard->isKeyDown(OIS::KC_RETURN)) {
 			currentTime = 0;
+			//Según el estado carga una escena u otra
 			if (state == 0) {
 				MainApp::instance()->getCurrentScene()->hideGUI();
 				GameSceneManager::instance()->LoadScene("ShipSelection");
@@ -100,6 +102,7 @@ void MainMenuManager::handleStates()
 {
 	if (state < 0) state = 2;
 	else if (state > 2) state = 0;
+	//Según el estado del botón cambia su textura
 	if (state == 0) //PLAY
 	{
 		activeButton = GUIMgr->getImage("Play");
@@ -128,7 +131,7 @@ void MainMenuManager::handleStates()
 
 void MainMenuManager::buttonAnimation()
 {
-	//El botón se hace grande siguiendo una funcion senoidal
+	//El botón seleccionado se hace grande siguiendo una funcion senoidal
 	int w = activeProps.w + buttonAmplitude * sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
 	int h = activeProps.h + buttonAmplitude * sin(MainApp::instance()->timeSinceStart()*buttonSinPeriod);
 	//La x y la y se tienen que mover de acuerdo al tamaño para que el título crezca desde el centro

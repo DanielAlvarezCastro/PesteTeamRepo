@@ -1,6 +1,7 @@
 {
 	"Camera" : "CameraMain"
 	,
+	"SkyBox" : "SpaceSkyBox",
 	"GUI": [
 		{
 			"Name" : "HealthBar",
