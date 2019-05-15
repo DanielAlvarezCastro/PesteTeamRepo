@@ -23,8 +23,8 @@
 							"Name" : "ShipController",
 							"BaseHealth" : 100,
 							"Health" : 30,
-							"RollingCooldown" : 1.0,
-							"WarningZoneLength" : 1400,
+							"RollingCooldown" : 0.3,
+							"WarningZoneLength" : 1600,
 							"DeadZoneLength" : 1900
 						}
 						 					

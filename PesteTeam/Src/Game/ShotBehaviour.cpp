@@ -62,7 +62,7 @@ void ShotBehaviour::Update(float t)
 			}
 		}
 	}
-	if (!overloaded && keyboard->isKeyDown(OIS::KC_L) && !keyDown)
+	if (!overloaded && keyboard->isKeyDown(OIS::KC_L) && !isRolling && !keyDown)
 	{
 		ISound* aux = SoundManager::instance()->PlaySound2D("ShootPlayer.wav");
 		aux->setVolume(0.9);
@@ -99,6 +99,14 @@ void ShotBehaviour::reciveMsg(Message * msg)
 		aux->setVolume(0.8);
 		MainApp::instance()->getParticleManager()->createParticle(dlm->pos, bulletParticleCollisionName, 1.0f);
 	}
+	else if (msg->id == "BARREL_START") {
+		isRolling = true;
+	}
+	else if (msg->id == "BARREL_END") {
+		isRolling = false;
+	}
+
+
 	//else if (msg->id == "BULLET_COLLIDE_ENTITY") {
 	//	BulletCollideEntity* bce = static_cast<BulletCollideEntity*>(msg);
 	//	//Si recibe el mensaje de colision con entidad y 

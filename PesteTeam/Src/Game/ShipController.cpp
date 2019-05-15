@@ -62,6 +62,8 @@ void ShipController::Update(float t)
 	if (keyboard->isKeyDown(OIS::KC_E)) {
 		if (!isRolling && rollingTimer<0) {
 			isRolling = true;
+			Message msg = BarrelRollStart();
+			sendSceneMsg(&msg);
 			rollRight = true;
 			iniOrientation = euler.mRoll;
 			gameObject->getRigidBody()->setActive(false);
@@ -71,6 +73,8 @@ void ShipController::Update(float t)
 	if (keyboard->isKeyDown(OIS::KC_Q) && rollingTimer < 0) {
 		if (!isRolling&& rollingTimer < 0) {
 			isRolling = true;
+			Message msg = BarrelRollStart();
+			sendSceneMsg(&msg);
 			rollLeft = true;
 			iniOrientation = euler.mRoll;
 			gameObject->getRigidBody()->setActive(false);
@@ -88,6 +92,8 @@ void ShipController::Update(float t)
 		}
 		else {
 			isRolling = false;
+			Message msg = BarrelRollEnd();
+			sendSceneMsg(&msg);
 			rollLeft = false;
 			rollRight = false;
 			gameObject->getRigidBody()->setActive(true);

@@ -23,6 +23,7 @@ private:
 	float ovRechargeMultiplier = 1.0;
 	float bLifeTime;
 	bool overloaded = false;
+	bool isRolling = false;
 	std::string shipName_;
 	std::string bulletMeshName;
 	std::string bulletParticleCollisionName;

@@ -57,3 +57,11 @@ struct NextLevelMsg : public Message
 {
 	NextLevelMsg(string id = "NEXT_LEVEL") : Message(id) {}
 };
+struct BarrelRollStart : public Message
+{
+	BarrelRollStart(string id = "BARREL_START") : Message(id) {}
+};
+struct BarrelRollEnd : public Message
+{
+	BarrelRollEnd(string id = "BARREL_END") : Message(id) {}
+};
