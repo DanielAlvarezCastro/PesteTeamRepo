@@ -130,7 +130,7 @@
 					"LeftPivot" : "LeftGunPivot",
 					"RightPivot" : "RightGunPivot",
 					"Damage" : 2,
-					"MaxOverload" : 10,
+					"MaxOverload" : 5,
 					"ShootCooldown" : 0.14285,
 					"OverloadRechargeMultiplier" : 3.0,
 					"BLifeTime" : 1.5
@@ -330,7 +330,7 @@
 					"Name" : "GameGUI",
 					"BaseHealth" : 100,
 					"Health" : 30,
-					"Overload" : 10
+					"Overload" : 5
 				 }		 
 			]
         }

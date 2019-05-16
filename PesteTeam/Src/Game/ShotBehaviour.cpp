@@ -63,7 +63,7 @@ void ShotBehaviour::Update(float t)
 	if (!overloaded && keyboard->isKeyDown(OIS::KC_L) && !isRolling && !keyDown)
 	{
 		ISound* aux = SoundManager::instance()->PlaySound2D("ShootPlayer.wav");
-		aux->setVolume(0.9);
+		aux->setVolume(0.8);
 		shoot();
 		keyDown = true;
 		//aqui llegara cada vez que dispare, que ocurre cada cooldown de tiempo
