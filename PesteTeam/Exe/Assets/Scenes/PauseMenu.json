@@ -6,23 +6,66 @@
 	{
 		"Name" : "GamePaused",
 		"Type" : "ImageBox",		
-		"Position" : [265,20],
-		"Size" : [550,200],
+		"Position" : [40,20],
+		"Size" : [500,175],
 		"Src" : "GamePaused.png"
 	},
 	{
 		"Name" : "Resume",
 		"Type" : "ImageBox",		
-		"Position" : [330,250],
-		"Size" : [420,130],
+		"Position" : [100,250],
+		"Size" : [320,100],
 		"Src" : "ResumeSelected.png"
 	},
 	{
 		"Name" : "MainMenu",
 		"Type" : "ImageBox",		
-		"Position" : [330,450],
-		"Size" : [420,130],
+		"Position" : [100,450],
+		"Size" : [320,100],
 		"Src" : "MainMenuUnSelected.png"
+	},
+	{
+		"Name" : "Controls",
+		"Type" : "ImageBox",		
+		"Position" : [585,60],
+		"Size" : [400,100],
+		"Src" : "Controls.png"
+	},
+	{
+		"Name" : "WASD",
+		"Type" : "ImageBox",		
+		"Position" : [650,200],
+		"Size" : [300,50],
+		"Src" : "WASD.png"
+	},
+	{
+		"Name" : "L",
+		"Type" : "ImageBox",		
+		"Position" : [650,275],
+		"Size" : [300,50],
+		"Src" : "L.png"
+	},
+	{
+		"Name" : "QE",
+		"Type" : "ImageBox",		
+		"Position" : [650,350],
+		"Size" : [300,50],
+		"Src" : "QE.png"
+	},
+	{
+		"Name" : "SPACE",
+		"Type" : "ImageBox",		
+		"Position" : [650,425],
+		"Size" : [300,50],
+		"Src" : "SPACE.png"
+	}
+	,
+	{
+		"Name" : "SHIFT",
+		"Type" : "ImageBox",		
+		"Position" : [650,500],
+		"Size" : [300,50],
+		"Src" : "SHIFT.png"
 	}
 	],
     "GameObjects": [			
