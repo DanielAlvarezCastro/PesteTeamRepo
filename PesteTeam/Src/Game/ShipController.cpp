@@ -142,7 +142,6 @@ void ShipController::reciveMsg(Message * msg)
 			if (health <= 0) {
 				GameOverMsg msg;
 				sendSceneMsg(&msg);
-				ISound* aux = SoundManager::instance()->PlaySound2D("DeathPlayer.wav");
 			}
 		}
 	}

@@ -75,5 +75,6 @@ void PlayerController::reciveMsg(Message * msg)
 {
 	if (msg->id == "GAME_OVER") {
 		gameObject->setActive(false);
+		ISound* aux = SoundManager::instance()->PlaySound2D("DeathPlayer.wav");
 	}
 }
