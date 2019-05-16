@@ -19,7 +19,7 @@ void GameManager::Update(float t)
 {
 	if (nextLevel) {
 		nextLevelTimer -= t;
-		if (nextLevelTimer <= 0) {
+		if (nextLevelTimer <= 0 || MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
 		
 			std::string sceneName;
 			sceneName = "Scene" + to_string(currentLevel);
@@ -34,7 +34,7 @@ void GameManager::Update(float t)
 	}
 	else if (GameOver) {
 		nextLevelTimer -= t;
-		if (nextLevelTimer <= 0) {
+		if (nextLevelTimer <= 0 || MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
 			GameSceneManager::instance()->ReturnToScene("MainMenu");
 
 			SoundManager::instance()->GetEngine()->stopAllSounds();
@@ -43,7 +43,7 @@ void GameManager::Update(float t)
 	}
 	else if (victory) {
 		nextLevelTimer -= t;
-		if (nextLevelTimer <= 0) {
+		if (nextLevelTimer <= 0 || MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
 			GameSceneManager::instance()->ReturnToScene("MainMenu");
 
 			SoundManager::instance()->GetEngine()->stopAllSounds();
@@ -51,7 +51,7 @@ void GameManager::Update(float t)
 		}
 	}
 
-	if (MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
+	if (!nextLevel && !GameOver && !victory && MainApp::instance()->getKeyboard()->isKeyDown(OIS::KC_ESCAPE)) {
 		MainApp::instance()->getCurrentScene()->hideGUI();
 		GameSceneManager::instance()->LoadScene("PauseMenu");
 	}

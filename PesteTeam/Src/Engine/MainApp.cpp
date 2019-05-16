@@ -76,6 +76,9 @@ int MainApp::initOgre()
 	{
 		return 0;
 	}
+	//Esconde la consola
+	HWND hwnd = GetConsoleWindow();
+	ShowWindow(hwnd, 0);
 
 	Ogre::RenderSystemList rsl = mRoot->getAvailableRenderers();
 	renderSys = *rsl.begin();
@@ -96,6 +99,7 @@ int MainApp::initOgre()
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
+	
 }
 
 void MainApp::initOIS()
